@@ -306,7 +306,7 @@ webannotator.main = {
 							]
 						   ], 
 						   document);
-		body.appendChild(dom);  
+		body.appendChild(dom); 
 		webannotator.main.initVarMenu(dtdFileName);
 		webannotator.isOpen = false;
 	},
@@ -365,6 +365,10 @@ webannotator.main = {
 		if (elems.length == 0) {
 			elems = "";
 		}
+	    // okohonen: Edit
+	    elems = [["input", {id: 'morph_edit_text', type: 'text', value: ''}]]
+	    // ---
+
 		var dom = webannotator.misc.jsonToDOM(["div", {id:"webannotator-main-menu", style:"font-family:arial;z-index:5;position:absolute;display:none;border:thin solid black;background-color:white;text-align:center;"},
 								[
 									["div", {id:"webannotator-main-menu-elems"}, elems],
