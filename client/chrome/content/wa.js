@@ -1,5 +1,9 @@
 // See license.txt for terms of usage
 
+// okohonen
+// const {Cc, Ci} = require("chrome");
+// ----
+
 // namespace
 if (typeof webannotator == "undefined") {  
 	var webannotator = {};  
@@ -366,7 +370,7 @@ webannotator.main = {
 			elems = "";
 		}
 	    // okohonen: Edit
-	    elems = [["input", {id: 'morph_edit_text', type: 'text', value: ''}]]
+	    // elems = [["input", {id: 'morph_edit_text', type: 'text', value: ''}]]
 	    // ---
 
 		var dom = webannotator.misc.jsonToDOM(["div", {id:"webannotator-main-menu", style:"font-family:arial;z-index:5;position:absolute;display:none;border:thin solid black;background-color:white;text-align:center;"},
@@ -1981,7 +1985,26 @@ webannotator.main = {
 		alert(webannotator.bundle.GetStringFromName(messageId));
 	},
 
+        // okohonen
+        send_to_server: function() {
+	    var host = "localhost";
+            var port = 50007;
+            
+            var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
+                          .getService(Components.interfaces.nsISocketTransportService)
+                          .createTransport(null, 0, host, port, null);
+            var stream = transport.openOutputStream(0, 0, 0);
+            var myObj = {url: "www.mozilla.org", "content": "wockaflockafliz"};
+            var dt = JSON.stringify(myObj);
+            
+            
+            //var dt = "JS Client says hullo";
+            stream.write("PUT\n\n" + dt, dt.length); // BUG in length
+            stream.close();
+	}
+        // ---
 };
+
 
 
 // Set extension file path and read annotation schemas file
