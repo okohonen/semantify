@@ -1994,10 +1994,9 @@ webannotator.main = {
                           .getService(Components.interfaces.nsISocketTransportService)
                           .createTransport(null, 0, host, port, null);
             var stream = transport.openOutputStream(0, 0, 0);
-	    var clone = window.content.document.cloneNode();
-            var dt = JSON.stringify({url: "www.mozilla.org", "content": clone});
+   	    var clone = window.content.document.body;
+            var dt = JSON.stringify({url: "www.mozilla.org", "content": clone.innerHTML});
              
-            //var dt = "JS Client says hullo";
 	    msg = header + "\n\n" + dt;
             stream.write(msg, msg.length); 
             stream.close();

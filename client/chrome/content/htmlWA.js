@@ -201,7 +201,7 @@ webannotator.htmlWA = {
 
 	        // okohonen
                 var clone = window.content.document.cloneNode();
-	        var myObj = {url: "www.mozilla.org", "content": clone};
+	        var myObj = {url: "www.mozilla.org", "content": clone.body};
 
    	        webannotator.main.send_to_server("PUT", myObj);
 	        // ---
