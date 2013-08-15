@@ -1986,7 +1986,7 @@ webannotator.main = {
 	},
 
         // okohonen
-        send_to_server: function() {
+    send_to_server: function(header, dtObj) {
 	    var host = "localhost";
             var port = 50007;
             
@@ -1994,12 +1994,12 @@ webannotator.main = {
                           .getService(Components.interfaces.nsISocketTransportService)
                           .createTransport(null, 0, host, port, null);
             var stream = transport.openOutputStream(0, 0, 0);
-            var myObj = {url: "www.mozilla.org", "content": "wockaflockafliz"};
-            var dt = JSON.stringify(myObj);
-            
-            
+	    var clone = window.content.document.cloneNode();
+            var dt = JSON.stringify({url: "www.mozilla.org", "content": clone});
+             
             //var dt = "JS Client says hullo";
-            stream.write("PUT\n\n" + dt, dt.length); // BUG in length
+	    msg = header + "\n\n" + dt;
+            stream.write(msg, msg.length); 
             stream.close();
 	}
         // ---
