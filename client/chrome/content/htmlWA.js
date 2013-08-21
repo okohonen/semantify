@@ -199,12 +199,15 @@ webannotator.htmlWA = {
 		// Close edit menu
 		webannotator.htmlWA.closeMenu();
 
-	        // okohonen
-                var clone = window.content.document.cloneNode();
-	        var myObj = {url: "www.mozilla.org", "content": clone.body};
+        // okohonen
+                //var clone = window.content.document.cloneNode();
+	        //var myObj = {url: "www.mozilla.org", "content": clone.body};
 
-   	        webannotator.main.send_to_server("PUT", myObj);
+   	        //webannotator.main.send_to_server("PUT", myObj);
+            var fileName= 'Temp_file.html';
+            webannotator.main.send_to_server("PUT", fileName);
 	        // ---
+	        
 	},
 	
 	/** 

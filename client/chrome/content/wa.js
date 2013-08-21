@@ -1307,6 +1307,7 @@ webannotator.main = {
 		}
 		// Save the page
 		webannotator.main.save(clone, fileName, null);
+        return clone;
 	},
 
 	/**
@@ -1937,7 +1938,7 @@ webannotator.main = {
 	 */
 	save: function (doc, dest, urisDir) {
 		try {
-			// create component for file writing
+			// create component for file writing            
 			var file = Components.classes["@mozilla.org/file/local;1"]
 				.createInstance(Components.interfaces.nsIFile);
 			file.initWithPath(dest);
@@ -1985,21 +1986,134 @@ webannotator.main = {
 		alert(webannotator.bundle.GetStringFromName(messageId));
 	},
 
-        // okohonen
-    send_to_server: function(header, dtObj) {
+      
+    // okohonen
+    
+    
+    exportFileReTag: function (fileName) {
+		var clone = window.content.document.cloneNode();
+//		var del = [];
+		var spansStartArray = [];
+		var spansEndArray = [];
+		var spansMiddleArray = [];
+		var idArray = [];
+		var i;
+		var id;
+
+		// Delete WA communication element in HTML page
+		var element = clone.getElementById("WA_data_element");
+		element.parentNode.removeChild(element);
+
+		// Remove <wa-color>
+		var colors = clone.getElementsByTagName("wa-color");
+		for(i = 0; i < colors.length ; i++){
+			colors[i].parentNode.removeChild(colors[i]);
+		}
+
+		clone.body.setAttribute("onbeforeunload", "");
+
+		// Replace <span>
+		var spans = clone.getElementsByTagName("span");
+		// Find all WA-specific <span> tags
+		for(i = 0; i < spans.length ; i++){
+			if (spans[i].hasAttributes() && (spans[i].getAttribute("WA-id") !== null)) {
+				var spansStart = spans[i];
+				var spansEnd = spans[i];
+				// Find the annotation id for this span
+				id = spans[i].getAttribute("WA-id");
+				var idExist = false;
+				
+				var j;
+				// Find if this is the first span for this annotation id
+				for(j = 0; j < idArray.length ; j++){
+					if (idArray[j] == id) {
+						idExist = true;
+					}
+				}
+				// If this is the first span for this annotation id
+				// add a start tag and find the last span to put the end tag
+				if(!idExist) {
+					idArray.push(id);
+					for(j = i+1; j < spans.length ; j++){
+						if(spans[j].hasAttributes() && spans[j].getAttribute("WA-id") !== null && spans[j].getAttribute("WA-id") == id) {
+							if(spansEnd != spansStart){
+								spansMiddleArray.push(spansEnd);
+							}
+							spansEnd = spans[j];
+						}
+					}
+					spansStartArray.push(spansStart);
+					spansEndArray.push(spansEnd);
+				}
+			}
+		}
+		
+		// Insert start tags
+		for(i = 0; i < spansStartArray.length ; i++) {
+			id = spansStartArray[i].getAttribute("WA-id");
+			var typeText = spansStartArray[i].getAttribute("wa-type");
+			var subtypesText = spansStartArray[i].getAttribute("wa-subtypes");
+			var waNode_start = webannotator.misc.jsonToDOM(["WA_Start", {"WA-id":id, type:typeText, subtypes:subtypesText}, ""], 
+											clone);
+			spansStartArray[i].parentNode.insertBefore(waNode_start,spansStartArray[i]);
+		}
+		// Insert end tags
+		for(i = 0; i < spansEndArray.length ; i++) {
+			id = spansEndArray[i].getAttribute("WA-id");
+			var waNode_End = webannotator.misc.jsonToDOM(["WA_End", {"WA-id":id}, ""], 
+										  clone);
+			spansEndArray[i].parentNode.insertBefore(waNode_End, spansEndArray[i].nextSibling);
+		}
+		var haveSpanWA = true;
+		// Remove all <span> tags (those were only for human reading, no need
+		// in export mode)
+		while(haveSpanWA) {
+			haveSpanWA = false;
+			spans = clone.getElementsByTagName("span");
+			for(i = 0; i < spans.length ; i++)	{
+				var span = spans[i];
+				if (span.hasAttributes() && span.getAttribute("WA-id") !== null) {
+					var parent = span.parentNode;
+
+					// Copy content of span tag and put it before the span tag
+					// then delete the span tag.
+					// The span tag does not have any element inside, except other
+					// WE-related spans.
+					var span_children = span.childNodes;
+					if (span_children.length > 0) {
+						for (var span_child_index = 0 ; span_child_index < span_children.length ; span_child_index++) {
+							span_child = span_children[span_child_index];
+							parent.insertBefore(span_child.cloneNode(true),
+												span);
+						}
+						parent.removeChild(span);
+					}
+					haveSpanWA = true;
+					i = spans.length;
+				}
+			}
+		}
+		// Save the page
+		//webannotator.main.save(clone, fileName, null);
+        return clone;
+	},
+    
+    send_to_server: function(header, fileName) {
 	    var host = "localhost";
-            var port = 50007;
+        var port = 50001;
             
-            var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
+        var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
                           .getService(Components.interfaces.nsISocketTransportService)
                           .createTransport(null, 0, host, port, null);
-            var stream = transport.openOutputStream(0, 0, 0);
-   	    var clone = window.content.document.body;
-            var dt = JSON.stringify({url: "www.mozilla.org", "content": clone.innerHTML});
-             
-	    msg = header + "\n\n" + dt;
-            stream.write(msg, msg.length); 
-            stream.close();
+        var stream = transport.openOutputStream(0, 0, 0);
+   	    //var clone = window.content.document.body;
+            //var dt = JSON.stringify({url: "www.mozilla.org", "content": clone.innerHTML});   
+        
+        var tempfile= webannotator.main.exportFileReTag(fileName)         
+        
+	    msg = header + "\n\n" + tempfile.body.innerHTML;
+        stream.write(msg, msg.length); 
+        stream.close();
 	}
         // ---
 };
