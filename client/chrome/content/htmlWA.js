@@ -200,10 +200,9 @@ webannotator.htmlWA = {
 		webannotator.htmlWA.closeMenu();
 
 	        // okohonen
-                var clone = window.content.document.cloneNode();
-	        var myObj = {url: "www.mozilla.org", "content": clone.body};
+	        var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
 
-   	        webannotator.main.send_to_server("PUT", myObj);
+   	        webannotator.main.sendToServer("PUT", myObj);
 	        // ---
 	},
 	

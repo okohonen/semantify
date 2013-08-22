@@ -1986,7 +1986,7 @@ webannotator.main = {
 	},
 
         // okohonen
-    send_to_server: function(header, dtObj) {
+    sendToServer: function(header, dtObj) {
 	    var host = "localhost";
             var port = 50007;
             
@@ -1994,13 +1994,35 @@ webannotator.main = {
                           .getService(Components.interfaces.nsISocketTransportService)
                           .createTransport(null, 0, host, port, null);
             var stream = transport.openOutputStream(0, 0, 0);
-   	    var clone = window.content.document.body;
-            var dt = JSON.stringify({url: "www.mozilla.org", "content": clone.innerHTML});
+            var dt = JSON.stringify(dtObj);
              
 	    msg = header + "\n\n" + dt;
             stream.write(msg, msg.length); 
             stream.close();
-	}
+    },
+
+    sendToServerAndReceive: function(header, dtObj) {
+	    var host = "localhost";
+            var port = 50007;
+            
+            var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
+                          .getService(Components.interfaces.nsISocketTransportService)
+                          .createTransport(null, 0, host, port, null);
+            var stream = transport.openOutputStream(0, 0, 0);
+            var dt = JSON.stringify(dtObj);
+             
+	    msg = header + "\n\n" + dt;
+            stream.write(msg, msg.length); 
+            stream.close();
+    },
+
+
+    tagPage: function() {
+	var header = "TAG"
+	var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+
+	webannotator.main.sendToServer("PUT", myObj)
+    }
         // ---
 };
 
