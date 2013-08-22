@@ -1988,22 +1988,25 @@ webannotator.main = {
         // okohonen
     sendToServer: function(header, dtObj) {
 	    var host = "localhost";
-            var port = 50007;
+            var port = 50001;
             
             var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
                           .getService(Components.interfaces.nsISocketTransportService)
                           .createTransport(null, 0, host, port, null);
             var stream = transport.openOutputStream(0, 0, 0);
-            var dt = JSON.stringify(dtObj);
-             
-	    msg = header + "\n\n" + dt;
-            stream.write(msg, msg.length); 
+            //var dt = JSON.stringify(dtObj);
+            // Sri        
+        
+            msg = header;            
+            stream.write(msg+"\n\n", msg.length); 
+            var tempfile= dtObj.innerHTML;
+            stream.write(tempfile, tempfile.length);
             stream.close();
     },
 
     sendToServerAndReceive: function(header, dtObj) {
 	    var host = "localhost";
-            var port = 50007;
+            var port = 50001;
             
             var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
                           .getService(Components.interfaces.nsISocketTransportService)
@@ -2019,7 +2022,10 @@ webannotator.main = {
 
     tagPage: function() {
 	var header = "TAG"
-	var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+        
+        //var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+        // Sri
+        var myObj = window.content.document.body;
 
 	webannotator.main.sendToServer("PUT", myObj)
     }

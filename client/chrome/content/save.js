@@ -1,13 +1,13 @@
 // See license.txt for terms of usage
-
+ 
 // namespace. 
 if (typeof webannotator == "undefined") {  
 	var webannotator = {};  
 };  
-
+ 
 webannotator.savefilemodified=false;
 webannotator.exportfilemodified=false;
-
+ 
 webannotator.save = {
 	selection: function(id, dir) {
 		var nsIFilePicker = Components.interfaces.nsIFilePicker;
@@ -24,7 +24,7 @@ webannotator.save = {
 		}
 		var filePath = fp.file.path;
 		document.getElementById(id).value = filePath;
-
+ 
 		// update dir name if empty and if checkbox checked
 		if (id == 'saveFileName') {
 			var dirTextField = document.getElementById('linkedDirName');
@@ -40,7 +40,7 @@ webannotator.save = {
 			webannotator.exportfilemodified=true;
 		}
 	},
-
+ 
 	validation: function () {
 		var saveFileName = document.getElementById('saveFileName').value;
 		var exportFileName = document.getElementById('exportFileName').value;
@@ -49,13 +49,13 @@ webannotator.save = {
 			alert(webannotator.bundle.GetStringFromName("waSaveFileRequired"));
 			return false;
 		}
-
+ 
 		// Save and export file names must be different
 		if (saveFileName == exportFileName) {
 			alert(webannotator.bundle.GetStringFromName("waSaveFilesDifferent"));
 			return false;
 		}
-
+ 
 		// If save and/or file have not been modified, confirm
 		// that they should be replaced
 		if (!webannotator.savefilemodified) {
@@ -73,18 +73,18 @@ webannotator.save = {
 				return false;
 			}
 		}
-
+ 
 		// Keep check box information in preferences
 		var saveColors = document.getElementById("color_cb").checked;
 		var activateLinks = document.getElementById("links_cb").checked;
 		var urisToSave = document.getElementById("save_cb").checked;
 		var quitAfterSave = document.getElementById("quit_cb").checked;
-
+ 
 		webannotator.prefs.setBoolPref("extensions.webannotator.savecolors", saveColors);
 		webannotator.prefs.setBoolPref("extensions.webannotator.activatelinks", activateLinks);
 		webannotator.prefs.setBoolPref("extensions.webannotator.urisToSave", urisToSave);
 		webannotator.prefs.setBoolPref("extensions.webannotator.quitAfterSave", quitAfterSave);
-
+ 
 		// OK
 		// first, save in the local file
 		var saveFileName = document.getElementById('saveFileName').value;
@@ -97,17 +97,17 @@ webannotator.save = {
 		eventElement.setAttribute('keepColors', saveColors); 
 		eventElement.setAttribute('activateLinks', activateLinks); 
 		eventElement.setAttribute('quitAfterSave', quitAfterSave); 
-
+ 
 		webannotator.prefs.setCharPref("extensions.webannotator.lastsavefile", saveFileName);
 		webannotator.prefs.setCharPref("extensions.webannotator.lastexportfile", exportFileName);
 		webannotator.prefs.setCharPref("extensions.webannotator.lastsavedir", exportDirName);
- 
+  
 		var evt = window.opener.content.document.createEvent('Events'); 
 		evt.initEvent('webannotator.saveAndExport', true, true); 
 		eventElement.dispatchEvent(evt);
 		return true;
 	},
-
+ 
 	// on command for linked URIs checkbox 
 	checkDir: function (checkBox) {
 		// enable/disable fields
@@ -115,7 +115,7 @@ webannotator.save = {
 		var desc2 = document.getElementById("descDir2");
 		var dirTextField = document.getElementById("linkedDirName");
 		var dirButton = document.getElementById("linkedDirButton");
-
+ 
 		if (checkBox.checked) {
 			// Enable all fields
 			desc1.disabled = false;    
@@ -137,13 +137,13 @@ webannotator.save = {
 			dirButton.disabled = true;    
 		}
 	},
-
+ 
 	// Pre-sets check boxes and file names with preferences information
 	loadDefaults: function () {
 		// Set fields as not modified
 		webannotator.savefilemodified = false;
 		webannotator.exportfilemodified = false;
-
+ 
 		// Check boxes information come from preferences
 		var saveColors = false;
 		var activateLinks = true;
@@ -161,7 +161,7 @@ webannotator.save = {
 		document.getElementById("quit_cb").checked = quitAfterSave;
 		var saveCB = document.getElementById("save_cb");
 		saveCB.checked = urisToSave;
-
+ 
 		// File names come from last file names
 		var eventElement = window.opener.content.document.getElementById('WA_data_element'); 
 		var saveFileName = null;
@@ -173,7 +173,7 @@ webannotator.save = {
 			exportFileName = webannotator.prefs.getCharPref("extensions.webannotator.lastexportfile");
 		} catch(ex) {
 		}
-
+ 
 		if (saveFileName != null) {
 			document.getElementById('saveFileName').value = saveFileName;
 			if (exportFileName != null) {
@@ -186,3 +186,4 @@ webannotator.save = {
 		webannotator.save.checkDir(saveCB);
 	}
 };
+

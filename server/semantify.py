@@ -10,6 +10,8 @@ import time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
 from datetime import datetime
+import shlex, subprocess
+import sys
 
 
 
@@ -20,7 +22,7 @@ def receive_file(filename):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host,port))    
 
-    sock.send(filename)	
+    #sock.send(filename)	
     f=open (os.getcwd()+"/"+filename+".html", 'r') 
     sock.send('SEND')
     l=f.read().split('\n')		
@@ -47,13 +49,14 @@ def receive_file(filename):
 
     
 def preprocess(filename):      
-    host = 'localhost'
-    port = 50001
-    size = 4096
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((host,port)) 
     
-    sock.send(filename)
+    conn = sqlite3.connect('sample.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS samples (id INTEGER PRIMARY KEY AUTOINCREMENT, content text, added datetime)''')
+    
+    
+
     f = open(os.getcwd()+'/temp/'+filename+'.test','w')
     d = open(os.getcwd()+'/temp/'+filename+'.test.devel','w')
     filename=open(os.getcwd()+'/temp/'+filename+'.html','r') 
@@ -61,15 +64,15 @@ def preprocess(filename):
     char=re.escape(string.punctuation)  
     counter=0
     tokens=[]
-    alltext=soup.find_all(text=True)    
-    sock.send('PUSH') 
+    alltext=soup.find_all(text=True)   
+    
     
     for a in range(len(alltext)):
         alltext[a]=re.sub('[^a-zA-Z\n\.]', ' ', alltext[a])
         alltext[a]=re.sub(r'['+char+']', ' ',alltext[a])
         words=alltext[a].split()
         for i in range(len(words)): 
-            if len(words[i])<50 and len(words[i])>2:
+            if len(words[i])<45 and len(words[i])>2:
                 tokens.append(words[i])                
                
     
@@ -80,15 +83,11 @@ def preprocess(filename):
         if counter % 10 <1:
             d.write(i+'\n') 
         ####### Code to add token to database
-        sock.send(i)
-        data=sock.recv(size) 
+        c.execute('''insert into samples (content, added) VALUES (?,?)''',(i, datetime.now()))
+        conn.commit()
                     
     f.close()
-    d.close()
-    sock.send('DoneSendingTokens')
-    data=sock.recv(size)
-    if data==404:
-        sock.close()    
+    d.close()    
     
     #print '\n\tinput file\t\t:' ,filename+'.html'
     #print '\ttest file\t\t:' ,filename+'.test'
@@ -150,7 +149,7 @@ def develparse(filename):
 #  Checking if each string on page is tagged and assigning corresponding B,I,O tags
 
     for a in range(len(alltext)):
-        if len(alltext[a])<40 and len(alltext[a])>1:
+        if len(alltext[a])<45 and len(alltext[a])>2:
             alltext[a]=re.sub(r'['+char+']', '',alltext[a])
             alltext[a]=re.sub('[^a-zA-Z0-9\.]', ' ', alltext[a])   
             count=0; flag=0 ; counter=counter+1 
@@ -180,7 +179,7 @@ def develparse(filename):
                             devels.append (ga+'\n')
 
 
-# Temp arrangement for  adding training toekns from db
+# Temp arrangement for  adding training tokens from db
 
     conn = sqlite3.connect('sample.db')
     c = conn.cursor()
@@ -245,15 +244,15 @@ def keywordtag(filename):
                                     else:      		  
                                         match=re.search(reg,i)
                                         start, end = match.start(), match.end()      				
-                                        newtag=i[:start]+'<span class="Web_annotator_entity" style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
+                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
                                         i.string.replace_with(newtag)
    
    
 
-        lt='&lt;' ; gt='&gt;'
-
         for i in soup:		
             ret.write(repr(i))
+            
+        lt='&lt;' ; gt='&gt;'
 
         page.close()
         ret.close()
@@ -261,11 +260,13 @@ def keywordtag(filename):
         # Since Beautifulsoup uses unicode, work around here is opening the temp file and replacing the tags with appropriate '<','>' and saving the file.
 
         fin = open(os.getcwd()+'/temp/temp.html')
-        fout = open(os.getcwd()+'/temp/'+filename+'tagged.html', 'wt')
+        fout = open(os.getcwd()+'/temp/'+filename+'tagged.html', 'w')
         for line in fin:
             if lt in line or gt in line:
                 line=line.replace('&lt;','<')    
                 line=line.replace('&gt;','>')
+                fout.write(line)
+            else:
                 fout.write(line)
         fin.close()
         fout.close()
@@ -286,7 +287,7 @@ def send_file( filename):
         sock.connect((host,port))
         size=4096   
         
-        sock.send(filename)
+        #sock.send(filename)
         f=open(os.getcwd()+"/temp/"+filename+".html", 'w')
         sock.send('RECV')
 
@@ -307,6 +308,67 @@ def send_file( filename):
         #print 'Receving completed'					
     
         return 1
+        
+        
+def backend(filename):
+    
+    #   Opening error log 
+    errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'wb')
+    successlog=open(os.getcwd()+'/temp/successlog.txt',  'wb')
+
+    # Garbage collection in database
+    GC=1
+    
+    try:
+     
+        #filename='snippetfile'
+        
+        #filename              =os.getcwd()+'/'+filename+'.html'
+        trainfile               =os.getcwd()+'/temp/'+filename+'.train'    
+        traindevelfile       =os.getcwd()+'/temp/'+filename+'.train.devel'
+        testfile                 =os.getcwd()+'/temp/'+filename+'.test'
+        testdevelfile         =os.getcwd()+'/temp/'+filename+'.test.devel'
+        segmentationfile =os.getcwd()+'/temp/'+filename+'.segmentation' 
+        clientmodel         =os.getcwd()+'/temp/'+filename+'.model'
+        standardmodel          =os.getcwd()+'/morphochal2010+eng.model'        
+        
+        value=0
+        value=semantify.preprocess(filename)
+        if value==1:
+            value=0
+            value=semantify.develparse(filename)
+            if value==1:
+                command='python train.py --train_file %s --devel_file %s --prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, segmentationfile, clientmodel)
+                args = shlex.split(command)
+                process=subprocess.Popen(args)
+                process.wait() 
+                command='python apply.py --model_file %s --test_file %s --prediction_file %s --verbose' % (standardmodel,testfile, segmentationfile)
+                args = shlex.split(command)
+                process=subprocess.Popen(args)
+                process.wait()
+                value=0
+                value=semantify.keywordtag(filename)
+                
+        successlog.write(filename)
+        successlog.write('\t')
+        successlog.write( str(datetime.now()))
+        successlog.write('\n')    
+        print 'Processing Complete for filename', filename, str(datetime.now())   
+        
+    except Exception as e:
+        errorlog.write(filename)
+        errorlog.write('\t')
+        errorlog.write(str(datetime.now()))
+        errorlog.write('\t')
+        errorlog.write(str(e))       
+        errorlog.write('\n')
+        raise e        
+  
+    finally:
+        pass
+        
+    return 1
+
         
 ########## Garbage collection in database  #########
         
@@ -331,4 +393,4 @@ def garbagecollection():
         c.execute('''insert into samples (content, added) VALUES (?,?)''',(i, datetime.now()))        
     return 1
 
-        
+            

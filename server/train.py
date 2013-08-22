@@ -7,11 +7,9 @@ from models import *
 
 
 if __name__ == "__main__":
- 
-   
 
     tic = time.clock()
-   
+
     # parse options
     parser = OptionParser("Usage: %prog [options]")
     parser.add_option("--corpus", dest = "corpus_id", default = None)
@@ -27,16 +25,16 @@ if __name__ == "__main__":
     parser.add_option("--verbose", action = "store_true", dest = "verbose", default = False)
 
     (options, args) = parser.parse_args()
-   
-    #print options
+
+    # print options
 
     print "options"
     print "\tcorpus:", options.corpus_id
     print "\tgraph:", options.graph_id
     print "\ttagset:", options.tagset_id
     print "\ttrain algorithm:", options.train_algorithm_id
-    print "\ttrain file:", options.train_file    
-    print "\tdevel file:", options.devel_file    
+    print "\ttrain file:", options.train_file
+    print "\tdevel file:", options.devel_file
     print "\twrite optimally predicted devel set to:", options.prediction_file
     print "\tssl file:", options.ssl_file
     print "\ttoken eval:", options.token_eval
@@ -49,12 +47,12 @@ if __name__ == "__main__":
     print
     print "train model"
     print
-    m.train(options.graph_id, options.tagset_id, options.train_algorithm_id, options.train_file, options.devel_file, options.prediction_file, options.ssl_file, options.token_eval, options.verbose)      
+    m.train(options.graph_id, options.tagset_id, options.train_algorithm_id, options.train_file, options.devel_file, options.prediction_file, options.ssl_file, options.token_eval, options.verbose)
     print "done"
     print
     print "save model"
-    print "\tmodel file:", options.model_file       
-    m.save(options.model_file)        
+    print "\tmodel file:", options.model_file
+    m.save(options.model_file)
     print "done"
     print
     print "time consumed in total:", time.clock() - tic
