@@ -2,12 +2,14 @@
 
 import socket
 import urllib2
+import sqlite3
 import os
 import string
 import re
 import time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
+from datetime import datetime
 
 
 
@@ -44,136 +46,169 @@ def receive_file(filename):
     return 1
 
     
-def preprocess(filename):
+def preprocess(filename):      
+    host = 'localhost'
+    port = 50001
+    size = 4096
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((host,port)) 
     
-    page=open(os.getcwd()+'/temp/'+filename+'.html','r')
-    soup=Soup(page)  
-
-    char=re.escape(string.punctuation)
+    sock.send(filename)
     f = open(os.getcwd()+'/temp/'+filename+'.test','w')
     d = open(os.getcwd()+'/temp/'+filename+'.test.devel','w')
+    filename=open(os.getcwd()+'/temp/'+filename+'.html','r') 
+    soup=Soup(filename) 
+    char=re.escape(string.punctuation)  
     counter=0
     tokens=[]
-    alltext=soup.find_all(text=True)
+    alltext=soup.find_all(text=True)    
+    sock.send('PUSH') 
+    
     for a in range(len(alltext)):
         alltext[a]=re.sub('[^a-zA-Z\n\.]', ' ', alltext[a])
         alltext[a]=re.sub(r'['+char+']', ' ',alltext[a])
         words=alltext[a].split()
         for i in range(len(words)): 
             if len(words[i])<50 and len(words[i])>2:
-                tokens.append(words[i]) 
-
+                tokens.append(words[i])                
+               
+    
     tokens=set(tokens)   
-    for i in tokens:
+    for i in tokens:   
         f.write(i+'\n')
-        counter=counter+1
+        counter=counter+1        
         if counter % 10 <1:
-            d.write(i+'\n')   
+            d.write(i+'\n') 
+        ####### Code to add token to database
+        sock.send(i)
+        data=sock.recv(size) 
+                    
     f.close()
     d.close()
-
+    sock.send('DoneSendingTokens')
+    data=sock.recv(size)
+    if data==404:
+        sock.close()    
+    
     #print '\n\tinput file\t\t:' ,filename+'.html'
     #print '\ttest file\t\t:' ,filename+'.test'
     #print '\ttest.devel file\t\t:', filename+'.test.devel'
-
+    
     return 1
         
 def develparse(filename):
-        page=open(os.getcwd()+'/temp/'+filename+'.html')
-        train=open(os.getcwd()+'/temp/'+filename+'.train','w')
-        devel=open(os.getcwd()+'/temp/'+filename+'.train.devel','w')
+    page=open(os.getcwd()+'/temp/'+filename+'.html')
+    train=open(os.getcwd()+'/temp/'+filename+'.train','w')
+    devel=open(os.getcwd()+'/temp/'+filename+'.train.devel','w')
 
-        soup=Soup(page)
-        char=re.escape(string.punctuation)
+    soup=Soup(page)
+    char=re.escape(string.punctuation)
 
-        #  Extracting the tagged texts and compiling into a list
+    #  Extracting the tagged texts and compiling into a list
 
-        tagsetentity=[]; tagsetorg=[];tagsetlocation=[];tagsetdate=[];taggedtext=[]
+    tagsetentity=[]; tagsetorg=[];tagsetlocation=[];tagsetdate=[];taggedtext=[]
 
-        tagset=['entity','org','location','date']
-        tagset0=soup.find_all("span", class_="WebAnnotator_entity")
-        tagset1=soup.find_all("span", class_="WebAnnotator_org")
-        tagset2=soup.find_all("span", class_="WebAnnotator_location")
-        tagset3=soup.find_all("span", class_="WebAnnotator_date")
-        compiledtag=[]
+    tagset=['entity','org','location','date']
+    tagset0=soup.find_all("span", class_="WebAnnotator_entity")
+    tagset1=soup.find_all("span", class_="WebAnnotator_org")
+    tagset2=soup.find_all("span", class_="WebAnnotator_location")
+    tagset3=soup.find_all("span", class_="WebAnnotator_date")
+    compiledtag=[]
 
-        for i in range(len(tagset0)):
-            if len(tagset0[i].string)>1:
-                tagset0[i]=re.sub(r'['+char+']', '',tagset0[i].string)
-                tagset0[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset0[i])  
-                tagsetentity.append(tagset0[i])
-        for i in range(len(tagset1)):
-            if len(tagset1[i].string)>1:
-                tagset1[i]=re.sub(r'['+char+']', '',tagset1[i].string)
-                tagset1[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset1[i])  
-                tagsetorg.append(tagset1[i])
-        for i in range(len(tagset2)):
-            if len(tagset2[i].string)>1:
-                tagset2[i]=re.sub(r'['+char+']', '',tagset2[i].string)
-                tagset2[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset2[i])  
-                tagsetlocation.append(tagset2[i])
-        for i in range(len(tagset3)):
-            if len(tagset3[i].string)>1:
-                tagset3[i]=re.sub(r'['+char+']', '',tagset3[i].string)
-                tagset3[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset3[i])  
-                tagsetdate.append(tagset3[i])
+    for i in range(len(tagset0)):
+        if len(tagset0[i].string)>1:
+            tagset0[i]=re.sub(r'['+char+']', '',tagset0[i].string)
+            tagset0[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset0[i])  
+            tagsetentity.append(tagset0[i])
+    for i in range(len(tagset1)):
+        if len(tagset1[i].string)>1:
+            tagset1[i]=re.sub(r'['+char+']', '',tagset1[i].string)
+            tagset1[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset1[i])  
+            tagsetorg.append(tagset1[i])
+    for i in range(len(tagset2)):
+        if len(tagset2[i].string)>1:
+            tagset2[i]=re.sub(r'['+char+']', '',tagset2[i].string)
+            tagset2[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset2[i])  
+            tagsetlocation.append(tagset2[i])
+    for i in range(len(tagset3)):
+        if len(tagset3[i].string)>1:
+            tagset3[i]=re.sub(r'['+char+']', '',tagset3[i].string)
+            tagset3[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset3[i])  
+            tagsetdate.append(tagset3[i])
 
-        compiledtag=[tagsetentity,tagsetorg,tagsetlocation,tagsetdate]
-        maxcount=len(compiledtag[0])+len(compiledtag[1])+len(compiledtag[2])+len(compiledtag[3])
+    compiledtag=[tagsetentity,tagsetorg,tagsetlocation,tagsetdate]
+    maxcount=len(compiledtag[0])+len(compiledtag[1])+len(compiledtag[2])+len(compiledtag[3])
 
-        #  Extracting all the visually rendered text on page
+    #  Extracting all the visually rendered text on page
 
-        alltext=soup.find_all(text=True)
-        alltext_length=len(alltext)
-        counter=0
-        flag=0
-        tags=[]; devels=[]
+    alltext=soup.find_all(text=True)
+    alltext_length=len(alltext)
+    counter=0
+    flag=0
+    tags=[]; devels=[]
 
-    #  Checking if each string on page is tagged and assigning corresponding B,I,O tags
+#  Checking if each string on page is tagged and assigning corresponding B,I,O tags
 
-        for a in range(len(alltext)):
-            if len(alltext[a])<40 and len(alltext[a])>1:
-                alltext[a]=re.sub(r'['+char+']', '',alltext[a])
-                alltext[a]=re.sub('[^a-zA-Z0-9\.]', ' ', alltext[a])   
-                count=0; flag=0 ; counter=counter+1 
-                for i in range(len(compiledtag)):
-                    for j in range(len(compiledtag[i])): 
-                        count= count+1       
-                        if compiledtag[i][j]==alltext[a]: 
-                            c=compiledtag[i][j].split()
-                            z=0 ; flag=1        
-                            for m in c:
-                                if z==0:        
-                                    tags.append(m+ '\tB-'+tagset[i]+'\n') ; z=1
-                                # counter % 10 is to reproduce 10 percent of train file as devel file
-                                    if counter % 10 <=5:
-                                        devels.append (m+ '\tB-'+tagset[i]+'\n')               
-                                else:
-                                    tags.append(m+ '\tI-'+tagset[i]+'\n')
-                                    if counter % 10 <=5:
-                                        devels.append (m+ '\tI-'+tagset[i]+'\n')
-                if count==maxcount and flag==0:   
-                    g=alltext[a].split()   
-                    for ga in g:
-                            tags.append(ga+'\tO'+'\n')
-                            if counter % 10 <1:
-                                devels.append (ga+'\tO'+'\n')
+    for a in range(len(alltext)):
+        if len(alltext[a])<40 and len(alltext[a])>1:
+            alltext[a]=re.sub(r'['+char+']', '',alltext[a])
+            alltext[a]=re.sub('[^a-zA-Z0-9\.]', ' ', alltext[a])   
+            count=0; flag=0 ; counter=counter+1 
+            for i in range(len(compiledtag)):
+                for j in range(len(compiledtag[i])): 
+                    count= count+1       
+                    if compiledtag[i][j]==alltext[a]: 
+                        c=compiledtag[i][j].split()
+                        z=0 ; flag=1        
+                        for m in c:
+                            if z==0:        
+                                tags.append(m+ '\tB-'+tagset[i]+'\n') ; z=1
+                            # counter % 10 is to reproduce 10 percent of train file as devel file
+                                if counter % 10 <=5:
+                                    devels.append (m+ '\tB-'+tagset[i]+'\n')               
+                            else:
+                                tags.append(m+ '\tI-'+tagset[i]+'\n')
+                                if counter % 10 <=5:
+                                    devels.append (m+ '\tI-'+tagset[i]+'\n')
+            if count==maxcount and flag==0:   
+                g=alltext[a].split()   
+                for ga in g:
+                        #tags.append(ga+'\tO'+'\n')
+                        tags.append(ga+'\n')
+                        if counter % 10 <1:
+                            #devels.append (ga+'\tO'+'\n')
+                            devels.append (ga+'\n')
 
-        #  Writing to file and closing  
 
-        for i in range(len(tags)):
-            train.write(tags[i])
-        train.close()
+# Temp arrangement for  adding training toekns from db
 
-        for i in range(len(devels)):
-            devel.write(devels[i])
-        devel.close()
+    conn = sqlite3.connect('sample.db')
+    c = conn.cursor()
+    counter=0   
+    c.execute('select * from samples')
+    content=c.fetchall()
+    tokens=[]
+    for row in content:  
+        tags.append(row[1]+'\n')
+        if counter % 10 <=5:
+            devels.append(row[1]+'\n')
+        
+    #  Writing to file and closing  
 
-        print '\n\tinput file\t\t:', filename+'.html'
-        print '\ttrain file\t\t:', filename+'.train'
-        print '\ttrain.devel file\t:', filename+'.train.devel'
+    for i in range(len(tags)):
+        train.write(tags[i])
+    train.close()
 
-        return 1
+    
+    for i in range(len(devels)):
+        devel.write(devels[i])
+    devel.close()
+
+    print '\n\tinput file\t\t:', filename+'.html'
+    print '\ttrain file\t\t:', filename+'.train'
+    print '\ttrain.devel file\t:', filename+'.train.devel'
+
+    return 1
         
 def keywordtag(filename):
         starttime=time.time()
@@ -210,7 +245,7 @@ def keywordtag(filename):
                                     else:      		  
                                         match=re.search(reg,i)
                                         start, end = match.start(), match.end()      				
-                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
+                                        newtag=i[:start]+'<span class="Web_annotator_entity" style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
                                         i.string.replace_with(newtag)
    
    
@@ -272,4 +307,28 @@ def send_file( filename):
         #print 'Receving completed'					
     
         return 1
+        
+########## Garbage collection in database  #########
+        
+def garbagecollection():
+    
+    conn = sqlite3.connect('sample.db')
+    c = conn.cursor()
+    
+    c.execute('select * from samples')
+    content=c.fetchall()
+    tokens=[]
+    print len(content)
+    for row in content:   
+        tokens.append(row[1])
+          
+    tokens=set(tokens)      
+    print len(tokens)
+    
+    c.execute('delete from samples')
+    
+    for i in tokens:
+        c.execute('''insert into samples (content, added) VALUES (?,?)''',(i, datetime.now()))        
+    return 1
+
         
