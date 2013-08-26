@@ -48,13 +48,7 @@ def receive_file(filename):
     return 1
 
     
-def preprocess(filename):      
-    
-    conn = sqlite3.connect('sample.db')
-    c = conn.cursor()
-
-    c.execute('''CREATE TABLE IF NOT EXISTS samples (id INTEGER PRIMARY KEY AUTOINCREMENT, content text, added datetime)''')
-    
+def preprocess(filename):        
     
 
     f = open(os.getcwd()+'/temp/'+filename+'.test','w')
@@ -82,9 +76,7 @@ def preprocess(filename):
         counter=counter+1        
         if counter % 10 <1:
             d.write(i+'\n') 
-        ####### Code to add token to database
-        c.execute('''insert into samples (content, added) VALUES (?,?)''',(i, datetime.now()))
-        conn.commit()
+        
                     
     f.close()
     d.close()    
@@ -95,10 +87,15 @@ def preprocess(filename):
     
     return 1
         
-def develparse(filename):
+def develparse(filename):   
+    
+    conn = sqlite3.connect('sample.db')
+    c = conn.cursor()
+    #c.execute('''CREATE TABLE IF NOT EXISTS samples (id INTEGER PRIMARY KEY AUTOINCREMENT, content text, added datetime)''')
+    
     page=open(os.getcwd()+'/temp/'+filename+'.html')
     train=open(os.getcwd()+'/temp/'+filename+'.train','w')
-    devel=open(os.getcwd()+'/temp/'+filename+'.train.devel','w')
+    devel=open(os.getcwd()+'/temp/'+filename+'.train.devel','w')    
 
     soup=Soup(page)
     char=re.escape(string.punctuation)
@@ -107,11 +104,11 @@ def develparse(filename):
 
     tagsetentity=[]; tagsetorg=[];tagsetlocation=[];tagsetdate=[];taggedtext=[]
 
-    tagset=['entity','org','location','date']
-    tagset0=soup.find_all("span", class_="WebAnnotator_entity")
-    tagset1=soup.find_all("span", class_="WebAnnotator_org")
-    tagset2=soup.find_all("span", class_="WebAnnotator_location")
-    tagset3=soup.find_all("span", class_="WebAnnotator_date")
+    tagset=['prefix','stem','suffix','lemma']
+    tagset0=soup.find_all("span", class_="WebAnnotator_prefix")
+    tagset1=soup.find_all("span", class_="WebAnnotator_stem")
+    tagset2=soup.find_all("span", class_="WebAnnotator_suffix")
+    tagset3=soup.find_all("span", class_="WebAnnotator_lemma")
     compiledtag=[]
 
     for i in range(len(tagset0)):
@@ -147,7 +144,8 @@ def develparse(filename):
     tags=[]; devels=[]
 
 #  Checking if each string on page is tagged and assigning corresponding B,I,O tags
-
+    print 'Adding training values to db'
+    
     for a in range(len(alltext)):
         if len(alltext[a])<45 and len(alltext[a])>2:
             alltext[a]=re.sub(r'['+char+']', '',alltext[a])
@@ -157,16 +155,24 @@ def develparse(filename):
                 for j in range(len(compiledtag[i])): 
                     count= count+1       
                     if compiledtag[i][j]==alltext[a]: 
-                        c=compiledtag[i][j].split()
+                        compiledtagsplit=compiledtag[i][j].split()
                         z=0 ; flag=1        
-                        for m in c:
+                        for m in compiledtagsplit:
                             if z==0:        
                                 tags.append(m+ '\tB-'+tagset[i]+'\n') ; z=1
+                                ####### Code to add token to database
+                                k=tagset[i]
+                                c.execute('''insert into samples (content, added) VALUES (?,?)''',(m, datetime.now()))
+                                conn.commit()
                             # counter % 10 is to reproduce 10 percent of train file as devel file
                                 if counter % 10 <=5:
                                     devels.append (m+ '\tB-'+tagset[i]+'\n')               
                             else:
                                 tags.append(m+ '\tI-'+tagset[i]+'\n')
+                                ####### Code to add token to database
+                                tagset[i]
+                                c.execute('''insert into samples (content, added) VALUES (?,?)''',(m, datetime.now()))
+                                conn.commit()
                                 if counter % 10 <=5:
                                     devels.append (m+ '\tI-'+tagset[i]+'\n')
             if count==maxcount and flag==0:   
@@ -178,16 +184,15 @@ def develparse(filename):
                             #devels.append (ga+'\tO'+'\n')
                             devels.append (ga+'\n')
 
-
+    print 'Added training values to db'
 # Temp arrangement for  adding training tokens from db
 
     conn = sqlite3.connect('sample.db')
     c = conn.cursor()
     counter=0   
     c.execute('select * from samples')
-    content=c.fetchall()
-    tokens=[]
-    for row in content:  
+    content=c.fetchall()    
+    for row in content:       
         tags.append(row[1]+'\n')
         if counter % 10 <=5:
             devels.append(row[1]+'\n')

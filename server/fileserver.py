@@ -37,8 +37,8 @@ if __name__ == "__main__":
     c.execute('''CREATE TABLE IF NOT EXISTS samples (id INTEGER PRIMARY KEY AUTOINCREMENT, content text, added datetime)''')
     
     #   Opening error log 
-    errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'wb')
-    successlog=open(os.getcwd()+'/temp/successlog.txt',  'wb')
+    errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'w')
+    successlog=open(os.getcwd()+'/temp/successlog.txt',  'w')
 
     # Garbage collection in database
     GC=1
@@ -79,18 +79,22 @@ if __name__ == "__main__":
                 standardmodel          =os.getcwd()+'/morphochal2010+eng.model'
                    
                 value=semantify.preprocess(filename)
-                if value==1:                
+                if value==1:
+                    print 'Preprocessing complete'
                     value=0
                     value=semantify.develparse(filename)
-                    if value==1:                    
+                    if value==1:    
+                         print 'Devel files extracted' 
                          command='python train.py --train_file %s --devel_file %s --prediction_file %s --model_file %s' % (trainfile,traindevelfile, segmentationfile, clientmodel)
                          args = shlex.split(command)
                          process=subprocess.Popen(args)
                          process.wait() 
-                         command='python apply.py --model_file %s --test_file %s --prediction_file %s' % (standardmodel,testfile, segmentationfile)
+                         print 'Model trained'
+                         command='python apply.py --model_file %s --test_file %s --prediction_file %s' % (clientmodel,testfile, segmentationfile)
                          args = shlex.split(command)
                          process=subprocess.Popen(args)
-                         process.wait()      
+                         process.wait()  
+                         print 'Model Applied'
                          value=semantify.keywordtag(filename)                        
                 successlog.write(filename)
                 successlog.write('\t')
