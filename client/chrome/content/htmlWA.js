@@ -200,11 +200,7 @@ webannotator.htmlWA = {
 		webannotator.htmlWA.closeMenu();
 
 	        // okohonen
-	        //var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
-            // Sri
-            var myObj = window.content.document.body;
-
-   	        webannotator.main.sendToServer("PUT", myObj);
+   	        webannotator.main.storePage();
 	        // ---
 	},
 	
