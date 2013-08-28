@@ -2010,11 +2010,15 @@ webannotator.main = {
     storePage: function() {
         var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
+    // Sri edit
+    //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);
     },
 
     tagPage: function() {
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
+    // Sri edit
+    //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);
     }
         // ---
 };

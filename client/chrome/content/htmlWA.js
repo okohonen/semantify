@@ -200,7 +200,7 @@ webannotator.htmlWA = {
 		webannotator.htmlWA.closeMenu();
 
 	        // okohonen
-   	        webannotator.main.storePage();
+   	        //webannotator.main.storePage();
 	        // ---
 	},
 	

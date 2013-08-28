@@ -266,13 +266,18 @@ def keywordtag(filename):
 
         fin = open(os.getcwd()+'/temp/temp.html')
         fout = open(os.getcwd()+'/temp/'+filename+'tagged.html', 'w')
+        content=[]
         for line in fin:
             if lt in line or gt in line:
                 line=line.replace('&lt;','<')    
                 line=line.replace('&gt;','>')
+                line=line.replace('<html><head><body>', '')
+                line=line.replace('</body></head></html>', '')
                 fout.write(line)
+                content.append(line)
             else:
                 fout.write(line)
+                content.append(line)
         fin.close()
         fout.close()
 
@@ -281,7 +286,7 @@ def keywordtag(filename):
         #print '\n\t\tInput file\t\t:', filename+'.html'
         #print '\t\tTagged file\t\t:', filename+'tagged.html'
 
-        return 1
+        return content
 
         
 def send_file( filename):
