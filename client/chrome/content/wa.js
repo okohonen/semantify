@@ -370,7 +370,7 @@ webannotator.main = {
 			elems = "";
 		}
 	    // okohonen: Edit
-	    // elems = [["input", {id: 'morph_edit_text', type: 'text', value: ''}]]
+	     elems = [["input", {id: 'morph_edit_text', type: 'text', value: ''}]]
 	    // ---
 
 		var dom = webannotator.misc.jsonToDOM(["div", {id:"webannotator-main-menu", style:"font-family:arial;z-index:5;position:absolute;display:none;border:thin solid black;background-color:white;text-align:center;"},
