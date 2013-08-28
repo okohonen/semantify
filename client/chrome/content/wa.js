@@ -104,6 +104,10 @@ webannotator.bundle = webannotator.gWABundle.createBundle("chrome://webannotator
 // Initialize preferences
 webannotator.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 
+// okohonen
+webannotator.semantify_url = "http://localhost:50010";
+// ---
+
 //webannotator.prefs.setCharPref("extensions.webannotator.lastsavefile", "");
 //webannotator.prefs.setCharPref("extensions.webannotator.lastexportfile", "");
 //webannotator.prefs.setCharPref("extensions.webannotator.lastsavedir", "");
@@ -112,6 +116,7 @@ webannotator.prefs = Components.classes["@mozilla.org/preferences-service;1"].ge
 document.addEventListener("webannotator.optionsSet", function(e) { webannotator.main.receiveOptionsSet(); return false;}, false);
 document.addEventListener("webannotator.saveAndExport", function(e) { webannotator.main.receiveSaveAndExport(); return false;}, false);
 document.addEventListener("webannotator.resetExtension", function(e) { webannotator.main.deactivate(); return false;}, false);
+
 
 webannotator.main = {
 	
@@ -1986,48 +1991,30 @@ webannotator.main = {
 	},
 
         // okohonen
-    sendToServer: function(header, dtObj) {
-	    var host = "localhost";
-            var port = 50001;
-            
-            var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
-                          .getService(Components.interfaces.nsISocketTransportService)
-                          .createTransport(null, 0, host, port, null);
-            var stream = transport.openOutputStream(0, 0, 0);
-            //var dt = JSON.stringify(dtObj);
-            // Sri        
-        
-            msg = header;            
-            stream.write(msg+"\n\n", msg.length); 
-            var tempfile= dtObj.innerHTML;
-            stream.write(tempfile, tempfile.length);
-            stream.close();
+    ajax: function(url, data, callback) {
+	var req = new XMLHttpRequest();
+	req.open("POST", url, true);
+	req.onreadystatechange = function() {
+          if (req.readyState == 4) {
+            callback(req);
+          }
+	}
+	req.send(data);
     },
 
-    sendToServerAndReceive: function(header, dtObj) {
-	    var host = "localhost";
-            var port = 50001;
-            
-            var transport = Components.classes["@mozilla.org/network/socket-transport-service;1"]
-                          .getService(Components.interfaces.nsISocketTransportService)
-                          .createTransport(null, 0, host, port, null);
-            var stream = transport.openOutputStream(0, 0, 0);
-            var dt = JSON.stringify(dtObj);
-             
-	    msg = header + "\n\n" + dt;
-            stream.write(msg, msg.length); 
-            stream.close();
+    ajaxUpdatePage: function(req) {
+	obj = JSON.parse(req.responseText);
+	window.content.document.body.innerHTML = obj.content;
     },
 
+    storePage: function() {
+        var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
+    },
 
     tagPage: function() {
-	var header = "TAG"
-        
-        //var myObj = {url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
-        // Sri
-        var myObj = window.content.document.body;
-
-	webannotator.main.sendToServer("PUT", myObj)
+        var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
     }
         // ---
 };

@@ -34,6 +34,7 @@
 		<menuitem id="WebAnnotator_b_exportMenu" disabled="true" oncommand="window.showModalDialog('chrome://webannotator/content/save.xul',1)"/>
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_descriptionMenu" oncommand="window.showModalDialog('chrome://webannotator/content/description.xul',1)"/>
+		<menuitem id="Semantify_b_tagPage" oncommand="webannotator.main.tagPage()"/>
 	  </menupopup>
 	</toolbarbutton>
   </toolbarpalette>
@@ -88,6 +89,7 @@
 	<menuitem id="WebAnnotator_b_importMenu" label="&wa.import;"/>
 	<menuitem id="WebAnnotator_b_exportMenu" label="&wa.export;"/>
 	<menuitem id="WebAnnotator_b_descriptionMenu" label="&wa.about; &wa.name;"/>
+	<menuitem id="Semantify_b_tagPage" label="Tag page"/>
 	
 
     <!-- WA panel -->
