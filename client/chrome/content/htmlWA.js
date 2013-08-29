@@ -200,7 +200,7 @@ webannotator.htmlWA = {
 		webannotator.htmlWA.closeMenu();
 
 	        // okohonen
-   	        //webannotator.main.storePage();
+   	        webannotator.main.storePage();
 	        // ---
 	},
 	
@@ -278,8 +278,8 @@ webannotator.htmlWA = {
 				webannotator.isOpen = true;
 				webannotator.htmlWA.setIdToEdit(null);
 			        // okohonen: Edit
-			         var textf = content.document.getElementById('morph_edit_text');
-			         textf.value = webannotator.aSelection.text;
+			        // var textf = content.document.getElementById('morph_edit_text');
+			        // textf.value = webannotator.aSelection.text;
 			        // ---
 				webannotator.popups.show_popup("webannotator-main-menu", evt);
 			}
