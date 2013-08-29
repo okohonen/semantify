@@ -281,7 +281,7 @@ webannotator.htmlWA = {
 			         var textf = content.document.getElementById('morph_edit_text');
 			         textf.value = webannotator.aSelection.text;
 			        // ---
-				//webannotator.popups.show_popup("webannotator-main-menu", evt);
+				webannotator.popups.show_popup("webannotator-main-menu", evt);
 			}
 		}
 	},
