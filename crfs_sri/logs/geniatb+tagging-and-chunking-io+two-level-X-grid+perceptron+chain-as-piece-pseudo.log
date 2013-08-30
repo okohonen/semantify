@@ -1,0 +1,48 @@
+
+options
+	corpus: geniatb
+	task: tagging-and-chunking-io
+	graph: two-level-X-grid
+	train algorithm: perceptron
+	inference: chain-as-piece-pseudo
+	single pass: False
+	train file: data/geniatb/geniatb.train
+	devel file: data/geniatb/geniatb.devel
+	devel prediction file: predictions/geniatb+tagging-and-chunking-io+perceptron+chain-as-piece-pseudo.devel.prediction
+	test file: data/geniatb/geniatb.test
+	test prediction file: predictions/geniatb+tagging-and-chunking-io+perceptron+chain-as-piece-pseudo.test.prediction
+	test reference file: data/geniatb/geniatb.test.reference
+	verbose: True
+
+initialize model
+done
+
+train model
+	preprocess
+	train data size: 14326
+	devel data size: 1361
+	number of features: 600471
+	number of states per clique set: [45, 4, 180, 180, 180, 2025, 16]
+	states: ['START', 'STOP', 'JJ', 'NNS', 'VBP', 'VBN', 'IN', 'NN', '.', 'DT', 'CD', 'CC', 'TO', '-LRB-', '-RRB-', ',', 'PRP', 'WDT', 'VBZ', 'VBG', 'MD', 'VB', 'RB', 'WP$', 'WP', 'VBD', 'PRP$', 'JJS', 'JJR', 'WRB', 'FW', ':', 'EX', 'LS', 'NNP', '``', 'POS', 'RP', 'RBR', 'RBS', 'PDT', "''", 'NNPS', 'SYM', 'NN_http://transfac.gbf.de/dbsearch/funsitep/s']
+	states: ['START', 'STOP', 'NP', 'O']
+	number of parameters: 1579238730
+
+	train
+
+	graph structure: two-level-X-grid
+	train algorithm: averaged generalized perceptron
+	inference algorithm (train): piecewise-pseudo (chain-as-piece) inference
+	inference algorithm (decoder): loopy belief propagation inference
+
+Traceback (most recent call last):
+  File "run.py", line 67, in <module>
+    options.verbose)
+  File "/triton/ics/scratch/tpruokol/crfs_local/models.py", line 206, in train
+    self.parameters, hyperparameters, performance, time_consumption = train_algorithm.train(initial_parameters, train_data, devel_data, prediction_file, devel_file, verbose)
+  File "/triton/ics/scratch/tpruokol/crfs_local/train_algorithms.py", line 69, in train
+    parameters, cum_parameters, hyperparameters, error_free = self.make_pass(train_data, parameters, cum_parameters, hyperparameters)
+  File "/triton/ics/scratch/tpruokol/crfs_local/train_algorithms.py", line 157, in make_pass
+    parameters, cum_parameters, hyperparameters, update_required = self.update_parameters(parameters, cum_parameters, hyperparameters, map_state_index_set, true_state_index_set, feature_vector_set, len_observation)
+  File "/triton/ics/scratch/tpruokol/crfs_local/train_algorithms.py", line 314, in update_parameters
+    map_state_index = map_state_index_set[(clique.position, free_node)]
+KeyError: (((0, 1), (1, 0)), (0, 1))

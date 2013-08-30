@@ -1,0 +1,25 @@
+
+options
+	corpus: genia
+	task: chunking-bio
+	train algorithm: likelihood
+	inference: piecewise-pseudo
+	single pass: False
+	train file: toydata/genia/genia.train
+	devel file: toydata/genia/genia.devel
+	devel prediction file: predictions/genia.chunking-bio.likelihood.piecewise-pseudo.devel.prediction
+	test file: toydata/genia/genia.test
+	test prediction file: predictions/genia.chunking-bio.likelihood.piecewise-pseudo.test.prediction
+	test reference file: toydata/genia/genia.test.reference
+	verbose: True
+
+initialize model
+done
+
+train model
+	train data size: 35
+	devel data size: 36
+	number of features: 4595
+	number of states per clique set: [11, 121]
+	number of parameters: 555995
+

@@ -1,0 +1,68 @@
+
+options
+	corpus: geniatb
+	task: joint-tagging-and-chunking-io
+	graph: first-order-chain
+	train algorithm: perceptron
+	inference: factor-as-piece-pseudo
+	single pass: False
+	train file: data/geniatb/geniatb.train
+	devel file: data/geniatb/geniatb.devel
+	devel prediction file: predictions/geniatb+joint-tagging-and-chunking-io+perceptron+factor-as-piece-pseudo.devel.prediction
+	test file: data/geniatb/geniatb.test
+	test prediction file: predictions/geniatb+joint-tagging-and-chunking-io+perceptron+factor-as-piece-pseudo.test.prediction
+	test reference file: data/geniatb/geniatb.test.reference
+	verbose: True
+
+initialize model
+done
+
+train model
+	preprocess
+	train data size: 14326
+	devel data size: 1361
+	number of features: 561253
+	number of states per clique set: [82, 6724]
+	states: ['START', 'STOP', 'START START', 'JJ NP', 'NNS NP', 'VBP O', 'VBN O', 'IN O', 'NN NP', '. O', 'STOP STOP', 'DT NP', 'JJ O', 'CD NP', 'CC O', 'TO O', 'DT O', '-LRB- O', '-RRB- O', ', O', 'PRP NP', 'NN O', 'WDT O', 'VBZ O', 'VBG O', 'MD O', 'VB O', 'VBN NP', 'NNS O', 'RB NP', 'RB O', 'WP$ O', 'WP O', 'VBD O', 'CC NP', 'CD O', 'PRP$ O', 'JJS O', ', NP', 'PRP$ NP', 'VBG NP', 'JJR NP', 'PRP O', 'WRB O', 'FW O', ': O', 'FW NP', 'EX NP', 'IN NP', 'JJS NP', 'LS O', 'JJR O', 'NNP NP', 'TO NP', '-LRB- NP', '-RRB- NP', '`` NP', 'POS NP', 'RP O', 'RBR O', 'RBS O', ': NP', 'PDT NP', 'POS O', "'' NP", 'VBD NP', 'RBS NP', 'RBR NP', 'VBZ NP', 'VBP NP', 'PDT O', '`` O', "'' O", 'VB NP', 'NNPS NP', 'LS NP', '. NP', 'WDT NP', 'SYM O', 'RP NP', 'WRB NP', 'NN_http://transfac.gbf.de/dbsearch/funsitep/s NP']
+	number of parameters: 3819887918
+
+	train
+
+	graph structure: first-order-chain
+	train algorithm: averaged generalized perceptron
+	inference algorithm (train): piecewise-pseudo (factor-as-piece) inference
+	inference algorithm (decoder): exact inference
+
+	pass index 1, cpu time so far 157.0, (f+acc)/2 (devel) 90.38
+	pass index 2, cpu time so far 309.1, (f+acc)/2 (devel) 90.63
+	pass index 3, cpu time so far 459.5, (f+acc)/2 (devel) 90.82
+	pass index 4, cpu time so far 608.6, (f+acc)/2 (devel) 90.86
+	pass index 5, cpu time so far 757.3, (f+acc)/2 (devel) 90.84
+
+	number of passes: 5.0
+	number of updates: 71631.0
+
+	pre (devel): 82.65
+	rec (devel): 83.80
+	f (devel): 83.22
+	acc (devel): 98.49
+
+	devel cpu time: 1167.1
+	train cpu time: 757.3
+
+done
+
+
+apply model
+
+	test set size: 1360
+
+	pre (test): 81.74
+	rec (test): 82.58
+	f (test): 82.16
+	acc (test): 98.29
+
+done
+
+time consumed in total: 2541.88
+

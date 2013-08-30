@@ -1,0 +1,5 @@
+
+import string
+
+f='word(t)=For : 1	suffix(word(t))=or : 1	suffix(word(t))=For : 1	IN'
+print f.split(' : ')

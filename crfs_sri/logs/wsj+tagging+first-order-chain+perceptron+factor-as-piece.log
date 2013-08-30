@@ -1,0 +1,65 @@
+
+options
+	corpus: wsj
+	task: tagging
+	graph: first-order-chain
+	train algorithm: perceptron
+	inference: factor-as-piece
+	single pass: False
+	train file: data/wsj/wsj.train
+	devel file: data/wsj/wsj.devel
+	devel prediction file: predictions/wsj+tagging+perceptron+factor-as-piece.devel.prediction
+	test file: data/wsj/wsj.test
+	test prediction file: predictions/wsj+tagging+perceptron+factor-as-piece.test.prediction
+	test reference file: data/wsj/wsj.test.reference
+	verbose: True
+
+initialize model
+done
+
+train model
+	preprocess
+	train data size: 36298
+	devel data size: 5527
+	number of features: 1324587
+	number of states per clique set: [47, 2209]
+	states: ['START', 'STOP', 'IN', 'CD', 'NNS', ',', 'NNP', 'VBZ', 'VBN', 'JJ', 'DT', 'NN', ':', 'CC', '.', 'RB', 'MD', 'PRP', 'VB', 'RBR', 'VBG', 'POS', '$', 'PRP$', 'JJR', 'WDT', 'VBD', 'TO', '``', 'VBP', "''", 'RP', 'WP', 'EX', 'NNPS', 'WRB', 'JJS', '-LRB-', '-RRB-', 'RBS', 'FW', 'UH', 'WP$', 'PDT', '#', 'LS', 'SYM']
+	number of parameters: 2988268272
+
+	train
+
+	graph structure: first-order-chain
+	train algorithm: averaged generalized perceptron
+	inference algorithm (train): piecewise (factor-as-piece) inference
+	inference algorithm (decoder): exact inference
+
+	pass index 1, cpu time so far 1225.1, acc (devel) 96.68
+	pass index 2, cpu time so far 2419.1, acc (devel) 96.92
+	pass index 3, cpu time so far 3584.5, acc (devel) 96.99
+	pass index 4, cpu time so far 4749.4, acc (devel) 97.00
+	pass index 5, cpu time so far 5911.8, acc (devel) 97.00
+	pass index 6, cpu time so far 7071.2, acc (devel) 97.02
+	pass index 7, cpu time so far 8230.9, acc (devel) 97.02
+	pass index 8, cpu time so far 9403.2, acc (devel) 97.02
+
+	number of passes: 8.0
+	number of updates: 290385.0
+
+	acc (devel): 97.02
+
+	devel cpu time: 1395.0
+	train cpu time: 9403.2
+
+done
+
+
+apply model
+
+	test set size: 5462
+
+	acc (test): 97.10
+
+done
+
+time consumed in total: 11379.01
+

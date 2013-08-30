@@ -1,0 +1,67 @@
+
+options
+	corpus: conll2000
+	task: chunking-bio
+	graph: first-order-chain
+	train algorithm: perceptron
+	inference: exact
+	single pass: False
+	train file: data/conll2000/conll2000.train
+	devel file: data/conll2000/conll2000.devel
+	devel prediction file: predictions/conll2000+chunking-bio+perceptron+exact.devel.prediction
+	test file: data/conll2000/conll2000.test
+	test prediction file: predictions/conll2000+chunking-bio+perceptron+exact.test.prediction
+	test reference file: data/conll2000/conll2000.test.reference
+	verbose: True
+
+initialize model
+done
+
+train model
+	preprocess
+	train data size: 8042
+	devel data size: 894
+	number of features: 402935
+	number of states per clique set: [24, 576]
+	states: ['START', 'STOP', 'O', 'B-PP', 'B-NP', 'I-NP', 'B-VP', 'I-VP', 'B-ADVP', 'I-ADVP', 'B-SBAR', 'B-ADJP', 'I-ADJP', 'I-SBAR', 'I-PP', 'B-PRT', 'B-LST', 'B-CONJP', 'I-CONJP', 'B-INTJ', 'I-PRT', 'I-INTJ', 'B-UCP', 'I-UCP']
+	number of parameters: 241761000
+
+	train
+
+	graph structure: first-order-chain
+	train algorithm: averaged generalized perceptron
+	inference algorithm (train): exact inference
+	inference algorithm (decoder): exact inference
+
+	pass index 1, cpu time so far 82.3, f (devel) 92.70
+	pass index 2, cpu time so far 163.1, f (devel) 93.10
+	pass index 3, cpu time so far 245.5, f (devel) 93.36
+	pass index 4, cpu time so far 326.5, f (devel) 93.55
+	pass index 5, cpu time so far 411.8, f (devel) 93.59
+	pass index 6, cpu time so far 495.0, f (devel) 93.58
+
+	number of passes: 6.0
+	number of updates: 48253.0
+
+	pre (devel): 93.66
+	rec (devel): 93.52
+	f (devel): 93.59
+
+	devel cpu time: 55.2
+	train cpu time: 495.0
+
+done
+
+
+apply model
+
+	test set size: 2012
+
+	pre (test): 93.52
+	rec (test): 93.44
+	f (test): 93.48
+
+done
+
+time consumed in total: 608.49
+
