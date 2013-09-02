@@ -28,7 +28,7 @@ def preprocess(filename):
     
     
     for a in range(len(alltext)):
-        alltext[a]=re.sub('[^a-zA-Z\n\.]', ' ', alltext[a])
+        alltext[a]=re.sub('[^a-zA-Z0-9\n\.]', ' ', alltext[a])
         alltext[a]=re.sub(r'['+char+']', ' ',alltext[a])
         words=alltext[a].split()
         for i in range(len(words)): 
@@ -105,8 +105,8 @@ def develparse(filename):
 
     #  Extracting all the visually rendered text on page
 
-    alltext=soup.find_all(text=True)
-    alltext_length=len(alltext)
+    #alltext=soup.find_all(text=True)
+    #alltext_length=len(alltext)
     counter=0
     flag=0
     tags=[]; devels=[]
@@ -114,63 +114,77 @@ def develparse(filename):
 #  Checking if each string on page is tagged and assigning corresponding B,I,O tags
     print 'Adding training values to db'
     
+    w=soup
     
-    for a in range(len(alltext)):
-        if len(alltext[a])<45 and len(alltext[a])>0:
-            alltext[a]=re.sub(r'['+char+']', '',alltext[a])
-            alltext[a]=re.sub('[^a-zA-Z0-9\.]', ' ', alltext[a])   
-            count=0; flag=0 ; counter=counter+1 
-            for i in range(len(compiledtag)):
-                for j in range(len(compiledtag[i])): 
-                    count= count+1       
-                    if compiledtag[i][j] in alltext[a] and compiledtag[i][j]: 
-                        compiledtagsplit=compiledtag[i][j].split()
-                        z=0 ; flag=1        
-                        for m in compiledtagsplit:   
-                            sub2=m[-2:] ; sub4= m[-4:];
-                            if z==0:                                 
-                                ####### Code to add token to database                                
-                                c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[i],  datetime.now()))
-                                conn.commit()                                                              
-                            # counter % 10 is to reproduce 10 percent of train file as devel file
-                                if counter % 10 <2:
-                                    devels.append ('word(t)='+m+ ' : 1\t'+tagset[i]+'\n') 
-                                else:
-                                    tags.append('word(t)='+m+ ' : 1\t'+tagset[i]+'\n') ; z=1
-                            else:                                
-                                ####### Code to add token to database                                
-                                c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m, tagset[i],  datetime.now()))
-                                conn.commit()                                              
-                                if counter % 10 <2:
-                                    devels.append ('word(t)='+m+ ' : 1\t'+tagset[i]+'\n')
-                                else:
-                                    tags.append('word(t)='+m+ ' : 1\t'+tagset[i]+'\n')
-            if count==maxcount and flag==0:   
-                g=alltext[a].split()   
-                for ga in g:
-                        sub2=ga[-2:] ; sub4= ga[-4:];    
-                        if counter % 10 <2:
-                            devels.append ('word(t)='+ga+' : 1\tO\n')
-                        else:
-                            tags.append('word(t)='+ga+ ' : 1\tO'+'\n')        
-                            
+    for child in w.descendants:
+                if child.next_sibling:
+                    for instring in child.next_sibling:				
+                        if isinstance(instring,NavigableString):
+                            parentname=instring.parent.name
+                            if len(instring)<45 and len(instring)>0:
+                                instring=re.sub(r'['+char+']', '',instring)
+                                instring=re.sub('[^a-zA-Z0-9\.]', ' ', instring)   
+                                count=0; counter=counter+1
+                                for i in range(len(compiledtag)):
+                                    for j in range(len(compiledtag[i])): 
+                                        count= count+1 ; flag=1       
+                                        if compiledtag[i][j] in instring and compiledtag[i][j]: 
+                                            instringsplit=instring.split()
+                                            z=0 ;                           
+                                            for m in instringsplit:                               
+                                                if m in compiledtag[i][j] :                                 
+                                                    ####### Code to add token to database                                
+                                                    c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[i],  datetime.now())) 
+                                                    conn.commit()    
+                                                    flag=0
+                                                    # collecting other features for the token
+                                                    if iscapital(m):
+                                                        capital="1"
+                                                    else:
+                                                        capital="0"
+                                                    if isnumber(m):
+                                                        number="1"
+                                                    else:
+                                                        number="0"
+                                                    if hasnumber(m):
+                                                        h_number="1"
+                                                    else:
+                                                        h_number="0"
+                                                    if hassplchars(m):
+                                                        splchar="1"
+                                                    else:
+                                                        splchars="0"                                  
+                                                    
+                                                # counter % 10 is to reproduce 10 percent of train file as devel file
+                                                    if counter % 10 <1:
+                                                        devels.append ('word(t)='+m+' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\t'+tagset[i]+'\n') 
+                                                    else:
+                                                        tags.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\t'+tagset[i]+'\n') 
+                                                else:   
+                                                    if iscapital(m):
+                                                        capital="1"
+                                                    else:
+                                                        capital="0"
+                                                    if isnumber(m):
+                                                        number="1"
+                                                    else:
+                                                        number="0"
+                                                    if hasnumber(m):
+                                                        h_number="1"
+                                                    else:
+                                                        h_number="0"
+                                                    if hassplchars(m):
+                                                        splchar="1"
+                                                    else:
+                                                        splchars="0"
+                                                    if counter % 10 <1:
+                                                        devels.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\tO\n') 
+                                                    else:
+                                                        tags.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\tO\n') 
+                                                        
 
     print 'Added training values to db'
-# Temp arrangement for  adding training tokens from db
-    '''
-    conn = sqlite3.connect('sentence.db')
-    c = conn.cursor()
-    counter=0   
-    c.execute('select * from sentences')
-    content=c.fetchall()    
-    for row in content:  
-        token=row[1]
-        sub2=token[-2:] ; sub4= token[-4:];        
-        if counter % 10 <2:
-            devels.append(r'word(t)='+token+ ' : 1\tsuffix(word(t))='+sub2+' : 1\tsuffix(word(t))='+sub4+' : 1 \t'+row[2]+'\n')
-        else:
-            tags.append('word(t)='+token+ ' : 1\tsuffix(word(t))='+sub2+' : 1\tsuffix(word(t))='+sub4+' : 1 \t'+row[2]+'\n')
-       '''
+
     #  Writing to file and closing  
 
     for i in range(len(tags)):
@@ -205,12 +219,12 @@ def keywordtag(filename):
         a=retfile.read().splitlines()
         tokens=[]        
         for terms in a:               
-            temptoken=terms.split(' : ')            
-            temptoken[0]=temptoken[0].replace('word(t)=', '')
-            if len(temptoken)>1:
-                temptoken[2]=temptoken[2].replace('1\t', '')              
-                if temptoken[2]!='O':
-                    tokens.append(temptoken[0])   
+            temptoken=terms.split(' : ')  
+            if temptoken[0] and temptoken[1]:
+                temptoken[0]=temptoken[0].replace('word(t)=', '')            
+                temptoken[1]=temptoken[1].replace('1\t', '')              
+                if temptoken[1]!='O':
+                    tokens.append(temptoken)   
                 
         # This chunk of code checks through the descendants for presence of NavigableStrings and replaces the string with an 'a' with title=keyword for tooltip purpose.
         w=soup
@@ -224,11 +238,11 @@ def keywordtag(filename):
                                 reg=re.compile(b[0], re.IGNORECASE)      
                                 if b[0] in i and len(b[0])>2:
                                     if i.parent.name=='a':
-                                        i.parent['title']=b[0]; i.parent['style']="color:#000000; background-color:#40E0D0"
+                                        i.parent['title']=b[1]; i.parent['style']="color:#000000; background-color:#40E0D0"
                                     else:      		  
                                         match=re.search(reg,i)
                                         start, end = match.start(), match.end()      				
-                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[0]+'">'+b[0]+'</span>'+i[end:]				
+                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
                                         i.string.replace_with(newtag)
    
    
@@ -259,12 +273,33 @@ def keywordtag(filename):
                 content.append(line)
         fin.close()
         fout.close()
-
-        #print 'Time elapsed is', time.time()-starttime, 'seconds'
-
-        #print '\n\t\tInput file\t\t:', filename+'.html'
-        #print '\t\tTagged file\t\t:', filename+'tagged.html'
-
         return content
 
 
+def iscapital(token):
+    tokensplit=list(token)    
+    if  re.match('[A-Z]', tokensplit[0]) :
+        return True
+    else:
+        return False
+
+
+def isnumber(token):    
+    if   not re.match('[^0-9]', token):
+        return True
+    else:
+        return False
+
+
+def hasnumber(token):
+    if   '[0-9]' in token:
+        return True
+    else:
+        return False
+
+
+def hassplchars(token):
+    if   re.match('[^a-zA-Z0-9]', token):
+        return True
+    else:
+        return False
