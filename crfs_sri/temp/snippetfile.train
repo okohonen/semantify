@@ -1,702 +1,1091 @@
-word(t)=Manchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=Manchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	location
-word(t)=2 : 1	0 : 1	1 : 1	0 : 1	0 : 1	span : 1	org
-word(t)=0 : 1	0 : 1	1 : 1	0 : 1	0 : 1	span : 1	org
-word(t)=Hull : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Cardiff : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Newcastle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Norwich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=West : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Stoke : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Sunderland : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Swansea : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=Arsenal : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=Leeds : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	entity
-word(t)=Birmingham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Ipswich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bolton : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	location
-word(t)=Millwall : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	org
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	location
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	span : 1	location
-word(t)=Yeovil : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Carlisle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Colchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bristol : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Rotherham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Peterborough : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Crawley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sheffield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Shrewsbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Coventry : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Bradford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Swindon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Fleetwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Northampton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cheltenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Exeter : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=York : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Mansfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Oxford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Scunthorpe : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Torquay : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hartlepool : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Southend : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cambridge : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Green : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Rovers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Alfreton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Grimsby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nuneaton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hereford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Welling : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Luton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Macclesfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Braintree : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Salisbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Halifax : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Aldershot : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Colchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hartlepool : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bradford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Fleetwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Exeter : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Shrewsbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cheltenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Northampton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Scunthorpe : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sheffield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Torquay : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bristol : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Dunstable : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Wantage : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Didcot : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ardley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Arnold : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brigg : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ashford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Atherstone : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Aylesbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Thatcham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ampthill : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Basford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Basildon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bracknell : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Belper : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Retford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Berkhamsted : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Harefield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Barton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Old : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Boys : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Boston : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Dereham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brentwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Merthyr : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Salford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Carlton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chessington : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Hook : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Rye : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cinderford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Aylesbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Mildenhall : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Clevedon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Colliers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Wood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Erith : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Corsham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sherborne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Lye : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Daventry : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Desborough : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Durham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Morpeth : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Eastbourne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Eastbourne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Farnham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Camberley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Faversham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Fleet : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Godalming : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Thetford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Guildford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Guisborough : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bridlington : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hadleigh : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=West : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Auckland : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hebburn : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Marske : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hertford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Horley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Kendal : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Crook : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=AFC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Leek : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Biggleswade : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Long : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Eaton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Eastwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Market : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Drayton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Deal : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Newcastle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Fareham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Spennymoor : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=North : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Greenford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ossett : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ashford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Petersfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ilfracombe : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Potters : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Bar : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Congleton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ramsbottom : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Royston : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Rugby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Norton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Runcorn : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Shirebrook : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Shortwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Egham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sleaford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Spalding : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Holbeach : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=St : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ives : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Soham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Rangers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Sutton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Coldfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bedworth : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Swaffham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Huntingdon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Taunton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bridgwater : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Felixstowe : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Walton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Tipton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Stratford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Whitstable : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Winsford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Wells : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Bodmin : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Wimborne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hamworthy : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Winchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Witham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Yate : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Littlehampton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Harborough : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bristol : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Carlisle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Leicester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Leeds : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Huddersfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hull : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Norwich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Peterborough : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Swindon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sunderland : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bolton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Wanderers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=West : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cheltenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Yeovil : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Birmingham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Cardiff : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Rotherham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Newcastle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nottingham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Millwall : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	org
-word(t)=Stoke : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Watford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Manchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brackley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=North : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ferriby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Oxford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Gloucester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Staines : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bath : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Dorchester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ebbsfleet : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hayes : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Yeading : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sutton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Matlock : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Grantham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nantwich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ashton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Grantham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nantwich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Skelmersdale : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ashton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Matlock : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Arlesey : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Banbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Frome : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chippenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hungerford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chesham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Biggleswade : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=St : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Neots : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Redditch : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Corby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Truro : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Hitchin : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hitchin : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Redditch : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hungerford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Biggleswade : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chesham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Banbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chippenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Arlesey : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Corby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=St : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Neots : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Frome : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Poole : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Bognor : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Regis : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=East : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Thurrock : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Enfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Thamesmead : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Aylesbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Faversham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Belper : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brigg : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Burgess : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Hill : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Carlton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bridgwater : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Rugby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Daventry : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Sutton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Coldfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Didcot : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cirencester : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Dunstable : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Eastwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Egham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ashford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Evesham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Market : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Drayton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Fleet : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Waltham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Godalming : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Guildford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Chertsey : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brentwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hythe : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Kendal : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bedworth : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Leighton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=North : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Greenford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Lincoln : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Mangotsfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Thatcham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Merthyr : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Yate : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Salford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=City : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Potters : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Bar : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=St : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Ives : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Chatham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Royston : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Shortwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Whitstable : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Newcastle : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Stratford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cinderford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Eastbourne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Warrington : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ramsbottom : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=United : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Wimborne : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nottingham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Huddersfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Ipswich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Yeovil : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Millwall : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	org
-word(t)=Bolton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Wanderers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Swindon : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Crawley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Shrewsbury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Fleetwood : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Mansfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Cheltenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Northampton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nuneaton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Forest : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	location
-word(t)=Green : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Rovers : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Grimsby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Braintree : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Halifax : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Luton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Alfreton : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Macclesfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Aldershot : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Brackley : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Matlock : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Grantham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Nantwich : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Poole : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=FC : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Arlesey : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hitchin : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Chippenham : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Biggleswade : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Frome : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Corby : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=St : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Neots : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Hungerford : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bury : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Lowestoft : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Enfield : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Bognor : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Regis : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
-word(t)=Thamesmead : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	O
-word(t)=Town : 1	1 : 1	0 : 1	0 : 1	0 : 1	td : 1	entity
+word(t)=header : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=left : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=navigation : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=bar : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=content : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=right : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=bar : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	tagset : O
+word(t)=LiveScore.com : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h1 : 1	tagset : O
+word(t)=Soccer : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h1 : 1	tagset : O
+word(t)=England : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h1 : 1	tagset : O
+word(t)=your : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=no.1 : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=Soccer : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=Live : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=Scores : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=since : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=1998 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=h2 : 1	tagset : O
+word(t)=Champions : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=World : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Confed. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=International : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=England : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Italy : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Germany : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=France : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Netherlands : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Belgium : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Portugal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Scotland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=World : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=U-20 : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Euro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=U-21 : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Euro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=U-19 : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Euro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=U-17 : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Euro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Women : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Austria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cyprus : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Denmark : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Greece : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Iceland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ireland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Rep. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=of : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Luxembourg : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Norway : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Northern : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ireland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Sweden : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Switzerland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Turkey : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Belarus : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Bosnia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Herz. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Croatia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Czech : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Republic : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Estonia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Hungary : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Israel : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Latvia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Lithuania : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=FYR : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Macedonia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Moldova : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Poland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Romania : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Russia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Serbia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Slovakia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Slovenia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ukraine : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=South : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=America : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Argentina : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Bolivia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Brazil : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Chile : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Colombia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ecuador : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Paraguay : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Uruguay : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Venezuela : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=CONCACAF : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=USA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Costa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Rica : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=El : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Salvador : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Guatemala : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Honduras : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Asia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=China : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Japan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Korea : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Republic : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Singapore : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Thailand : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Armenia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Azerbaijan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Georgia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Kazakhstan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Kuwait : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Iran : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Australia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=New : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Zealand : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Africa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=of : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Nations : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Algeria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Egypt : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Kenya : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Morocco : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=South : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Africa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Albania : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Andorra : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Faroe : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Islands : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Malta : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=San : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Marino : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Barbados : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Bermuda : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Canada : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cuba : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Grenada : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Guadeloupe : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Haiti : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Jamaica : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Nicaragua : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Panama : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Puerto : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Rico : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Saint : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Kitts : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Nevis : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Trinidad : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Tobago : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Bahrain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Hong : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Kong : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=India : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Indonesia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Iraq : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Jordan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Lebanon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Malaysia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Oman : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Pakistan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Qatar : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Saudi : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Arabia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Syria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Arab : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Emirates : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Taiwan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Uzbekistan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Fiji : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Solomon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Islands : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Tahiti : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Vanuatu : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Angola : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Benin : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Botswana : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Burkina : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Faso : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cameroon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Cape : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Verde : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=DR : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Congo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Gabon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Gambia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ghana : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Guinea : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Yemen : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Lesotho : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Liberia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Madagascar : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Malawi : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Mauritius : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Mozambique : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Namibia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Nigeria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Ivory : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Coast : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Rwanda : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Senegal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Sierra : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Leone : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Sudan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Tanzania : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Togo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Uganda : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Zambia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=Zimbabwe : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	tagset : O
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : O
+word(t)=England : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=strong : 1	tagset : O
+word(t)=August : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : O
+word(t)=31 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : O
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=2 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Cardiff : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=Everton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Newcastle : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=Fulham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Norwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=Southampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=Ham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Crystal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=Palace : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=2 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : org
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Southampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Crystal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Palace : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Fulham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Hull : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Liverpool : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Liverpool : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Norwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Sunderland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Ham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Bromwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Albion : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Bromwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Albion : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Cardiff : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Newcastle : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Ham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Norwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Southampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Cardiff : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Crystal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Palace : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Everton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity
+word(t)=Sunderland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	tagset : entity

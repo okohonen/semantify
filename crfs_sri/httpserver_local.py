@@ -36,8 +36,9 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')        
         self.end_headers()
         t=time.time()
-
+        counter=0
         o = json.loads(data_string) 
+      
         # Writing to a file for processing
         f=open(os.getcwd()+"/temp/snippetfile.html", 'w')    
         content=o['content']
@@ -134,7 +135,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(o))
         elapsed=time.time()-t
         print 'File', filename, 'served in:',  elapsed
-                           
+                   
 
 httpd = SocketServer.TCPServer(("", PORT), TestHandler)
 

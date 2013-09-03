@@ -28,8 +28,8 @@ def preprocess(filename):
     
     
     for a in range(len(alltext)):
-        alltext[a]=re.sub('[^a-zA-Z0-9\n\.]', ' ', alltext[a])
-        alltext[a]=re.sub(r'['+char+']', ' ',alltext[a])
+        alltext[a]=re.sub('[^a-zA-Z0-9\n\.\-]', ' ', alltext[a])
+        #alltext[a]=re.sub(r'['+char+']', ' ',alltext[a])
         words=alltext[a].split()
         for i in range(len(words)): 
             if len(words[i])<45 and len(words[i])>0:
@@ -80,33 +80,29 @@ def develparse(filename):
 
     for i in range(len(tagset0)):
         if len(tagset0[i].string)>1:
-            tagset0[i]=re.sub(r'['+char+']', '',tagset0[i].string)
-            tagset0[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset0[i])  
+            #tagset0[i]=re.sub(r'['+char+']', '',tagset0[i].string)
+            tagset0[i]=re.sub('[^a-zA-Z0-9\.\-]', ' ', tagset0[i].string)  
             tagsetentity.append(tagset0[i])
     for i in range(len(tagset1)):
         if len(tagset1[i].string)>1:
-            tagset1[i]=re.sub(r'['+char+']', '',tagset1[i].string)
-            tagset1[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset1[i])  
+            #tagset1[i]=re.sub(r'['+char+']', '',tagset1[i].string)
+            tagset1[i]=re.sub('[^a-zA-Z0-9\.\-]', ' ', tagset1[i].string)  
             tagsetorg.append(tagset1[i])
     for i in range(len(tagset2)):
         if len(tagset2[i].string)>1:
-            tagset2[i]=re.sub(r'['+char+']', '',tagset2[i].string)
-            tagset2[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset2[i])  
+            #tagset2[i]=re.sub(r'['+char+']', '',tagset2[i].string)
+            tagset2[i]=re.sub('[^a-zA-Z0-9\.\-]', ' ', tagset2[i].string)  
             tagsetlocation.append(tagset2[i])
     for i in range(len(tagset3)):
         if len(tagset3[i].string)>1:
-            tagset3[i]=re.sub(r'['+char+']', '',tagset3[i].string)
-            tagset3[i]=re.sub('[^a-zA-Z0-9\.]', ' ', tagset3[i])  
+            #tagset3[i]=re.sub(r'['+char+']', '',tagset3[i].string)
+            tagset3[i]=re.sub('[^a-zA-Z0-9\.\-]', ' ', tagset3[i].string)  
             tagsetdate.append(tagset3[i])
 
     compiledtag=[tagsetentity,tagsetorg,tagsetlocation,tagsetdate]
     print compiledtag
     maxcount=len(compiledtag[0])+len(compiledtag[1])+len(compiledtag[2])+len(compiledtag[3])
-
-    #  Extracting all the visually rendered text on page
-
-    #alltext=soup.find_all(text=True)
-    #alltext_length=len(alltext)
+    
     counter=0
     flag=0
     tags=[]; devels=[]
@@ -114,21 +110,23 @@ def develparse(filename):
 #  Checking if each string on page is tagged and assigning corresponding B,I,O tags
     print 'Adding training values to db'
     
-    w=soup
-    
+    w=soup  
+    trainingflag=0
+   
     for child in w.descendants:
                 if child.next_sibling:
                     for instring in child.next_sibling:				
                         if isinstance(instring,NavigableString):
                             parentname=instring.parent.name
                             if len(instring)<45 and len(instring)>0:
-                                instring=re.sub(r'['+char+']', '',instring)
-                                instring=re.sub('[^a-zA-Z0-9\.]', ' ', instring)   
-                                count=0; counter=counter+1
+                                #instring=re.sub(r'['+char+']', '',instring)
+                                instring=re.sub('[^a-zA-Z0-9\.-]', ' ', instring)   
+                                count=0; counter=counter+1; trainingminiflag=0
                                 for i in range(len(compiledtag)):
                                     for j in range(len(compiledtag[i])): 
                                         count= count+1 ; flag=1       
                                         if compiledtag[i][j] in instring and compiledtag[i][j]: 
+                                            trainingflag=1
                                             instringsplit=instring.split()
                                             z=0 ;                           
                                             for m in instringsplit:                               
@@ -157,9 +155,10 @@ def develparse(filename):
                                                     
                                                 # counter % 10 is to reproduce 10 percent of train file as devel file
                                                     if counter % 10 <1:
-                                                        devels.append ('word(t)='+m+' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\t'+tagset[i]+'\n') 
+                                                        #devels.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname : '+parentname+'\ttagset : '+tagset[i]+'\n') 
+                                                        devels.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)='+parentname+' : 1\ttagset : '+tagset[i]+'\n') 
                                                     else:
-                                                        tags.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\t'+tagset[i]+'\n') 
+                                                        tags.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)='+parentname+' : 1\ttagset : '+tagset[i]+'\n') 
                                                 else:   
                                                     if iscapital(m):
                                                         capital="1"
@@ -178,10 +177,37 @@ def develparse(filename):
                                                     else:
                                                         splchars="0"
                                                     if counter % 10 <1:
-                                                        devels.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\tO\n') 
+                                                        devels.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)='+parentname+' : 1\ttagset : O\n') 
                                                     else:
-                                                        tags.append ('word(t)='+m+ ' : 1\t'+capital+' : 1\t'+number+' : 1\t'+h_number+' : 1\t'+splchars+' : 1\t'+parentname+' : 1\tO\n') 
-                                                        
+                                                        tags.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)'+parentname+' : 1\ttagset : O\n') 
+                                        elif trainingflag==0 and trainingminiflag==0:
+                                             trainingminiflag=1
+                                             instringsplit=instring.split()
+                                             z=0 ;                           
+                                             for m in instringsplit:  
+                                                    # collecting other features for the token
+                                                    if iscapital(m):
+                                                        capital="1"
+                                                    else:
+                                                        capital="0"
+                                                    if isnumber(m):
+                                                        number="1"
+                                                    else:
+                                                        number="0"
+                                                    if hasnumber(m):
+                                                        h_number="1"
+                                                    else:
+                                                        h_number="0"
+                                                    if hassplchars(m):
+                                                        splchar="1"
+                                                    else:
+                                                        splchars="0"                                  
+                                                    
+                                                # counter % 10 is to reproduce 10 percent of train file as devel file
+                                                    if counter % 10 <1:                                                       
+                                                      devels.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)='+parentname+' : 1\ttagset : O\n') 
+                                                    else:
+                                                      tags.append ('word(t)='+m+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tparentname(t)='+parentname+' : 1\ttagset : O\n') 
 
     print 'Added training values to db'
 
@@ -223,13 +249,13 @@ def keywordtag(filename):
             if temptoken[0] and temptoken[1]:
                 temptoken[0]=temptoken[0].replace('word(t)=', '')            
                 temptoken[1]=temptoken[1].replace('1\t', '')              
-                if temptoken[1]!='O':
+                if temptoken[2]!='O':
                     tokens.append(temptoken)   
                 
         # This chunk of code checks through the descendants for presence of NavigableStrings and replaces the string with an 'a' with title=keyword for tooltip purpose.
         w=soup
 
-        for b in tokens:
+        for b in tokens:           
             for child in w.descendants:
                 if child.next_sibling:
                     for i in child.next_sibling:				
@@ -238,15 +264,23 @@ def keywordtag(filename):
                                 reg=re.compile(b[0], re.IGNORECASE)      
                                 if b[0] in i and len(b[0])>2:
                                     if i.parent.name=='a':
-                                        i.parent['title']=b[1]; i.parent['style']="color:#000000; background-color:#40E0D0"
+                                        i.parent['title']=b[2]; i.parent['style']="color:#000000; background-color:#40E0D0"
                                     else:      		  
                                         match=re.search(reg,i)
                                         start, end = match.start(), match.end()      				
-                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[1]+'">'+b[0]+'</span>'+i[end:]				
+                                        newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+b[2]+'">'+b[0]+'</span>'+i[end:]				
                                         i.string.replace_with(newtag)
    
-   
-
+        # Debugging the output of test.prediction
+        testfile= open(os.getcwd()+'/temp/'+filename+'.test.correction', 'w')
+        for b in tokens:           
+            testfile.write(b[0])
+            testfile.write(':')
+            testfile.write(b[2])
+            testfile.write('\n')
+        testfile.close()
+        ###########
+        
         for i in soup:		
             ret.write(repr(i))
             
@@ -291,8 +325,8 @@ def isnumber(token):
         return False
 
 
-def hasnumber(token):
-    if   '[0-9]' in token:
+def hasnumber(token):    
+    if   re.match('[0-9]', token):
         return True
     else:
         return False
