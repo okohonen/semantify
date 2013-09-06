@@ -4,7 +4,7 @@ import SocketServer
 import json
 import os
 import string
-import semantify_local
+import semantify_localmodified
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
@@ -61,37 +61,31 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             clientmodel         =os.getcwd()+'/temp/'+filename+'.model'
             standardmodel          =os.getcwd()+'/morphochal2010+eng.model'
                
-            value=semantify_local.preprocess(filename)
-            if value==1:
-                print 'Preprocessing complete'
-                value=0
-                value=semantify_local.develparse(filename)
-                if value==1:    
-                     print 'Devel files extracted' 
-                     command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
-                     print command
-                     args = shlex.split(command)
-                     process=subprocess.Popen(args)
-                     process.wait() 
-                     print 'Model trained'
-                     command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --verbose' % (clientmodel,testfile, testpredictionfile)
-                     print command
-                     args = shlex.split(command)
-                     process=subprocess.Popen(args)
-                     process.wait()  
-                     print 'Model Applied'
-                     content=semantify_local.keywordtag(filename)                       
-            successlog.write(filename)
-            successlog.write('\t')
-            successlog.write( str(datetime.now()))
-            successlog.write('\n') 
-            elapsed=time.time()-t
-            print 'File', filename, 'served in:',  elapsed
-            
-            #if GC%5==0:
-                    #semantify_local.garbagecollection()
-                    #GC=GC+1
-            pass
+            #value=semantify_local.preprocess(filename)
+            #if value==1:
+                #print 'Preprocessing complete'
+            value=0
+            value=semantify_localmodified.subpreprocess(filename)
+            if value==1:    
+                 print 'Devel files extracted' 
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait() 
+                 print 'Model trained'
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --verbose' % (clientmodel,testfile, testpredictionfile)               
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait()  
+                 print 'Model Applied'
+                 content=semantify_localmodified.keywordtag(filename)                       
+                 successlog.write(filename)
+                 successlog.write('\t')
+                 successlog.write( str(datetime.now()))
+                 successlog.write('\n') 
+                 elapsed=time.time()-t
+                 print 'File', filename, 'served in:',  elapsed
+                 pass
             
         elif o["command"] == "TAG":
             # Replace this line with real action
@@ -104,38 +98,34 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             testpredictionfile =os.getcwd()+'/temp/'+filename+'.test.prediction' 
             testreferencefile = os.getcwd()+'/temp/'+filename+'.test.reference' 
             clientmodel         =os.getcwd()+'/temp/'+filename+'.model'
-            standardmodel          =os.getcwd()+'/models/wsj.first-order-chain.model'
+            standardmodel          =os.getcwd()+'/models/wsj.first-order-chain.model'               
+            
+            value=0
+            value=semantify_localmodified.subpreprocess(filename)
+            if value==1:    
+                 print 'Devel files extracted' 
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait() 
+                 print 'Model trained'
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --test_reference_file %s --verbose' % (clientmodel,testfile, testpredictionfile, testreferencefile)
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait()  
+                 print 'Model Applied'
+                 content=semantify_localmodified.keywordtag(filename)                        
+                 successlog.write(filename)
+                 successlog.write('\t')
+                 successlog.write( str(datetime.now()))
+                 successlog.write('\n')             
+                 
+                 o['content']=''.join(content)                     
+                 
+                 self.wfile.write(json.dumps(o))
+                 elapsed=time.time()-t
+                 print 'File', filename, 'served in:',  elapsed
                
-            value=semantify_local.preprocess(filename)
-            if value==1:
-                print 'Preprocessing complete'
-                value=0
-                value=semantify_local.develparse(filename)
-                if value==1:    
-                     print 'Devel files extracted' 
-                     command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
-                     args = shlex.split(command)
-                     process=subprocess.Popen(args)
-                     process.wait() 
-                     print 'Model trained'
-                     command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --test_reference_file %s --verbose' % (clientmodel,testfile, testpredictionfile, testreferencefile)
-                     args = shlex.split(command)
-                     process=subprocess.Popen(args)
-                     process.wait()  
-                     print 'Model Applied'
-                     content=semantify_local.keywordtag(filename)                        
-            successlog.write(filename)
-            successlog.write('\t')
-            successlog.write( str(datetime.now()))
-            successlog.write('\n')             
-            
-            o['content']=''.join(content)
-                
-            
-            self.wfile.write(json.dumps(o))
-        elapsed=time.time()-t
-        print 'File', filename, 'served in:',  elapsed
-                   
 
 httpd = SocketServer.TCPServer(("", PORT), TestHandler)
 

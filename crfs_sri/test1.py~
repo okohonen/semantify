@@ -1,12 +1,24 @@
 
 import string
 import re
+import os
+from bs4 import BeautifulSoup as Soup
+from bs4 import NavigableString
+import devutil
+import time
 
-line='.2-0'
+filename='snippetfile'
 
-char=re.escape(string.punctuation)
-#line=re.sub(r'['+char+']', '',line)
-line=re.sub('[^a-zA-Z0-9\.-]', ' ', line)  
+page=open(os.getcwd()+'/temp/'+filename+'.html','r')
+
+soup=Soup(page)
+
+for i in w:           
+ if isinstance(i,NavigableString):                
+  if len(i)<50 and len(i)>2:
+   print i
+   print i.parent.name
+	
 
 
-print line
+

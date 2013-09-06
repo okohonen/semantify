@@ -1,469 +1,286 @@
-word(t)=ANDROID : 1 
-word(t)=Live : 1 
-word(t)=Ltd. : 1 
-word(t)=UEFA : 1 
-word(t)=League : 1 
-word(t)=One : 1 
-word(t)=Evo-Stik : 1 
-word(t)=Italy : 1 
-word(t)=U-20 : 1 
-word(t)=Cyprus : 1 
-word(t)=Northern : 1 
-word(t)=Croatia : 1 
-word(t)=Moldova : 1 
-word(t)=America : 1 
-word(t)=Venezuela : 1 
-word(t)=Asia : 1 
-word(t)=Georgia : 1 
-word(t)=Nations : 1 
-word(t)=Albania : 1 
-word(t)=Barbados : 1 
-word(t)=Panama : 1 
-word(t)=Bahrain : 1 
-word(t)=Palestine : 1 
-word(t)=Uzbekistan : 1 
-word(t)=Burkina : 1 
-word(t)=Ghana : 1 
-word(t)=Namibia : 1 
-word(t)=Tanzania : 1 
-word(t)=August : 1 
-word(t)=FT : 1 
-word(t)=1 : 1 
-word(t)=Southampton : 1 
-word(t)=FT : 1 
-word(t)=Liverpool : 1 
-word(t)=0 : 1 
-word(t)=Tottenham : 1 
-word(t)=0 : 1 
-word(t)=1 : 1 
-word(t)=Town : 1 
-word(t)=Blackpool : 1 
-word(t)=- : 1 
-word(t)=City : 1 
-word(t)=Rovers : 1 
-word(t)=1 : 1 
-word(t)=Forest : 1 
-word(t)=League : 1 
-word(t)=United : 1 
-word(t)=Gillingham : 1 
-word(t)=- : 1 
-word(t)=Tranmere : 1 
-word(t)=FT : 1 
-word(t)=United : 1 
-word(t)=1 : 1 
-word(t)=Bradford : 1 
-word(t)=FT : 1 
-word(t)=League : 1 
-word(t)=Fleetwood : 1 
-word(t)=FT : 1 
-word(t)=4 : 1 
-word(t)=1 : 1 
-word(t)=Redbridge : 1 
-word(t)=United : 1 
-word(t)=Chesterfield : 1 
-word(t)=Torquay : 1 
-word(t)=2 : 1 
-word(t)=31 : 1 
-word(t)=3 : 1 
-word(t)=0 : 1 
-word(t)=Green : 1 
-word(t)=1 : 1 
-word(t)=1 : 1 
-word(t)=Town : 1 
-word(t)=Salisbury : 1 
-word(t)=- : 1 
-word(t)=FC : 1 
-word(t)=Lea : 1 
-word(t)=- : 1 
-word(t)=Didcot : 1 
-word(t)=Hanworth : 1 
-word(t)=FT : 1 
-word(t)=Atherstone : 1 
-word(t)=1 : 1 
-word(t)=Waltham : 1 
-word(t)=FT : 1 
-word(t)=Rovers : 1 
-word(t)=- : 1 
-word(t)=Swifts : 1 
-word(t)=Bedfont : 1 
-word(t)=5 : 1 
-word(t)=1 : 1 
-word(t)=Town : 1 
-word(t)=Whetstone : 1 
-word(t)=- : 1 
-word(t)=- : 1 
-word(t)=Hallen : 1 
-word(t)=Town : 1 
-word(t)=2 : 1 
-word(t)=St : 1 
-word(t)=Town : 1 
-word(t)=6 : 1 
-word(t)=0 : 1 
-word(t)=Victoria : 1 
-word(t)=FT : 1 
-word(t)=0 : 1 
-word(t)=United : 1 
-word(t)=Clacton : 1 
-word(t)=2 : 1 
-word(t)=Bishop : 1 
-word(t)=Cockfosters : 1 
-word(t)=- : 1 
-word(t)=Town : 1 
-word(t)=Coventry : 1 
-word(t)=Gatwick : 1 
-word(t)=2 : 1 
-word(t)=Ashton : 1 
-word(t)=- : 1 
-word(t)=Loughborough : 1 
-word(t)=Dunkirk : 1 
-word(t)=1 : 1 
-word(t)=0 : 1 
-word(t)=FT : 1 
-word(t)=Evesham : 1 
-word(t)=- : 1 
-word(t)=Lancaster : 1 
-word(t)=Town : 1 
-word(t)=3 : 1 
-word(t)=FT : 1 
-word(t)=0 : 1 
-word(t)=Bishop : 1 
-word(t)=Guildford : 1 
-word(t)=1 : 1 
-word(t)=5 : 1 
-word(t)=FT : 1 
-word(t)=2 : 1 
-word(t)=- : 1 
-word(t)=United : 1 
-word(t)=Town : 1 
-word(t)=- : 1 
-word(t)=Town : 1 
-word(t)=Langley : 1 
-word(t)=1 : 1 
-word(t)=and : 1 
-word(t)=FT : 1 
-word(t)=United : 1 
-word(t)=- : 1 
-word(t)=1 : 1 
-word(t)=Market : 1 
-word(t)=1 : 1 
-word(t)=Deal : 1 
-word(t)=FT : 1 
-word(t)=Market : 1 
-word(t)=- : 1 
-word(t)=- : 1 
-word(t)=Spennymoor : 1 
-word(t)=Athletic : 1 
-word(t)=Ossett : 1 
-word(t)=Town : 1 
-word(t)=1 : 1 
-word(t)=FT : 1 
-word(t)=Town : 1 
-word(t)=1 : 1 
-word(t)=Haringey : 1 
-word(t)=Town : 1 
-word(t)=Raynes : 1 
-word(t)=1 : 1 
-word(t)=3 : 1 
-word(t)=United : 1 
-word(t)=FT : 1 
-word(t)=1 : 1 
-word(t)=Penrith : 1 
-word(t)=Shortwood : 1 
-word(t)=1 : 1 
-word(t)=0 : 1 
-word(t)=Soham : 1 
-word(t)=Tigers : 1 
-word(t)=1 : 1 
-word(t)=Wanderers : 1 
-word(t)=FT : 1 
-word(t)=Town : 1 
-word(t)=- : 1 
-word(t)=Walton : 1 
-word(t)=Tipton : 1 
-word(t)=- : 1 
-word(t)=Sholing : 1 
-word(t)=Uxbridge : 1 
-word(t)=- : 1 
-word(t)=2 : 1 
-word(t)=United : 1 
-word(t)=Ware : 1 
-word(t)=Winsford : 1 
-word(t)=FT : 1 
-word(t)=Whitehaven : 1 
-word(t)=- : 1 
-word(t)=Swindon : 1 
-word(t)=Witham : 1 
-word(t)=2 : 1 
-word(t)=Country : 1 
-word(t)=- : 1 
-word(t)=Greenwich : 1 
-word(t)=FT : 1 
-word(t)=Bridlington : 1 
-word(t)=Binfield : 1 
-word(t)=JP : 1 
-word(t)=21 : 1 
-word(t)=- : 1 
-word(t)=21 : 1 
-word(t)=City : 1 
-word(t)=21 : 1 
-word(t)=Town : 1 
-word(t)=Argyle : 1 
-word(t)=45 : 1 
-word(t)=- : 1 
-word(t)=45 : 1 
-word(t)=City : 1 
-word(t)=27 : 1 
-word(t)=2 : 1 
-word(t)=Preston : 1 
-word(t)=FT : 1 
-word(t)=County : 1 
-word(t)=3 : 1 
-word(t)=Athletic : 1 
-word(t)=Liverpool : 1 
-word(t)=- : 1 
-word(t)=FT : 1 
-word(t)=Sunderland : 1 
-word(t)=1 : 1 
-word(t)=- : 1 
-word(t)=Birmingham : 1 
-word(t)=County : 1 
-word(t)=City : 1 
-word(t)=Everton : 1 
-word(t)=Newcastle : 1 
-word(t)=Stoke : 1 
-word(t)=0 : 1 
-word(t)=Manchester : 1 
-word(t)=North : 1 
-word(t)=Boston : 1 
-word(t)=- : 1 
-word(t)=3 : 1 
-word(t)=FT : 1 
-word(t)=- : 1 
-word(t)=Hednesford : 1 
-word(t)=0 : 1 
-word(t)=- : 1 
-word(t)=Staines : 1 
-word(t)=FT : 1 
-word(t)=- : 1 
-word(t)=Super : 1 
-word(t)=FT : 1 
-word(t)=and : 1 
-word(t)=2 : 1 
-word(t)=0 : 1 
-word(t)=F.C. : 1 
-word(t)=2 : 1 
-word(t)=Droylsden : 1 
-word(t)=- : 1 
-word(t)=United : 1 
-word(t)=Rushall : 1 
-word(t)=2 : 1 
-word(t)=Stamford : 1 
-word(t)=FT : 1 
-word(t)=Ilkeston : 1 
-word(t)=45 : 1 
-word(t)=21 : 1 
-word(t)=Athletic : 1 
-word(t)=Town : 1 
-word(t)=United : 1 
-word(t)=21 : 1 
-word(t)=45 : 1 
-word(t)=Worksop : 1 
-word(t)=Town : 1 
-word(t)=2 : 1 
-word(t)=FT : 1 
-word(t)=3 : 1 
-word(t)=Totton : 1 
-word(t)=Poole : 1 
-word(t)=Neots : 1 
-word(t)=- : 1 
-word(t)=Hitchin : 1 
-word(t)=2 : 1 
-word(t)=United : 1 
-word(t)=AFC : 1 
-word(t)=Weymouth : 1 
-word(t)=United : 1 
-word(t)=45 : 1 
-word(t)=Town : 1 
-word(t)=21 : 1 
-word(t)=Frome : 1 
-word(t)=August : 1 
-word(t)=FT : 1 
-word(t)=Hamlet : 1 
-word(t)=- : 1 
-word(t)=Thamesmead : 1 
-word(t)=0 : 1 
-word(t)=Kingstonian : 1 
-word(t)=Wealdstone : 1 
-word(t)=- : 1 
-word(t)=- : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=FC : 1 
-word(t)=Bishop : 1 
-word(t)=- : 1 
-word(t)=17 : 1 
-word(t)=Peter : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=Town : 1 
-word(t)=17 : 1 
-word(t)=FC : 1 
-word(t)=Drayton : 1 
-word(t)=Folkestone : 1 
-word(t)=Slough : 1 
-word(t)=City : 1 
-word(t)=17 : 1 
-word(t)=Chipstead : 1 
-word(t)=Town : 1 
-word(t)=00 : 1 
-word(t)=New : 1 
-word(t)=Leighton : 1 
-word(t)=- : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=00 : 1 
-word(t)=Darlington : 1 
-word(t)=Potters : 1 
-word(t)=Scarborough : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=00 : 1 
-word(t)=Whitstable : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=00 : 1 
-word(t)=Town : 1 
-word(t)=Uxbridge : 1 
-word(t)=17 : 1 
-word(t)=- : 1 
-word(t)=Down : 1 
-word(t)=Town : 1 
-word(t)=October : 1 
-word(t)=bar : 1 
-word(t)=- : 1 
-word(t)=Bet : 1 
-word(t)=Bonus : 1 
-word(t)=function : 1 
-word(t)=if : 1 
-word(t)=connect.facebook.net : 1 
-word(t)=Place : 1 
-word(t)=render. : 1 
-word(t)=function : 1 
-word(t)=po.src : 1 
-word(t)=s.parentNode.insertBefore : 1 
-word(t)=Liverpool : 1 
-word(t)=3 : 1 
-word(t)=6 : 1 
-word(t)=4 : 1 
-word(t)=3 : 1 
-word(t)=4 : 1 
-word(t)=3 : 1 
-word(t)=16 : 1 
-word(t)=Hull : 1 
-word(t)=Bromwich : 1 
-word(t)=13 : 1 
-word(t)=10 : 1 
-word(t)=10 : 1 
-word(t)=8 : 1 
-word(t)=Leeds : 1 
-word(t)=Huddersfield : 1 
-word(t)=14 : 1 
-word(t)=Ipswich : 1 
-word(t)=Doncaster : 1 
-word(t)=Barnsley : 1 
-word(t)=Town : 1 
-word(t)=5 : 1 
-word(t)=15 : 1 
-word(t)=12 : 1 
-word(t)=6 : 1 
-word(t)=8 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=6 : 1 
-word(t)=16 : 1 
-word(t)=18 : 1 
-word(t)=20 : 1 
-word(t)=Carlisle : 1 
-word(t)=Coventry : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=7 : 1 
-word(t)=14 : 1 
-word(t)=15 : 1 
-word(t)=Portsmouth : 1 
-word(t)=City : 1 
-word(t)=Town : 1 
-word(t)=Stanley : 1 
-word(t)=6 : 1 
-word(t)=14 : 1 
-word(t)=Forest : 1 
-word(t)=8 : 1 
-word(t)=10 : 1 
-word(t)=12 : 1 
-word(t)=14 : 1 
-word(t)=16 : 1 
-word(t)=6 : 1 
-word(t)=4 : 1 
-word(t)=3 : 1 
-word(t)=-3 : 1 
-word(t)=Altrincham : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=11 : 1 
-word(t)=13 : 1 
-word(t)=Leamington : 1 
-word(t)=4 : 1 
-word(t)=20 : 1 
-word(t)=Gainsborough : 1 
-word(t)=12 : 1 
-word(t)=3 : 1 
-word(t)=6 : 1 
-word(t)=Bishop : 1 
-word(t)=Bath : 1 
-word(t)=Hayes : 1 
-word(t)=14 : 1 
-word(t)=5 : 1 
-word(t)=18 : 1 
-word(t)=Gosport : 1 
-word(t)=Farnborough : 1 
-word(t)=6 : 1 
-word(t)=5 : 1 
-word(t)=9 : 1 
-word(t)=9 : 1 
-word(t)=10 : 1 
-word(t)=Whitby : 1 
-word(t)=5 : 1 
-word(t)=6 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=5 : 1 
-word(t)=Evo-Stik : 1 
-word(t)=13 : 1 
-word(t)=11 : 1 
-word(t)=6 : 1 
-word(t)=8 : 1 
-word(t)=5 : 1 
-word(t)=6 : 1 
-word(t)=6 : 1 
-word(t)=6 : 1 
-word(t)=6 : 1 
-word(t)=4 : 1 
-word(t)=5 : 1 
-word(t)=Ryman : 1 
-word(t)=7 : 1 
-word(t)=14 : 1 
-word(t)=7 : 1 
-word(t)=Town : 1 
-word(t)=Thurrock : 1 
-word(t)=Leiston : 1 
-word(t)=Metropolitan : 1 
-word(t)=Wingate : 1 
-word(t)=Richmond : 1 
-word(t)=6 : 1 
-word(t)=7 : 1 
-word(t)=England : 1 
-word(t)=UA-426278-1 : 1 
+word(t)=iPHONE : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=your : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=h2 : 1	grandparentname(t)=td : 1	
+
+word(t)=Home : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Confed. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=One : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Conference : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Belgium : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Euro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
+word(t)=Denmark : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Northern : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Herz. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Latvia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Serbia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Brazil : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=CONCACAF : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Asia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Armenia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Zealand : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=South : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Islands : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Bermuda : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Panama : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Jordan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Syria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Solomon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Faso : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Ghana : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Mauritius : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Sierra : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=content : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=div : 1	grandparentname(t)=body : 1	
+word(t)=Dons : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Brentford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Alexandra : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=35 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Exeter : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Forest : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Dartford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Salisbury : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Grimsby : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=3 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
+word(t)=Park : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Bishop : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Folkestone : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Spencer : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=AET : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Sheffield : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Waltham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Cheltenham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=England : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=strong : 1	grandparentname(t)=span : 1	
+
+word(t)=Hartlepool : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Torquay : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Bristol : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Newcastle : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Swansea : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Rovers : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Hove : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Forest : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Fulham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=AET : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Rovers : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Albion : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Stoke : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Community : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Solihull : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Boston : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=England : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=strong : 1	grandparentname(t)=span : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Ebbsfleet : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Mare : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Basingstoke : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Frickley : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Steels : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Whitby : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Blyth : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Stocksbridge : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Whitby : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Chesham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Burnham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Maidstone : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Metropolitan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Hendon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Burgess : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Bridgwater : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Ashford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Drayton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Godalming : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Herne : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Chipstead : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Northwood : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Potters : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Ives : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Whitstable : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Thurrock : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Uxbridge : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Ramsbottom : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=15 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=ul : 1	grandparentname(t)=div : 1	
+
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=th : 1	
+word(t)=Brentford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Walsall : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Sheffield : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=PTS : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Exeter : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Redbridge : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Nuneaton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Dartford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Chester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Hotspur : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Southampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Bromwich : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Burnley : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Brighton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Charlton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Hednesford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Bradford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=South : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=th : 1	
+
+word(t)=Bath : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Evo-Stik : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=th : 1	
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Kings : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Witton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=F.C : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Hitchin : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Bedford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Grays : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=East : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Richmond : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Cray : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=time : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=option : 1	grandparentname(t)=select : 1	
