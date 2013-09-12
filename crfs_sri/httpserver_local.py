@@ -4,7 +4,7 @@ import SocketServer
 import json
 import os
 import string
-import semantify_localmodified
+import semantify_local
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
@@ -21,8 +21,31 @@ c.execute('''CREATE TABLE IF NOT EXISTS sentences (id INTEGER PRIMARY KEY AUTOIN
 errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'w')
 successlog=open(os.getcwd()+'/temp/successlog.txt',  'w')
 
-# Garbage collection in database
-#GC=1
+filename=   'snippetfile'
+experiment='experiment80'
+tagset=['home','away','score','date']
+tagdict=['WebAnnotator_home', 'WebAnnotator_away', 'WebAnnotator_score','WebAnnotator_date']
+
+testfile                        =os.getcwd()+'/temp/'+filename+'.test'
+testreferencefile         =os.getcwd()+'/temp/'+filename+'.test.reference'
+
+trainfile                       =os.getcwd()+'/temp/'+filename+'.train'    
+traindevelfile              =os.getcwd()+'/temp/'+filename+'.train.devel' 
+develpredictionfile      =os.getcwd()+'/temp/'+filename+'.devel.prediction' 
+testpredictionfile         =os.getcwd()+'/temp/'+filename+'.test.prediction'
+clientmodel                 =os.getcwd()+'/temp/'+filename+'.model'
+
+experimenttrainfile                          =os.getcwd()+'/temp/'+filename+'.'+experiment+'.train'
+experimenttraindevelfile                =os.getcwd()+'/temp/'+filename+'.'+experiment+'.train.devel'
+experimentdevelpredictionfile      =os.getcwd()+'/temp/'+filename+'.'+experiment+'.devel.prediction' 
+experimenttestpredictionfile         =os.getcwd()+'/temp/'+filename+'.'+experiment+'.test.prediction'
+experimentclientmodel                   =os.getcwd()+'/temp/'+filename+'.'+experiment+'.model'
+
+standardmodel=os.getcwd()+'/temp/snippetfile.model'
+
+
+            
+            
 
 class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """The test example handler."""
@@ -42,43 +65,50 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # Writing to a file for processing
         f=open(os.getcwd()+"/temp/snippetfile.html", 'w')    
         content=o['content']
-        f.write('<html><head><body>')
+        f.write('<html><<body>')
         for i in range(len(content)):            
             f.write(content[i].encode('utf8'))
-        f.write('</body></head></html>')
+        f.write('</body></html>')
         f.close()
-        filename=   'snippetfile'
+    
+        
+        
         
         if o["command"] == "PUT":            
-            # Do what should be done during PUT
-            
-            trainfile               =os.getcwd()+'/temp/'+filename+'.train'    
-            traindevelfile       =os.getcwd()+'/temp/'+filename+'.train.devel'
-            testfile                 =os.getcwd()+'/temp/'+filename+'.test'
-            testreferencefile         =os.getcwd()+'/temp/'+filename+'.test.reference'
-            develpredictionfile =os.getcwd()+'/temp/'+filename+'.devel.prediction' 
-            testpredictionfile         =os.getcwd()+'/temp/'+filename+'.test.prediction'
-            clientmodel         =os.getcwd()+'/temp/'+filename+'.model'
-            standardmodel          =os.getcwd()+'/morphochal2010+eng.model'
+            # Do what should be done during PUT           
                
-            #value=semantify_local.preprocess(filename)
-            #if value==1:
-                #print 'Preprocessing complete'
+           
             value=0
-            value=semantify_localmodified.subpreprocess(filename)
+            value=semantify_local.preprocess(filename, experiment, tagset, tagdict)
             if value==1:    
-                 print 'Devel files extracted' 
-                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
+                 #print 'Devel files extracted' 
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait() 
-                 print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --verbose' % (clientmodel,testfile, testpredictionfile)               
+                 #print 'Model trained'
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)               
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 print 'Model Applied'
-                 content=semantify_localmodified.keywordtag(filename)                       
+                 
+                 ################## Experiment10
+                 
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (experimenttrainfile,experimenttraindevelfile, experimentdevelpredictionfile, experimentclientmodel)              
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait() 
+                 #print 'Model trained'
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (experimentclientmodel,testfile, experimenttestpredictionfile)               
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait()  
+                 
+                 #####################
+                 
+                 semantify_local.accuracy(filename, experiment)
+                 #print 'Model Applied'
+                 #content=semantify_local.keywordtag(filename, tagset, tagdict)                       
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))
@@ -89,32 +119,37 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             
         elif o["command"] == "TAG":
             # Replace this line with real action
-            
-            trainfile               =os.getcwd()+'/temp/'+filename+'.train'    
-            traindevelfile       =os.getcwd()+'/temp/'+filename+'.train.devel'
-            develpredictionfile= os.getcwd()+'/temp/'+filename+'.devel.prediction' 
-            testfile                 =os.getcwd()+'/temp/'+filename+'.test'
-            testdevelfile         =os.getcwd()+'/temp/'+filename+'.test.devel'
-            testpredictionfile =os.getcwd()+'/temp/'+filename+'.test.prediction' 
-            testreferencefile = os.getcwd()+'/temp/'+filename+'.test.reference' 
-            clientmodel         =os.getcwd()+'/temp/'+filename+'.model'
-            standardmodel          =os.getcwd()+'/models/wsj.first-order-chain.model'               
-            
+          
             value=0
-            value=semantify_localmodified.subpreprocess(filename)
+            value=semantify_localmodified.preprocess(filename, experiment, tagset, tagdict)
             if value==1:    
                  print 'Devel files extracted' 
-                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s --verbose' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait() 
                  print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s --test_reference_file %s --verbose' % (clientmodel,testfile, testpredictionfile, testreferencefile)
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 print 'Model Applied'
-                 content=semantify_localmodified.keywordtag(filename)                        
+                 
+                 ################## Experiment10
+                 
+                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (experimenttrainfile,experimenttraindevelfile, experimentdevelpredictionfile, experimentclientmodel)              
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait() 
+                 #print 'Model trained'
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (experimentclientmodel,testfile, experimenttestpredictionfile)               
+                 args = shlex.split(command)
+                 process=subprocess.Popen(args)
+                 process.wait()  
+                 
+                 #####################
+                 semantify_local.accuracy(filename, experiment)
+                 #print 'Model Applied'
+                 #content=semantify_localmodified.keywordtag(filename, tagset, tagdict)                        
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))

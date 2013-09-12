@@ -1,11 +1,156 @@
-word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	org
-word(t)=U-21 : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
-word(t)=Dons : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=Alexandra : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=Burton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=ANDROID : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=no.1 : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=h2 : 1	grandparentname(t)=td : 1	O
 
-word(t)=Town : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
-word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Spain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Women : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Rep. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Estonia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Montenegro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Peru : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=El : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Iran : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Algeria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Haiti : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=India : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Pakistan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Benin : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Congo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Coast : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+word(t)=Togo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Spain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=strong : 1	date
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	score
+word(t)=Ponferradina : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=18 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Lleida : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Eibar : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=21 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Hercules : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+
+word(t)=Tudelano : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=CS : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Eupen : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=Dessel : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=21 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Westerlo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=Borinage : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=72 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	home
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	home
+word(t)=Kayseri : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=72 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=Nyiregyhaza : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=C : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=Bekescsaba : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=Puskas : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Budapest : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Kupa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+
+word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Kupa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=18 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=Maccabi : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	score
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Platense : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Criciuma : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	away
+word(t)=50 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Postob : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 1	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=P : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Guatemala : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=strong : 1	date
+word(t)=CSD : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=Deportivo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=J. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	home
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=FC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 1	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	home
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	home
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	home
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	score
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	score
+word(t)=0 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	score
+word(t)=Play-Out : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	date
+
+word(t)=FT : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=16 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=div : 1	grandparentname(t)=div : 1	O
+word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	O
+
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Southampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=20 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=Atalanta : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Hellas : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=BBVA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=th : 1	O
+word(t)=Athletic : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=14 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=Hannover : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Wolfsburg : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=Eintracht : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Ligue : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=th : 1	O
+
+word(t)=Lorient : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+word(t)=Evian : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	O
+
+word(t)=Football : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=b : 1	grandparentname(t)=div : 1	O
+word(t)=uacct : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=script : 1	grandparentname(t)=body : 1	O

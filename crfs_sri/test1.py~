@@ -10,15 +10,20 @@ import time
 filename='snippetfile'
 
 page=open(os.getcwd()+'/temp/'+filename+'.html','r')
+checking=open(os.getcwd()+'/temp/'+filename+'.checking.html','w')
 
 soup=Soup(page)
 
-for i in w:           
- if isinstance(i,NavigableString):                
-  if len(i)<50 and len(i)>2:
-   print i
-   print i.parent.name
-	
 
+
+for i in soup.body.descendants:           
+ if isinstance(i,NavigableString):                
+  if len(i)<50 and len(i)>1:
+   instring=re.sub('[^a-zA-Z0-9\.\-?]', ' ', i)            
+   checking.write(repr(instring))
+   checking.write('\n')
+
+checking.close()
+page.close()
 
 
