@@ -1,149 +1,535 @@
-word(t)=ANDROID : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=no.1 : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=h2 : 1	grandparentname(t)=td : 1	
+word(t)=Jump : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=mw-jump id : 1	classlong(t)=aa#aaaa#aa : 1	classbrief(t)=a#a#a : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=other : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=dablink>MUFC redirects here. For other uses, see <a hreftemp : 1	classlong(t)=aaaaaaa#AAAA#aaaaaaaaa#aaaa##Aaa#aaaaa#aaaa##aaa##a#aaaaaaaa : 1	classbrief(t)=a#A#a#a#Aa#a#a#a#a#a : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
 
-word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Spain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Devils : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=nickname>The Red Devils<sup class : 1	classlong(t)=aaaaaaaa#Aaa#Aaa#Aaaaaa#aaa#aaaaa : 1	classbrief(t)=a#Aa#Aa#Aa#a#a : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Ground : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
 
-word(t)=Women : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Rep. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Manager : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Premier : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
 
-word(t)=Estonia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Montenegro : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Football : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=b : 1	grandparentname(t)=p : 1	
+word(t)=based : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=have : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=a : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=a : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=FA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=FA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=won : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=one : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=99 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=1958 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=WebAnnotator_score style : 1	classlong(t)=AaaAaaaaaaaa#aaaaa#aaaaa : 1	classbrief(t)=AaAa#a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Ferguson : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=WebAnnotator_score style : 1	classlong(t)=AaaAaaaaaaaa#aaaaa#aaaaa : 1	classbrief(t)=AaAa#a#a : 1	parentname(t)=span : 1	grandparentname(t)=a : 1	
+word(t)=replacement : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=10 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=Exchange : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Malcolm : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=WebAnnotator_score style : 1	classlong(t)=AaaAaaaaaaaa#aaaaa#aaaaa : 1	classbrief(t)=AaAa#a#a : 1	parentname(t)=span : 1	grandparentname(t)=a : 1	
+word(t)=made : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Stock : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=WebAnnotator_score style : 1	classlong(t)=AaaAaaaaaaaa#aaaaa#aaaaa : 1	classbrief(t)=AaAa#a#a : 1	parentname(t)=span : 1	grandparentname(t)=a : 1	
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+word(t)=system : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
 
-word(t)=Peru : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=El : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=depot : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=team. : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa# : 1	brief(t)=a# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
 
-word(t)=Iran : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Algeria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
 
-word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Haiti : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=including : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Under : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
 
-word(t)=India : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Pakistan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=1938 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=mw-redirect hreftemp : 1	classlong(t)=aa#aaaaaaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
 
-word(t)=Benin : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Congo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=route : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
 
-word(t)=Coast : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
-word(t)=Togo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=disaster : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Edwards : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
 
-word(t)=Spain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=strong : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Sant : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Caudal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=21 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Deportivo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Fuenlabrada : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=22 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=30 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=San : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=WS : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=30 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=KSK : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Borinage : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Beylerbeyi : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=72 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Karaman : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=72 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Group : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Varda : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Hungary : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=strong : 1	
-word(t)=Nyiregyhaza : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Group : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=17 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Kupa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=September : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
+word(t)=team : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=they : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
 
-word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Hakoach : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=21 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=30 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Club : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Temperley : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Sur : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=A : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=00 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=RJ : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=da : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=12 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=Medellin : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=30 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=Carmelita : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=P : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=? : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=Republic : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=strong : 1	
-word(t)=- : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=2 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Steelers : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Seongnam : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Korea : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=2 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=1 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=a : 1	
-word(t)=Busan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=11 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=span : 1	
-word(t)=Daejeon : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=Ilhwa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=span : 1	grandparentname(t)=td : 1	
-word(t)=03 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=div : 1	grandparentname(t)=div : 1	
-word(t)=LiveScore : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=h2 : 1	grandparentname(t)=div : 1	
-word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=West : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Crystal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Fulham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Albion : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Fiorentina : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Torino : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Sampdoria : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Catania : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Barcelona : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Celta : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Valladolid : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=15 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=19 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=12 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Mainz : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=10 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Schalke : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=16 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Monaco : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Rennes : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=Montpellier : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=15 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=19 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	has_fc : 0	parentname(t)=td : 1	grandparentname(t)=tr : 1	
-word(t)=live : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=div : 1	grandparentname(t)=div : 1	
-word(t)=home : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	has_fc : 0	parentname(t)=button : 1	grandparentname(t)=div : 1	
+word(t)=to : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=alongside : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Denis : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=33 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=start : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=but : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=1985 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=History : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+
+word(t)=Ferguson : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Aberdeen : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=41 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=Final : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=going : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Champions : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=Tokyo. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa# : 1	brief(t)=Aa# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=again : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=regaining : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=won : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=Wigan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=penalties : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=FIFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Cristiano : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=57 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=badge : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=derived : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=67 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=1927 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=thumbcaption style : 1	classlong(t)=aaaaaaaaaaaa#aaaaa : 1	classbrief(t)=a#a : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=1963 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=thumbcaption style : 1	classlong(t)=aaaaaaaaaaaa#aaaaa : 1	classbrief(t)=a#a : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Trafford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=fn org colspan : 1	classlong(t)=aa#aaa#aaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Greater : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+
+word(t)=cost : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Capacity : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=th : 1	
+
+word(t)=North : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=1893. : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111# : 1	brief(t)=1# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=It : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=of : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Farman : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=later. : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa# : 1	brief(t)=a# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=77 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=Wolverhampton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=1993 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=81 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=clubs : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=highest : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=F.C. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=A#A# : 1	brief(t)=A#A# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=of : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Liverpool : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=derby : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=major : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=York : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=is : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=Finance : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=106 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=1975 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Sharp : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+
+word(t)=2014 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=500 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=111 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=kit : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=received : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+word(t)=started : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=Chevrolet : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+
+word(t)=126 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=British : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=p : 1	
+word(t)=takeover : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=John : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Gibraltar : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=138 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=IPO : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=16 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=dd : 1	
+word(t)=Position : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+
+word(t)=Ferdinand : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=Wayne : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Hern : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=MF : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+
+word(t)=20 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=bio : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=28 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=Zaha : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=38 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=44 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Zaragoza : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=i : 1	
+word(t)=Federico : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=until : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=td : 1	
+word(t)=33 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Johnstone : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=148 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=Further : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=rellink>Further information: <a hreftemp : 1	classlong(t)=aaaaaaa#Aaaaaaa#aaaaaaaaaaa###a#aaaaaaaa : 1	classbrief(t)=a#Aa#a#a#a : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+
+word(t)=151 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=operating : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaaa : 1	brief(t)=a : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=li : 1	grandparentname(t)=ul : 1	
+
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=dt : 1	grandparentname(t)=dl : 1	
+word(t)=Edelson : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=155 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+word(t)=156 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=Ryan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Fitness : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=reference id : 1	classlong(t)=aaaaaaaaa#aa : 1	classbrief(t)=a#a : 1	parentname(t)=li : 1	grandparentname(t)=ul : 1	
+
+word(t)=F.C. : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=A#A# : 1	brief(t)=A#A# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+word(t)=Unknown : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=Bentley : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+word(t)=Chapman : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+
+word(t)=Herbert : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+word(t)=Scott : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+
+word(t)=Busby : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=td : 1	
+word(t)=from : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=1986 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+word(t)=163 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=sup : 1	
+
+word(t)=Winners : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Intercontinental : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=Europa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=65. : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11# : 1	brief(t)=1# : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=p : 1	grandparentname(t)=div : 1	
+
+word(t)=1910 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=1964 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=01 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=09 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=1908 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=1982 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=1991 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=FA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=1983 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=2008 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=Super : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=FA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=as : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=li : 1	grandparentname(t)=ul : 1	
+
+word(t)=1998 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=08 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Charity : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+word(t)=Club : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=p : 1	
+
+word(t)=Premier : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=win : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=glorious : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Magazine : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=BBC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+
+word(t)=BBC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=d : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=a : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Ferguson : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=crowned : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=FA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Sport : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=The : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+
+word(t)=Sport : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=kit : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=ESPN : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+
+word(t)=Giggs : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=Scouse : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Deloitte : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=The : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+
+word(t)=Times : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=Admiral : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=seven : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=exceeds : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=owner : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=News : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Sport : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=joins : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=The : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=United : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Coaching : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=wcstle : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=won : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=1-84513-121-5 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1#11111#111#1 : 1	brief(t)=1#1#1#1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+word(t)=ISBN : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=of : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=ISBN : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Yearbook : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+word(t)=Heath : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=i : 1	grandparentname(t)=span : 1	
+
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=extiw hreftemp : 1	classlong(t)=aaaaa#aaaaaaaa : 1	classbrief(t)=a#a : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=to : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=mbox-text plainlist style : 1	classlong(t)=aaaa#aaaa#aaaaaaaaa#aaaaa : 1	classbrief(t)=a#a#a#a : 1	parentname(t)=td : 1	grandparentname(t)=tr : 1	
+
+word(t)=BBC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Club : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=external text hreftemp : 1	classlong(t)=aaaaaaaa#aaaa#aaaaaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=1969 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=disaster : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+
+word(t)=Trafford : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Way : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Rivalries : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=rivalry : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Related : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=2013 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=div : 1	
+word(t)=group : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=th : 1	
+
+word(t)=Borussia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Juventus : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=04 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Zenit : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Karagandy : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=os : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=FH : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Partizan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Daugava : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Bratislava : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=eljezni : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=and : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=show : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=98 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=02 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=2010 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Clubs : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Stoke : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Blackburn : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Charlton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Portsmouth : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Wednesday : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Stadia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=All-time : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa#aaaa : 1	brief(t)=Aa#a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Awards : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=list : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Trophy : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Cup : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Former : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=div : 1	grandparentname(t)=th : 1	
+word(t)=2008 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+
+word(t)=PSV : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Leverkusen : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Dinamo : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Porto : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Madrid : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Madrid : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Milan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=66 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=71 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=1973 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=Liverpool : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Forest : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=1985 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=1987 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=UEFA : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAAA : 1	brief(t)=A : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+word(t)=Milan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Manchester : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=selflink : 1	classlong(t)=aaaaaaaa : 1	classbrief(t)=a : 1	parentname(t)=strong : 1	grandparentname(t)=li : 1	
+word(t)=Bayern : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Barcelona : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=2008 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=Players : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Winners : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=navbox-group scope : 1	classlong(t)=aaaaaa#aaaaa#aaaaa : 1	classbrief(t)=a#a#a : 1	parentname(t)=th : 1	grandparentname(t)=tr : 1	
+
+word(t)=1964 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=Dortmund : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=71 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=1973 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=79 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=11 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=Tbilisi : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=1986 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=Barcelona : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Arsenal : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Saint-Germain : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa#Aaaaaaa : 1	brief(t)=Aa#Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=CWC : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=AAA : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=th : 1	
+word(t)=1977 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=Steaua : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Milan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Barcelona : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=2000 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=2008 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=tico : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=1960 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+word(t)=1963 : 1	iscapital : 0	isnumber : 1	hasnumber : 1	hassplchars : 0	long(t)=1111 : 1	brief(t)=1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=b : 1	
+
+word(t)=Milan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Independiente : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Nacional : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=mio : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Red : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=S : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=A : 1	brief(t)=A : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Madrid : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Bayern : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Corinthians : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Milan : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Altrincham : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=City : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Bolton : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=from : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=printfooter : 1	classlong(t)=aaaaaaaaaaa : 1	classbrief(t)=a : 1	parentname(t)=div : 1	grandparentname(t)=div : 1	
+word(t)=the : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=in : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Football : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=League : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=winners : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=August : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Wikipedia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=external : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=with : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Log : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=source : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=span : 1	
+
+word(t)=Interaction : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=h3 : 1	
+word(t)=Contact : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=item : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=book : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aaaa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Deutsch : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Fran : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Latina : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Bahasa : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=s : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=a : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Simple : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=rk : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa : 1	brief(t)=a : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+word(t)=Edit : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=Wikipedia : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=li : 1	grandparentname(t)=ul : 1	
+word(t)=Foundation : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=a : 1	grandparentname(t)=li : 1	
+
+word(t)=mw1212 : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=aa1111 : 1	brief(t)=a1 : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=body : 1	grandparentname(t)=html : 1	
+word(t)=Cancel : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	long(t)=Aaaaaa : 1	brief(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=button : 1	grandparentname(t)=div : 1	
