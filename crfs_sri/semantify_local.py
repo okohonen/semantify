@@ -79,7 +79,7 @@ def generalisation(token):
     return long, brief
         
         
-def preprocess(filename, experiment, tagset,  tagdict,  factor):        
+def preprocess(filename, experiment, tagset,  tagdict,  factor,  tagindex):        
     
     conn = sqlite3.connect('sentence.db')
     c = conn.cursor()
@@ -90,129 +90,126 @@ def preprocess(filename, experiment, tagset,  tagdict,  factor):
     traindevelfile=open(os.getcwd()+'/temp/'+filename+'.train.devel','w')    
     testfile = open(os.getcwd()+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+'/temp/'+filename+'.test.reference','w')
-    soup=Soup(page)    
+    soup=Soup(page)   
     counter=0
     tokens=[];    parentname=[];    tags=[];    devels=[];  test=[];    testreference=[];   tagscount=0;    
-    containertag=['a','b','c']
-    previousterm='na'
+    containertag=['a','b','c'];  previousterm=['na']; ancestors=[]
+    capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[]
   
-    # ### Srikrishna edit
-    # ## A few changes made as in addition of new features like ancestors and previousterm , otherwise it is a working copy for orthographic features -1 working
+
     
 
     for i in soup.body.descendants:     			
         if isinstance(i,NavigableString):    
             instring=re.sub('[^a-zA-Z0-9\.\-?]', ' ', i)              
-            if len(instring)<50 and len(instring)>1:
-                counter=counter+1
-                iterator=0;parentname=[]
+            if len(instring)<50 and len(instring)>1:                
+                iterator=0;parentname=[]; ancestor=[]
                 for parent in i.parents:
                     iterator=iterator+1 
-                    if parent.name:
-                        ancestors.append(parent.name)
-                        if  iterator<4:
-                            parentname.append(parent.name)  
-                    else:
-                        parentname.append('na')
-                        ancestors.append('na')
-                ancestors='-'.join(ancestors)
+                    if parent.name: 
+                        if parent.name=='html':
+                            break
+                        else:
+                            ancestor.append(parent.name)
+                            if  iterator<4:
+                                parentname.append(parent.name) 
+                if len(parentname)<3:
+                    for count in range(0, 4):
+                        if len(parentname)<3:
+                            parentname.append('na')                            
+           
                 instringsplit=instring.split()
                 for m in instringsplit:
                     
+                    
+                    ancestors='-'.join(ancestor)    
+                    parentsname.append(parentname)
+                                      
                     # Feature extraction
-                    capital= iscapital(m)                         
-                    number= isnumber(m)                                                                          
-                    h_number= hasnumber(m)                       
-                    splchars= hassplchars(m)                   
-                    #has_fc= hasFC(m) 
-                    long, brief=generalisation(m)                      
+                    capital.append(iscapital(m))
+                    number.append(isnumber(m))                                                                          
+                    h_number.append(hasnumber(m))                       
+                    splchars.append(hassplchars(m)) 
+                    longtemp, brieftemp=generalisation(m)  
+                    long.append(longtemp)
+                    brief.append(brieftemp)                  
                     classname=re.findall('class=".*"', containertag)
                     if classname:
                         classname=classname[0].split('=')
-                        classname=re.sub('"', '', classname[1])
-                        classlong, classbrief=generalisation(classname)
+                        classname=repr(re.sub('"', '', classname[1]))
+                        classlongtemp, classbrieftemp=generalisation(classname)
+                        classnames.append(classname)
+                        classlong.append(classlongtemp)
+                        classbrief.append(classbrieftemp)
                     else:
                         classname='na'
-                        classlong, classbrief="A", "B"
-                        
-                    # #######
+                        classlongtemp, classbrieftemp="A", "B"
+                        classnames.append(classname)
+                        classlong.append(classlongtemp)
+                        classbrief.append(classbrieftemp)
                     
-                    if len(containertag)<2:
-                        pass
-                    if parentname[0]=='span':            
-                        if  tagdict[0] in containertag:                
-                            c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[0],  datetime.now())) 
-                            conn.commit()   
-                            tags.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t'+tagset[0]+'\n') 
-                            test.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t\n') 
-                            tagscount=tagscount+1
-                            if tagscount%10==0:
-                                 tags.append('\n')
-                                 
-                        elif tagdict[1] in containertag:              
-                            c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[1],  datetime.now())) 
-                            conn.commit()   
-                            tags.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t'+tagset[1]+'\n') 
-                            test.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t\n') 
-                            tagscount=tagscount+1
-                            if tagscount%10==0:
-                                 tags.append('\n')
-                                 
-                        elif tagdict[2] in containertag: 
-                            c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[2],  datetime.now())) 
-                            conn.commit()   
-                            tags.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t'+tagset[2]+'\n') 
-                            test.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t\n') 
-                            tagscount=tagscount+1
-                            if tagscount%10==0:
-                                 tags.append('\n')
-                            
-                        elif tagdict[3] in containertag: 
-                            c.execute('''insert into sentences (entity, tag, added) VALUES (?,?,?)''',(m,tagset[3],  datetime.now())) 
-                            conn.commit()   
-                            tags.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t'+tagset[3]+'\n') 
-                            test.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t\n') 
-                            tagscount=tagscount+1
-                            if tagscount%10==0:
-                                 tags.append('\n')
-                                 
+                    #print  previousterm, m, capital,  number,  h_number,  splchars,  long, brief,  classname,  classlong,  classbrief,  parentname[0],  parentname[1],  parentname[2],  ancestors
+                    
+                   
+                    if parentname[0]=='span':
+                        if  tagdict[0]in containertag:   
+                             tagsetname.append(tagset[0])                     
+                        elif  tagdict[1] in containertag:              
+                             tagsetname.append(tagset[1])
+                        elif  tagdict[2] in containertag:
+                             tagsetname.append(tagset[2])                           
+                        elif  tagdict[3] in containertag: 
+                             tagsetname.append(tagset[3])
+                        else:
+                            tagsetname.append('O')
                     else:                                 
-                        tags.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t'+tagset[0]+'\n') 
-                        test.append ('word(t)='+m+' : 1\tpreviousterm(t)='+previousterm+' : 1\tiscapital : '+capital+'\tisnumber : '+number+'\thasnumber : '+h_number+'\thassplchars : '+splchars+'\tlong(t)='+long+' : 1\tbrief(t)='+brief+' : 1\tclassname(t)='+classname+' : 1\tclasslong(t)='+classlong+' : 1\tclassbrief(t)='+classbrief+' : 1\tparentname(t)='+parentname[0]+' : 1\tgrandparentname(t)='+parentname[1]+' : 1\tgreatgrandparentname(t)='+parentname[2]+' : 1\tancestors(t)='+ancestors+' : 1\t\n') 
-                        tagscount=tagscount+1
-                        if tagscount%5==0:
-                             tags.append('\n')
-                             test.append('\n')
-                     # previous word
-                    previousterm=m
+                        tagsetname.append('O')         
+                    
+                    if counter>1:
+                        tags.append('word(t)='+m+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tlong(t)='+long[counter-1]+' : 1\tbrief(t)='+brief[counter-1]+' : 1\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
+                        test.append('word(t)='+m+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tlong(t)='+long[counter-1]+' : 1\tbrief(t)='+brief[counter-1]+' : 1\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
+                        if  counter%10==0:
+                            tags.append('\n')
+                            test.append('\n')
+                       
+                             
+                    # previous and prepreviousterms
+                    previousterm.append(m)
+                    counter=counter+1
+                    
         containertag=i.encode('utf8')
         
         
         
-         
+   
     linetags=[]; temp=[]; temptags=[] 
     
+  
    
     # Cleaning out useless 'O' tags and maintaining only the ones within +/-6 tags limit for learning the transitions from 'O' to annotation value
-    
+    flag=0
     for i in range(len(tags)):
         temp=tags[i].split(' : ')        
         if temp[0]=='\n':            
-            pass
+            newline=newline+1
         else:
-            temp[12]=temp[12].replace('1\t', '')
-            temp[12]=temp[12].replace('\n', '')
-            if temp[12] in tagset:
+            temp[tagindex]=temp[tagindex].replace('1\t', '')
+            temp[tagindex]=temp[tagindex].replace('\n', '')
+            if temp[tagindex] in tagset:               
                 temptags.append(tags[i])
+                if flag==0:
+                    temp[tagindex]
+                    firsttagindex=i
+                    flag=1
             else:
                 counter=0
                 for j in range(10):
                     if  (i+j) <len(tags):                                              
                         temp=tags[i+j].split(' : ')
                         if not temp[0]=='\n':
-                            temp[12]=temp[12].replace('1\t', '')
-                            temp[12]=temp[12].replace('\n', '')
-                            if temp[12] in tagset: 
+                            temp[tagindex]=temp[tagindex].replace('1\t', '')
+                            temp[tagindex]=temp[tagindex].replace('\n', '')
+                            if temp[tagindex] in tagset: 
                                 temptags.append(tags[i])
                                 break
                             else:
@@ -222,7 +219,7 @@ def preprocess(filename, experiment, tagset,  tagdict,  factor):
                     else:
                         break
                         
-                        
+   
     
     
     counter=0; newtags=[]
@@ -245,7 +242,7 @@ def preprocess(filename, experiment, tagset,  tagdict,  factor):
         if counter%10==0:
             traindevelfile.write(tags[i])
     counter=0
-    for j in range(316+experiment10): 
+    for j in range(firsttagindex, firsttagindex+experiment10): 
         counter=counter+1
         experimenttrain.write(tags[j])
         if counter%10==0:
@@ -275,11 +272,11 @@ def preprocess(filename, experiment, tagset,  tagdict,  factor):
     testfile.close()
     testreferencefile.close()
     
-            
+    print len(tags),  len(temptags),  len(newtags)       
     return 1
     
     
-def keywordtag(filename, tagset,  tagdict):
+def keywordtag(filename, tagset,  tagdict,  tagindex):
     starttime=time.time()
     # Reference snippet to apply return tags to the html file
     page=open(os.getcwd()+'/temp/'+filename+'.html')
@@ -300,27 +297,27 @@ def keywordtag(filename, tagset,  tagdict):
        
         if temptoken[0]:
             temptoken[0]=temptoken[0].replace('word(t)=', '')         
-            temptoken[12]=temptoken[12].replace('1\t', '')             
-            if temptag=='O':
-                temptag=temptoken[12]        
-            if temptoken[12] in tagset:
-                if temptag==temptoken[12]:
+            temptoken[tagindex]=temptoken[tagindex].replace('1\t', '')             
+            if not temptag in tagset:
+                temptag=temptoken[tagindex]        
+            if temptoken[tagindex] in tagset:
+                if temptag==temptoken[tagindex]:
                     flag=1                       
                     annovar.append(temptoken[0])
-                    annotag=temptoken[12] 
+                    annotag=temptoken[tagindex] 
                 elif  flag==1:
                     flag=2                
                     annovar=' '.join(annovar)
                     annotate=[annovar, annotag]
                     annotations.append(annotate)
-                    temptag=temptoken[12]
+                    temptag=temptoken[tagindex]
                     annovar=[]  
             elif flag==1:
                 flag=2                
                 annovar=' '.join(annovar)
                 annotate=[annovar, annotag]
                 annotations.append(annotate)
-                temptag=temptoken[12]
+                temptag=temptoken[tagindex]
                 annovar=[]
                        
                 
@@ -425,7 +422,7 @@ def confusionmatrix(filename, experiment, confusion,  tagset):
     
 
 
-def accuracy(filename,  experiment):
+def accuracy(filename,  experiment,  tagindex):
     
     standardfile=open(os.getcwd()+'/temp/'+filename+'.train')
     firstfile=open(os.getcwd()+'/temp/'+filename+'.test.prediction')
@@ -437,7 +434,7 @@ def accuracy(filename,  experiment):
     for i in standard:
         line=i.split(' : ')
         if line[0] and not line[0]=='\n':
-            line=line[12].replace('1\t', '')
+            line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             stan.append(line)
         
@@ -446,7 +443,7 @@ def accuracy(filename,  experiment):
     for i in first:
         line=i.split(' : ')
         if line[0] and not line[0]=='\n':
-            line=line[12].replace('1\t', '')
+            line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             file1.append(line)
         
@@ -455,7 +452,7 @@ def accuracy(filename,  experiment):
     for i in second:
         line=i.split(' : ')
         if line[0] and not line[0]=='\n':
-            line=line[12].replace('1\t', '')
+            line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             file2.append(line)
         
