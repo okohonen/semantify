@@ -4,7 +4,9 @@ import SocketServer
 import json
 import os
 import string
-import semantify_local
+import semantify_local_ortho1html
+import semantify_local_ortho3
+import semantify_local_ortho3html
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
@@ -23,9 +25,11 @@ errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'w')
 successlog=open(os.getcwd()+'/temp/successlog.txt',  'w')
 
 filename=   'snippetfile'
-experiment='experiment80'
-confusion='confusion80'
-factor=0.8
+experiment='experiment100'
+confusion='confusion100'
+factor=1
+# for ortho3 tagindex=15, for ortho1html tagindex=14, for ortho3html tagindex=21;
+tagindex=22
 tagset=['home','away','score','date']
 tagdict=['WebAnnotator_home', 'WebAnnotator_away', 'WebAnnotator_score','WebAnnotator_date']
 
@@ -44,7 +48,7 @@ experimentdevelpredictionfile      =os.getcwd()+'/temp/'+filename+'.'+experiment
 experimenttestpredictionfile         =os.getcwd()+'/temp/'+filename+'.'+experiment+'.test.prediction'
 experimentclientmodel                   =os.getcwd()+'/temp/'+filename+'.'+experiment+'.model'
 
-standardmodel=os.getcwd()+'/temp/snippetfiletest.model'
+standardmodel=os.getcwd()+'/temp/snippetfileb.model'
 
 
             
@@ -82,7 +86,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                
            
             value=0
-            value=semantify_local.preprocess(filename, experiment, tagset, tagdict,  factor)
+            value=semantify_local_ortho3html.preprocess(filename, experiment, tagset, tagdict,  factor, tagindex)
             if value==1:    
                  #print 'Devel files extracted' 
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
@@ -90,11 +94,11 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  process=subprocess.Popen(args)
                  process.wait() 
                  #print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)               
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (standardmodel,testfile, testpredictionfile)               
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
                  
                  ################## Experiment10
                  
@@ -103,17 +107,17 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  process=subprocess.Popen(args)
                  process.wait() 
                  #print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (experimentclientmodel,testfile, experimenttestpredictionfile)               
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (standardmodel,testfile, experimenttestpredictionfile)               
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
                  
                  #####################
                  
-                 semantify_local.accuracy(filename, experiment)
+                 semantify_local_ortho3html.accuracy(filename, experiment,  tagindex)
                  #print 'Model Applied'
-                 content=semantify_local.keywordtag(filename, tagset, tagdict)                       
+                 content=semantify_local_ortho3html.keywordtag(filename, tagset, tagdict,  tagindex)                       
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))
@@ -126,7 +130,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Replace this line with real action
           
             value=0
-            value=semantify_localmodified.preprocess(filename, experiment, tagset, tagdict)
+            value=semantify_local_ortho3html.preprocess(filename, experiment, tagset, tagdict,  tagindex)
             if value==1:    
                  print 'Devel files extracted' 
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
@@ -138,7 +142,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
                  
                  ################## Experiment10
                  
@@ -151,12 +155,12 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
                  #####################
                  
-                 semantify_local.accuracy(filename, experiment)
+                 semantify_local_ortho3html.accuracy(filename, experiment,  tagindex)
                  #print 'Model Applied'
-                 content=semantify_localmodified.keywordtag(filename, tagset, tagdict)                        
+                 content=semantify_local_ortho3html.keywordtag(filename, tagset, tagdict,  tagindex)                        
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))
