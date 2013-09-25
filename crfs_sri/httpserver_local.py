@@ -15,23 +15,24 @@ import unicodedata
 
 PORT = 50010
 
-conn = sqlite3.connect('sentence.db')
+conn = sqlite3.connect('experiment.db')
 c = conn.cursor()
 
-c.execute('''CREATE TABLE IF NOT EXISTS sentences (id INTEGER PRIMARY KEY AUTOINCREMENT, entity text, tag text, added datetime)''')
+c.execute('''CREATE TABLE IF NOT EXISTS experiments (id INTEGER PRIMARY KEY AUTOINCREMENT, entity text, tag text, added datetime)''')
 
 #   Opening error log 
 errorlog=open(os.getcwd()+'/temp/errorlog.txt',  'w')
 successlog=open(os.getcwd()+'/temp/successlog.txt',  'w')
 
-filename=   'snippetfile'
+dbname='experiment.db'
+filename=   'huuto1'
 experiment='experiment100'
 confusion='confusion100'
 factor=1
-# for ortho3 tagindex=15, for ortho1html tagindex=14, for ortho3html tagindex=21;
+# for ortho3 tagindex=15, for ortho1html tagindex=14, for ortho3html tagindex=22;
 tagindex=22
-tagset=['home','away','score','date']
-tagdict=['WebAnnotator_home', 'WebAnnotator_away', 'WebAnnotator_score','WebAnnotator_date']
+tagset=['measures']
+tagdict=['WebAnnotator_measures']
 
 testfile                        =os.getcwd()+'/temp/'+filename+'.test'
 testreferencefile         =os.getcwd()+'/temp/'+filename+'.test.reference'
@@ -86,7 +87,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                
            
             value=0
-            value=semantify_local_ortho3html.preprocess(filename, experiment, tagset, tagdict,  factor, tagindex)
+            value=semantify_local_ortho3html.preprocess(dbname, filename, experiment, tagset, tagdict,  factor, tagindex)
             if value==1:    
                  #print 'Devel files extracted' 
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
@@ -94,11 +95,10 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  process=subprocess.Popen(args)
                  process.wait() 
                  #print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (standardmodel,testfile, testpredictionfile)               
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)               
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
-                 process.wait()  
-                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 process.wait()                               
                  
                  ################## Experiment10
                  
@@ -107,15 +107,16 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  process=subprocess.Popen(args)
                  process.wait() 
                  #print 'Model trained'
-                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (standardmodel,testfile, experimenttestpredictionfile)               
+                 command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (experimentclientmodel,testfile, experimenttestpredictionfile)               
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
-                 process.wait()  
-                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 process.wait()                   
                  
-                 #####################
                  
+                 #####################    
                  semantify_local_ortho3html.accuracy(filename, experiment,  tagindex)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)             
+                 
                  #print 'Model Applied'
                  content=semantify_local_ortho3html.keywordtag(filename, tagset, tagdict,  tagindex)                       
                  successlog.write(filename)
@@ -130,7 +131,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Replace this line with real action
           
             value=0
-            value=semantify_local_ortho3html.preprocess(filename, experiment, tagset, tagdict,  tagindex)
+            value=semantify_local_ortho3html.preprocess(dbname, filename, experiment, tagset, tagdict,  tagindex)
             if value==1:    
                  print 'Devel files extracted' 
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)
@@ -142,7 +143,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
+             
                  
                  ################## Experiment10
                  
@@ -155,10 +156,11 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
+                 
                  #####################
                  
                  semantify_local_ortho3html.accuracy(filename, experiment,  tagindex)
+                 semantify_local_ortho3html.confusionmatrix(filename,  experiment, confusion,  tagset)
                  #print 'Model Applied'
                  content=semantify_local_ortho3html.keywordtag(filename, tagset, tagdict,  tagindex)                        
                  successlog.write(filename)
