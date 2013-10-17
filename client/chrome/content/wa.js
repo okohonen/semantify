@@ -2005,6 +2005,7 @@ webannotator.main = {
     ajaxUpdatePage: function(req) {
 	obj = JSON.parse(req.responseText);
 	window.content.document.body.innerHTML = obj.content;
+	webannotator.main.activate();
     },
 
     storePage: function() {
