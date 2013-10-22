@@ -2005,7 +2005,11 @@ webannotator.main = {
     ajaxUpdatePage: function(req) {
 	obj = JSON.parse(req.responseText);
 	window.content.document.body.innerHTML = obj.content;
-	webannotator.main.activate();
+	webannotator.main.activateMenus();
+	// Show already existing annotation (if any)
+	webannotator.main.receiveShowAnnotations();
+	// The page has not been modified yet
+	webannotator.main.setModified(false);
     },
 
     storePage: function() {
