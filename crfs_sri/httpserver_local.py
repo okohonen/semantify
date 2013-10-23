@@ -10,19 +10,20 @@ from bs4 import NavigableString
 from datetime import datetime
 import unicodedata
 import numpy
+import devutil
 
 PORT = 50010
+dbname='temp/semantify.db'
 
-conn = sqlite3.connect('experiment.db')
+if not os.path.exists(dbname):
+    # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
+    raise AssertionError('Database not found')
+
+
+conn = sqlite3.connect(dbname)
 c = conn.cursor()
 
-c.execute('''CREATE TABLE IF NOT EXISTS ortho1html(id INTEGER PRIMARY KEY AUTOINCREMENT, entity, long, brief, iscapital, isnumber, hasnumber, hassplchars,classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors, tagsetname, added)''')
-c.execute('''CREATE TABLE IF NOT EXISTS ortho3 (id INTEGER PRIMARY KEY AUTOINCREMENT, entity, longcurrent, briefcurrent, previousterm, longprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, tagsetname, added)''')
-c.execute('''CREATE TABLE IF NOT EXISTS ortho3html (id INTEGER PRIMARY KEY AUTOINCREMENT, entity, longcurrent, briefcurrent, previousterm, lonprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors,tagsetname, added)''')
-
-
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
-dbname='experiment.db'
 path='/data/application/'
 tagindex=20
 tagset=['genre','item', 'price', 'stock', 'features']
@@ -32,6 +33,13 @@ tagdict=['WebAnnotator_genre', 'WebAnnotator_item', 'WebAnnotator_price', 'WebAn
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
 successlog=open(os.getcwd()+path+'successlog.txt',  'w')
 filecount=0
+
+def insert_new_page(cursor, o, version, schema_id = 1):
+    cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], o['content'], version, schema_id))
+
+def update_page(cursor, page_id, o):
+    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], o['content'], page_id))
+
 
 class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """The test example handler.""" 
@@ -72,6 +80,49 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
        
         
         if o["command"] == "PUT":            
+            
+            # TODO client sends schema identifier
+            schema_id = 1;
+
+            # Add to database
+            # We have three cases:
+            # 1. We are editing the latest version
+            # 2. We are editing an older version
+            # 3. We want to create a new version to edit
+
+            # Case 3.
+            if o.has_key("create_new"):
+                c.execute('''SELECT MAX(version) FROM pages WHERE url=? AND schema_id=?''', (o['url'], schema_id))
+                if c.rowcount > 0:
+                    r = c.fetchone()
+                    version = r[0] + 1;
+                else:
+                    version = 1;
+                insert_new_page(c, o, version);
+
+            # Case 2.
+            if o.has_key("version"):
+                c.execute('''SELECT id FROM pages WHERE url=? AND version=? AND schema_id=? ORDER BY timestamp DESC''', (o['url'], o['version'], schema_id))
+                r = c.fetchone()
+                if r is None:
+                    # This is an error, since we should never insert an old version
+                    raise ValueError("Cannot use version that does not exist")
+                else:
+                    page_id = r[0];
+                    update_page(c, page_id, o)
+                
+            # Case 1.
+            else:
+                c.execute("SELECT id FROM pages WHERE url=? AND schema_id=? ORDER BY version DESC", (o['url'], schema_id))
+                r = c.fetchone()                
+                if r is None:
+                    # Here we are doing the first insertion
+                    insert_new_page(c, o, 1)
+                else:
+                    page_id = r[0];
+                    update_page(c, page_id, o)
+            conn.commit()
+
             # Trains a model wit received annotations  
             value=0
             value=semantify_local.preprocess(dbname, path, filename, tagset, tagdict, tagindex)                
@@ -112,7 +163,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
                
 
-httpd = SocketServer.TCPServer(("", PORT), TestHandler)
+httpd = SocketServer.TCPServer(("localhost", PORT), TestHandler)
 
 if __name__ == "__main__":
     print "serving at port", PORT
