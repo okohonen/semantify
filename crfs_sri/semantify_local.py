@@ -78,48 +78,35 @@ def generalisation(token):
     long=''.join(long)
     brief=''.join(brief)
     return long, brief
-       
     
-def dbextraction(dbname):
-    conn = sqlite3.connect(dbname)
+    
+def preprocess(conn, path, filename, tagindex, page_id):        
     c = conn.cursor()    
-    history=[]
-    c.execute('select * from ortho3html')
-    for row in c.fetchall(): 
-        history.append(row)   
-    return history
-    
-    
-    
-    
-def preprocess(dbname, path, filename, tagset, tagdict, tagindex):        
-    
-    conn = sqlite3.connect(dbname)
-    c = conn.cursor()
-    
 
-    page=open(os.getcwd()+path+filename+'.html','r') 
-    trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
-    traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w')    
+    page=open(os.getcwd()+path+filename+'.html','r')     
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
-    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')
+    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w') 
     soup=Soup(page)    
     counter=0
     tokens=[];    parentname=[];    tags=[];    devels=[];  test=[];    testreference=[];    
     containertag=['a','b','c'];  previousterm=['na']; ancestor=[];ancestors=[]; classnames=[]
-    capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]
+    capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]   
     
-    # Adding historic annotations to training and testing file  as well 
+    # Extracting the tagset names from page
+    reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
+    tagdict=[]; tagset=[]
+    taglist= soup.find_all('span', class_=reg)
+    for index in taglist:
+        index=str(index).split('"')
+        if not index[1] in tagdict:
+            tagdict.append(index[1])
+            tagtemp=index[1].replace('WebAnnotator_', '')
+            tagset.append(tagtemp)
+   
     
-    history=dbextraction(dbname)
-    for values in history:
-        tags.append('word(t)='+values[1]+' : 1\tlongcurrent(t)='+values[2]+' : 1\tbriefcurrent(t)='+values[3]+' : 1\tpreviousterm(t)='+values[4]+' : 1\tlongprevious(t)='+values[5]+' : 1\tbriefprevious(t)='+values[6]+' : 1\tnextterm(t)='+values[7]+' : 1\tlongnext(t)='+values[8]+' : 1\tbriefnext(t)='+values[9]+' : 1\tiscapital : '+values[10]+'\tisnumber : '+values[11]+'\thasnumber : '+values[12]+'\thassplchars : '+values[13]+'\tclassname(t)='+values[14]+' : 1\tclasslong(t)='+values[15]+' : 1\tclassbrief(t)='+values[16]+' : 1\tparentname(t)='+values[17]+' : 1\tgrandparentname(t)='+values[18]+' : 1\tgreatgrandparentname(t)='+values[19]+' : 1\tancestors(t)='+values[20]+' : 1\t'+values[21]+'\n') 
-        test.append('word(t)='+values[1]+' : 1\tlongcurrent(t)='+values[2]+' : 1\tbriefcurrent(t)='+values[3]+' : 1\tpreviousterm(t)='+values[4]+' : 1\tlongprevious(t)='+values[5]+' : 1\tbriefprevious(t)='+values[6]+' : 1\tnextterm(t)='+values[7]+' : 1\tlongnext(t)='+values[8]+' : 1\tbriefnext(t)='+values[9]+' : 1\tiscapital : '+values[10]+'\tisnumber : '+values[11]+'\thasnumber : '+values[12]+'\thassplchars : '+values[13]+'\tclassname(t)='+values[14]+' : 1\tclasslong(t)='+values[15]+' : 1\tclassbrief(t)='+values[16]+' : 1\tparentname(t)='+values[17]+' : 1\tgrandparentname(t)='+values[18]+' : 1\tgreatgrandparentname(t)='+values[19]+' : 1\tancestors(t)='+values[20]+' : 1\t\n') 
-        tags.append('\n')
-        test.append('\n')
-    # 
-    
-
+    # Running through all lines in page: tokenizing, adding to db
+    c.execute('BEGIN TRANSACTION')
+    c.execute('DELETE FROM tokens WHERE page_id=?',  str(page_id))
     for i in soup.body.descendants:     			
         if isinstance(i,NavigableString):    
             instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)              
@@ -137,11 +124,10 @@ def preprocess(dbname, path, filename, tagset, tagdict, tagindex):
                 if len(parentname)<3:
                     for count in range(0, 4):
                         if len(parentname)<3:
-                            parentname.append('na')
-           
+                            parentname.append('na')           
                 instringsplit=instring.split()
-                for m in instringsplit:
-                                        
+
+                for m in instringsplit:                                        
                     ancestors.append('-'.join(ancestor))
                     parentsname.append(parentname)
                                       
@@ -186,21 +172,38 @@ def preprocess(dbname, path, filename, tagset, tagdict, tagindex):
                         tagsetname.append('O')                    
                     
 
-                    if counter>1:
-                        #print counter
+                    if counter>1:                
                         #print currentterm[counter-1], previousterm[counter-1], currentterm[counter], capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], long[counter-1], brief[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1]
                         longprevious, briefprevious=generalisation(previousterm[counter-1])                                             
                         longcurrent, briefcurrent=generalisation(currentterm[counter-1])                  
-                        longnext, briefnext=generalisation(currentterm[counter])
-                        
+                        longnext, briefnext=generalisation(currentterm[counter])                        
                         tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
-                        if tagsetname[counter-1] in tagset:    
-                            c.execute('''insert into ortho1html (entity, long, brief, iscapital, isnumber, hasnumber, hassplchars,classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1],long[counter-1], brief[counter-1], capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
-                            conn.commit()
-                            c.execute('''insert into ortho3 (entity, longcurrent, briefcurrent, previousterm, longprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1],  tagsetname[counter-1],  datetime.now()))
-                            conn.commit()
-                            c.execute('''insert into ortho3html (entity, longcurrent, briefcurrent, previousterm, lonprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors,tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
-                            conn.commit() 
+                         
+                       # Insert into tokens  
+                        c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
+                    
+                        token_id = c.lastrowid
+                        
+                        # Insert into  the features with corresponding features_set_id 
+                        line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]
+                        ortho1='\tlongcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]
+                        ortho3='\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\t(briefnext(t)='+briefnext
+                        html='\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : \tgrandparentname(t)='+parentsname[counter-1][1]+' : \tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : \tancestors(t)='+ancestors[counter-1]                        
+                        linelist=[line+ortho1, line+ortho3, line+html]                        
+                        for p in range(1, 4):
+                            feature_set_id=p
+                            c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))
+                            
+                        
+                        # Insert into tags 
+                        schema_id=1
+                        c.execute("INSERT INTO tags (schema_id, token_id, val) VALUES (?, ?, ?)",  (schema_id, token_id,  tagsetname[counter-1]))
+                        
+                        
+                        #if tagsetname[counter-1] in tagset: 
+                            #c.execute('''insert into ortho1html (entity, long, brief, iscapital, isnumber, hasnumber, hassplchars,classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1],long[counter-1], brief[counter-1], capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
+                            #c.execute('''insert into ortho3 (entity, longcurrent, briefcurrent, previousterm, longprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1],  tagsetname[counter-1],  datetime.now())
+                            #c.execute('''insert into ortho3html (entity, longcurrent, briefcurrent, previousterm, lonprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors,tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         #if  counter%10==0:
                         tags.append('\n')
@@ -208,24 +211,11 @@ def preprocess(dbname, path, filename, tagset, tagdict, tagindex):
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
+                
+                
         containertag=i.encode('utf8')
-        
-    #print  len(previousterm), len(currentterm), len(capital),  len(number),  len(h_number),  len(splchars),  len(long), len(brief),  len(classnames),  len(classlong),  len(classbrief),  len(parentsname),  len(ancestors),  len(tagsetname)
-        
-
-    
-    # For windowed selection of tags, use 'newtags' instead of 'tags' and uncomment the above section starting from "firsttagindex=0"
-
-    for i in range(len(tags)):        
-        trainfile.write(tags[i])      
-        if i>1 and i%10==0:
-            if len(tags[i])>1:
-                traindevelfile.write(tags[i])
-                traindevelfile.write('\n')
-    trainfile.close()   
-    traindevelfile.close() 
-           
-
+    # c.execute('COMMIT')
+    conn.commit()
     for i in range(len(test)):        
         testfile.write(test[i])
         if i>1 and i%10==0:
@@ -233,12 +223,37 @@ def preprocess(dbname, path, filename, tagset, tagdict, tagindex):
                 testreferencefile.write(test[i])
                 testreferencefile.write('\n')
     testfile.close()
-    testreferencefile.close()    
-   
+    testreferencefile.close() 
+        
+    return tagdict,  tagset,  tags
+        
+    
+def history(conn, path, filename, tags):    
+    trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
+    traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w')    
+    
+    c = conn.cursor()   
+    c.execute('select * from ortho3html')
+    
+    for values in c.fetchall():         
+        tags.append('word(t)='+values[1]+' : 1\tlongcurrent(t)='+values[2]+' : 1\tbriefcurrent(t)='+values[3]+' : 1\tpreviousterm(t)='+values[4]+' : 1\tlongprevious(t)='+values[5]+' : 1\tbriefprevious(t)='+values[6]+' : 1\tnextterm(t)='+values[7]+' : 1\tlongnext(t)='+values[8]+' : 1\tbriefnext(t)='+values[9]+' : 1\tiscapital : '+values[10]+'\tisnumber : '+values[11]+'\thasnumber : '+values[12]+'\thassplchars : '+values[13]+'\tclassname(t)='+values[14]+' : 1\tclasslong(t)='+values[15]+' : 1\tclassbrief(t)='+values[16]+' : 1\tparentname(t)='+values[17]+' : 1\tgrandparentname(t)='+values[18]+' : 1\tgreatgrandparentname(t)='+values[19]+' : 1\tancestors(t)='+values[20]+' : 1\t'+values[21]+'\n') 
+        tags.append('\n')
+      
+        
+    # Writing to train, train devel, test, test devel files
+    for i in range(len(tags)):        
+        trainfile.write(tags[i])      
+        if i>1 and i%10==0:
+            if len(tags[i])>1:
+                traindevelfile.write(tags[i])
+                traindevelfile.write('\n')
+    trainfile.close()   
+    traindevelfile.close()   
+    
     return 1
     
     
-def keywordtag(path, filename, tagset,  tagdict, tagindex):
+def keywordtag(path, filename, tagdict, tagset, tagindex):
  
     # Reference snippet to apply return tags to the html file
     page=open(os.getcwd()+path+filename+'.html')

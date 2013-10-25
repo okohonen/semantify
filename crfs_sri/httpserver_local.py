@@ -22,12 +22,11 @@ if not os.path.exists(dbname):
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
+c.execute("PRAGMA foreign_keys = ON;")
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
 tagindex=20
-tagset=['genre','item', 'price', 'stock', 'features']
-tagdict=['WebAnnotator_genre', 'WebAnnotator_item', 'WebAnnotator_price', 'WebAnnotator_stock', 'WebAnnotator_features']
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
@@ -36,6 +35,7 @@ filecount=0
 
 def insert_new_page(cursor, o, version, schema_id = 1):
     cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], o['content'], version, schema_id))
+    return cursor.lastrowid
 
 def update_page(cursor, page_id, o):
     cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], o['content'], page_id))
@@ -117,15 +117,18 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 r = c.fetchone()                
                 if r is None:
                     # Here we are doing the first insertion
-                    insert_new_page(c, o, 1)
+                    page_id = insert_new_page(c, o, 1)
                 else:
                     page_id = r[0];
                     update_page(c, page_id, o)
             conn.commit()
+            
+            
 
-            # Trains a model wit received annotations  
+            # Trains a model with received annotations  
             value=0
-            value=semantify_local.preprocess(dbname, path, filename, tagset, tagdict, tagindex)                
+            tagdict,  tagset, tags=semantify_local.preprocess(conn, path, filename, tagindex, page_id) 
+            value=semantify_local.history(conn, path, filename, tags)            
             if value==1:   
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
                  args = shlex.split(command)
@@ -142,14 +145,14 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0
-            value=semantify_local.preprocess(dbname, path, filename, tagset, tagdict,  tagindex)            
+            tagdict,  tagset,  tags=semantify_local.preprocess(dbname, path, filename, tagindex,  version_id)            
             if value==1:    
                  print 'Devel files extracted' 
                  command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
                  process.wait()  
-                 content=semantify_local.keywordtag(path, filename, tagset, tagdict,  tagindex)                        
+                 content=semantify_local.keywordtag(path, filename, tagdict,  tagset,  tagindex)                        
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))
