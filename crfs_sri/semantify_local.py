@@ -185,25 +185,19 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         token_id = c.lastrowid
                         
                         # Insert into  the features with corresponding features_set_id 
-                        line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]
-                        ortho1='\tlongcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]
-                        ortho3='\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\t(briefnext(t)='+briefnext
-                        html='\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : \tgrandparentname(t)='+parentsname[counter-1][1]+' : \tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : \tancestors(t)='+ancestors[counter-1]                        
+                        line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\t'
+                        ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
+                        ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
+                        html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
                         linelist=[line+ortho1, line+ortho3, line+html]                        
                         for p in range(1, 4):
                             feature_set_id=p
-                            c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))
-                            
+                            c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))                           
                         
                         # Insert into tags 
                         schema_id=1
                         c.execute("INSERT INTO tags (schema_id, token_id, val) VALUES (?, ?, ?)",  (schema_id, token_id,  tagsetname[counter-1]))
                         
-                        
-                        #if tagsetname[counter-1] in tagset: 
-                            #c.execute('''insert into ortho1html (entity, long, brief, iscapital, isnumber, hasnumber, hassplchars,classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1],long[counter-1], brief[counter-1], capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
-                            #c.execute('''insert into ortho3 (entity, longcurrent, briefcurrent, previousterm, longprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1],  tagsetname[counter-1],  datetime.now())
-                            #c.execute('''insert into ortho3html (entity, longcurrent, briefcurrent, previousterm, lonprevious, briefprevious, nextterm, longnext, briefnext,iscapital, isnumber, hasnumber, hassplchars, classname, classlong, classbrief, parentname, grandparentname, greatgrandparentname, ancestors,tagsetname, added) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',(currentterm[counter-1], longcurrent, briefcurrent, previousterm[counter-1], longprevious, briefprevious, currentterm[counter], longnext, briefnext, capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1],  datetime.now()))
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         #if  counter%10==0:
                         tags.append('\n')
@@ -216,6 +210,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
         containertag=i.encode('utf8')
     # c.execute('COMMIT')
     conn.commit()
+    
     for i in range(len(test)):        
         testfile.write(test[i])
         if i>1 and i%10==0:
@@ -233,12 +228,14 @@ def history(conn, path, filename, tags):
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w')    
     
     c = conn.cursor()   
-    c.execute('select * from ortho3html')
+    c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
     
-    for values in c.fetchall():         
-        tags.append('word(t)='+values[1]+' : 1\tlongcurrent(t)='+values[2]+' : 1\tbriefcurrent(t)='+values[3]+' : 1\tpreviousterm(t)='+values[4]+' : 1\tlongprevious(t)='+values[5]+' : 1\tbriefprevious(t)='+values[6]+' : 1\tnextterm(t)='+values[7]+' : 1\tlongnext(t)='+values[8]+' : 1\tbriefnext(t)='+values[9]+' : 1\tiscapital : '+values[10]+'\tisnumber : '+values[11]+'\thasnumber : '+values[12]+'\thassplchars : '+values[13]+'\tclassname(t)='+values[14]+' : 1\tclasslong(t)='+values[15]+' : 1\tclassbrief(t)='+values[16]+' : 1\tparentname(t)='+values[17]+' : 1\tgrandparentname(t)='+values[18]+' : 1\tgreatgrandparentname(t)='+values[19]+' : 1\tancestors(t)='+values[20]+' : 1\t'+values[21]+'\n') 
+    for values in c.fetchall():
+        line=values[1].replace('*!*', '')            
+        tags.append(line+values[2])
+        print (line+values[2])
         tags.append('\n')
-      
+
         
     # Writing to train, train devel, test, test devel files
     for i in range(len(tags)):        
@@ -259,18 +256,15 @@ def keywordtag(path, filename, tagdict, tagset, tagindex):
     page=open(os.getcwd()+path+filename+'.html')
     ret=open(os.getcwd()+path+'/temp/temp.html','w')
 
-
     soup=Soup(page)
 
-    # The keywords that need to be tagged
-    
+    # The keywords that need to be tagged    
     retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
     a=retfile.read().splitlines()
     tokens=[]
     flag=0; temptag='O';annovar=[];annotations=[]
     
-    # Obtaining annotations in the form of collocations if annotation is not a single token
-    
+    # Obtaining annotations in the form of collocations if annotation is not a single token    
     for terms in a:               
         temptoken=terms.split(' : ')  
    
@@ -300,8 +294,6 @@ def keywordtag(path, filename, tagdict, tagset, tagindex):
                 temptag=temptoken[tagindex]
                 annovar=[]
                        
-                       
-                
     print annotations
             
     # This chunk of code checks through the descendants for presence of NavigableStrings and replaces the string with an 'a' with title=category_value for tooltip purpose.
@@ -324,8 +316,6 @@ def keywordtag(path, filename, tagdict, tagset, tagindex):
                                     start, end = match.start(), match.end()      				
                                     newtag=i[:start]+'<span style="color:#000000; background-color:#40E0D0" title="'+line[1]+'">'+line[0]+'</span>'+i[end:]				
                                     i.string.replace_with(newtag)
-                                  
-                       
                     containertag=i                    
 
     
