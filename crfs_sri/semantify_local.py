@@ -102,7 +102,8 @@ def preprocess(conn, path, filename, tagindex, page_id):
             tagdict.append(index[1])
             tagtemp=index[1].replace('WebAnnotator_', '')
             tagset.append(tagtemp)
-   
+    
+    print tagdict,  tagset
     
     # Running through all lines in page: tokenizing, adding to db
     c.execute('BEGIN TRANSACTION')
@@ -177,7 +178,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         longprevious, briefprevious=generalisation(previousterm[counter-1])                                             
                         longcurrent, briefcurrent=generalisation(currentterm[counter-1])                  
                         longnext, briefnext=generalisation(currentterm[counter])                        
-                        tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
+                        #tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
                          
                        # Insert into tokens  
                         c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
@@ -200,7 +201,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         #if  counter%10==0:
-                        tags.append('\n')
+                        #tags.append('\n')
                         test.append('\n')
                     # previous and prepreviousterms
                     previousterm.append(m)
@@ -214,32 +215,30 @@ def preprocess(conn, path, filename, tagindex, page_id):
     for i in range(len(test)):        
         testfile.write(test[i])
         if i>1 and i%10==0:
-            if len(tags[i])>1:
+            if len(test[i])>1:
                 testreferencefile.write(test[i])
                 testreferencefile.write('\n')
     testfile.close()
     testreferencefile.close() 
         
-    return tagdict,  tagset,  tags
+    return tagdict,  tagset
         
     
-def history(conn, path, filename, tags):    
+def history(conn, path, filename):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
-    traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w')    
-    
+    traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     c = conn.cursor()   
     c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
-    
+    tags=[]
     for values in c.fetchall():
         line=values[1].replace('*!*', '')            
-        tags.append(line+values[2])
-        print (line+values[2])
+        tags.append(line+values[2]+'\n')       
         tags.append('\n')
 
         
     # Writing to train, train devel, test, test devel files
     for i in range(len(tags)):        
-        trainfile.write(tags[i])      
+        trainfile.write(tags[i])   
         if i>1 and i%10==0:
             if len(tags[i])>1:
                 traindevelfile.write(tags[i])
