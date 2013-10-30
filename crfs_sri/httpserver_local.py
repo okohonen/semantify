@@ -11,6 +11,7 @@ from datetime import datetime
 import unicodedata
 import numpy
 import devutil
+import zlib
 
 PORT = 50010
 dbname='temp/semantify.db'
@@ -38,7 +39,7 @@ def insert_new_page(cursor, o, version, schema_id = 1):
     return cursor.lastrowid
 
 def update_page(cursor, page_id, o):
-    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], o['content'], page_id))
+    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(zlib.compress(o['content'])), page_id))
 
 
 class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
