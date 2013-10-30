@@ -13,10 +13,23 @@ from bs4 import NavigableString
 from datetime import datetime
 import shlex, subprocess
 import sys  
+import zlib
 from sklearn.metrics import confusion_matrix
+import devutil
 
+# Convert to utf-8 so zlib doesn't get confused
+def blobencode(s):
+    return zlib.compress(s.encode('utf-8'))
 
+def blobdecode(s):
+    return zlib.decompress(s).decode('utf-8')
 
+def insert_new_page(cursor, o, version, schema_id = 1):
+    cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], sqlite3.Binary(blobencode(o['content'])), version, schema_id))
+    return cursor.lastrowid
+
+def update_page(cursor, page_id, o):
+    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(blobencode(o['content'])), page_id))
         
 
 def iscapital(token):
@@ -104,10 +117,19 @@ def preprocess(conn, path, filename, tagindex, page_id):
             tagset.append(tagtemp)
     
     print tagdict,  tagset
-    
+
+    schema_id = 1
     # Running through all lines in page: tokenizing, adding to db
     c.execute('BEGIN TRANSACTION')
     c.execute('DELETE FROM tokens WHERE page_id=?',  str(page_id))
+    c.execute('DELETE FROM features WHERE page_id=?',  str(page_id))
+    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (str(page_id), str(schema_id)))
+    tokens = []
+    f_ortho1 = []
+    f_ortho3 = []
+    f_html = []
+    tags = []
+
     for i in soup.body.descendants:     			
         if isinstance(i,NavigableString):    
             instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)              
@@ -180,24 +202,29 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         longnext, briefnext=generalisation(currentterm[counter])                        
                         #tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
                          
-                       # Insert into tokens  
-                        c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
+                       # Insert into tokens
+                        tokens.append(currentterm[counter-1])
+                        # c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
                     
-                        token_id = c.lastrowid
+                        # token_id = c.lastrowid
                         
                         # Insert into  the features with corresponding features_set_id 
                         line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\t'
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
                         html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
-                        linelist=[line+ortho1, line+ortho3, line+html]                        
-                        for p in range(1, 4):
-                            feature_set_id=p
-                            c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))                           
+                        f_ortho1.append(ortho1)
+                        f_ortho3.append(ortho3)
+                        f_html.append(html)
+                        # linelist=[line+ortho1, line+ortho3, line+html]                        
+                        #for p in range(1, 4):
+                        #    feature_set_id=p
+                            # c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))
                         
                         # Insert into tags 
                         schema_id=1
-                        c.execute("INSERT INTO tags (schema_id, token_id, val) VALUES (?, ?, ?)",  (schema_id, token_id,  tagsetname[counter-1]))
+                        # c.execute("INSERT INTO tags (schema_id, token_id, val) VALUES (?, ?, ?)",  (schema_id, token_id,  tagsetname[counter-1]))
+                        tags.append(tagsetname[counter-1])
                         
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         #if  counter%10==0:
@@ -209,7 +236,13 @@ def preprocess(conn, path, filename, tagindex, page_id):
                 
                 
         containertag=i.encode('utf8')
-    # c.execute('COMMIT')
+    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode("\n".join(f_ortho1)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode("\n".join(f_ortho3)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary( blobencode("\n".join(f_html)))))
+    schema_id = 1
+    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode("\n".join(tags)))))
+ 
     conn.commit()
     
     for i in range(len(test)):        
@@ -223,12 +256,33 @@ def preprocess(conn, path, filename, tagindex, page_id):
         
     return tagdict,  tagset
         
+
     
 def history(conn, path, filename):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     c = conn.cursor()   
-    c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
+    # c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
+    
+    schema_id = 1
+    c.execute("SELECT pages.id, pages.body, tags.val FROM pages JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE pages.schema_id=?", str(schema_id))
+    for values in c.fetchall():
+        page_id = values[0]
+        body = blobdecode(str(values[1]))
+        tags = blobdecode(str(values[2]))
+        
+        c2 = conn.cursor()
+        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3', 'html') ORDER BY page_id, feature_sets.id", str(page_id))
+
+        fts = []
+        for features in c2.fetchall():
+            fts.append(blobdecode(str(features[1])))
+
+        # Continue here and load the features by the same principles
+        print "Check the variables body, tags and fts and join them to a training file"
+        devutil.keyboard()
+
+    
     tags=[]
     for values in c.fetchall():
         line=values[1].replace('*!*', '')            

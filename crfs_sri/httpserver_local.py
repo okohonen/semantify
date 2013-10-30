@@ -34,13 +34,6 @@ errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
 successlog=open(os.getcwd()+path+'successlog.txt',  'w')
 filecount=0
 
-def insert_new_page(cursor, o, version, schema_id = 1):
-    cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], o['content'], version, schema_id))
-    return cursor.lastrowid
-
-def update_page(cursor, page_id, o):
-    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(zlib.compress(o['content'])), page_id))
-
 
 class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """The test example handler.""" 
@@ -99,7 +92,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     version = r[0] + 1;
                 else:
                     version = 1;
-                insert_new_page(c, o, version);
+                semantify_local.insert_new_page(c, o, version);
         
             # Case 2.
             if o.has_key("version"):
@@ -110,7 +103,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     raise ValueError("Cannot use version that does not exist")
                 else:
                     page_id = r[0];
-                    update_page(c, page_id, o)
+                    semantify_local.update_page(c, page_id, o)
                 
             # Case 1.
             else:
@@ -118,10 +111,10 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 r = c.fetchone()                
                 if r is None:
                     # Here we are doing the first insertion
-                    page_id = insert_new_page(c, o, 1)
+                    page_id = semantify_local.insert_new_page(c, o, 1)
                 else:
                     page_id = r[0];
-                    update_page(c, page_id, o)
+                    semantify_local.update_page(c, page_id, o)
             conn.commit()       
         
 
