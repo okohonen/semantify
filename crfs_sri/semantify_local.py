@@ -19,10 +19,10 @@ import devutil
 
 # Convert to utf-8 so zlib doesn't get confused
 def blobencode(s):
-    return zlib.compress(s.encode('utf-8'))
+    return zlib.compress(s.encode('utf8'))
 
 def blobdecode(s):
-    return zlib.decompress(s).decode('utf-8')
+    return zlib.decompress(s).decode('utf8')
 
 def insert_new_page(cursor, o, version, schema_id = 1):
     cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], sqlite3.Binary(blobencode(o['content'])), version, schema_id))
@@ -202,8 +202,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         longnext, briefnext=generalisation(currentterm[counter])                        
                         #tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
                          
-                       # Insert into tokens
-                        tokens.append(currentterm[counter-1])
+                       
                         # c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
                     
                         # token_id = c.lastrowid
@@ -213,6 +212,9 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
                         html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
+                        # # Srikrishna edit: instead of append(currenterm[counter-1], append(line)
+                        tokens.append(line)
+                        
                         f_ortho1.append(ortho1)
                         f_ortho3.append(ortho3)
                         f_html.append(html)
@@ -233,15 +235,14 @@ def preprocess(conn, path, filename, tagindex, page_id):
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
-                
-                
-        containertag=i.encode('utf8')
-    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode("\n".join(f_ortho1)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode("\n".join(f_ortho3)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary( blobencode("\n".join(f_html)))))
+        containertag=i.encode('utf8')    
+        
+    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))    
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho1)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho3)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary(blobencode('\n'.join(f_html)))))
     schema_id = 1
-    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode("\n".join(tags)))))
+    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode('\n'.join(tags)))))
  
     conn.commit()
     
@@ -261,14 +262,15 @@ def preprocess(conn, path, filename, tagindex, page_id):
 def history(conn, path, filename):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
+    lines=[]
     c = conn.cursor()   
     # c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
     
     schema_id = 1
-    c.execute("SELECT pages.id, pages.body, tags.val FROM pages JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE pages.schema_id=?", str(schema_id))
+    c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", str(schema_id))    
     for values in c.fetchall():
         page_id = values[0]
-        body = blobdecode(str(values[1]))
+        tokens = blobdecode(str(values[1]))
         tags = blobdecode(str(values[2]))
         
         c2 = conn.cursor()
@@ -279,23 +281,33 @@ def history(conn, path, filename):
             fts.append(blobdecode(str(features[1])))
 
         # Continue here and load the features by the same principles
-        print "Check the variables body, tags and fts and join them to a training file"
-        devutil.keyboard()
-
+        #print "Check the variables body, tags and fts and join them to a training file"
+        #devutil.keyboard()
+ 
+    tokentemp=[token for token in str(tokens).strip().split('\n')]
+    tagtemp=[token for token in str(tags).strip().split('\n')]
+    fttempa=[token for token in str(fts [0]).strip().split('\n')]    
+    fttempb=[token for token in str(fts [1]).strip().split('\n')]
+    print len(tokentemp),  len(tagtemp), len(fttempb)
     
-    tags=[]
-    for values in c.fetchall():
-        line=values[1].replace('*!*', '')            
-        tags.append(line+values[2]+'\n')       
-        tags.append('\n')
+    #for values in c.fetchall():
+        #line=values[1].replace('*!*', '')            
+        #tags.append(line+values[2]+'\n')       
+        #tags.append('\n')
+    
+    for i in range(len(tokentemp)-1):       
+        lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n')
+        #print tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]
+   
 
-        
+
     # Writing to train, train devel, test, test devel files
-    for i in range(len(tags)):        
-        trainfile.write(tags[i])   
+    for i in range(len(lines)):        
+        trainfile.write(lines[i])
+        trainfile.write('\n')
         if i>1 and i%10==0:
-            if len(tags[i])>1:
-                traindevelfile.write(tags[i])
+            if len(lines[i])>1:
+                traindevelfile.write(lines[i])
                 traindevelfile.write('\n')
     trainfile.close()   
     traindevelfile.close()   

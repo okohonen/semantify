@@ -14,13 +14,11 @@ path='/data/amazon/'
 filename='amazon052'
 tagindex=20
 tagset=['genre','item', 'price', 'stock', 'features']
-tagdict=['WebAnnotator_genre', 'WebAnnotator_item', 'WebAnnotator_price', 'WebAnnotator_stock', 'WebAnnotator_features']
+tagdict=['WebAnnotator_genre\nWebAnnotator_item\nWebAnnotator_price"\n"WebAnnotator_stock"\n"WebAnnotator_features']
 
-tag=open(os.getcwd()+'/data/application/temp/file_20131025_182137.train')
+#tag=open(os.getcwd()+'/data/application/temp/file_20131025_182137.train')
 
-#text="word(t)=features : 1	iscapital : 0	isnumber : 0	hasnumber : 0	hassplchars : 0longcurrent(t)=aaaaaaaa : 1	briefcurrent(t)=a : 1	previousterm(t)=stock : 1	longprevious(t)=aaaaa : 1	briefprevious(t)=a : 1	nextterm(t)=Cancel : 1	longnext(t)=Aaaaaa : 1	briefnext(t)=Aa : 1		classname(t)='WebAnnotator_features id' : 1	classlong(t)=#AaaAaaaaaaaa#aaaaaaaa#aa# : 1	classbrief(t)=#AaAa#a#a# : 1	parentname(t)=button : 1	grandparentname(t)=div : 1	greatgrandparentname(t)=div : 1	ancestors(t)=button-div-div-body : 1"
+text='word(t)=Finland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	longcurrent(t)=Aaaaaaa : 1	briefcurrent(t)=Aa : 1	previousterm(t)=CentralNotice : 1longprevious(t)=AaaaaaaAaaaaa : 1	briefprevious(t)=AaAa : 1	nextterm(t)=From : 1	longnext(t)=Aaaa : 1	briefnext(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=span : 1	grandparentname(t)=h1 : 1	greatgrandparentname(t)=div : 1	ancestors(t)=span-h1-div-body : 1	O'
 
-for text in tag.read().splitlines():
-    print text.split(' : ')
-    
 
+print text.split(' : ')
