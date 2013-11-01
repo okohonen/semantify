@@ -19,7 +19,8 @@ dbname='temp/semantify.db'
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
     raise AssertionError('Database not found')
-
+tagset=['entity',  'sentence', 'date']
+tagdict=['WebAnnotator_entity', 'WebAnnotator_sentence', 'WebAnnotator_date']
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
@@ -120,7 +121,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Trains a model with received annotations  
             value=0
-            tagdict,  tagset=semantify_local.preprocess(conn, path, filename, tagindex, page_id) 
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex, page_id) 
+            semantify_local.transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags)
             value=semantify_local.history(conn, path, filename)            
             if value==1:   
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
@@ -132,14 +134,14 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                  successlog.write( str(datetime.now()))
                  successlog.write('\n') 
                  elapsed=time.time()-t
-                 print 'File', filename, 'served in:',  elapsed
+                 print 'File', filename, 'handled in:',  elapsed
                  pass       
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0
             page_id=1            
-            tagdict,  tagset=semantify_local.preprocess(conn, path, filename, tagindex, page_id)
+            semantify_local.preprocess(conn, path, filename, tagindex, page_id)
             print 'Devel files extracted' 
             command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
             args = shlex.split(command)

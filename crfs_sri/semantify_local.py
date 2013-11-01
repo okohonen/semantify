@@ -92,9 +92,25 @@ def generalisation(token):
     brief=''.join(brief)
     return long, brief
     
+def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags):
+    c=conn.cursor()
+    schema_id = 1
+    # Running through all lines in page: tokenizing, adding to db
+    c.execute('BEGIN TRANSACTION')
+    c.execute('DELETE FROM tokens WHERE page_id=?',  str(page_id))
+    c.execute('DELETE FROM features WHERE page_id=?',  str(page_id))
+    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (str(page_id), str(schema_id)))
     
-def preprocess(conn, path, filename, tagindex, page_id):        
-    c = conn.cursor()    
+    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))    
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho1)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho3)))))
+    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary(blobencode('\n'.join(f_html)))))    
+    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode('\n'.join(tags)))))
+ 
+    conn.commit()
+    return
+    
+def preprocess(conn, path, filename, tagindex, page_id):   
 
     page=open(os.getcwd()+path+filename+'.html','r')     
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
@@ -105,6 +121,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
     containertag=['a','b','c'];  previousterm=['na']; ancestor=[];ancestors=[]; classnames=[]
     capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]   
     
+   
     # Extracting the tagset names from page
     reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
     tagdict=[]; tagset=[]
@@ -115,15 +132,13 @@ def preprocess(conn, path, filename, tagindex, page_id):
             tagdict.append(index[1])
             tagtemp=index[1].replace('WebAnnotator_', '')
             tagset.append(tagtemp)
+    if not tagdict:
+        tagdict=['O']
+        tagset=['O']
     
     print tagdict,  tagset
-
-    schema_id = 1
-    # Running through all lines in page: tokenizing, adding to db
-    c.execute('BEGIN TRANSACTION')
-    c.execute('DELETE FROM tokens WHERE page_id=?',  str(page_id))
-    c.execute('DELETE FROM features WHERE page_id=?',  str(page_id))
-    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (str(page_id), str(schema_id)))
+   
+    
     tokens = []
     f_ortho1 = []
     f_ortho3 = []
@@ -195,17 +210,10 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         tagsetname.append('O')                    
                     
 
-                    if counter>1:                
-                        #print currentterm[counter-1], previousterm[counter-1], currentterm[counter], capital[counter-1], number[counter-1], h_number[counter-1], splchars[counter-1], long[counter-1], brief[counter-1], classnames[counter-1], classlong[counter-1], classbrief[counter-1], parentsname[counter-1][0], parentsname[counter-1][1], parentsname[counter-1][2], ancestors[counter-1], tagsetname[counter-1]
+                    if counter>1:   
                         longprevious, briefprevious=generalisation(previousterm[counter-1])                                             
                         longcurrent, briefcurrent=generalisation(currentterm[counter-1])                  
-                        longnext, briefnext=generalisation(currentterm[counter])                        
-                        #tags.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t'+tagsetname[counter-1]+'\n') 
-                         
-                       
-                        # c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)", (page_id, currentterm[counter-1]))
-                    
-                        # token_id = c.lastrowid
+                        longnext, briefnext=generalisation(currentterm[counter])     
                         
                         # Insert into  the features with corresponding features_set_id 
                         line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\t'
@@ -213,38 +221,20 @@ def preprocess(conn, path, filename, tagindex, page_id):
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
                         html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
                         # # Srikrishna edit: instead of append(currenterm[counter-1], append(line)
-                        tokens.append(line)
-                        
+                        tokens.append(line)                        
                         f_ortho1.append(ortho1)
                         f_ortho3.append(ortho3)
-                        f_html.append(html)
-                        # linelist=[line+ortho1, line+ortho3, line+html]                        
-                        #for p in range(1, 4):
-                        #    feature_set_id=p
-                            # c.execute("INSERT INTO features (token_id, line, feature_set_id) VALUES (?, ?, ?)",  (token_id,  linelist[p-1],  feature_set_id))
-                        
-                        # Insert into tags 
-                        schema_id=1
-                        # c.execute("INSERT INTO tags (schema_id, token_id, val) VALUES (?, ?, ?)",  (schema_id, token_id,  tagsetname[counter-1]))
+                        f_html.append(html)     
                         tags.append(tagsetname[counter-1])
                         
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
-                        #if  counter%10==0:
-                        #tags.append('\n')
                         test.append('\n')
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
         containertag=i.encode('utf8')    
         
-    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))    
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho1)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho3)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary(blobencode('\n'.join(f_html)))))
-    schema_id = 1
-    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode('\n'.join(tags)))))
- 
-    conn.commit()
+    
     
     for i in range(len(test)):        
         testfile.write(test[i])
@@ -255,7 +245,7 @@ def preprocess(conn, path, filename, tagindex, page_id):
     testfile.close()
     testreferencefile.close() 
         
-    return tagdict,  tagset
+    return tokens,  f_ortho1, f_ortho3,  f_html,   tags
         
 
     
@@ -288,17 +278,10 @@ def history(conn, path, filename):
     tagtemp=[token for token in str(tags).strip().split('\n')]
     fttempa=[token for token in str(fts [0]).strip().split('\n')]    
     fttempb=[token for token in str(fts [1]).strip().split('\n')]
-    print len(tokentemp),  len(tagtemp), len(fttempb)
-    
-    #for values in c.fetchall():
-        #line=values[1].replace('*!*', '')            
-        #tags.append(line+values[2]+'\n')       
-        #tags.append('\n')
+    print len(tokentemp),  len(tagtemp), len(fttempb)  
     
     for i in range(len(tokentemp)-1):       
-        lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n')
-        #print tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]
-   
+        lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n')  
 
 
     # Writing to train, train devel, test, test devel files
