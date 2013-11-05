@@ -74,7 +74,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
        
         
-        if o["command"] == "PUT":    
+           
+        if o["command"] == "PUT": 
             
             # TODO client sends schema identifier
             schema_id = 1;
@@ -118,17 +119,17 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     semantify_local.update_page(c, page_id, o)
             conn.commit()       
         
-
+        
             # Trains a model with received annotations  
             value=0
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex, page_id) 
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex) 
             semantify_local.transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags)
             value=semantify_local.history(conn, path, filename)            
             if value==1:   
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
                  args = shlex.split(command)
                  process=subprocess.Popen(args)
-                 process.wait()           
+                 process.wait()                      
                  successlog.write(filename)
                  successlog.write('\t')
                  successlog.write( str(datetime.now()))
@@ -139,9 +140,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
-            value=0
-            page_id=1            
-            semantify_local.preprocess(conn, path, filename, tagindex, page_id)
+            value=0                       
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex)            
             print 'Devel files extracted' 
             command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
             args = shlex.split(command)

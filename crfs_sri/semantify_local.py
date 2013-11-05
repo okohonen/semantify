@@ -110,7 +110,7 @@ def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   ta
     conn.commit()
     return
     
-def preprocess(conn, path, filename, tagindex, page_id):   
+def preprocess(conn, path, filename, tagindex):   
 
     page=open(os.getcwd()+path+filename+'.html','r')     
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
