@@ -141,7 +141,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0                       
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex)            
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex)                                
             print 'Devel files extracted' 
             command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
             args = shlex.split(command)

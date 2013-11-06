@@ -254,54 +254,45 @@ def history(conn, path, filename):
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     lines=[]
+    
     c = conn.cursor()   
     # c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
     
     schema_id = 1
     tokens = []
     tags = []
-    featurefuns = []
 
     c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", str(schema_id))    
     for values in c.fetchall():
-        page_id = values[0]
-        tokens.append(blobdecode(str(values[1])))
-        tags.append(blobdecode(str(values[2])))
+        page_id = values[0]       
+        tokens=blobdecode(str(values[1]))
+        tags=blobdecode(str(values[2]))
+        tokentemp=[]; tagtemp=[]; fttempa=[]; fttempb=[]
         
         c2 = conn.cursor()
         c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3', 'html') ORDER BY page_id, feature_sets.id", str(page_id))
 
         fts = []
-        for features in c2.fetchall():
-            fts.append(blobdecode(str(features[1])))
-        featurefuns.append(fts)
+        for features in c2.fetchall():             
+            fts.append(blobdecode(str(features[1])))    
+            
+        tokentemp=(tokens.split('\n'))
+        tagtemp=(tags.split('\n'))
+        fttempa=(fts[0].split('\n'))
+        fttempb=(fts[1].split('\n')) 
+        # Simultaneously writing to training file
+        for i in range(len(tokentemp)):
+            lines=tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n'  
+            trainfile.write(lines)
+            trainfile.write('\n')
+            if i>1 and i%10==0:
+                if len(lines)>1:
+                    traindevelfile.write(lines)
+                    traindevelfile.write('\n')
+        
         # Continue here and load the features by the same principles
-        #print "Check the variables body, tags and fts and join them to a training file"
-
-    tokentemp = []
-    tagtemp = []
-    fttempa = []
-    fttempb = []
-
-    for i in range(len(tokens)):
-        tokentemp.extend([token for token in str(tokens).strip().split('\n')])
-        tagtemp.extend([token for token in str(tags).strip().split('\n')])
-        fttempa.extend([token for token in str(fts [0]).strip().split('\n')])
-        fttempb.extend([token for token in str(fts [1]).strip().split('\n')])
-    print len(tokentemp),  len(tagtemp), len(fttempb)  
+        #print "Check the variables body, tags and fts and join them to a training file"     
     
-    for i in range(len(tokentemp)-1):       
-        lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n')  
-
-
-    # Writing to train, train devel, test, test devel files
-    for i in range(len(lines)):        
-        trainfile.write(lines[i])
-        trainfile.write('\n')
-        if i>1 and i%10==0:
-            if len(lines[i])>1:
-                traindevelfile.write(lines[i])
-                traindevelfile.write('\n')
     trainfile.close()   
     traindevelfile.close()   
     
