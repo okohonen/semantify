@@ -64,9 +64,9 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             
         testfile                        =os.getcwd()+path+'/temp/'+filename+'.test'
-        testreferencefile         =os.getcwd()+path+'/temp/'+filename+'.test.reference'
+        testreferencefile         =os.getcwd()+path+'/temp/'+filename+'.test.reference'  
         
-        trainfile                       =os.getcwd()+path+'/temp/'+filename+'.train'    
+        trainfile                       =os.getcwd()+path+'/temp/'+filename+'.train'   
         traindevelfile              =os.getcwd()+path+'/temp/'+filename+'.train.devel' 
         develpredictionfile      =os.getcwd()+path+'/temp/'+filename+'.devel.prediction' 
         testpredictionfile         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'

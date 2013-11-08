@@ -149,7 +149,7 @@ def preprocess(conn, path, filename, tagindex):
     for i in soup.body.descendants:     			
         if isinstance(i,NavigableString):    
             instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)              
-            if len(instring)<50 and len(instring)>1: 
+            if len(instring)<80 and len(instring)>1: 
                 iterator=0;parentname=[];ancestor=[]
                 for parent in i.parents:
                     iterator=iterator+1 
@@ -164,9 +164,11 @@ def preprocess(conn, path, filename, tagindex):
                     for count in range(0, 4):
                         if len(parentname)<3:
                             parentname.append('na')           
-                instringsplit=instring.split()
-
-                for m in instringsplit:                                        
+                instringsplit=[]
+                instringsplit.append([element for element in instring.split('.')])               
+                w=[p.split() for p in instringsplit[0]]
+                #devutil.keyboard()
+                for m in w[0]:                                        
                     ancestors.append('-'.join(ancestor))
                     parentsname.append(parentname)
                                       
@@ -221,7 +223,8 @@ def preprocess(conn, path, filename, tagindex):
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
                         html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
-                        # # Srikrishna edit: instead of append(currenterm[counter-1], append(line)
+                        # # Srikrishna edit: Only annotated contents are collected for inserting into db, discarding the O tags
+                        
                         tokens.append(line)                        
                         f_ortho1.append(ortho1)
                         f_ortho3.append(ortho3)
@@ -229,18 +232,25 @@ def preprocess(conn, path, filename, tagindex):
                         tags.append(tagsetname[counter-1])
                         
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
-                        test.append('\n')
+                         
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
+                    # New line added after every sentence in test file
+                test.append('\n') 
+                tokens.append('\n')                        
+                f_ortho1.append('\n')
+                f_ortho3.append('\n')
+                f_html.append('\n')     
+                tags.append('\n')
         containertag=i.encode('utf8')    
         
     
     
-    for i in range(len(test)):        
-        testfile.write(test[i])
-        if i>1 and i%10==0:
-            if len(test[i])>1:
+    for i in range(len(test)):  
+        if len(test[i])>1:
+            testfile.write(test[i])
+            if i>1 and i%10==0:            
                 testreferencefile.write(test[i])
                 testreferencefile.write('\n')
     testfile.close()
@@ -261,6 +271,8 @@ def history(conn, path, filename):
     schema_id = 1
     tokens = []
     tags = []
+    writingflag=0
+    lines=[]
 
     c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", str(schema_id))    
     for values in c.fetchall():
@@ -280,18 +292,26 @@ def history(conn, path, filename):
         tagtemp=(tags.split('\n'))
         fttempa=(fts[0].split('\n'))
         fttempb=(fts[1].split('\n')) 
-        # Simultaneously writing to training file
+        # Simultaneously writing to training file        
         for i in range(len(tokentemp)):
-            lines=tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i]+'\n'  
-            trainfile.write(lines)
+            lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i])
+            
+            
+                
+     
+    for i in range(len(lines)):
+        if len(lines[i])>1:
+            trainfile.write(lines[i])
             trainfile.write('\n')
-            if i>1 and i%10==0:
-                if len(lines)>1:
-                    traindevelfile.write(lines)
-                    traindevelfile.write('\n')
+            writingflag=1    
+            if i>0 and i%10==0:
+                traindevelfile.write(lines[i]+'\n')            
+                traindevelfile.write('\n')
+        elif writingflag==1:
+            trainfile.write('\n')
+            writingflag=0
         
-        # Continue here and load the features by the same principles
-        #print "Check the variables body, tags and fts and join them to a training file"     
+        
     
     trainfile.close()   
     traindevelfile.close()   

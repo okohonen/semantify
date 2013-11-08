@@ -11,19 +11,23 @@ import numpy
 import sqlite3
 
 path='/data/amazon/'
-filename='amazon052'
+filename='amazon098'
 tagindex=20
 tagset=['genre','item', 'price', 'stock', 'features']
 tagdict=['WebAnnotator_genre\nWebAnnotator_item\nWebAnnotator_price"\n"WebAnnotator_stock"\n"WebAnnotator_features']
 
-#tag=open(os.getcwd()+'/data/application/temp/file_20131025_182137.train')
+page=open(os.getcwd()+path+filename+'.html','r')     
+soup=Soup(page)
 
-text='word(t)=Finland : 1	iscapital : 1	isnumber : 0	hasnumber : 0	hassplchars : 0	longcurrent(t)=Aaaaaaa : 1	briefcurrent(t)=Aa : 1	previousterm(t)=CentralNotice : 1longprevious(t)=AaaaaaaAaaaaa : 1	briefprevious(t)=AaAa : 1	nextterm(t)=From : 1	longnext(t)=Aaaa : 1	briefnext(t)=Aa : 1	classname(t)=na : 1	classlong(t)=A : 1	classbrief(t)=B : 1	parentname(t)=span : 1	grandparentname(t)=h1 : 1	greatgrandparentname(t)=div : 1	ancestors(t)=span-h1-div-body : 1	O'
+for i in soup.body.descendants:     			
+    if isinstance(i,NavigableString): 
+        instring= i
+        instringsplit=[]
+        if len(instring)<80 and len(instring)>1:            
+            instringsplit.append([element for element in instring.split('.')])
+            p=[p.split() for p in instringsplit[0]]
+            for m in p:
+                print m
+             
+      
 
-
-a=['a', 'b']
-b=['c', 'd']
-c=[a, b]
-d=[b, a]
-e=[c, d]
-print [q for q in e[w] for w in e]
