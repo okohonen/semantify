@@ -218,6 +218,12 @@ webannotator.main = {
 		else {
 			webannotator.main.locale_alert("waChooseDTD");		
 		}
+	    // okohonen: Add style sheet
+	    Components.utils.import("resource://gre/modules/Services.jsm");
+	    var styleSheetService = Components.classes["@mozilla.org/content/style-sheet-service;1"]
+                .getService(Components.interfaces.nsIStyleSheetService);
+	    var uri = Services.io.newURI("chrome://webannotator/skin/semantify_content.css", null, null);
+	    styleSheetService.loadAndRegisterSheet(uri, styleSheetService.USER_SHEET);
 	},
 
 	/**
@@ -2021,11 +2027,19 @@ webannotator.main = {
 
     tagPage: function() {
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+	webannotator.main.expandOverlay("Tagging page");
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
-    // Sri edit
-    //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);
-    }
+    },
         // ---
+
+    expandOverlay: function(s) {
+	var overlay = window.content.document.createElement("div");
+	overlay.setAttribute("id", "semantify_overlay");
+	overlay.setAttribute("class", "semantify_overlay");
+	overlay.innerHTML = s;
+        window.content.document.body.appendChild(overlay);
+    },
+
 };
 
 
