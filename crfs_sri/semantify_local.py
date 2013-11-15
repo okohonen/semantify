@@ -123,7 +123,8 @@ def preprocess(conn, path, filename):
     containertag=['a','b','c'];  previousterm=['na']; ancestor=[];ancestors=[]; classnames=[]
     capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]   
     htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
-   
+    # Special variables used for sentence break : based on count of words that comes up inside the loop. 
+    w_flag_len=[]; w_flag_count=0; flag_count=1
     # Extracting the tagset names from page
     reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
     tagdict=[]; tagset=[]
@@ -149,14 +150,7 @@ def preprocess(conn, path, filename):
 
     for i in soup.body.descendants:     			
         if isinstance(i,NavigableString):  
-            instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)      
-            if not i.parent in htmltags:                
-                test.append('newlinesentencebreak') 
-                tokens.append('newlinesentencebreak')                        
-                f_ortho1.append('newlinesentencebreak')
-                f_ortho3.append('newlinesentencebreak')
-                f_html.append('newlinesentencebreak')     
-                tags.append('newlinesentencebreak')                   
+            instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)                            
             if len(instring)>2: 
                 iterator=0;parentname=[];ancestor=[]
                 for parent in i.parents:
@@ -175,7 +169,8 @@ def preprocess(conn, path, filename):
                 instringsplit=[]
                 instringsplit.append([element for element in instring.split('.') if element])   
                 if instringsplit:
-                    w=[p.split() for p in instringsplit[0]]     
+                    w=[p.split() for p in instringsplit[0]]    
+                    w_flag_len.append(len(w[0]))                       
                 else: 
                     continue                
                 for m in w[0] :                                        
@@ -183,14 +178,7 @@ def preprocess(conn, path, filename):
                     parentsname.append(parentname)
                                       
                     # Feature extraction                    
-                    capital.append(iscapital(m))
-                    number.append(isnumber(m))                                                                          
-                    h_number.append(hasnumber(m))                       
-                    splchars.append(hassplchars(m)) 
-                    longtemp, brieftemp=generalisation(m)  
-                    long.append(longtemp)
-                    brief.append(brieftemp)
-                    classname=re.findall('class=".*"', containertag)
+                    capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', containertag); 
                     if classname:
                         classname=classname[0].split('=')
                         classname=repr(re.sub('"', '', classname[1]))
@@ -239,15 +227,27 @@ def preprocess(conn, path, filename):
                         f_ortho3.append(ortho3)
                         f_html.append(html)     
                         tags.append(tagsetname[counter-1])
+                        test.append(line+ortho3+html+'\n')
+                        w_flag_count=w_flag_count+1
                         
-                        test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
+                        if len(w_flag_len)>=flag_count and w_flag_len[flag_count]==w_flag_count:
+                            tokens.append('newlinesentencebreak')                        
+                            f_ortho1.append('newlinesentencebreak')
+                            f_ortho3.append('newlinesentencebreak')
+                            f_html.append('newlinesentencebreak')     
+                            tags.append('newlinesentencebreak')  
+                            test.append('newlinesentencebreak')  
+                            w_flag_count=0; flag_count=flag_count+1
+                        
+                        #test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
-                    # New line added after every sentence in test file                
+                # New line added after every sentence in test file 
+                                         
         containertag=i.encode('utf8')    
-        
+        #devutil.keyboard()
 
     writingflag=0
     for i in range(len(test)):
@@ -342,12 +342,14 @@ def history(conn, path, filename, tagset, tagdict):
                             temp[tagindex]=temp[tagindex].replace('1\t', '')                            
                             if temp[tagindex] in tagset: 
                                 temptags.append(lines[i])     
-                                #temptags.append('\n')
+                                temptags.append('\n')
                                 break
                             else:
                                 counter=counter+1
                                 if counter>7:
-                                    break                        
+                                    break   
+                        else:
+                            temptags.append('\n')
                     else:
                         break
     
@@ -363,7 +365,7 @@ def history(conn, path, filename, tagset, tagdict):
         elif writingflag==1:            
             trainfile.write('\n')
             writingflag=0
-            
+    devutil.keyboard()        
     # Not checking for 'newlinesentencebreak' here, because they have all been converted to '\n' while windowing
     writingflag=0
     for i in range(len(temptags)):        
