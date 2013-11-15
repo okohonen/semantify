@@ -9,25 +9,20 @@ import time
 from sklearn.metrics import confusion_matrix
 import numpy
 import sqlite3
+import devutil
 
-path='/data/amazon/'
-filename='amazon098'
-tagindex=20
-tagset=['genre','item', 'price', 'stock', 'features']
-tagdict=['WebAnnotator_genre\nWebAnnotator_item\nWebAnnotator_price"\n"WebAnnotator_stock"\n"WebAnnotator_features']
+path='/data/application/'
+filename='adorationtemp'
+
 
 page=open(os.getcwd()+path+filename+'.html','r')     
 soup=Soup(page)
+htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
 
-for i in soup.body.descendants:     			
-    if isinstance(i,NavigableString): 
-        instring= i
-        instringsplit=[]
-        if len(instring)<80 and len(instring)>1:            
-            instringsplit.append([element for element in instring.split('.')])
-            p=[p.split() for p in instringsplit[0]]
-            for m in p:
-                print m
-             
-      
+allstrings=[] 
 
+
+for i in soup.body.descendants:
+    if not type(i) is None and isinstance(i,  NavigableString):
+        if len(i)>1 and i.parent.name in htmltags:
+            print i

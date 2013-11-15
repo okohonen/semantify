@@ -1,3 +1,0 @@
-<!-- Three high-level annotations types -->
-<!ELEMENT cubboard_measures (#PCDATA)>
-<!ELEMENT other_measures (#PCDATA)>

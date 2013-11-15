@@ -15,6 +15,7 @@ import shlex, subprocess
 import sys  
 import zlib
 from sklearn.metrics import confusion_matrix
+from sklearn import cross_validation
 import devutil
 
 # Convert to utf-8 so zlib doesn't get confused
@@ -111,17 +112,17 @@ def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   ta
     conn.commit()
     return
     
-def preprocess(conn, path, filename, tagindex):   
+def preprocess(conn, path, filename):   
 
     page=open(os.getcwd()+path+filename+'.html','r')     
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w') 
-    soup=Soup(page)    
+    soup=Soup(page)      
     counter=0
     tokens=[];    parentname=[];    tags=[];    devels=[];  test=[];    testreference=[];    
     containertag=['a','b','c'];  previousterm=['na']; ancestor=[];ancestors=[]; classnames=[]
     capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]   
-    
+    htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
    
     # Extracting the tagset names from page
     reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
@@ -147,9 +148,16 @@ def preprocess(conn, path, filename, tagindex):
     tags = []
 
     for i in soup.body.descendants:     			
-        if isinstance(i,NavigableString):    
-            instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)              
-            if len(instring)<80 and len(instring)>1: 
+        if isinstance(i,NavigableString):  
+            instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)      
+            if not i.parent in htmltags:                
+                test.append('newlinesentencebreak') 
+                tokens.append('newlinesentencebreak')                        
+                f_ortho1.append('newlinesentencebreak')
+                f_ortho3.append('newlinesentencebreak')
+                f_html.append('newlinesentencebreak')     
+                tags.append('newlinesentencebreak')                   
+            if len(instring)>2: 
                 iterator=0;parentname=[];ancestor=[]
                 for parent in i.parents:
                     iterator=iterator+1 
@@ -165,14 +173,16 @@ def preprocess(conn, path, filename, tagindex):
                         if len(parentname)<3:
                             parentname.append('na')           
                 instringsplit=[]
-                instringsplit.append([element for element in instring.split('.')])               
-                w=[p.split() for p in instringsplit[0]]
-                #devutil.keyboard()
-                for m in w[0]:                                        
+                instringsplit.append([element for element in instring.split('.') if element])   
+                if instringsplit:
+                    w=[p.split() for p in instringsplit[0]]     
+                else: 
+                    continue                
+                for m in w[0] :                                        
                     ancestors.append('-'.join(ancestor))
                     parentsname.append(parentname)
                                       
-                    # Feature extraction
+                    # Feature extraction                    
                     capital.append(iscapital(m))
                     number.append(isnumber(m))                                                                          
                     h_number.append(hasnumber(m))                       
@@ -210,8 +220,7 @@ def preprocess(conn, path, filename, tagindex):
                         if absent==1:
                             tagsetname.append('O')
                     else:                                 
-                        tagsetname.append('O')                    
-                    
+                        tagsetname.append('O')             
 
                     if counter>1:   
                         longprevious, briefprevious=generalisation(previousterm[counter-1])                                             
@@ -232,35 +241,33 @@ def preprocess(conn, path, filename, tagindex):
                         tags.append(tagsetname[counter-1])
                         
                         test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
-                         
+                        
                     # previous and prepreviousterms
                     previousterm.append(m)
                     counter=counter+1
-                    # New line added after every sentence in test file
-                test.append('\n') 
-                tokens.append('\n')                        
-                f_ortho1.append('\n')
-                f_ortho3.append('\n')
-                f_html.append('\n')     
-                tags.append('\n')
+                    # New line added after every sentence in test file                
         containertag=i.encode('utf8')    
         
-    
-    
-    for i in range(len(test)):  
-        if len(test[i])>1:
+
+    writingflag=0
+    for i in range(len(test)):
+        if not test[i]=='newlinesentencebreak':
             testfile.write(test[i])
-            if i>1 and i%10==0:            
-                testreferencefile.write(test[i])
-                testreferencefile.write('\n')
+            testreferencefile.write(test[i])
+            writingflag=1
+        elif writingflag==1:
+            testfile.write('\n')
+            testreferencefile.write('\n')
+            writingflag=0
+       
     testfile.close()
     testreferencefile.close() 
         
-    return tokens,  f_ortho1, f_ortho3,  f_html,   tags
+    return tokens,  f_ortho1, f_ortho3,  f_html,   tags,  tagset, tagdict
         
 
     
-def history(conn, path, filename):    
+def history(conn, path, filename, tagset, tagdict):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     lines=[]
@@ -288,37 +295,93 @@ def history(conn, path, filename):
         for features in c2.fetchall():             
             fts.append(blobdecode(str(features[1])))    
             
-        tokentemp=(tokens.split('\n'))
-        tagtemp=(tags.split('\n'))
-        fttempa=(fts[0].split('\n'))
-        fttempb=(fts[1].split('\n')) 
-        # Simultaneously writing to training file        
+        tokentemp=tokens.split('\n')      
+        tagtemp=tags.split('\n')
+        fttempa=fts[0].split('\n')
+        fttempb=fts[1].split('\n')
+        
+    # Collecting list of lines to write to training file and devel file    
         for i in range(len(tokentemp)):
-            lines.append(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i])
-            
-            
-                
-     
+            temp=(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i])
+            if not temp in 'newlinesentencebreak':
+                lines.append(temp)           
+            else:
+                lines.append('\n')
+          
+        
+    # Obtaining tagindex first
     for i in range(len(lines)):
-        if len(lines[i])>1:
+        temp=lines[i].split(' : ')
+        if not 'newlinesentencebreak' in temp[0]:
+            tagindex=len(temp)-1
+            break
+    print 'Tagindex is :', tagindex
+    
+    # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
+    flag=0; firsttagindex=0; temptags=[]; 
+    
+    for i in range(len(lines)):
+        temp=lines[i].split(' : ')           
+        if 'newlinesentencebreak' in temp[0]:            
+            temptags.append('\n')
+            pass
+        else:   
+            temp[tagindex]=temp[tagindex].replace('1\t', '')            
+            if temp[tagindex] in tagset:             
+                temptags.append(lines[i])
+                if flag==0:
+                    firsttagindex=i
+                    flag=1
+            else:
+                counter=0
+                for j in range(8):
+                    if  (i+j) <len(lines):    
+                        temp=lines[i+j]
+                        if not 'newlinesentencebreak' in temp:
+                            temp=lines[i+j].split(' : ')                        
+                            temp[tagindex]=temp[tagindex].replace('1\t', '')                            
+                            if temp[tagindex] in tagset: 
+                                temptags.append(lines[i])     
+                                #temptags.append('\n')
+                                break
+                            else:
+                                counter=counter+1
+                                if counter>7:
+                                    break                        
+                    else:
+                        break
+    
+   
+    # Writing to test and test reference files
+    
+    writingflag=0
+    for i in range(len(lines)):
+        if not 'newlinesentencebreak' in lines[i]:
             trainfile.write(lines[i])
             trainfile.write('\n')
-            writingflag=1    
-            if i>0 and i%10==0:
-                traindevelfile.write(lines[i]+'\n')            
-                traindevelfile.write('\n')
-        elif writingflag==1:
+            writingflag=1 
+        elif writingflag==1:            
             trainfile.write('\n')
             writingflag=0
-        
-        
+            
+    # Not checking for 'newlinesentencebreak' here, because they have all been converted to '\n' while windowing
+    writingflag=0
+    for i in range(len(temptags)):        
+        if len(temptags[i])>2:
+            traindevelfile.write(temptags[i])   
+            traindevelfile.write('\n')
+            writingflag=1
+        elif writingflag==1:            
+            traindevelfile.write('\n')
+            writingflag=0
+            
     
     trainfile.close()   
     traindevelfile.close()   
     
     return 1    
     
-def keywordtag(path, filename, tagdict, tagset, tagindex):
+def keywordtag(path, filename):
  
     # Reference snippet to apply return tags to the html file
     page=open(os.getcwd()+path+filename+'.html')
@@ -330,7 +393,26 @@ def keywordtag(path, filename, tagdict, tagset, tagindex):
     retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
     a=retfile.read().splitlines()
     tokens=[]
-    flag=0; temptag='O';annovar=[];annotations=[]
+    flag=0; temptag=['O',  'START', 'STOP'];annovar=[];annotations=[]
+    tagset=[]; tagdict=[]
+    
+    # gettting tag index first
+    for lines in a:
+        line=lines.split(' : ')
+        if len(line)>1:
+            tagindex=len(line)-1
+            break
+    print tagindex
+    
+    for lines in a:        
+        line=lines.split(' : ')      
+        if len(line)>1:
+            line[tagindex]=line[tagindex].replace('1\t', '')
+            if not line[tagindex] in tagset and not line[tagindex] in temptag:
+                tagset.append(line[tagindex])
+                tagdict.append('WebAnnotator_'+str(line[tagindex]))
+  
+    print tagset,  tagdict,  tagindex
     
     # Obtaining annotations in the form of collocations if annotation is not a single token    
     for terms in a:               

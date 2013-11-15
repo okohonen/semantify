@@ -19,8 +19,8 @@ dbname='temp/semantify.db'
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
     raise AssertionError('Database not found')
-tagset=['entity',  'sentence', 'date']
-tagdict=['WebAnnotator_entity', 'WebAnnotator_sentence', 'WebAnnotator_date']
+#tagset=['entity',  'sentence', 'date']
+#tagdict=['WebAnnotator_entity', 'WebAnnotator_sentence', 'WebAnnotator_date']
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
@@ -28,7 +28,7 @@ c.execute("PRAGMA foreign_keys = ON;")
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
-tagindex=20
+#tagindex=20
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
@@ -122,9 +122,9 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Trains a model with received annotations  
             value=0
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex) 
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags,  tagset,  tagdict=semantify_local.preprocess(conn, path, filename) 
             semantify_local.transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags)
-            value=semantify_local.history(conn, path, filename)            
+            value=semantify_local.history(conn, path, filename,  tagset,  tagdict)            
             if value==1:   
                  command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
                  args = shlex.split(command)
@@ -141,13 +141,13 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0                       
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags=semantify_local.preprocess(conn, path, filename, tagindex)                                
+            tokens,  f_ortho1, f_ortho3,  f_html,   tags,  tagset,  tagdict=semantify_local.preprocess(conn, path, filename)                                
             print 'Devel files extracted' 
             command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
             args = shlex.split(command)
             process=subprocess.Popen(args)
             process.wait()  
-            content=semantify_local.keywordtag(path, filename, tagdict,  tagset,  tagindex)                        
+            content=semantify_local.keywordtag(path, filename)                        
             successlog.write(filename)
             successlog.write('\t')
             successlog.write( str(datetime.now()))
