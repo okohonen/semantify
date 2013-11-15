@@ -38,6 +38,10 @@ webannotator.WAid = 0;
 webannotator.noLoad = true;
 // WA annotation identifier to edit, if edit asked
 webannotator.id_to_edit = null;
+// okohonen
+// Tag type to edit so that also automatic tags from semantify can be edited correctly
+webannotator.tag_type = null;
+// --
 // Are the links activated or not in the page?
 webannotator.linksEnable = true;
 // Event for showing or editing annotations
@@ -91,11 +95,11 @@ webannotator.htmlWA = {
 	/**
 	 * Show menu for editing an annotation. Called by onmouseover.
 	 */
-	showEditAnnotationMenu: function (evt, id) {
+        showEditAnnotationMenu: function (evt, id, tag_type) {
 		clearTimeout(webannotator.showEditEvent);
 		webannotator.htmlWA.receiveWindowUnblinkAnnotation();
 		webannotator.popups.hide_popup("webannotator-edit-menu");
-		webannotator.showEditEvent = setTimeout(function() {webannotator.htmlWA.setIdToEdit(id); webannotator.popups.show_popup('webannotator-edit-menu', evt); webannotator.main.receiveSelectAnnotation(id); webannotator.htmlWA.receiveWindowBlinkAnnotation(id);}, 500); 
+	webannotator.showEditEvent = setTimeout(function() {webannotator.htmlWA.setIdToEdit(id, tag_type); webannotator.popups.show_popup('webannotator-edit-menu', evt); webannotator.main.receiveSelectAnnotation(id); webannotator.htmlWA.receiveWindowBlinkAnnotation(id);}, 500); 
 	},
 
 	/**
@@ -118,8 +122,11 @@ webannotator.htmlWA = {
 	/**
 	 * Set annotation identifier to be edited
 	 */
-	setIdToEdit: function (id) {
+        setIdToEdit: function (id, tag_type) {
 		webannotator.id_to_edit = id;
+	        // okohonen
+	        webannotator.tag_type = tag_type;
+	        // ---
 	},
 
 	/**
@@ -129,6 +136,15 @@ webannotator.htmlWA = {
 		return webannotator.id_to_edit;
 	},
 
+    
+      	/**
+	 * Get type of tag to be edited
+	 */
+	getTagTypeToEdit: function () {
+		return webannotator.tag_type;
+	},
+
+
 	/** 
 	 * Create a new annotation or edit the currently selected one
 	 * Called by editing popup menus.
@@ -137,8 +153,40 @@ webannotator.htmlWA = {
 		// If an id has been selected for edition, then 
 		// this is not a new annotation, but an old one
 		// tha must be updated
+	    
+	    // okohonen
+	    // Convert an automatic semantify tag into a manually made webannotator tag
+	    if (webannotator.htmlWA.getTagTypeToEdit() == "semantify") {
+		        var subtypes = "";
+		        var subtype;
+		        // subtypes
+		        for (subtype in webannotator.attributesOptions) {
+		            subtypes += subtype + ":" + webannotator.attributesOptions[subtype] + ";";
+		        }
 
-		if (webannotator.htmlWA.getIdToEdit() !== null) {
+			var element = content.document.getElementById("WA_data_element");
+
+		        var id = webannotator.htmlWA.getIdToEdit();
+		        var span = content.document.getElementById("semantify_" + id);
+		        span.setAttribute("class", "WebAnnotator_" + sectionName);
+		        span.setAttribute("wa-type", sectionName);
+		        span.setAttribute("wa-subtypes", subtypes);
+		        var color = webannotator.htmlWA.getColorFromNode(sectionName);
+		        span.setAttribute("style", "color:" + color[0] + "; background-color:" + color[1] + ";");
+ 		        span.removeAttribute("semantify");
+ 		        span.removeAttribute("idnr");
+ 		        span.removeAttribute("id");
+		        // We need to set the id as for a new tag
+		        webannotator.WAid = Math.max(webannotator.WAid, parseInt(element.getAttribute("WA-maxid"))) + 1;
+  		        span.setAttribute("WA-id", ""+webannotator.WAid);
+
+		        // Update info in bottom panel
+			webannotator.main.receiveNewAnnotation(webannotator.WAid, sectionName, span.innerHTML, subtypes)
+			// Reset id to edit
+			webannotator.htmlWA.setIdToEdit(null);
+
+	    }
+	    else if (webannotator.htmlWA.getIdToEdit() !== null) {
 			var subtypes = "";
 			var subtype;
 			// subtypes
@@ -582,5 +630,6 @@ webannotator.htmlWA = {
 
 	setColor: function (dtd, n, fg, bg) {
 		webannotator.colors[dtd][n] = [fg, bg];
-	}	
+	}
+
 };

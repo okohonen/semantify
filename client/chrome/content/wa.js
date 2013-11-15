@@ -255,13 +255,21 @@ webannotator.main = {
 		link.setAttribute("href", webannotator.contentPath + "schemas/"+ webannotator.dtdFileName + ".css");
 		head.appendChild(link);
 		
-		var body = content.document.body;
-		
-		// Add element for communication between HTML and XUL
+	        // Add element for communication between HTML and XUL
 		var dom = webannotator.misc.jsonToDOM(["WA_data_element", {id:"WA_data_element", "WA-maxid":""+webannotator.maxId},
 										   ""], content.document);
 		webannotator.main.setModified(false);
 		content.document.documentElement.appendChild(dom);  
+
+                // okohonen
+	        // Break into two functions
+	        webannotator.main.activateHTMLBody();
+	},
+        
+
+        activateHTMLBody: function() {
+	        var body = content.document.body;
+
 		// building the panels
 		webannotator.main.buildPopups(webannotator.dtdFileName);
 		
@@ -1489,20 +1497,41 @@ webannotator.main = {
 	 * Remove an annotation in the table of bottom panel
 	 */
 	receiveDeleteAnnotation: function () {
-		var xulTable = document.getElementById("WebAnnotator_tablecontent");
-		var id = webannotator.htmlWA.getIdToEdit();
+	        // okohonen
+	        if (webannotator.htmlWA.getTagTypeToEdit() == "semantify") {
+		    var id = webannotator.htmlWA.getIdToEdit();
+		    var span = content.document.getElementById("semantify_" + id);
+		    // This seems unnecessary
+		    // var r = confirm(webannotator.bundle.GetStringFromName("waSemantifyDeleteAnnotationConfirm") + id + "?");
+	            r = true
 
-		// Display the dialogue to confirm whether delete or not
-		var r = confirm(webannotator.bundle.GetStringFromName("waDeleteAnnotationConfirm") + id + "?");
-		
-		// Confirm to delete
-		if (r == true) {
-			delete webannotator.annotationNames[id];
-			delete webannotator.annotationTexts[id];
-			delete webannotator.annotationAttributes[id];	
-			webannotator.main.deleteIdWebAnnotator(id);
-		}
-		webannotator.main.receiveShowAnnotations();
+	            // Confirm to delete
+	            if (r == true) {
+			var n;
+			var parent = span.parentNode;
+			while (span.firstChild) {
+				parent.insertBefore(span.firstChild, span);
+			}
+			parent.removeChild(span);
+	            } 
+		} 
+	        else {
+	           // ---
+	           var xulTable = document.getElementById("WebAnnotator_tablecontent");
+	           var id = webannotator.htmlWA.getIdToEdit();
+	           
+	           // Display the dialogue to confirm whether delete or not
+	           var r = confirm(webannotator.bundle.GetStringFromName("waDeleteAnnotationConfirm") + id + "?");
+	           
+	           // Confirm to delete
+	           if (r == true) {
+	           	delete webannotator.annotationNames[id];
+	           	delete webannotator.annotationTexts[id];
+	           	delete webannotator.annotationAttributes[id];	
+	           	webannotator.main.deleteIdWebAnnotator(id);
+	           }
+	           webannotator.main.receiveShowAnnotations();
+	       }      
 	},
 
 	/**
@@ -1697,6 +1726,8 @@ webannotator.main = {
 			}
 		}
 	},
+
+
 
 	/**
 	 * Get text contained by an element, by recursively 
@@ -1910,7 +1941,18 @@ webannotator.main = {
 	 * Show the delete/edit small popup 
 	 */
 	showEdit: function (e) {
-		webannotator.htmlWA.showEditAnnotationMenu(e, this.getAttribute('WA-id'));
+	    // okohonen
+	    var id;
+	    var tag_type;
+	    if (this.getAttribute('semantify') !== null) {
+		tag_type = "semantify";
+		id = this.getAttribute('idnr');
+	    } else {
+		tag_type = "webannotator";
+		id = this.getAttribute('WA-id');
+	    }
+	    webannotator.htmlWA.showEditAnnotationMenu(e, id, tag_type);
+	    // --
 	},
 
 	/**
@@ -2009,8 +2051,24 @@ webannotator.main = {
     },
 
     ajaxUpdatePage: function(req) {
-	obj = JSON.parse(req.responseText);
+	var obj = JSON.parse(req.responseText);
 	window.content.document.body.innerHTML = obj.content;
+
+	// Erase annotations, so we can receive the latest from the server
+	webannotator.annotationNames = {};
+	webannotator.annotationTexts = {};
+	webannotator.annotationAttributes = {};
+	var selectedIds = [];
+	webannotator.main.updateTable(selectedIds, true);
+
+	webannotator.main.buildSemantifyAnnotations();
+	webannotator.main.buildAnnotations();
+	
+	// Update the data element as we now have counted the amount of annotations
+	var element = content.document.getElementById("WA_data_element");
+  	element.setAttribute("WA-maxid", webannotator.maxId);
+
+	webannotator.main.activateHTMLBody();
 	webannotator.main.activateMenus();
 	// Show already existing annotation (if any)
 	webannotator.main.receiveShowAnnotations();
@@ -2039,6 +2097,44 @@ webannotator.main = {
 	overlay.innerHTML = s;
         window.content.document.body.appendChild(overlay);
     },
+
+    	/**
+	 * Build semantify annotations from WA spans in loaded document
+	 */
+	buildSemantifyAnnotations: function () {
+		var spans = window.content.document.getElementsByTagName("span");
+		var id;
+		var subtypes;
+		var type;
+	        id = 1;
+	    
+		var i;
+		for(i = 0; i < spans.length ; i++){
+			if (spans[i].hasAttributes() && spans[i].getAttribute("semantify") !== null) {
+				var span = spans[i];
+				subtypes = span.getAttribute("wa-subtypes");
+				type = span.getAttribute("wa-type");
+				
+				// Add style information if exists
+				var color = webannotator.htmlWA.getColor(webannotator.dtdFileName, type, -2);
+			        bgcol = tinycolor.lighten(tinycolor.lighten(tinycolor.lighten(color[1])));
+
+				if (color !== null) {
+					span.setAttribute("style", "color:" + color[0] + "; background-color:" + bgcol + ";");
+				}
+			        span.setAttribute("id", "semantify_" + id);
+			        span.setAttribute("idnr", id);
+			        id++;
+				
+				// add event listener for showing and hiding 
+				// edit menus
+				span.addEventListener("mouseover", webannotator.main.showEdit);
+				span.addEventListener("mouseout", webannotator.main.hideEdit);
+
+			}
+		}
+	}
+
 
 };
 
