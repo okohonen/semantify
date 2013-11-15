@@ -9,6 +9,7 @@
   <script type="text/javascript" src="popups.js"></script>
   <script type="text/javascript" src="options.js"></script>
   <script type="text/javascript" src="highlighter.js"></script>
+  <script type="text/javascript" src="tinycolor.js"></script>
  
   <!-- Extend Firefox menu -->
   <toolbarpalette id="BrowserToolbarPalette">
