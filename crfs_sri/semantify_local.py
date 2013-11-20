@@ -124,7 +124,7 @@ def preprocess(conn, path, filename):
     capital=[];number=[]; h_number=[];splchars=[];long=[]; brief=[]; classlong=[]; classbrief=[]; tagsetname=[];parentsname=[];currentterm=[]   
     htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
     # Special variables used for sentence break : based on count of words that comes up inside the loop. 
-    w_flag_len=[]; w_flag_count=0; flag_count=1
+    w_flag_len=[]; w_flag_count=0; flag_count=0
     # Extracting the tagset names from page
     reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
     tagdict=[]; tagset=[]
@@ -141,7 +141,7 @@ def preprocess(conn, path, filename):
     
     print tagdict,  tagset
    
-    
+    reg=re.compile('WebAnnotator_[a-zA-Z0-9]')
     tokens = []
     f_ortho1 = []
     f_ortho3 = []
@@ -158,18 +158,21 @@ def preprocess(conn, path, filename):
                     if parent.name: 
                         if parent.name=='html':
                             break
-                        else:
-                            ancestor.append(parent.name)
-                            if  iterator<4:
-                                parentname.append(parent.name) 
+                        else:                           
+                            if re.findall(reg, str(parent)) and iterator==1:                                
+                                continue
+                            else:
+                                ancestor.append(parent.name)
+                                if  iterator<4:
+                                    parentname.append(parent.name) 
                 if len(parentname)<3:
                     for count in range(0, 4):
                         if len(parentname)<3:
                             parentname.append('na')           
                 instringsplit=[]
-                instringsplit.append([element for element in instring.split('.') if element])   
-                if instringsplit:
-                    w=[p.split() for p in instringsplit[0]]    
+                instringsplit.append([element for element in instring.split('.') if element]) 
+                w=[p.split() for p in instringsplit[0]]                        
+                if len(w[0])>0:
                     w_flag_len.append(len(w[0]))                       
                 else: 
                     continue                
@@ -179,13 +182,14 @@ def preprocess(conn, path, filename):
                                       
                     # Feature extraction                    
                     capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', containertag); 
-                    if classname:
+                    
+                    if classname and not (re.findall("WebAnnotator", str(classname))):                        
                         classname=classname[0].split('=')
                         classname=repr(re.sub('"', '', classname[1]))
                         classlongtemp, classbrieftemp=generalisation(classname)
                         classnames.append(classname)
                         classlong.append(classlongtemp)
-                        classbrief.append(classbrieftemp)
+                        classbrief.append(classbrieftemp)                    
                     else:
                         classname='na'
                         classlongtemp, classbrieftemp="A", "B"
@@ -196,7 +200,7 @@ def preprocess(conn, path, filename):
                     # #######           
                     currentterm.append(m)                    
                     
-                    if parentname[0]=='span':
+                    if i.parent.name=='span':
                         absent=0
                         for q in range(len(tagdict)):
                             if  tagdict[q] in containertag: 
@@ -210,7 +214,7 @@ def preprocess(conn, path, filename):
                     else:                                 
                         tagsetname.append('O')             
 
-                    if counter>1:   
+                    if counter>1:                           
                         longprevious, briefprevious=generalisation(previousterm[counter-1])                                             
                         longcurrent, briefcurrent=generalisation(currentterm[counter-1])                  
                         longnext, briefnext=generalisation(currentterm[counter])     
@@ -220,24 +224,27 @@ def preprocess(conn, path, filename):
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
                         html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
-                        # # Srikrishna edit: Only annotated contents are collected for inserting into db, discarding the O tags
+                               
                         
                         tokens.append(line)                        
                         f_ortho1.append(ortho1)
                         f_ortho3.append(ortho3)
                         f_html.append(html)     
                         tags.append(tagsetname[counter-1])
-                        test.append(line+ortho3+html+'\n')
+                        test.append(line+ortho1+html+'\n')
                         w_flag_count=w_flag_count+1
+                        #devutil.keyboard()  
                         
-                        if len(w_flag_len)>=flag_count and w_flag_len[flag_count]==w_flag_count:
+                        #print w_flag_len,  flag_count,  w_flag_count
+                        if len(w_flag_len)>flag_count and w_flag_len[flag_count]==w_flag_count:
                             tokens.append('newlinesentencebreak')                        
                             f_ortho1.append('newlinesentencebreak')
                             f_ortho3.append('newlinesentencebreak')
                             f_html.append('newlinesentencebreak')     
                             tags.append('newlinesentencebreak')  
                             test.append('newlinesentencebreak')  
-                            w_flag_count=0; flag_count=flag_count+1
+                            w_flag_count=0
+                            flag_count=flag_count+1
                         
                         #test.append('word(t)='+currentterm[counter-1]+' : 1\tlongcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\tclassname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1]+' : 1\t\n') 
                         
@@ -289,7 +296,7 @@ def history(conn, path, filename, tagset, tagdict):
         tokentemp=[]; tagtemp=[]; fttempa=[]; fttempb=[]
         
         c2 = conn.cursor()
-        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3', 'html') ORDER BY page_id, feature_sets.id", str(page_id))
+        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho1','html') ORDER BY page_id, feature_sets.id", str(page_id))
 
         fts = []
         for features in c2.fetchall():             
@@ -307,8 +314,8 @@ def history(conn, path, filename, tagset, tagdict):
                 lines.append(temp)           
             else:
                 lines.append('\n')
-          
-        
+       
+      
     # Obtaining tagindex first
     for i in range(len(lines)):
         temp=lines[i].split(' : ')
@@ -316,7 +323,7 @@ def history(conn, path, filename, tagset, tagdict):
             tagindex=len(temp)-1
             break
     print 'Tagindex is :', tagindex
-    
+   
     # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
     flag=0; firsttagindex=0; temptags=[]; 
     
@@ -353,7 +360,7 @@ def history(conn, path, filename, tagset, tagdict):
                     else:
                         break
     
-   
+  
     # Writing to test and test reference files
     
     writingflag=0
@@ -365,7 +372,7 @@ def history(conn, path, filename, tagset, tagdict):
         elif writingflag==1:            
             trainfile.write('\n')
             writingflag=0
-    devutil.keyboard()        
+    
     # Not checking for 'newlinesentencebreak' here, because they have all been converted to '\n' while windowing
     writingflag=0
     for i in range(len(temptags)):        
@@ -383,7 +390,7 @@ def history(conn, path, filename, tagset, tagdict):
     
     return 1    
     
-def keywordtag(path, filename):
+def keywordtag(path, filename,  tagindex):
  
     # Reference snippet to apply return tags to the html file
     page=open(os.getcwd()+path+filename+'.html')
@@ -398,6 +405,7 @@ def keywordtag(path, filename):
     flag=0; temptag=['O',  'START', 'STOP'];annovar=[];annotations=[]
     tagset=[]; tagdict=[]
     
+    '''
     # gettting tag index first
     for lines in a:
         line=lines.split(' : ')
@@ -405,7 +413,7 @@ def keywordtag(path, filename):
             tagindex=len(line)-1
             break
     print tagindex
-    
+    '''
     for lines in a:        
         line=lines.split(' : ')      
         if len(line)>1:
@@ -449,14 +457,14 @@ def keywordtag(path, filename):
     print annotations
             
     # This chunk of code checks through the descendants for presence of NavigableStrings and replaces the string with an 'a' with title=category_value for tooltip purpose.
-    w=soup
+    w=soup.body
 
     for line in annotations:
         for child in w.descendants:
             if child.next_sibling:
                 for i in child.next_sibling:           
                     if isinstance(i,NavigableString): 
-                        if len(i)<100 and len(i)>0:   
+                        if len(i)<1000 and len(i)>0:   
                             if line[0] in i and len(line[0])>1:                                    
                                 if i.parent.name=='a':
                                     i.parent['title']=line[1]; i.parent['style']="color:#000000; background-color:#40E0D0"                            

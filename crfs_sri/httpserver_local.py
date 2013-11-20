@@ -14,7 +14,7 @@ import devutil
 import zlib
 
 PORT = 50010
-dbname='temp/semantify.db'
+dbname='temp/wikipedia.db'
 
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
@@ -28,7 +28,8 @@ c.execute("PRAGMA foreign_keys = ON;")
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
-#tagindex=20
+# for ortho3 tagindex=13, for ortho1html tagindex=14, for ortho3html tagindex=20;
+tagindex=14
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
@@ -147,7 +148,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             args = shlex.split(command)
             process=subprocess.Popen(args)
             process.wait()  
-            content=semantify_local.keywordtag(path, filename)                        
+            content=semantify_local.keywordtag(path, filename,  tagindex)                        
             successlog.write(filename)
             successlog.write('\t')
             successlog.write( str(datetime.now()))
