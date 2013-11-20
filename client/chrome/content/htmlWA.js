@@ -248,7 +248,8 @@ webannotator.htmlWA = {
 		webannotator.htmlWA.closeMenu();
 
 	        // okohonen
-        webannotator.main.storePage();
+	        // Now done from menu
+                // webannotator.main.storePage();
 	        // ---
 	},
 	

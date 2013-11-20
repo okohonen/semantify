@@ -159,7 +159,7 @@ def preprocess(conn, path, filename):
                         if parent.name=='html':
                             break
                         else:                           
-                            if re.findall(reg, str(parent)) and iterator==1:                                
+                            if iterator==1 and parent.name=="span" and re.findall(reg, str(parent)):
                                 continue
                             else:
                                 ancestor.append(parent.name)
