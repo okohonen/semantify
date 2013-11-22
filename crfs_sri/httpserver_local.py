@@ -14,7 +14,7 @@ import devutil
 import zlib
 
 PORT = 50010
-dbname='temp/wikipedia.db'
+dbname='temp/livescore.db'
 
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
@@ -29,7 +29,7 @@ c.execute("PRAGMA foreign_keys = ON;")
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
 # for ortho3 tagindex=13, for ortho1html tagindex=14, for ortho3html tagindex=20;
-tagindex=14
+tagindex=12
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')

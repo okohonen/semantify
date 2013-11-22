@@ -181,7 +181,7 @@ def preprocess(conn, path, filename):
                     parentsname.append(parentname)
                                       
                     # Feature extraction                    
-                    capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', containertag); 
+                    capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', testcontainertag); 
                     
                     if classname and not (re.findall("WebAnnotator", str(classname))):                        
                         classname=classname[0].split('=')
@@ -203,7 +203,7 @@ def preprocess(conn, path, filename):
                     if i.parent.name=='span':
                         absent=0
                         for q in range(len(tagdict)):
-                            if  tagdict[q] in containertag: 
+                            if  tagdict[q] in traincontainertag: 
                                  tagsetname.append(tagset[q])
                                  absent=0
                                  break
@@ -223,8 +223,8 @@ def preprocess(conn, path, filename):
                         line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\t'
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
-                        html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
-                               
+                        #html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
+                        html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\t'                       
                         
                         tokens.append(line)                        
                         f_ortho1.append(ortho1)
@@ -253,7 +253,11 @@ def preprocess(conn, path, filename):
                     counter=counter+1
                 # New line added after every sentence in test file 
                                          
-        containertag=i.encode('utf8')    
+        testcontainertag=i.encode('utf8')
+        if "WebAnnotator" in str(testcontainertag):
+            traincontainertag=(i.previous_element).encode('utf8')
+        else:
+            traincontainertag=i.encode('utf8')
         #devutil.keyboard()
 
     writingflag=0
