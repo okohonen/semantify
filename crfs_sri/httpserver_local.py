@@ -14,7 +14,7 @@ import devutil
 import zlib
 
 PORT = 50010
-dbname='temp/wikipedia.db'
+dbname='temp/hn.db'
 
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
