@@ -10,6 +10,7 @@ import re
 import time
 from bs4 import BeautifulSoup as Soup
 from bs4 import NavigableString
+import bs4
 from datetime import datetime
 import shlex, subprocess
 import sys  
@@ -111,7 +112,56 @@ def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   ta
  
     conn.commit()
     return
+
+def tokenize(s):
+    return s.split()
+
+def htmlparse(page, htmlfeaturefuns, tokenfeaturefuns):
+    soup = Soup(page)
+    nodestack = [soup.body]
+    htmlstack = [[]]
+    tokens = []
+
+    while(len(nodestack) > 0):
+        node = nodestack.pop()
+        stack = htmlstack.pop()
+
+        if isinstance(node, bs4.Tag):
+            l = [node]
+            l.extend(stack)                
+            for c in reversed(node.contents):
+                nodestack.append(c)
+                htmlstack.append(l)
+
+        elif isinstance(node, bs4.Comment): 
+            pass # Ignore comments
+
+        elif isinstance(node, bs4.NavigableString):
+            # Ignore script tags
+            if node.parent.name != "script":
+                tk = tokenize(node.string)
+                htmlf = {}
+                for fun in htmlfeaturefuns.keys():
+                    v = htmlfeaturefuns[fun](stack)
+                    if v is not None:
+                        htmlf[fun] = v
+        
+                ret = []
+                for t in tk:
+                    tokenf = {}
+                    for fun in tokenfeaturefuns.keys():
+                        v = tokenfeaturefuns[fun](t)
+                        if v is not None:
+                            tokenf[fun] = v
+                    tokens.append((tokenf, htmlf))
+        else:
+            print "Unknown tag type"
+            devutil.keyboard()
     
+    assert(len(htmlstack) == 0)
+    return tokens
+
+
 def preprocess(conn, path, filename):   
 
     page=open(os.getcwd()+path+filename+'.html','r')     
@@ -149,7 +199,7 @@ def preprocess(conn, path, filename):
     tags = []
 
     for i in soup.body.descendants:     			
-        if isinstance(i,NavigableString):  
+        if isinstance(i,NavigableString):
             instring=re.sub('[^a-zA-Z0-9\.,\-?]', ' ', i)                            
             if len(instring)>2: 
                 iterator=0;parentname=[];ancestor=[]
