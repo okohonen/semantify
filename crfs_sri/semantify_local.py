@@ -153,7 +153,7 @@ def htmlparse(page, htmlfeaturefuns, tokenfeaturefuns):
                         v = tokenfeaturefuns[fun](t)
                         if v is not None:
                             tokenf[fun] = v
-                    tokens.append((tokenf, htmlf))
+                    tokens.append((tokenf, htmlf, node.parent))
         else:
             print "Unknown tag type"
             devutil.keyboard()
@@ -161,6 +161,8 @@ def htmlparse(page, htmlfeaturefuns, tokenfeaturefuns):
     assert(len(htmlstack) == 0)
     return tokens
 
+def sentence_split(tokens):
+    return tokens
 
 def preprocess(conn, path, filename):   
 
