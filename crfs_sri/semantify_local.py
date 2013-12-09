@@ -136,12 +136,14 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
     soup = Soup(pagefp)
     nodestack = [soup.body]
     htmlstack = [[]]
+    labelstack = ['O']
     tokens = []
     labels=[]
 
     while(len(nodestack) > 0):
         node = nodestack.pop()
         stack = htmlstack.pop()
+        label = labelstack.pop()
 
         if isinstance(node, bs4.Tag):
             nodeclassname,  nodeclasslong,  nodeclassbrief=class_features(node)   
@@ -170,6 +172,19 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                         nodestack.append(c)
                         htmlstack.append(l)
 
+                    temp=str(node).split('class')
+                    temp=temp[1].split('"')
+                    label=temp[1].replace('WebAnnotator_', '')
+                    l = stack
+                else:
+                    l = [node]
+                    l.extend(stack)                
+                for c in reversed(node.contents):
+                    nodestack.append(c)
+                    htmlstack.append(l)
+                    labelstack.append(label)
+
+
         elif isinstance(node, bs4.Comment): 
             pass # Ignore comments
 
@@ -188,7 +203,11 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                     for fun in tokenfeaturefuns:
                         vd = fun(t)
                         tokenf = vd      
+<<<<<<< HEAD
                     labels.append('O')
+=======
+                    labels.append(label)
+>>>>>>> 879ed4de3775255a46efaae2a81f979a7143e95e
                     tokens.append((tokenf, htmlf, node.parent))
         else:
             print "Unknown tag type"
