@@ -15,9 +15,9 @@ from datetime import datetime
 import shlex, subprocess
 import sys  
 import zlib
-# from sklearn.metrics import confusion_matrix
-# from sklearn import cross_validation
-# import nltk
+from sklearn.metrics import confusion_matrix
+from sklearn import cross_validation
+import nltk
 import devutil
 
 # Convert to utf-8 so zlib doesn't get confused
@@ -117,8 +117,7 @@ def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     return
 
 def tokenize(s):
-    return s.split()
-    # return nltk.wordpunct_tokenize(s)
+    return nltk.wordpunct_tokenize(s)
     
 def class_features(nodeparent):
     # Classname features    
