@@ -20,7 +20,9 @@ dbname='temp/livescore.db'
 
 if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
-    raise AssertionError('Database not found')
+    raise AssertionError('Database not found')    
+
+    
 #tagset=['entity',  'sentence', 'date']
 #tagdict=['WebAnnotator_entity', 'WebAnnotator_sentence', 'WebAnnotator_date']
 
@@ -31,7 +33,7 @@ c.execute("PRAGMA foreign_keys = ON;")
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
 # for ortho3 tagindex=13, for ortho1html tagindex=14, for ortho3html tagindex=20;
-tagindex=12
+#tagindex=12
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
@@ -58,8 +60,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         f=open(os.getcwd()+path+'file_'+now+'.html', 'w')   
         content=o['content']
         f.write('<html><body>')
-        for i in range(len(content)):            
-            f.write(content[i].encode('utf8'))
+        for i in range(len(content)):                        
+            f.write(content[i].encode('utf-8'))
         f.write('</body></html>')
         f.close()
         
@@ -124,27 +126,27 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         
             # Trains a model with received annotations  
-            value=0
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags,  tagset,  tagdict=semantify_local.preprocess(conn, path, filename) 
-            semantify_local.transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags)
-            value=semantify_local.history(conn, path, filename,  tagset,  tagdict)            
+            value=0            
+            words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)
+            semantify_local.transactions(conn,  page_id, words, f_ortho1,  f_ortho3, f_html,   labels)
+            value=semantify_local.history(conn, path, filename)         
             if value==1:   
-                 command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
-                 args = shlex.split(command)
-                 process=subprocess.Popen(args)
-                 process.wait()                      
-                 successlog.write(filename)
-                 successlog.write('\t')
-                 successlog.write( str(datetime.now()))
-                 successlog.write('\n') 
-                 elapsed=time.time()-t
-                 print 'File', filename, 'handled in:',  elapsed
-                 pass       
+                command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
+                args = shlex.split(command)
+                process=subprocess.Popen(args)
+                process.wait()                      
+                successlog.write(filename)
+                successlog.write('\t')
+                successlog.write( str(datetime.now()))
+                successlog.write('\n') 
+                elapsed=time.time()-t
+                print 'File', filename, 'handled in:',  elapsed
+                pass       
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
-            value=0                       
-            tokens,  f_ortho1, f_ortho3,  f_html,   tags,  tagset,  tagdict=semantify_local.preprocess(conn, path, filename)                                
+            value=0                             
+            words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)                           
             print 'Devel files extracted' 
             command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
             args = shlex.split(command)
@@ -167,5 +169,5 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 httpd = SocketServer.TCPServer(("localhost", PORT), TestHandler)
 
 if __name__ == "__main__":
-    print "serving at port", PORT
+    print "serving at port", PORT  
     httpd.serve_forever()
