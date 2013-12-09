@@ -15,8 +15,9 @@ from datetime import datetime
 import shlex, subprocess
 import sys  
 import zlib
-from sklearn.metrics import confusion_matrix
-from sklearn import cross_validation
+# from sklearn.metrics import confusion_matrix
+# from sklearn import cross_validation
+# import nltk
 import devutil
 
 # Convert to utf-8 so zlib doesn't get confused
@@ -69,6 +70,7 @@ def hasFC(token):
         return "0"
         
 def generalisation(token):
+    # print "t: %s" % token
     reg1=re.compile('[A-Z]')
     reg2=re.compile('[a-z]')
     reg3=re.compile('[0-9]')
@@ -83,18 +85,19 @@ def generalisation(token):
             long.append('1')
         elif re.match(reg4, token[i]):
             long.append('#')
-    brief=[];    
-    temp=long[0]    
-    for i in range(len(long)):        
-        if not temp== long[i]:
-            brief.append(temp)
-            temp=long[i]
-    brief.append(temp)     
+    brief=[]; 
+    if len(long) > 0:
+      temp=long[0]    
+      for i in range(len(long)):        
+          if not temp== long[i]:
+              brief.append(temp)
+              temp=long[i]
+      brief.append(temp)     
     long=''.join(long)
     brief=''.join(brief)
     return long, brief
     
-def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   tags):
+def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     c=conn.cursor()
     schema_id = 1
 
@@ -115,54 +118,175 @@ def transactions(conn, path, page_id, tokens,  f_ortho1, f_ortho3,  f_html,   ta
 
 def tokenize(s):
     return s.split()
+    # return nltk.wordpunct_tokenize(s)
+    
+def class_features(nodeparent):
+    # Classname features    
+    classname='na'; classlong="B"; classbrief= "A" 
+    classnametemp=repr(nodeparent).split('class') 
+    if len(classnametemp)>1:
+        classname=classnametemp[1].split('"')
+        if len(classname)>1:
+            classname=classname[1] 
+            if not re.search("WebAnnotator", classname):          
+                classlong, classbrief=generalisation(classname) 
+                
+    return classname, classlong,  classbrief
 
-def htmlparse(page, htmlfeaturefuns, tokenfeaturefuns):
-    soup = Soup(page)
+def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):   
+    soup = Soup(pagefp)
     nodestack = [soup.body]
     htmlstack = [[]]
+    labelstack = ['O']
     tokens = []
+    labels=[]
 
     while(len(nodestack) > 0):
         node = nodestack.pop()
         stack = htmlstack.pop()
+        label = labelstack.pop()
 
         if isinstance(node, bs4.Tag):
-            l = [node]
-            l.extend(stack)                
-            for c in reversed(node.contents):
-                nodestack.append(c)
-                htmlstack.append(l)
+            nodeclassname,  nodeclasslong,  nodeclassbrief=class_features(node)   
+            if node!=None:
+                if (node.name == "span" and "WebAnnotator" in nodeclassname):                   
+                    # Find the annotation label and add to 'labels' list
+                    temp=str(node).split('class')
+                    temp=temp[1].split('"')
+                    label=temp[1].replace('WebAnnotator_', '')
+                    l = stack
+                else:
+                    l = [node]
+                    l.extend(stack)                
+                for c in reversed(node.contents):
+                    nodestack.append(c)
+                    htmlstack.append(l)
+                    labelstack.append(label)
 
         elif isinstance(node, bs4.Comment): 
             pass # Ignore comments
 
         elif isinstance(node, bs4.NavigableString):
             # Ignore script tags
-            if node.parent.name != "script":
+            if node.parent.name != "script":        
                 tk = tokenize(node.string)
                 htmlf = {}
-                for fun in htmlfeaturefuns.keys():
-                    v = htmlfeaturefuns[fun](stack)
-                    if v is not None:
-                        htmlf[fun] = v
+                for fun in htmlfeaturefuns:
+                    vd = fun(stack)              
+                    htmlf.update(vd)                                  
         
                 ret = []
                 for t in tk:
                     tokenf = {}
-                    for fun in tokenfeaturefuns.keys():
-                        v = tokenfeaturefuns[fun](t)
-                        if v is not None:
-                            tokenf[fun] = v
+                    for fun in tokenfeaturefuns:
+                        vd = fun(t)
+                        tokenf = vd      
+                    labels.append(label)
                     tokens.append((tokenf, htmlf, node.parent))
         else:
             print "Unknown tag type"
             devutil.keyboard()
     
     assert(len(htmlstack) == 0)
-    return tokens
+    return tokens, labels
+    
+           
 
-def sentence_split(tokens):
-    return tokens
+def descendants(stack):
+    limit=len(stack) 
+    parentnames=[]    
+    if limit>0 and stack[0].name:
+        parentnames.append(stack[0].name)
+    else:
+        parentnames.append('na')
+    if limit>1 and stack[1].name:
+        parentnames.append(stack[1].name)
+    else:
+        parentnames.append('na')
+    if limit >2 and stack[2].name:
+        parentnames.append(stack[2].name)
+    else:
+        parentnames.append('na')
+    # print "-".join(map(lambda x: x.name,  stack))
+    classname,  classlong,  classbrief=class_features(stack[0])    
+    descends="-".join(map(lambda x: x.name, stack))        
+    return {'parentname': parentnames[0],  'grandparentname': parentnames[1],  'greatgrandparentname': parentnames[2],'classname': classname,'classlong': classlong, 'classbrief': classbrief, 'descendants':  descends}
+    
+def feature_extraction(token):
+    capital=iscapital(token); number=isnumber(token); h_number=hasnumber(token) ; splchars=hassplchars(token) ;  long, brief=generalisation(token) ;    
+    return capital,  number,  h_number,  splchars,  long,  brief
+    
+def ortho(token):
+    capital,  number,  h_number,  splchars,  long,  brief= feature_extraction(token)      
+    return {'word(t)': token, 'iscapital': capital,  'isnumber': number ,'hasnumber': h_number ,'hassplchars': splchars ,'long': long ,'brief': brief }
+    
+def preprocess_file(path,  filename):
+    
+    page=open(os.getcwd()+path+filename+'.html')
+    
+    htmlfeaturefuns = [descendants]
+    
+    tokenfeaturefuns = [ortho]
+    
+    tokens, tags = htmlparse(page, htmlfeaturefuns, tokenfeaturefuns)
+    
+    words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
+    wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
+    sentences = []
+    sentencetemp=[]   
+    htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
+    print len(tokens), len(tags)
+    
+    # Split sentences based on '.' and tag name not being in htmltags list
+    for t in range(len(tokens)):        
+        if '.' in  tokens[t][0]['word(t)']:   
+            if len(sentencetemp)>0:
+                sentences.extend(sentencetemp)                              
+                words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+                sentences.extend('\n')   
+                words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
+                sentencetemp=[]  
+                wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
+        
+        elif not tokens[t][2].name in htmltags: 
+            
+            if len(sentencetemp)>0:
+                sentences.extend(sentencetemp)   
+                words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+                sentences.extend('\n')  
+                words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n');labels.extend('\n')                
+                sentencetemp=[]   
+                wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
+        else:
+            
+            previousword='na'; nextword='na'; previouslong='na'; previousbrief='a'; nextlong='na'; nextbrief='a'            
+            if t>0:
+                previousword=tokens[t-1][0]['word(t)']; previouslong, previousbrief= generalisation(tokens[t-1][0]['word(t)'])         
+            if t+1<len(tokens):
+                nextword=tokens[t+1][0]['word(t)']; nextlong, nextbrief=generalisation(tokens[t+1][0]['word(t)'])
+            
+            line='word(t)='+tokens[t][0]['word(t)']+' : 1\tiscapital : '+tokens[t][0]['iscapital']+'\tisnumber : '+tokens[t][0]['isnumber'] +'\thasnumber : '+tokens[t][0]['hasnumber']+'\thassplchars : '+tokens[t][0]['hassplchars']+'\t'            
+            ortho1='long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\t'    
+            ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
+            html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
+            
+            sentencetemp.append(line+ortho3+html+'\n')               
+            wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
+            
+    
+    
+    print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)        
+    #devutil.keyboard()
+    testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
+    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')
+
+    for i in range(len(sentences)):              
+        testfile.write(sentences[i])
+        testreferencefile.write(sentences[i])
+    testfile.close()
+    testreferencefile.close()      
+    
+    return words, f_ortho1,  f_ortho3, f_html, labels
 
 def preprocess(conn, path, filename):   
 
@@ -233,7 +357,7 @@ def preprocess(conn, path, filename):
                     parentsname.append(parentname)
                                       
                     # Feature extraction                    
-                    capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', containertag); 
+                    capital.append(iscapital(m)); number.append(isnumber(m)) ; h_number.append(hasnumber(m)) ; splchars.append(hassplchars(m)) ;  longtemp, brieftemp=generalisation(m) ; long.append(longtemp) ;  brief.append(brieftemp); classname=re.findall('class=".*"', testcontainertag); 
                     
                     if classname and not (re.findall("WebAnnotator", str(classname))):                        
                         classname=classname[0].split('=')
@@ -255,7 +379,7 @@ def preprocess(conn, path, filename):
                     if i.parent.name=='span':
                         absent=0
                         for q in range(len(tagdict)):
-                            if  tagdict[q] in containertag: 
+                            if  tagdict[q] in traincontainertag: 
                                  tagsetname.append(tagset[q])
                                  absent=0
                                  break
@@ -275,8 +399,8 @@ def preprocess(conn, path, filename):
                         line = 'word(t)='+currentterm[counter-1]+' : 1\tiscapital : '+capital[counter-1]+'\tisnumber : '+number[counter-1]+'\thasnumber : '+h_number[counter-1]+'\thassplchars : '+splchars[counter-1]+'\t'
                         ortho1='longcurrent(t)='+long[counter-1]+' : 1\tbriefcurrent(t)='+ brief[counter-1]+' : 1\t'
                         ortho3='longcurrent(t)='+longcurrent+' : 1\tbriefcurrent(t)='+briefcurrent+' : 1\tpreviousterm(t)='+previousterm[counter-1]+' : 1\tlongprevious(t)='+longprevious+' : 1\tbriefprevious(t)='+briefprevious+' : 1\tnextterm(t)='+currentterm[counter]+' : 1\tlongnext(t)='+longnext+' : 1\tbriefnext(t)='+briefnext+' : 1\t'
-                        html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
-                               
+                        #html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\tgreatgrandparentname(t)='+parentsname[counter-1][2]+' : 1\tancestors(t)='+ancestors[counter-1] +' : 1\t'                 
+                        html='classname(t)='+classnames[counter-1]+' : 1\tclasslong(t)='+classlong[counter-1]+' : 1\tclassbrief(t)='+classbrief[counter-1]+' : 1\tparentname(t)='+parentsname[counter-1][0]+' : 1\tgrandparentname(t)='+parentsname[counter-1][1]+' : 1\t'                       
                         
                         tokens.append(line)                        
                         f_ortho1.append(ortho1)
@@ -305,8 +429,11 @@ def preprocess(conn, path, filename):
                     counter=counter+1
                 # New line added after every sentence in test file 
                                          
-        containertag=i.encode('utf8')    
-        #devutil.keyboard()
+        testcontainertag=i.encode('utf8')
+        if "WebAnnotator" in str(testcontainertag):
+            traincontainertag=(i.previous_element).encode('utf8')
+        else:
+            traincontainertag=i.encode('utf8')
 
     writingflag=0
     for i in range(len(test)):
@@ -326,7 +453,7 @@ def preprocess(conn, path, filename):
         
 
     
-def history(conn, path, filename, tagset, tagdict):    
+def history(conn, path, filename):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     lines=[]
@@ -348,46 +475,35 @@ def history(conn, path, filename, tagset, tagdict):
         tokentemp=[]; tagtemp=[]; fttempa=[]; fttempb=[]
         
         c2 = conn.cursor()
-        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho1','html') ORDER BY page_id, feature_sets.id", str(page_id))
+        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3','html') ORDER BY page_id, feature_sets.id", str(page_id))
 
         fts = []
         for features in c2.fetchall():             
-            fts.append(blobdecode(str(features[1])))    
-            
-        tokentemp=tokens.split('\n')      
-        tagtemp=tags.split('\n')
-        fttempa=fts[0].split('\n')
-        fttempb=fts[1].split('\n')
+            fts.append(blobdecode(str(features[1])))   
         
     # Collecting list of lines to write to training file and devel file    
-        for i in range(len(tokentemp)):
-            temp=(tokentemp[i]+fttempa[i]+fttempb[i]+tagtemp[i])
-            if not temp in 'newlinesentencebreak':
-                lines.append(temp)           
-            else:
-                lines.append('\n')
+    
+    tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
+    for i in range(len(tokens)):
+        lines.append(tokens[i]+fts[0][i]+fts[1][i]+tags[i]+'\n')
+               
        
-      
-    # Obtaining tagindex first
     for i in range(len(lines)):
-        temp=lines[i].split(' : ')
-        if not 'newlinesentencebreak' in temp[0]:
+        if len(lines[i])>1:
+            temp=lines[i].split(' : ')
             tagindex=len(temp)-1
             break
-    print 'Tagindex is :', tagindex
+    print 'Index of label is :', tagindex
    
     # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
-    flag=0; firsttagindex=0; temptags=[]; 
+    flag=0; firsttagindex=0; window=[]; 
     
     for i in range(len(lines)):
         temp=lines[i].split(' : ')           
-        if 'newlinesentencebreak' in temp[0]:            
-            temptags.append('\n')
-            pass
-        else:   
+        if len(temp)>1:   
             temp[tagindex]=temp[tagindex].replace('1\t', '')            
-            if temp[tagindex] in tagset:             
-                temptags.append(lines[i])
+            if not temp[tagindex]=='O':             
+                window.append(lines[i])
                 if flag==0:
                     firsttagindex=i
                     flag=1
@@ -396,53 +512,59 @@ def history(conn, path, filename, tagset, tagdict):
                 for j in range(8):
                     if  (i+j) <len(lines):    
                         temp=lines[i+j]
-                        if not 'newlinesentencebreak' in temp:
+                        if len(temp)>1:
                             temp=lines[i+j].split(' : ')                        
                             temp[tagindex]=temp[tagindex].replace('1\t', '')                            
-                            if temp[tagindex] in tagset: 
-                                temptags.append(lines[i])     
-                                temptags.append('\n')
+                            if not temp[tagindex]=='O': 
+                                window.append(lines[i])                               
                                 break
                             else:
-                                counter=counter+1
+                                counter+=1
                                 if counter>7:
-                                    break   
+                                    break 
                         else:
-                            temptags.append('\n')
+                            counter+=1                
+                            window.append('\n')
                     else:
                         break
+        else:
+            window.append('\n')
     
-  
-    # Writing to test and test reference files
-    
+    # Writing to train file and train devel files    
     writingflag=0
     for i in range(len(lines)):
-        if not 'newlinesentencebreak' in lines[i]:
+        if len(lines[i])>2:
             trainfile.write(lines[i])
-            trainfile.write('\n')
-            writingflag=1 
-        elif writingflag==1:            
-            trainfile.write('\n')
-            writingflag=0
-    
-    # Not checking for 'newlinesentencebreak' here, because they have all been converted to '\n' while windowing
-    writingflag=0
-    for i in range(len(temptags)):        
-        if len(temptags[i])>2:
-            traindevelfile.write(temptags[i])   
-            traindevelfile.write('\n')
             writingflag=1
-        elif writingflag==1:            
-            traindevelfile.write('\n')
+        elif writingflag==1:
+            trainfile.write('\n')
             writingflag=0
-            
+ 
+   
+    writingflag=0
+    for i in range(len(window)):
+        if len(window[i])>2:
+            trainfile.write(window[i])
+            writingflag=1
+        elif writingflag==1:
+            trainfile.write('\n')
+            writingflag=0
     
     trainfile.close()   
-    traindevelfile.close()   
-    
+    traindevelfile.close()       
     return 1    
     
-def keywordtag(path, filename,  tagindex):
+def fetch_tagnames(page, tagindex):
+    for lines in page:        
+        line=lines.split(' : ')      
+        if len(line)>1:
+            line[tagindex]=line[tagindex].replace('1\t', '')
+            if not line[tagindex] in tagset and not line[tagindex] in temptag:
+                tagset.append(line[tagindex])
+                tagdict.append('WebAnnotator_'+str(line[tagindex]))  
+    return tagset,  tagdict
+    
+def keywordtag(path, filename):
  
     # Reference snippet to apply return tags to the html file
     page=open(os.getcwd()+path+filename+'.html')
@@ -452,32 +574,24 @@ def keywordtag(path, filename,  tagindex):
 
     # The keywords that need to be tagged    
     retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
-    a=retfile.read().splitlines()
+    retlist=retfile.read().splitlines()
     tokens=[]
     flag=0; temptag=['O',  'START', 'STOP'];annovar=[];annotations=[]
-    tagset=[]; tagdict=[]
+    tagset=[]; tagdict=[]    
     
-    '''
     # gettting tag index first
-    for lines in a:
+    for lines in retlist:
         line=lines.split(' : ')
         if len(line)>1:
             tagindex=len(line)-1
             break
     print tagindex
-    '''
-    for lines in a:        
-        line=lines.split(' : ')      
-        if len(line)>1:
-            line[tagindex]=line[tagindex].replace('1\t', '')
-            if not line[tagindex] in tagset and not line[tagindex] in temptag:
-                tagset.append(line[tagindex])
-                tagdict.append('WebAnnotator_'+str(line[tagindex]))
-  
-    print tagset,  tagdict,  tagindex
+    
+    tagset,  tagdict= fetch_tagnames(retlist, tagindex)
+    
     
     # Obtaining annotations in the form of collocations if annotation is not a single token    
-    for terms in a:               
+    for terms in retlist:               
         temptoken=terms.split(' : ')  
    
         if temptoken[0]:
