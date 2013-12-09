@@ -203,11 +203,7 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                     for fun in tokenfeaturefuns:
                         vd = fun(t)
                         tokenf = vd      
-<<<<<<< HEAD
-                    labels.append('O')
-=======
                     labels.append(label)
->>>>>>> 879ed4de3775255a46efaae2a81f979a7143e95e
                     tokens.append((tokenf, htmlf, node.parent))
         else:
             print "Unknown tag type"
