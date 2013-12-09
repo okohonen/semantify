@@ -143,6 +143,7 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
     while(len(nodestack) > 0):
         node = nodestack.pop()
         stack = htmlstack.pop()
+        devutil.keyboard()
         label = labelstack.pop()
 
         if isinstance(node, bs4.Tag):
@@ -176,9 +177,9 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                     temp=temp[1].split('"')
                     label=temp[1].replace('WebAnnotator_', '')
                     l = stack
-                else:
-                    l = [node]
-                    l.extend(stack)                
+            else:
+                l = [node]
+                l.extend(stack)                
                 for c in reversed(node.contents):
                     nodestack.append(c)
                     htmlstack.append(l)
@@ -202,12 +203,9 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                     tokenf = {}
                     for fun in tokenfeaturefuns:
                         vd = fun(t)
-                        tokenf = vd      
-<<<<<<< HEAD
+                        tokenf = vd     
                     labels.append('O')
-=======
                     labels.append(label)
->>>>>>> 879ed4de3775255a46efaae2a81f979a7143e95e
                     tokens.append((tokenf, htmlf, node.parent))
         else:
             print "Unknown tag type"
