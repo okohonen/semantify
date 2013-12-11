@@ -11,6 +11,7 @@ from datetime import datetime
 import unicodedata
 import numpy
 import devutil
+import codecs
 import zlib
 
 PORT = 50010
@@ -59,10 +60,10 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         now=str(datetime.now().strftime('%Y%m%d_%H%M%S'))
         f=open(os.getcwd()+path+'file_'+now+'.html', 'w')   
         content=o['content']
-        f.write('<html><body>')
+        f.write('<html><body>'.encode('utf-8'))
         for i in range(len(content)):                        
             f.write(content[i].encode('utf-8'))
-        f.write('</body></html>')
+        f.write('</body></html>'.encode('utf-8'))
         f.close()
         
         filename='file_'+now
@@ -152,7 +153,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             args = shlex.split(command)
             process=subprocess.Popen(args)
             process.wait()  
-            content=semantify_local.keywordtag(path, filename,  tagindex)                        
+            content=semantify_local.keywordtag(path, filename)                        
             successlog.write(filename)
             successlog.write('\t')
             successlog.write( str(datetime.now()))
