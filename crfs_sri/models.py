@@ -88,8 +88,9 @@ class Model(object):
                 num_parameters += self.state_manager.num_states[clique_set_index] * num_features
 
         return parameters, num_parameters
-
-
+    
+    
+        
     def train(self, # corpus_id,               
 #              train_algorithm_id, 
               graph_id, 
@@ -183,7 +184,8 @@ class Model(object):
 #        print '\ttarget performance measure id: %s' % performance['target measure id']
 
         for key, value in performance['all'].items():
-
+            
+            accuracy=value
             print '\t%s (devel): %.2f' % (key, value)
 
         print
@@ -192,10 +194,10 @@ class Model(object):
 
             print "\t%s: %.1f" % (key, value)
 
-        print
-            
-        return
-
+        print                
+              
+        return accuracy 
+    
 
 
     def apply(self, test_file, prediction_file, reference_file, verbose):
@@ -228,9 +230,9 @@ class Model(object):
 
                         measures[measure_id].append(value)
 
-            for measure_id, values in measures.items():
+            #for measure_id, values in measures.items():
 
-                print '\t%s (test): %.2f$\pm$%.2f ' % (measure_id, numpy.mean(values), numpy.std(values))
+                #print '\t%s (test): %.2f$\pm$%.2f ' % (measure_id, numpy.mean(values), numpy.std(values))
 
         print
             

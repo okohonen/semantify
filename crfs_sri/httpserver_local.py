@@ -3,6 +3,7 @@ import SocketServer
 import json
 import os
 import string
+from models import *
 import semantify_local
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup as Soup
@@ -23,9 +24,7 @@ if not os.path.exists(dbname):
     # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
     raise AssertionError('Database not found')    
 
-    
-#tagset=['entity',  'sentence', 'date']
-#tagdict=['WebAnnotator_entity', 'WebAnnotator_sentence', 'WebAnnotator_date']
+
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
@@ -33,8 +32,7 @@ c.execute("PRAGMA foreign_keys = ON;")
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
-# for ortho3 tagindex=13, for ortho1html tagindex=14, for ortho3html tagindex=20;
-#tagindex=12
+
 
 #   Opening error log 
 errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
@@ -68,17 +66,18 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         filename='file_'+now
 
-            
-        testfile                        =os.getcwd()+path+'/temp/'+filename+'.test'
-        testreferencefile         =os.getcwd()+path+'/temp/'+filename+'.test.reference'  
+        graph_id='first-order-chain'; performance_measure_id='accuracy'; single_pass=False; verbose=False
         
-        trainfile                       =os.getcwd()+path+'/temp/'+filename+'.train'   
-        traindevelfile              =os.getcwd()+path+'/temp/'+filename+'.train.devel' 
-        develpredictionfile      =os.getcwd()+path+'/temp/'+filename+'.devel.prediction' 
-        testpredictionfile         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'
-        clientmodel                 =os.getcwd()+path+'/temp/client.model'   
+        test_file                        =os.getcwd()+path+'/temp/'+filename+'.test'
+        test_reference_file         =os.getcwd()+path+'/temp/'+filename+'.test.reference'  
         
-       
+        train_file                       =os.getcwd()+path+'/temp/'+filename+'.train'   
+        devel_file              =os.getcwd()+path+'/temp/'+filename+'.train.devel' 
+        devel_prediction_file      =os.getcwd()+path+'/temp/'+filename+'.devel.prediction' 
+        test_prediction_file         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'
+        model_file                 =os.getcwd()+path+'/temp/client.model'   
+        
+        
         
            
         if o["command"] == "PUT": 
@@ -131,28 +130,47 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)
             semantify_local.transactions(conn,  page_id, words, f_ortho1,  f_ortho3, f_html,   labels)
             value=semantify_local.history(conn, path, filename)         
-            if value==1:   
-                command='python train.py --graph first-order-chain --performance_measure accuracy --train_file %s --devel_file %s --devel_prediction_file %s --model_file %s' % (trainfile,traindevelfile, develpredictionfile, clientmodel)              
-                args = shlex.split(command)
-                process=subprocess.Popen(args)
-                process.wait()                      
+            if value==1:
+                print "initialize model"
+                m = Model()
+                print "done"
+                print
+                print "train model"
+                accuracy=m.train(graph_id,  performance_measure_id,   single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
+                print "done"    
+                print
+                print "save model"
+                m.save(model_file)
+                print "done"
+                print                
+                print accuracy                
                 successlog.write(filename)
                 successlog.write('\t')
                 successlog.write( str(datetime.now()))
                 successlog.write('\n') 
                 elapsed=time.time()-t
                 print 'File', filename, 'handled in:',  elapsed
+                
+                o['accuracy']=accuracy   
+                self.wfile.write(json.dumps(o))            
                 pass       
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0                             
             words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)                           
+            
             print 'Devel files extracted' 
-            command='python apply.py --model_file %s --test_file %s --test_prediction_file %s' % (clientmodel,testfile, testpredictionfile)
-            args = shlex.split(command)
-            process=subprocess.Popen(args)
-            process.wait()  
+            print "load model"
+            m=Model()
+            m.load(model_file)
+            print "done"
+            print
+            print "apply model"
+            m.apply(test_file, test_prediction_file, test_reference_file, verbose)
+            print "done"
+            print
+            
             content=semantify_local.keywordtag(path, filename)                        
             successlog.write(filename)
             successlog.write('\t')

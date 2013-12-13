@@ -24,7 +24,7 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
 
     # print options
-
+    
     print
     print "options"
     print "\tperformance measure:", options.performance_measure_id
@@ -39,18 +39,26 @@ if __name__ == "__main__":
     print "done"
     print
     print "train model"
-    m.train(options.graph_id,
+    accuracy=m.train(options.graph_id,
             options.performance_measure_id,
             options.single_pass, 
             options.train_file, 
             options.devel_file, 
             options.devel_prediction_file, 
             options.verbose)
-    print "done"
+    print "done"    
     print
     print "save model"
     m.save(options.model_file)
     print "done"
     print
     print "time consumed in total:", time.clock() - tic
-    print
+    print 
+    
+    
+    
+    
+    
+    
+    
+    
