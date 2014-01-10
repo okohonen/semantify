@@ -1,5 +1,6 @@
 import SimpleHTTPServer
 import SocketServer
+import socket
 import json
 import os
 import string
@@ -41,9 +42,7 @@ filecount=0
 
 
 class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
-    """The test example handler.""" 
-
-    def do_POST(self):        
+    def do_POST(self):
         """Handle a post request by learning or returning a tagged page."""
         length = int(self.headers.getheader('content-length'))        
         data_string = self.rfile.read(length)
@@ -183,9 +182,13 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             elapsed=time.time()-t
             print 'File', filename, 'served in:',  elapsed                 
         
-               
+class MyTCPServer(SocketServer.TCPServer):
+    def server_bind(self):
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket.bind(self.server_address)
 
-httpd = SocketServer.TCPServer(("localhost", PORT), TestHandler)
+
+httpd = MyTCPServer(("localhost", PORT), TestHandler)
 
 if __name__ == "__main__":
     print "serving at port", PORT  

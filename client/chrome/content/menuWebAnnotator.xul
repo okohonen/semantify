@@ -18,7 +18,9 @@
 				   label="&wa.name;" tooltiptext="&wa.name;"
 				   oncommand="webannotator.main.updateMenus(true, false)">
 	  <menupopup id="WebAnnotator_menu_ButtonPopup">
-		<menuitem id="WebAnnotator_b_importMenu" oncommand="webannotator.main.importFile()"/>
+	    <menuitem id="Semantify_b_choose_modelMenu" oncommand="window.showModalDialog('chrome://webannotator/content/choose.xul',1)"/>
+		<menuseparator/>
+	        <menuitem id="WebAnnotator_b_importMenu" oncommand="webannotator.main.importFile()"/>
 		<menu id="WebAnnotator_b_chooseMenu" >
 		  <menupopup id="WebAnnotator_b_chooseMenu_pop" >
 			<menuitem id="WebAnnotator_b_chooseMenu1"/>
@@ -44,6 +46,8 @@
   <menupopup id="menu_ToolsPopup">
 	<menu class="menu-iconic" image="chrome://webannotator/skin/wa_small_activated.png" id="WebAnnotator-menu">
 	  <menupopup id="WebAnnotator_t_menu_pop">
+	    <menuitem id="Semantify_t_choose_modelMenu" oncommand="window.showModalDialog('chrome://webannotator/content/choose.xul',1)"/>
+	    <menuseparator/>
 		<menuitem id="WebAnnotator_t_importMenu" oncommand="webannotator.main.importFile()"/>
 		<menu id="WebAnnotator_t_chooseMenu" >
 		  <menupopup id="WebAnnotator_t_chooseMenu_pop" >
@@ -70,6 +74,7 @@
 
 	<menu id="WebAnnotator-menu" label="&wa.name;"/>
 
+	<menuitem id="Semantify_t_choose_modelMenu" label="Choose model"/>
 	<menu id="WebAnnotator_t_activeMenu" label="&wa.activatelastused;"/>
 	<menu id="WebAnnotator_t_chooseMenu" label="&wa.chooseschema;"/>
 	<menuitem id="WebAnnotator_t_chooseMenu1" label="&wa.displayfiles;"/>
@@ -83,6 +88,7 @@
 	<menuitem id="Semantify_t_putPage" label="Store page tags"/>
 	<menuitem id="Semantify_t_tagPage" label="Tag page"/>
 
+	<menuitem id="Semantify_b_choose_modelMenu" label="Choose model"/>
 	<menu id="WebAnnotator_b_activeMenu" label="&wa.activatelastused;"/>
 	<menu id="WebAnnotator_b_chooseMenu" label="&wa.chooseschema;"/>
 	<menuitem id="WebAnnotator_b_chooseMenu1" label="&wa.displayfiles;"/>
