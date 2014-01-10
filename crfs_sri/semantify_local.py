@@ -193,7 +193,7 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
                         vd = fun(t)
                         tokenf = vd      
                     labels.append(label)
-                    tokens.append((tokenf, htmlf, node.parent))
+                    tokens.append((tokenf, htmlf, node))
         else:
             print "Unknown tag type"
             devutil.keyboard()
@@ -231,26 +231,34 @@ def ortho(token):
     capital,  number,  h_number,  splchars,  long,  brief= feature_extraction(token)      
     return {'word(t)': token, 'iscapital': capital,  'isnumber': number ,'hasnumber': h_number ,'hassplchars': splchars ,'long': long ,'brief': brief }
     
-def preprocess_file(path,  filename):
-    
-    page=open(os.getcwd()+path+filename+'.html')
-    
-    htmlfeaturefuns = [descendants]
-    
-    tokenfeaturefuns = [ortho]
-    
+
+
+def write_testfiles(path, filename, sentences):
+    testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
+    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
+    for i in range(len(sentences)):              
+        testfile.write(sentences[i].encode('utf8'))
+        testreferencefile.write(sentences[i].encode('utf8'))
+    testfile.close()
+    testreferencefile.close()      
+
+
+def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ortho]):        
     tokens, tags = htmlparse(page, htmlfeaturefuns, tokenfeaturefuns)
     
     words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
     wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
     sentences = []
     sentencetemp=[]   
-    htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
+    nodestemp = []
+    nodes = []
+
+    nonblocktags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
     print len(tokens), len(tags)
     
-    # Split sentences based on '.' and tag name not being in htmltags list
+    # Split sentences based on '.' and tag name not being in nonblocktags list
     for t in range(len(tokens)):        
-        if '.' in  tokens[t][0]['word(t)']:   
+        if '.' in  tokens[t][0]['word(t)'] or not tokens[t][2].parent.name in nonblocktags:   
             if len(sentencetemp)>0:
                 sentences.extend(sentencetemp)                              
                 words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
@@ -258,16 +266,8 @@ def preprocess_file(path,  filename):
                 words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
                 sentencetemp=[]  
                 wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
-        
-        elif not tokens[t][2].name in htmltags: 
-            
-            if len(sentencetemp)>0:
-                sentences.extend(sentencetemp)   
-                words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
-                sentences.extend('\n')  
-                words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n');labels.extend('\n')                
-                sentencetemp=[]   
-                wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
+                nodes.append(nodestemp)
+                nodestemp = []
         else:
             
             previousword='na'; nextword='na'; previouslong='na'; previousbrief='a'; nextlong='na'; nextbrief='a'            
@@ -280,23 +280,14 @@ def preprocess_file(path,  filename):
             ortho1='long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\t'    
             ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
             html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
-            
+
             sentencetemp.append(line+ortho3+html+'\n')               
             wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
-            
-    
-    
+            nodestemp.append(tokens[t][2])
+                   
     print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)        
-    #devutil.keyboard()
-    testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
-    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
-    for i in range(len(sentences)):              
-        testfile.write(sentences[i].encode('utf8'))
-        testreferencefile.write(sentences[i].encode('utf8'))
-    testfile.close()
-    testreferencefile.close()      
     
-    return words, f_ortho1,  f_ortho3, f_html, labels
+    return words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes
 
     
 def history(conn, path, filename):    
@@ -456,26 +447,19 @@ def keywordtag_htmlparse(annotations, soup, htmlfeaturefuns, tokenfeaturefuns):
                 wordtemp=[]
                 newtag = ""
                 for t in tk:
-                    for  p in range(len(annotations)): 
+                    for p in range(len(annotations)): 
                         if annotations[p][0]==t and annotations[p][1]==htmlf['descendants']:       
                             wordtemp.append(annotations[p][0])
                             if  (p+1<=len(annotations)):
                                 if annotations[p][1]!=annotations[p+1][1]:   
                                     wordtemp=' '.join(wordtemp)  
-                                    if node.parent and node.parent.name=='a':                                        
-                                        node.parent['style']="color:#000000; background-color:#40E0D0";
-                                        node.parent['wa-subtypes']=""; node.parent['class']='"Semantify_'+annotations[p][2]                                                      
-                                    else:       
-                                        newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                 		
-                                        wordtemp=[]
+                                           
+                                    newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                 		
+                                    wordtemp=[]
                                 elif (p+1==len(annotations)):   
                                     wordtemp=' '.join(wordtemp)
-                                    if node.parent.name=='a':
-                                        node.parent['style']="color:#000000; background-color:#40E0D0" 
-                                        node.parent['wa-subtypes']=""; node.parent['class']='"Semantify_'+annotations[p][2]    
-                                    else:
-                                        newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                                   			
-                                        wordtemp=[]
+                                    newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'	       
+                                    wordtemp=[]
                             else:
                                 break
                 if len(newtag) > 0:

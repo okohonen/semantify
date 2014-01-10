@@ -16,12 +16,14 @@ import nltk
 
 # Usage: ~/code/semantify/crfs_sri> python preprocess_file.py filename.html
 
+
+# htmlfeaturefuns = [semantify_local.descendants]
+# tokenfeaturefuns = [semantify_local.ortho]
 fp = open(sys.argv[1])
+# tokens, labels = semantify_local.htmlparse(fp,  htmlfeaturefuns, tokenfeaturefuns)
 
-htmlfeaturefuns = [semantify_local.descendants]
-tokenfeaturefuns = [semantify_local.ortho]
+words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(fp)
 
-sent = semantify_local.htmlparse(fp,  htmlfeaturefuns, tokenfeaturefuns)
 devutil.keyboard()
 
   

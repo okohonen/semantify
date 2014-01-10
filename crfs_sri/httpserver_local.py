@@ -76,8 +76,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         test_prediction_file         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'
         model_file                 =os.getcwd()+path+'/temp/client.model'   
         
-        
-        
+        page=open(os.getcwd()+path+filename+'.html')        
            
         if o["command"] == "PUT": 
             
@@ -125,8 +124,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         
             # Trains a model with received annotations  
-            value=0            
-            words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)
+            value=0              
+            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(page)
             semantify_local.transactions(conn,  page_id, words, f_ortho1,  f_ortho3, f_html,   labels)
             value=semantify_local.history(conn, path, filename)         
             if value==1:
@@ -135,7 +134,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 print "done"
                 print
                 print "train model"
-                accuracy=m.train(graph_id,  performance_measure_id,   single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
+                accuracy=m.train(graph_id,  performance_measure_id,  single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
                 print "done"    
                 print
                 print "save model"
@@ -156,8 +155,10 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
-            value=0                             
-            words, f_ortho1,  f_ortho3, f_html, labels=semantify_local.preprocess_file(path, filename)                           
+            value=0
+                             
+            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(page)
+            semantify_local.write_testfiles(path, filename, sentences)                        
             
             print 'Devel files extracted' 
             print "load model"
@@ -169,6 +170,28 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             m.apply(test_file, test_prediction_file, test_reference_file, verbose)
             print "done"
             print
+            
+            print "Reading in prediction file"
+            print
+
+            retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
+            c = 1
+            
+            taggednodes = {}
+            # Gather the nodes that have non-O tags
+            for line in retfile:
+                parts = line.split("\t")
+                tag = parts[-1]
+                if tag != "O":
+                    if not taggednodes.has_key(nodes[c]):
+                        taggednodes[nodes[c]] = []
+                    taggednodes[nodes[c]].append(tag)
+                c += 1
+
+            # Check that lengths match
+            assert(c == len(words))
+
+            devutil.keyboard()
             
             content=semantify_local.keywordtag(path, filename)                        
             successlog.write(filename)
