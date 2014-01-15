@@ -17,7 +17,7 @@ import zlib
 
 PORT = 50010
 
-dbname='temp/livescore.db'
+dbname='temp/amazon.db'
 
 
 if not os.path.exists(dbname):

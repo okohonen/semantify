@@ -15,6 +15,7 @@ from datetime import datetime
 import shlex, subprocess
 import sys  
 import zlib
+from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
 import nltk
@@ -88,25 +89,26 @@ def generalisation(token):
             long.append('#')
     brief=[]; 
     if len(long) > 0:
-      temp=long[0]    
-      for i in range(len(long)):        
-          if not temp== long[i]:
-              brief.append(temp)
-              temp=long[i]
-      brief.append(temp)     
+        temp=long[0]    
+        for i in range(len(long)):        
+            if not temp== long[i]:
+                brief.append(temp)
+                temp=long[i]
+        brief.append(temp)     
     long=''.join(long)
     brief=''.join(brief)
     return long, brief
     
 def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     c=conn.cursor()
-    schema_id = 1
-
+    schema_id = str(1)
+    page_id=str(page_id)
+    #devutil.keyboard()
     # Running through all lines in page: tokenizing, adding to db
     c.execute('BEGIN TRANSACTION')
-    c.execute('DELETE FROM tokens WHERE page_id=?',  str(page_id))
-    c.execute('DELETE FROM features WHERE page_id=?',  str(page_id))
-    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (str(page_id), str(schema_id)))
+    c.execute('DELETE FROM tokens WHERE page_id=?',  (page_id, ))
+    c.execute('DELETE FROM features WHERE page_id=?',  (page_id,))
+    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (page_id,schema_id))
     
     c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))    
     c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho1)))))
@@ -243,8 +245,8 @@ def preprocess_file(path,  filename):
     
     words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
     wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
-    sentences = []
-    sentencetemp=[]   
+    sentences = []; sentencesreference=[]
+    sentencetemp=[]   ;    sentenceref=[]
     htmltags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
     print len(tokens), len(tags)
     
@@ -252,21 +254,21 @@ def preprocess_file(path,  filename):
     for t in range(len(tokens)):        
         if '.' in  tokens[t][0]['word(t)']:   
             if len(sentencetemp)>0:
-                sentences.extend(sentencetemp)                              
+                sentences.extend(sentencetemp) ; sentencesreference.extend(sentenceref)                             
                 words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
-                sentences.extend('\n')   
+                sentences.extend('\n')   ; sentencesreference.extend('\n')
                 words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
-                sentencetemp=[]  
+                sentencetemp=[]  ; sentenceref=[]
                 wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
         
         elif not tokens[t][2].name in htmltags: 
             
             if len(sentencetemp)>0:
-                sentences.extend(sentencetemp)   
+                sentences.extend(sentencetemp)   ; sentencesreference.extend(sentenceref) 
                 words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
-                sentences.extend('\n')  
+                sentences.extend('\n')  ; sentencesreference.extend('\n') 
                 words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n');labels.extend('\n')                
-                sentencetemp=[]   
+                sentencetemp=[]   ; sentenceref=[]
                 wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
         else:
             
@@ -281,18 +283,20 @@ def preprocess_file(path,  filename):
             ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
             html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
             
-            sentencetemp.append(line+ortho3+html+'\n')               
+            sentencetemp.append(line+ortho3+html+'\n')       
+            sentenceref.append(line+ortho3+html+tags[t]+'\n')
             wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
             
     
     
-    print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)        
+    #print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)  
+    print len(sentences),  len(sentencesreference)    
     #devutil.keyboard()
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
     for i in range(len(sentences)):              
         testfile.write(sentences[i].encode('utf8'))
-        testreferencefile.write(sentences[i].encode('utf8'))
+        testreferencefile.write(sentencesreference[i].encode('utf8'))
     testfile.close()
     testreferencefile.close()      
     
@@ -307,32 +311,32 @@ def history(conn, path, filename):
     c = conn.cursor()   
     # c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
     
-    schema_id = 1
+    schema_id = str(1)
     tokens = []
     tags = []
     writingflag=0
     lines=[]
 
-    c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", str(schema_id))    
+    c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", (schema_id,))    
     for values in c.fetchall():
-        page_id = values[0]       
+        page_id = str(values[0])           
         tokens=blobdecode(str(values[1]))
         tags=blobdecode(str(values[2]))
-        tokentemp=[]; tagtemp=[]; fttempa=[]; fttempb=[]
         
         c2 = conn.cursor()
-        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3','html') ORDER BY page_id, feature_sets.id", str(page_id))
+        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3','html') ORDER BY page_id, feature_sets.id", (page_id,))
+     
 
         fts = []
         for features in c2.fetchall():             
             fts.append(blobdecode(str(features[1])))   
         
-    # Collecting list of lines to write to training file and devel file    
+        # Collecting list of lines to write to training file and devel file        
+        tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
+        for i in range(len(tokens)):
+            lines.append(tokens[i]+fts[0][i]+fts[1][i]+tags[i]+'\n')
     
-    tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-    for i in range(len(tokens)):
-        lines.append(tokens[i]+fts[0][i]+fts[1][i]+tags[i]+'\n')
-               
+    print 'Latest collections of training data==========', len(lines)
        
     for i in range(len(lines)):
         if len(lines[i])>1:
@@ -566,14 +570,22 @@ def keywordtag(path, filename):
     return content
     
 
-def accuracy(path, filename, tagindex):
+def accuracy(path, filename):
     
-    standardfile=open(os.getcwd()+path+'/temp/'+filename+'.train')
+    standardfile=open(os.getcwd()+path+'/temp/'+filename+'.test.reference')
     firstfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
-    predictiontracker=open(os.getcwd()+path+'/temp/'+filename+'.prediction.tracker', 'w')
+    predictiontracker=open(os.getcwd()+path+'/temp/'+filename+'.prediction.tracker', 'w')   
+    
     
     standard=standardfile.read().splitlines()
     stan=[]
+    
+    for i in standard:
+        line=i.split(' : ')
+        if len(line)>1:
+            tagindex=len(line)-1
+            break
+    
     for i in standard:
         line=i.split(' : ')
         if line[0] and not line[0]=='\n':
@@ -589,7 +601,8 @@ def accuracy(path, filename, tagindex):
             line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             file1.append(line)
- 
+    
+    tagset=[]
     a=0; b=0
     for i in range(len(stan)):
         if stan[i]==file1[i]:
@@ -597,27 +610,31 @@ def accuracy(path, filename, tagindex):
         predictiontracker.write(stan[i]); predictiontracker.write('\t')
         predictiontracker.write(file1[i]); predictiontracker.write('\t')
         predictiontracker.write('\n')
+        if not stan[i]=='O' and not stan[i] in tagset:
+            tagset.append(stan[i])
     predictiontracker.close()
             
     
     f1=(a/len(stan))*100
     print 'Original model accuracy is : ', f1
     
-    return
+    return tagset
         
-def confusionmatrix(path, filename, confusion,  tagset):
+def confusionmatrix(path, filename, tagset):
 
     predictionfile=open(os.getcwd()+path+'/temp/'+filename+'.prediction.tracker')
     
-    confusionfile=open(os.getcwd()+path+'/temp/'+filename+'.'+confusion+'.confusion', 'w')    
+    #confusionfile=open(os.getcwd()+path+'/temp/'+filename+'.'+confusion+'.confusion', 'w')    
     
     
     prediction=predictionfile.read().splitlines()
     true=[]; predfull=[]
     pred=[]
     
-    def replace(token):
-        absent=0; order=[0]
+    
+    
+    def replace(token,  order):
+        absent=0;
         for q in range(len(tagset)):
             if  tagset[q] in token:  
                 token=q+1
@@ -629,21 +646,21 @@ def confusionmatrix(path, filename, confusion,  tagset):
                 absent=1
         if absent==1:
             token=0
-        return token
+        return token,  order
     
     order=[0]
     for i in range(len(prediction)):
         line=prediction[i].split('\t')   
-        line[0]=replace(line[0])
+        line[0],  order=replace(line[0],  order)
         if not line[0] in order:
             order.append(line[0])
-        line[1]=replace(line[1])
+        line[1],  order=replace(line[1],  order)
         true.append(line[0])
         predfull.append(line[1])
-        confusionfile.write(repr(line))
-        confusionfile.write('\n')       
+        #confusionfile.write(repr(line))
+        #confusionfile.write('\n')       
     
-    confusionfile.close()        
+    #confusionfile.close()        
     
     if not len(order)==len(tagset)+1:
         for i in range(len(tagset)+1):
@@ -651,7 +668,8 @@ def confusionmatrix(path, filename, confusion,  tagset):
                 true.append(i)
                 predfull.append(i)
                 pred.append(i)
-               
-    print  'Confusion matrix for Original model is :', confusion_matrix( predfull,  true)
-
-    return confusion_matrix(predfull,  true)
+                
+    #statistics=metrics.classification_report(true, predfull)           
+    print  'Confusion matrix for Original model is :', confusion_matrix( true,  predfull)    
+    
+    return confusion_matrix(true,  predfull), true, predfull
