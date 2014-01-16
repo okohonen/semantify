@@ -458,6 +458,7 @@ def keywordtag_htmlparse(annotations, soup, htmlfeaturefuns, tokenfeaturefuns):
                 ret = []
                 
                 wordtemp=[]
+                newtag = ""
                 for t in tk:
                     for  p in range(len(annotations)): 
                         if annotations[p][0]==t and annotations[p][1]==htmlf['descendants']:       
@@ -469,8 +470,7 @@ def keywordtag_htmlparse(annotations, soup, htmlfeaturefuns, tokenfeaturefuns):
                                         node.parent['style']="color:#000000; background-color:#40E0D0";
                                         node.parent['wa-subtypes']=""; node.parent['class']='"Semantify_'+annotations[p][2]                                                      
                                     else:       
-                                        newtag='<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                 		
-                                        node.string.replace_with(newtag)
+                                        newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                 		
                                         wordtemp=[]
                                 elif (p+1==len(annotations)):   
                                     wordtemp=' '.join(wordtemp)
@@ -478,12 +478,13 @@ def keywordtag_htmlparse(annotations, soup, htmlfeaturefuns, tokenfeaturefuns):
                                         node.parent['style']="color:#000000; background-color:#40E0D0" 
                                         node.parent['wa-subtypes']=""; node.parent['class']='"Semantify_'+annotations[p][2]    
                                     else:
-                                        newtag='<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                                   			
-                                        node.string.replace_with(newtag)
+                                        newtag += '<span style="color:#000000; background-color:#40E0D0" wa-subtypes="" wa-type="'+annotations[p][2]+'" class="Semantify_'+annotations[p][2]+'"semantify="auto">'+wordtemp+'</span>'                                   			
                                         wordtemp=[]
                             else:
                                 break
-                    
+                if len(newtag) > 0:
+                    node.string.replace_with(newtag)
+
         else:
             print "Unknown tag type"
 
