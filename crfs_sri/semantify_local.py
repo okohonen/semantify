@@ -17,9 +17,26 @@ import sys
 import zlib
 from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
-import nltk
 import codecs
 import devutil
+
+# Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
+class WordPunctTokenizer:
+    def __init__(self):
+        self.wpre = re.compile(r'\w+|[^\w\s]+', re.UNICODE)
+
+    def tokenize(self, s):
+        return re.findall(self.wpre, s)
+    
+    def positioned_tokenize(self, s):
+        tokens = []
+        tokenstart = []
+        tokenend = []
+        for m in re.finditer(self.wpre, s):
+            tokens.append(m.group(0))
+            tokenstart.append(m.start())
+            tokenend.append(m.end())
+        return tokens, tokenstart, tokenend
 
 # Convert to utf-8 so zlib doesn't get confused
 def blobencode(s):
@@ -117,9 +134,6 @@ def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     conn.commit()
     return
 
-def tokenize(s):
-    return nltk.wordpunct_tokenize(s)
-    
 def class_features(nodeparent):
     # Classname features   
     classname='na'; classlong="B"; classbrief= "A"  
@@ -138,13 +152,11 @@ def class_features(nodeparent):
         #devutil.keyboard()
     return classname, classlong,  classbrief
 
-def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):   
+def htmlparse(pagefp):   
     soup = Soup(pagefp)
     nodestack = [soup.body]
     htmlstack = [[]]
     labelstack = ['O']
-    tokens = []
-    labels=[]
 
     while(len(nodestack) > 0):
         node = nodestack.pop()
@@ -179,29 +191,42 @@ def htmlparse(pagefp, htmlfeaturefuns, tokenfeaturefuns):
 
         elif isinstance(node, bs4.NavigableString):
             # Ignore script tags
-            if node.parent.name != "script":        
-                tk = tokenize(node.string)
-                htmlf = {}
-                for fun in htmlfeaturefuns:
-                    vd = fun(stack)              
-                    htmlf.update(vd)                                  
-        
-                ret = []
-                for t in tk:
-                    tokenf = {}
-                    for fun in tokenfeaturefuns:
-                        vd = fun(t)
-                        tokenf = vd      
-                    labels.append(label)
-                    tokens.append((tokenf, htmlf, node))
+            if node.parent.name != "script":
+                yield (node, stack, label)
         else:
             print "Unknown tag type"
             devutil.keyboard()
     
     assert(len(htmlstack) == 0)
-    return tokens, labels
-    
-           
+
+#     return tokens, labels
+ 
+def traverse_html_nodes(nodeiter, htmlfeaturefuns, tokenfeaturefuns, build_token_index):
+    tokens = []
+    labels=[]
+    node_index = {}
+    tok = WordPunctTokenizer()
+
+    for node, stack, label in nodeiter:
+        htmlf = {}
+        for fun in htmlfeaturefuns:
+            vd = fun(stack)              
+            htmlf.update(vd)                                  
+
+        if build_token_index:
+            tokenization, tokenstart, tokenend = tok.positioned_tokenize(node.string)        
+            node_index[node] = (tokenstart, tokenend)
+        else:
+            tokenization = tok.tokenize(node.string)
+
+        for t in tokenization:
+            tokenf = {}
+            for fun in tokenfeaturefuns:
+                vd = fun(t)
+                tokenf = vd      
+            labels.append(label)
+            tokens.append((tokenf, htmlf, node))
+    return (tokens, labels, node_index)
 
 def descendants(stack):
     limit=len(stack) 
@@ -242,10 +267,83 @@ def write_testfiles(path, filename, sentences):
     testfile.close()
     testreferencefile.close()      
 
+def nodeblocks(retfile, nodes):
+    c = 0
+    curnode = nodes[0]
 
-def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ortho]):        
-    tokens, tags = htmlparse(page, htmlfeaturefuns, tokenfeaturefuns)
-    
+    taggednodes = {}
+    # Gather the nodes that have non-O tags
+    curtags = []
+
+    for line in retfile:        
+        if curnode != nodes[c]:
+            yield (curnode, curtags)
+            curtags = []
+        parts = line.split("\t")
+        curtags.append(parts[-1])
+        c += 1
+    yield (curnode, curtags)
+
+    # Check that lengths match
+    assert(c == len(words))
+
+
+def extract_tagged_nodes(retfile, tokens):
+    tagnodes = []
+    tagoffsets = []
+    tags = []
+
+    c = 0
+    curnode = tokens[0][2]
+    tokenoffset = 0
+    nodeoffsets = []
+    nodetags = []
+
+    print len(tokens)
+
+    for line in retfile:
+        # Ignore sentence split lines
+        if line=="\n":
+            continue
+        if curnode != tokens[c][2]:
+            if len(nodeoffsets) > 0:
+               tagnodes.append(curnode)
+               tagoffsets.append(nodeoffsets)
+               tags.append(nodetags)    
+            nodeoffsets = []
+            nodetags = []
+            curnode = tokens[c][2]
+            tokenoffset = 0
+
+        parts = line.split("\t")
+        if len(parts) > 1:
+            tag = parts[-1].strip()
+            
+            if tag == []:
+                devutil.keyboard()
+
+            if tag != "O":
+                nodeoffsets.append(tokenoffset)
+                tags.append(tag)
+        c += 1
+        tokenoffset += 1
+        print (tokenoffset, c)
+
+    if len(nodeoffsets) > 0:
+        tagnodes.append(curnode)
+        tagoffsets.append(nodeoffsets)
+        tags.append(nodetags)  
+
+    return (tagnodes, tagoffsets, tags)
+
+
+def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ortho], build_node_index=False):        
+    nodes = []
+
+    nodelist = htmlparse(page)
+
+    tokens, tags, node_index = traverse_html_nodes(nodelist, htmlfeaturefuns, tokenfeaturefuns, build_node_index)            
+
     words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
     wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
     sentences = []
@@ -257,7 +355,7 @@ def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ort
     print len(tokens), len(tags)
     
     # Split sentences based on '.' and tag name not being in nonblocktags list
-    for t in range(len(tokens)):        
+    for t in xrange(len(tokens)):        
         if '.' in  tokens[t][0]['word(t)'] or not tokens[t][2].parent.name in nonblocktags:   
             if len(sentencetemp)>0:
                 sentences.extend(sentencetemp)                              
@@ -284,10 +382,16 @@ def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ort
             sentencetemp.append(line+ortho3+html+'\n')               
             wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
             nodestemp.append(tokens[t][2])
+
+    # Last sentence
+    if len(sentencetemp)>0:        
+        sentences.extend(sentencetemp)                              
+        words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+
                    
     print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)        
     
-    return words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes
+    return words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens
 
     
 def history(conn, path, filename):    

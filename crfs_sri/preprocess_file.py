@@ -20,9 +20,10 @@ import nltk
 # htmlfeaturefuns = [semantify_local.descendants]
 # tokenfeaturefuns = [semantify_local.ortho]
 fp = open(sys.argv[1])
-# tokens, labels = semantify_local.htmlparse(fp,  htmlfeaturefuns, tokenfeaturefuns)
+#for t in semantify_local.htmlparse(fp,  htmlfeaturefuns, tokenfeaturefuns):
+#    devutil.keyboard()
 
-words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(fp)
+words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index=semantify_local.preprocess_file(fp, build_node_index=True)
 
 devutil.keyboard()
 

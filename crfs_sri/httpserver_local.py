@@ -125,7 +125,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Trains a model with received annotations  
             value=0              
-            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(page)
+            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(page)
             semantify_local.transactions(conn,  page_id, words, f_ortho1,  f_ortho3, f_html,   labels)
             value=semantify_local.history(conn, path, filename)         
             if value==1:
@@ -156,8 +156,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0
-                             
-            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes=semantify_local.preprocess_file(page)
+            
+            words, f_ortho1,  f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=semantify_local.preprocess_file(page, build_node_index = True)
             semantify_local.write_testfiles(path, filename, sentences)                        
             
             print 'Devel files extracted' 
@@ -175,21 +175,8 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print
 
             retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
-            c = 1
-            
-            taggednodes = {}
-            # Gather the nodes that have non-O tags
-            for line in retfile:
-                parts = line.split("\t")
-                tag = parts[-1]
-                if tag != "O":
-                    if not taggednodes.has_key(nodes[c]):
-                        taggednodes[nodes[c]] = []
-                    taggednodes[nodes[c]].append(tag)
-                c += 1
 
-            # Check that lengths match
-            assert(c == len(words))
+            tagnodes, tagoffsets, tags = semantify_local.extract_tagged_nodes(retfile, tokens)
 
             devutil.keyboard()
             
