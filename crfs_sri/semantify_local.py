@@ -19,6 +19,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
 import codecs
 import devutil
+import collections
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
 class WordPunctTokenizer:
@@ -53,21 +54,6 @@ def update_page(cursor, page_id, o):
     cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(blobencode(o['content'])), page_id))
         
 
-def iscapital(token):
-    tokensplit=list(token)    
-    if  re.match('[A-Z]', tokensplit[0]) :
-        return "1"
-    else:
-        return "0"
-
-
-def isnumber(token):    
-    if   not re.match('[^0-9]', token):
-        return "1"
-    else:
-        return "0"
-
-
 def hasnumber(token):    
     if   re.match('[0-9]', token):
         return "1"
@@ -87,34 +73,7 @@ def hasFC(token):
     else:
         return "0"
         
-def generalisation(token):
-    # print "t: %s" % token
-    reg1=re.compile('[A-Z]')
-    reg2=re.compile('[a-z]')
-    reg3=re.compile('[0-9]')
-    reg4=re.compile('[^A-Za-z0-9]')
-    long=[]
-    for i in range(len(token)):
-        if re.match(reg1, token[i]):
-            long.append('A')
-        elif re.match(reg2, token[i]):
-            long.append('a')
-        elif re.match(reg3, token[i]):
-            long.append('1')
-        elif re.match(reg4, token[i]):
-            long.append('#')
-    brief=[]; 
-    if len(long) > 0:
-      temp=long[0]    
-      for i in range(len(long)):        
-          if not temp== long[i]:
-              brief.append(temp)
-              temp=long[i]
-      brief.append(temp)     
-    long=''.join(long)
-    brief=''.join(brief)
-    return long, brief
-    
+
 def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     c=conn.cursor()
     schema_id = 1
@@ -134,6 +93,7 @@ def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     conn.commit()
     return
 
+
 def class_features(nodeparent):
     # Classname features   
     classname='na'; classlong="B"; classbrief= "A"  
@@ -144,7 +104,7 @@ def class_features(nodeparent):
             if len(classnametemp)>1:
                 if not "WebAnn" in classnametemp:          
                     classname=classnametemp[1]             
-                    classlong, classbrief=generalisation(classname)             
+                    classlong, classbrief=Ortho.generalisation(classname)             
                 else:       
                     classname='na'; classlong="B"; classbrief= "A" 
                 
@@ -154,14 +114,19 @@ def class_features(nodeparent):
 
 def htmlparse(pagefp):   
     soup = Soup(pagefp)
-    nodestack = [soup.body]
-    htmlstack = [[]]
-    labelstack = ['O']
+    nodestack = [soup.body] # Track nodes to expand
+    htmlstack = [[]] # Track position in HTML-tree for feature extraction
+    labelstack = ['O'] # Track labeling: All subtrees of a labeled tags have the same label
+    blocknrstack = [0] # For finding "sentence" boundaries
+    
+    nonblocktags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
+    maxblocknr = 0
 
     while(len(nodestack) > 0):
         node = nodestack.pop()
         stack = htmlstack.pop()
         label = labelstack.pop()
+        blocknr = blocknrstack.pop()
 
         if isinstance(node, bs4.Tag):
             #if node.has_attr('class'):
@@ -181,10 +146,15 @@ def htmlparse(pagefp):
                 else:
                     l = [node]
                     l.extend(stack)                
+                    # Node starts new block
+                    if node.name not in nonblocktags:
+                        maxblocknr += 1
+                        blocknr = maxblocknr
                 for c in reversed(node.contents):
                     nodestack.append(c)
                     htmlstack.append(l)
                     labelstack.append(label)
+                    blocknrstack.append(blocknr)
 
         elif isinstance(node, bs4.Comment): 
             pass # Ignore comments
@@ -192,7 +162,7 @@ def htmlparse(pagefp):
         elif isinstance(node, bs4.NavigableString):
             # Ignore script tags
             if node.parent.name != "script":
-                yield (node, stack, label)
+                yield (node, stack, label, blocknr)
         else:
             print "Unknown tag type"
             devutil.keyboard()
@@ -207,10 +177,10 @@ def traverse_html_nodes(nodeiter, htmlfeaturefuns, tokenfeaturefuns, build_token
     node_index = {}
     tok = WordPunctTokenizer()
 
-    for node, stack, label in nodeiter:
+    for node, stack, label, blocknr in nodeiter:        
         htmlf = {}
-        for fun in htmlfeaturefuns:
-            vd = fun(stack)              
+        for feat in htmlfeaturefuns:
+            vd = feat.extract(stack)              
             htmlf.update(vd)                                  
 
         if build_token_index:
@@ -221,42 +191,104 @@ def traverse_html_nodes(nodeiter, htmlfeaturefuns, tokenfeaturefuns, build_token
 
         for t in tokenization:
             tokenf = {}
-            for fun in tokenfeaturefuns:
-                vd = fun(t)
+            for feat in tokenfeaturefuns:
+                vd = feat.extract(t)
                 tokenf = vd      
             labels.append(label)
-            tokens.append((tokenf, htmlf, node))
+            tokens.append((tokenf, htmlf, node, blocknr))
     return (tokens, labels, node_index)
 
-def descendants(stack):
-    limit=len(stack) 
-    parentnames=[]    
-    if limit>0 and stack[0].name:
-        parentnames.append(stack[0].name)
-    else:
-        parentnames.append('na')
-    if limit>1 and stack[1].name:
-        parentnames.append(stack[1].name)
-    else:
-        parentnames.append('na')
-    if limit >2 and stack[2].name:
-        parentnames.append(stack[2].name)
-    else:
-        parentnames.append('na')
-    # print "-".join(map(lambda x: x.name,  stack))
-    classname,  classlong,  classbrief=class_features(stack[0])    
-    descends="-".join(map(lambda x: x.name, stack))        
-    return {'parentname': parentnames[0],  'grandparentname': parentnames[1],  'greatgrandparentname': parentnames[2],'classname': classname,'classlong': classlong, 'classbrief': classbrief, 'descendants':  descends}
-    
-def feature_extraction(token):
-    capital=iscapital(token); number=isnumber(token); h_number=hasnumber(token) ; splchars=hassplchars(token) ;  long, brief=generalisation(token) ;    
-    return capital,  number,  h_number,  splchars,  long,  brief
-    
-def ortho(token):
-    capital,  number,  h_number,  splchars,  long,  brief= feature_extraction(token)      
-    return {'word(t)': token, 'iscapital': capital,  'isnumber': number ,'hasnumber': h_number ,'hassplchars': splchars ,'long': long ,'brief': brief }
-    
+class BlockFeatureFunction:
+    def extract(input):
+        pass
 
+    def feature_names():
+        pass
+
+
+class Descendants(BlockFeatureFunction):
+    def extract(self, stack):
+        limit=len(stack) 
+        parentnames=[]    
+        if limit>0 and stack[0].name:
+            parentnames.append(stack[0].name)
+        else:
+            parentnames.append('na')
+        if limit>1 and stack[1].name:
+            parentnames.append(stack[1].name)
+        else:
+            parentnames.append('na')
+        if limit >2 and stack[2].name:
+            parentnames.append(stack[2].name)
+        else:
+            parentnames.append('na')
+        # print "-".join(map(lambda x: x.name,  stack))
+        classname,  classlong,  classbrief=class_features(stack[0])    
+        descends="-".join(map(lambda x: x.name, stack))        
+        return {'parentname': parentnames[0],  'grandparentname': parentnames[1],  'greatgrandparentname': parentnames[2],'classname': classname,'classlong': classlong, 'classbrief': classbrief, 'descendants':  descends}
+    
+    def feature_names(self):
+        return ['parentname', 'grandparentname', 'greatgrandparentname','classname', 'classlong', 'classbrief', 'descendants']
+
+class Ortho(BlockFeatureFunction):
+    namemap = {'a': 'lowercase', 'A': 'capital', '1': 'number', '#': 'splchar'}
+
+    @staticmethod
+    def generalisation(token):
+        # print "t: %s" % token
+        reg1=re.compile('[A-Z]')
+        reg2=re.compile('[a-z]')
+        reg3=re.compile('[0-9]')
+        reg4=re.compile('[^A-Za-z0-9]')
+        long=[]
+        for i in range(len(token)):
+            if re.match(reg1, token[i]):
+                long.append('A')
+            elif re.match(reg2, token[i]):
+                long.append('a')
+            elif re.match(reg3, token[i]):
+                long.append('1')
+            elif re.match(reg4, token[i]):
+                long.append('#')
+        brief=[]; 
+        if len(long) > 0:
+          temp=long[0]    
+          for i in range(len(long)):        
+              if not temp== long[i]:
+                  brief.append(temp)
+                  temp=long[i]
+          brief.append(temp)     
+        long=''.join(long)
+        brief=''.join(brief)
+        return long, brief
+
+    @staticmethod         
+    def countletters(tlong):
+        counts = collections.defaultdict(int)
+        for c in tlong:
+            counts[c] += 1
+        return counts
+
+
+    def __init__(self):
+        self._feature_nm = ['word', 'wordlower', 'long', 'brief']
+        self._feature_nm.extend(map(lambda s: s+"count", Ortho.namemap.values()))
+        self._feature_nm.extend(map(lambda s: "has" + s, Ortho.namemap.values()))
+
+    def extract(self, token):
+        tlong, tbrief = Ortho.generalisation(token);
+        chartypecounts = Ortho.countletters(tlong);
+
+        ret = {'word': token, 'wordlower': token.lower(), 'long': tlong ,'brief': tbrief }
+        for k in Ortho.namemap.keys():
+            ret["%scount" % Ortho.namemap[k]] = str(chartypecounts[k])
+            ret["has%s" % Ortho.namemap[k]] = str(int(chartypecounts[k] > 0))
+
+        return ret 
+    
+    def feature_names(self):
+        return self._feature_nm
+    
 
 def write_testfiles(path, filename, sentences):
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
@@ -337,7 +369,34 @@ def extract_tagged_nodes(retfile, tokens):
     return (tagnodes, tagoffsets, tags)
 
 
-def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ortho], build_node_index=False):        
+def sentence_split(tokens):
+    ltemp = []
+    if len(tokens) > 0:
+        curblock = tokens[0][3]
+    for t in xrange(len(tokens)):        
+        ltemp.append(tokens[t])
+        if '.' in tokens[t][0]['word'] or (t+1 < len(tokens)  and tokens[t+1][3] != curblock):
+            yield(ltemp)
+            ltemp = []
+            curblock = tokens[t+1][3]
+    yield(ltemp)
+
+def write_feature_line(featurenames, tokenfeat, timesuffix):
+    return "\t".join(["%s%s : %s" % (f, timesuffix, tokenfeat[f]) for f in featurenames if tokenfeat.has_key(f)])
+
+def window(start, end, t, sent, featurenames, featgroup):
+    s = write_feature_line(featurenames, sent[t][featgroup], "(t)")
+    for i in [k for k in range(start, end+1) if k!=0]:
+        if i < 0:
+            toffset = "%d" % i
+        else:
+            toffset = "+%d" % i
+        timesuffix = "(t%s)" % toffset
+        if t+i >= 0 and t+i < len(sent) - 1:
+            s += "\t" + write_feature_line(featurenames, sent[t+i][featgroup], timesuffix)
+    return s
+            
+def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [Ortho()], build_node_index=False):        
     nodes = []
 
     nodelist = htmlparse(page)
@@ -345,52 +404,72 @@ def preprocess_file(page, htmlfeaturefuns=[descendants], tokenfeaturefuns = [ort
     tokens, tags, node_index = traverse_html_nodes(nodelist, htmlfeaturefuns, tokenfeaturefuns, build_node_index)            
 
     words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
-    wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]
     sentences = []
-    sentencetemp=[]   
-    nodestemp = []
-    nodes = []
 
-    nonblocktags=['a', 'abbr', 'b', 'basefont', 'bdo', 'big', 'br', 'dfn', 'em', 'font', 'i', 'img', 'input', 'kbd', 'label', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var']
     print len(tokens), len(tags)
-    
-    # Split sentences based on '.' and tag name not being in nonblocktags list
-    for t in xrange(len(tokens)):        
-        if '.' in  tokens[t][0]['word(t)'] or not tokens[t][2].parent.name in nonblocktags:   
-            if len(sentencetemp)>0:
-                sentences.extend(sentencetemp)                              
-                words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
-                sentences.extend('\n')   
-                words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
-                sentencetemp=[]  
-                wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
-                nodes.append(nodestemp)
-                nodestemp = []
-        else:
+    c = 0
+    sentencec = 0
+
+    for sent in sentence_split(tokens):
+        for t in range(len(sent)):
+            words.append(sent[t][0]["word"])
+            f_ortho1.append(write_feature_line(tokenfeaturefuns[0].feature_names(), sent[t][0], '(t)'))
             
-            previousword='na'; nextword='na'; previouslong='na'; previousbrief='a'; nextlong='na'; nextbrief='a'            
-            if t>0:
-                previousword=tokens[t-1][0]['word(t)']; previouslong, previousbrief= generalisation(tokens[t-1][0]['word(t)'])         
-            if t+1<len(tokens):
-                nextword=tokens[t+1][0]['word(t)']; nextlong, nextbrief=generalisation(tokens[t+1][0]['word(t)'])
-            
-            line='word(t)='+tokens[t][0]['word(t)']+' : 1\tiscapital : '+tokens[t][0]['iscapital']+'\tisnumber : '+tokens[t][0]['isnumber'] +'\thasnumber : '+tokens[t][0]['hasnumber']+'\thassplchars : '+tokens[t][0]['hassplchars']+'\t'            
-            ortho1='long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\t'    
-            ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
-            html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
+            htmlf = write_feature_line(htmlfeaturefuns[0].feature_names(), sent[t][1], '(t)')
+            f_html.append(htmlf)
 
-            sentencetemp.append(line+ortho3+html+'\n')               
-            wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
-            nodestemp.append(tokens[t][2])
+            ortho3f = window(-1, 1, t, sent, tokenfeaturefuns[0].feature_names(), 0)
+            f_ortho3.append(ortho3f)
+            sentences.append(ortho3f + "\t" + htmlf)
 
-    # Last sentence
-    if len(sentencetemp)>0:        
-        sentences.extend(sentencetemp)                              
-        words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+            labels.append(tags[c])
+            c += 1
+        sentencec += 1
+        words.append('\n'); f_ortho1.append('\n'); f_ortho3.append('\n'); f_html.append('\n'); labels.append('\n'); sentences.append('\n')   
 
-                   
-    print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels)        
+    # c = 0
+    # 
+    # # Split sentences based on '.' and tag name not being in nonblocktags list
+    # for t in xrange(len(tokens)):        
+    #     if '.' in  tokens[t][0]['word(t)'] or not tokens[t][2].parent.name in nonblocktags:   
+    # 
+    # 
+    #         if len(sentencetemp)>0:
+    #             sentences.extend(sentencetemp)                              
+    #             words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+    #             sentences.extend('\n')   
+    #             words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
+    #             sentencetemp=[]  
+    #             wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
+    #             nodes.append(nodestemp)
+    #             nodestemp = []
+    #             c += 1
+    # 
+    #     previousword='na'; nextword='na'; previouslong='na'; previousbrief='a'; nextlong='na'; nextbrief='a'            
+    #     if t>0:
+    #         previousword=tokens[t-1][0]['word(t)']; previouslong, previousbrief= generalisation(tokens[t-1][0]['word(t)'])         
+    #     if t+1<len(tokens):
+    #         nextword=tokens[t+1][0]['word(t)']; nextlong, nextbrief=generalisation(tokens[t+1][0]['word(t)'])
+    #     
+    #     line='word(t)='+tokens[t][0]['word(t)']+' : 1\tiscapital : '+tokens[t][0]['iscapital']+'\tisnumber : '+tokens[t][0]['isnumber'] +'\thasnumber : '+tokens[t][0]['hasnumber']+'\thassplchars : '+tokens[t][0]['hassplchars']+'\t'            
+    #     ortho1='long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\t'    
+    #     ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
+    #     html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
+    # 
+    #     sentencetemp.append(line+ortho3+html+'\n')               
+    #     wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
+    #     nodestemp.append(tokens[t][2])
+    # 
+    # # Last sentence
+    # if len(sentencetemp)>0:        
+    #     sentences.extend(sentencetemp)                              
+    #     words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
+
     
+    print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels) 
+    print len(tokens) + sentencec 
+    assert(len(tokens) + sentencec == len(sentences))
+
     return words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens
 
     
