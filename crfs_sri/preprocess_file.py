@@ -25,6 +25,6 @@ fp = open(sys.argv[1])
 
 words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(fp, build_node_index=True)
 
-# devutil.keyboard()
+devutil.keyboard()
 
   

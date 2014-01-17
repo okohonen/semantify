@@ -96,20 +96,13 @@ def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
 
 def class_features(nodeparent):
     # Classname features   
-    classname='na'; classlong="B"; classbrief= "A"  
+    classname=''; classlong=""; classbrief= ""  
     if nodeparent.has_attr('class'): 
-        classnametemp=repr(nodeparent).split('class') 
-        if len(classnametemp)>1:
-            classnametemp=classnametemp[1].split('"')
-            if len(classnametemp)>1:
-                if not "WebAnn" in classnametemp:          
-                    classname=classnametemp[1]             
-                    classlong, classbrief=Ortho.generalisation(classname)             
-                else:       
-                    classname='na'; classlong="B"; classbrief= "A" 
+        classname=",".join(nodeparent['class'])
+        if "WebAnnotator" in classname:          
+            assert False, "WebAnnotator tags should be stripped when this is applied"
+        classlong, classbrief=Ortho.generalisation(classname)             
                 
-    #if "WebAnn" in classname:
-        #devutil.keyboard()
     return classname, classlong,  classbrief
 
 def htmlparse(pagefp):   
@@ -199,6 +192,9 @@ def traverse_html_nodes(nodeiter, htmlfeaturefuns, tokenfeaturefuns, build_token
     return (tokens, labels, node_index)
 
 class BlockFeatureFunction:
+    # Feature extraction function returns a dictionary where the key is the featurename and the value
+    # is a pair where the first part is the featurename-specifier and the other is the value 
+    # E.g. {'word': ('remarkable', '1')} will turn into 'word(t)=remarkable : 1'
     def extract(input):
         pass
 
@@ -225,7 +221,7 @@ class Descendants(BlockFeatureFunction):
         # print "-".join(map(lambda x: x.name,  stack))
         classname,  classlong,  classbrief=class_features(stack[0])    
         descends="-".join(map(lambda x: x.name, stack))        
-        return {'parentname': parentnames[0],  'grandparentname': parentnames[1],  'greatgrandparentname': parentnames[2],'classname': classname,'classlong': classlong, 'classbrief': classbrief, 'descendants':  descends}
+        return {'parentname': (parentnames[0], '1'),  'grandparentname': (parentnames[1], '1'),  'greatgrandparentname': (parentnames[2], '1'),'classname': (classname, '1'), 'classlong': (classlong, '1'), 'classbrief': (classbrief, '1'), 'descendants': (descends, '1')}
     
     def feature_names(self):
         return ['parentname', 'grandparentname', 'greatgrandparentname','classname', 'classlong', 'classbrief', 'descendants']
@@ -279,10 +275,10 @@ class Ortho(BlockFeatureFunction):
         tlong, tbrief = Ortho.generalisation(token);
         chartypecounts = Ortho.countletters(tlong);
 
-        ret = {'word': token, 'wordlower': token.lower(), 'long': tlong ,'brief': tbrief }
+        ret = {'word': (token, '1'), 'wordlower': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
         for k in Ortho.namemap.keys():
-            ret["%scount" % Ortho.namemap[k]] = str(chartypecounts[k])
-            ret["has%s" % Ortho.namemap[k]] = str(int(chartypecounts[k] > 0))
+            ret["%scount" % Ortho.namemap[k]] = ('', str(chartypecounts[k])) 
+            ret["has%s" % Ortho.namemap[k]] = ('', str(int(chartypecounts[k] > 0)))
 
         return ret 
     
@@ -294,8 +290,11 @@ def write_testfiles(path, filename, sentences):
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
     for i in range(len(sentences)):              
-        testfile.write(sentences[i].encode('utf8'))
+        testfile.write(sentences[i].encode('utf8'))        
         testreferencefile.write(sentences[i].encode('utf8'))
+        if sentences[i] != "\n":
+            testfile.write('\n')        
+            testreferencefile.write('\n')
     testfile.close()
     testreferencefile.close()      
 
@@ -382,7 +381,7 @@ def sentence_split(tokens):
     yield(ltemp)
 
 def write_feature_line(featurenames, tokenfeat, timesuffix):
-    return "\t".join(["%s%s : %s" % (f, timesuffix, tokenfeat[f]) for f in featurenames if tokenfeat.has_key(f)])
+    return "\t".join(["%s%s%s%s : %s" % (f, timesuffix, '=' if len(tokenfeat[f][0]) > 0 else '', tokenfeat[f][0], tokenfeat[f][1]) for f in featurenames if tokenfeat.has_key(f)])
 
 def window(start, end, t, sent, featurenames, featgroup):
     s = write_feature_line(featurenames, sent[t][featgroup], "(t)")
@@ -406,6 +405,7 @@ def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [O
     words=[]; f_ortho1=[]; f_ortho3=[]; f_html=[]; labels=[]
     sentences = []
 
+    print "Page tokens"
     print len(tokens), len(tags)
     c = 0
     sentencec = 0
@@ -465,7 +465,7 @@ def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [O
     #     sentences.extend(sentencetemp)                              
     #     words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
 
-    
+    print "Tokens after sentence split"
     print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels) 
     print len(tokens) + sentencec 
     assert(len(tokens) + sentencec == len(sentences))

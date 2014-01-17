@@ -167,6 +167,7 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print "done"
             print
             print "apply model"
+            print (test_file, test_prediction_file, test_reference_file, verbose)
             m.apply(test_file, test_prediction_file, test_reference_file, verbose)
             print "done"
             print
