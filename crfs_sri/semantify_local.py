@@ -298,22 +298,30 @@ def write_testfiles(path, filename, sentences):
     testfile.close()
     testreferencefile.close()      
 
-def nodeblocks(retfile, nodes):
+def nodeblocks(retfile, tokens, filterf):
     c = 0
-    curnode = nodes[0]
+    curnode = tokens[0][2]
 
-    taggednodes = {}
     # Gather the nodes that have non-O tags
     curtags = []
+    curfilterstat = False;
 
-    for line in retfile:        
-        if curnode != nodes[c]:
-            yield (curnode, curtags)
+    for line in retfile:
+        if line == "\n":
+            continue
+        if curnode != tokens[c][2]:
+            if curfilterstat:
+                yield (curnode, curtags)
             curtags = []
+            curnode = tokens[c][2]
+            curfilterstat = False;
         parts = line.split("\t")
-        curtags.append(parts[-1])
+        tag = parts[-1].strip()
+        curtags.append(tag)
+        curfilterstat = filterf(tag)
         c += 1
-    yield (curnode, curtags)
+    if curfilterstat:
+        yield (curnode, curtags)
 
     # Check that lengths match
     assert(c == len(words))
@@ -332,10 +340,7 @@ def extract_tagged_nodes(retfile, tokens):
 
     print len(tokens)
 
-    for line in retfile:
-        # Ignore sentence split lines
-        if line=="\n":
-            continue
+    for node, tags in semantify_local.nodeblocks(retfile, tokens, lambda x: x not in ['O', 'START', 'STOP']):
         if curnode != tokens[c][2]:
             if len(nodeoffsets) > 0:
                tagnodes.append(curnode)

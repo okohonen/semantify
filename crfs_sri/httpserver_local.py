@@ -177,6 +177,11 @@ class TestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
 
+            for node, tags in semantify_local.nodeblocks(retfile, tokens, lambda x: x not in ['O', 'START', 'STOP']):
+                print (node, tags)
+                devutil.keyboard()
+                
+
             tagnodes, tagoffsets, tags = semantify_local.extract_tagged_nodes(retfile, tokens)
 
             devutil.keyboard()
