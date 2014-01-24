@@ -31,7 +31,10 @@ words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens
 # semantify_local.write_testfiles("", "Talviurheilu-KeltainenPorssi", sentences)
 # Then apply: python dummy_tagger.py ../samples/Talviurheilu-KeltainenPorssi.test > ../samples/Talviurheilu-KeltainenPorssi.test.prediction
 nodes_to_tag = semantify_local.extract_tagged_nodes(open(sys.argv[2]), tokens)
-semantify_local.apply_tagging(nodes_to_tag, node_index)
+
+print nodes_to_tag
+
+semantify_local.apply_tagging(page, nodes_to_tag, node_index)
 
 print str(page)
 

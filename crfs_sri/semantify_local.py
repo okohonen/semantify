@@ -54,7 +54,7 @@ def update_page(cursor, page_id, o):
     cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(blobencode(o['content'])), page_id))
                 
 
-def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
+def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html, tags):
     c=conn.cursor()
     schema_id = 1
 
@@ -74,12 +74,12 @@ def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     return
 
 
-def class_features(nodeparent):
+def class_features(node):
     # Classname features   
     classname=''; classlong=""; classbrief= ""  
-    if nodeparent.has_attr('class'): 
-        classname=",".join(nodeparent['class'])
-        if "WebAnnotator" in classname:          
+    if node.has_attr('class'): 
+        classname=",".join(node['class'])
+        if node.name == "span" and "WebAnnotator" in classname:          
             assert False, "WebAnnotator tags should be stripped when this is applied"
         classlong, classbrief=Ortho.generalisation(classname)             
                 
@@ -101,32 +101,22 @@ def htmlparse(soup):
         blocknr = blocknrstack.pop()
 
         if isinstance(node, bs4.Tag):
-            #if node.has_attr('class'):
-            nodeclassname,  nodeclasslong,  nodeclassbrief=class_features(node)   
-            #else:
-                #nodeclassname='na';  nodeclasslong='na';  nodeclassbrief='na'
-            if node!=None:
-                if (node.name == "span" and "WebAnnotator" in nodeclassname):                       
-                    # Find the annotation label and add to 'labels' list
-                    if node.has_attr('class'):                        
-                        temp=str(node).split('class')
-                        temp=temp[1].split('"')
-                        label=temp[1].replace('WebAnnotator_', '')
-                        #devutil.keyboard()
-                        
-                    l = stack
-                else:
-                    l = [node]
-                    l.extend(stack)                
-                    # Node starts new block
-                    if node.name not in nonblocktags:
-                        maxblocknr += 1
-                        blocknr = maxblocknr
-                for c in reversed(node.contents):
-                    nodestack.append(c)
-                    htmlstack.append(l)
-                    labelstack.append(label)
-                    blocknrstack.append(blocknr)
+            # Find the annotation label and add to 'labels' list
+            if node.name == "span" and node.has_attr("class") and "WebAnnotator_" in node['class'][0]:
+                label=node['class'][0].replace('WebAnnotator_', '')
+                l = stack
+            else:
+                l = [node]
+                l.extend(stack)                
+                # Node starts new block
+                if node.name not in nonblocktags:
+                    maxblocknr += 1
+                    blocknr = maxblocknr
+            for c in reversed(node.contents):
+                nodestack.append(c)
+                htmlstack.append(l)
+                labelstack.append(label)
+                blocknrstack.append(blocknr)
 
         elif isinstance(node, bs4.Comment): 
             pass # Ignore comments
@@ -331,25 +321,32 @@ def extract_tagged_nodes(retfile, tokens):
 
     return ret
 
-def modified_node_string(s, taggings, node_pos):
-    strl = []
+def modified_subtreelist(soup, s, taggings, node_pos):
+    nodel = []
     lastpos = 0
     for startoffset, endoffset, tag in taggings:            
         startpos = node_pos[0][startoffset]
         endpos = node_pos[1][endoffset]
-        strl.append(s[lastpos:startpos])
-        strl.append('<span wa-subtypes="" wa-type="%s" class="Semantify_%s" semantify="auto">%s</span>' % (tag, tag, s[startpos:endpos]))
+        nodel.append(soup.new_string(s[lastpos:startpos]))
+        span = soup.new_tag('span')
+        span['wa-subtypes'] = ""
+        span['wa-type'] = tag
+        span['class'] = "Semantify_%s" % tag
+        span['semantify'] = "auto"
+        span.string = s[startpos:endpos]
+        nodel.append(span)
         lastpos = endpos
-    strl.append(s[lastpos:])
-    return ''.join(strl)
+    nodel.append(soup.new_string(s[lastpos:]))
+    return nodel
 
 
-def apply_tagging(nodes_to_tag, node_index):
+def apply_tagging(soup, nodes_to_tag, node_index):
     for node, taggings in nodes_to_tag:
-        devutil.keyboard()
-        newnode = BeautifulSoup.NavigableString(modified_node_string(node.string, taggings, node_index[node]))
-        node.string.replace_with(modified_node_string(node.string, taggings, node_index[node]))
-        print str(node)
+        ml = modified_subtreelist(soup, node.string, taggings, node_index[node])
+        node.replace_with(ml[0])
+        for i in range(1, len(ml)):
+            ml[i-1].insert_after(ml[i])
+            
 
 markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
 soup = BeautifulSoup(markup)
@@ -404,7 +401,7 @@ def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [O
 
     for sent in sentence_split(tokens):
         for t in range(len(sent)):
-            words.append(sent[t][0]["word"])
+            words.append(sent[t][0]["word"][0])
             f_ortho1.append(write_feature_line(tokenfeaturefuns[0].feature_names(), sent[t][0], '(t)'))
             
             htmlf = write_feature_line(htmlfeaturefuns[0].feature_names(), sent[t][1], '(t)')
@@ -496,11 +493,13 @@ def history(conn, path, filename):
     # Collecting list of lines to write to training file and devel file    
     
     tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-    for i in range(len(tokens)):
-        lines.append(tokens[i]+fts[0][i]+fts[1][i]+tags[i]+'\n')
-               
-       
-    for i in range(len(lines)):
+    for i in xrange(len(tokens)):
+        if fts[0][i] == "":
+            lines.append("\n")
+        else:
+            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
+                
+    for i in xrange(len(lines)):
         if len(lines[i])>1:
             temp=lines[i].split(' : ')
             tagindex=len(temp)-1
@@ -510,7 +509,7 @@ def history(conn, path, filename):
     # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
     flag=0; firsttagindex=0; window=[]; 
     
-    for i in range(len(lines)):
+    for i in xrange(len(lines)):
         temp=lines[i].split(' : ')        
         if temp[0]=='\n':            
             window.append('\n')

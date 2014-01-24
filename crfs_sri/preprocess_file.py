@@ -5,7 +5,7 @@ import os
 import string
 import semantify_local
 import sqlite3, shlex, subprocess,  sys,  re,  time
-from bs4 import BeautifulSoup as Soup
+from bs4 import BeautifulSoup 
 from bs4 import NavigableString
 from datetime import datetime
 import unicodedata
@@ -23,7 +23,9 @@ fp = open(sys.argv[1])
 #for t in semantify_local.htmlparse(fp,  htmlfeaturefuns, tokenfeaturefuns):
 #    devutil.keyboard()
 
-words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(fp, build_node_index=True)
+page = BeautifulSoup(fp)
+
+words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(page)
 
 devutil.keyboard()
 
