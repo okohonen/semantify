@@ -8,7 +8,7 @@ import os
 import string
 import re
 import time
-from bs4 import BeautifulSoup as Soup
+from bs4 import BeautifulSoup
 from bs4 import NavigableString
 import bs4
 from datetime import datetime
@@ -52,27 +52,7 @@ def insert_new_page(cursor, o, version, schema_id = 1):
 
 def update_page(cursor, page_id, o):
     cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(blobencode(o['content'])), page_id))
-        
-
-def hasnumber(token):    
-    if   re.match('[0-9]', token):
-        return "1"
-    else:
-        return "0"
-
-
-def hassplchars(token):
-    if   not re.match('[a-zA-Z0-9]', token):
-        return "1"
-    else:
-        return "0"  
-
-def hasFC(token):
-    if 'FC' in token:
-        return "1"
-    else:
-        return "0"
-        
+                
 
 def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html,   tags):
     c=conn.cursor()
@@ -105,8 +85,7 @@ def class_features(nodeparent):
                 
     return classname, classlong,  classbrief
 
-def htmlparse(pagefp):   
-    soup = Soup(pagefp)
+def htmlparse(soup):   
     nodestack = [soup.body] # Track nodes to expand
     htmlstack = [[]] # Track position in HTML-tree for feature extraction
     labelstack = ['O'] # Track labeling: All subtrees of a labeled tags have the same label
@@ -232,19 +211,18 @@ class Ortho(BlockFeatureFunction):
     @staticmethod
     def generalisation(token):
         # print "t: %s" % token
-        reg1=re.compile('[A-Z]')
-        reg2=re.compile('[a-z]')
-        reg3=re.compile('[0-9]')
-        reg4=re.compile('[^A-Za-z0-9]')
+        alphareg=re.compile('\w', re.UNICODE)
+        numreg=re.compile('[0-9]', re.UNICODE)
         long=[]
         for i in range(len(token)):
-            if re.match(reg1, token[i]):
-                long.append('A')
-            elif re.match(reg2, token[i]):
-                long.append('a')
-            elif re.match(reg3, token[i]):
-                long.append('1')
-            elif re.match(reg4, token[i]):
+            if re.match(alphareg, token[i]):
+                if re.match(numreg, token[i]):
+                    long.append('1')
+                elif token[i].isupper():
+                    long.append('A')
+                else:
+                    long.append('a')
+            else:
                 long.append('#')
         brief=[]; 
         if len(long) > 0:
@@ -314,63 +292,72 @@ def nodeblocks(retfile, tokens, filterf):
                 yield (curnode, curtags)
             curtags = []
             curnode = tokens[c][2]
-            curfilterstat = False;
+            curfilterstat = False;        
         parts = line.split("\t")
         tag = parts[-1].strip()
         curtags.append(tag)
-        curfilterstat = filterf(tag)
+        curfilterstat = curfilterstat or filterf(tag)
         c += 1
     if curfilterstat:
         yield (curnode, curtags)
 
     # Check that lengths match
-    assert(c == len(words))
+    assert(c == len(tokens))
 
 
+# Takes as input the tagged file and the tokens and then produces a list of taggings
+# represented as pairs with offsets in lists of triples :[(node, [(startoffset, endoffset, tags)])]
 def extract_tagged_nodes(retfile, tokens):
-    tagnodes = []
-    tagoffsets = []
-    tags = []
+    ret = []
 
-    c = 0
-    curnode = tokens[0][2]
-    tokenoffset = 0
-    nodeoffsets = []
-    nodetags = []
+    notags = ['O', 'START', 'STOP']
 
-    print len(tokens)
+    for node, tags in nodeblocks(retfile, tokens, lambda x: x not in notags):
+        curtag = tags[0]
+        starti = 0
 
-    for node, tags in semantify_local.nodeblocks(retfile, tokens, lambda x: x not in ['O', 'START', 'STOP']):
-        if curnode != tokens[c][2]:
-            if len(nodeoffsets) > 0:
-               tagnodes.append(curnode)
-               tagoffsets.append(nodeoffsets)
-               tags.append(nodetags)    
-            nodeoffsets = []
-            nodetags = []
-            curnode = tokens[c][2]
-            tokenoffset = 0
 
-        parts = line.split("\t")
-        if len(parts) > 1:
-            tag = parts[-1].strip()
-            
-            if tag == []:
-                devutil.keyboard()
+        offsets = []
 
-            if tag != "O":
-                nodeoffsets.append(tokenoffset)
-                tags.append(tag)
-        c += 1
-        tokenoffset += 1
-        print (tokenoffset, c)
+        for i in range(len(tags)):
+            if tags[i] != curtag:
+                if curtag not in notags:
+                    offsets.append((starti, i-1, tags[starti]))
+                starti = i
+                curtag = tags[i]
+        if curtag not in notags:
+            offsets.append((starti, i, tags[starti]))
+        ret.append((node, offsets))
 
-    if len(nodeoffsets) > 0:
-        tagnodes.append(curnode)
-        tagoffsets.append(nodeoffsets)
-        tags.append(nodetags)  
+    return ret
 
-    return (tagnodes, tagoffsets, tags)
+def modified_node_string(s, taggings, node_pos):
+    strl = []
+    lastpos = 0
+    for startoffset, endoffset, tag in taggings:            
+        startpos = node_pos[0][startoffset]
+        endpos = node_pos[1][endoffset]
+        strl.append(s[lastpos:startpos])
+        strl.append('<span wa-subtypes="" wa-type="%s" class="Semantify_%s" semantify="auto">%s</span>' % (tag, tag, s[startpos:endpos]))
+        lastpos = endpos
+    strl.append(s[lastpos:])
+    return ''.join(strl)
+
+
+def apply_tagging(nodes_to_tag, node_index):
+    for node, taggings in nodes_to_tag:
+        devutil.keyboard()
+        newnode = BeautifulSoup.NavigableString(modified_node_string(node.string, taggings, node_index[node]))
+        node.string.replace_with(modified_node_string(node.string, taggings, node_index[node]))
+        print str(node)
+
+markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
+soup = BeautifulSoup(markup)
+a_tag = soup.a
+
+new_tag = soup.new_tag("b")
+new_tag.string = "example.net"
+a_tag.i.replace_with(new_tag)
 
 
 def sentence_split(tokens):
@@ -665,7 +652,7 @@ def keywordtag(path, filename):
     page=open(os.getcwd()+path+filename+'.html')
     ret=open(os.getcwd()+path+'/temp/temp.html','w')
 
-    soup=Soup(page)
+    soup=BeautifulSoup(page)
 
     # The keywords that need to be tagged    
     retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
