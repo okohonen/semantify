@@ -18,14 +18,13 @@ import zlib
 
 PORT = 50010
 
-dbname='temp/hs.db'
+if len(sys.argv) < 2:
+    sys.exit("Usage httpserver_local.py dbfile")
 
+dbname=sys.argv[1]
 
 if not os.path.exists(dbname):
-    # db should be initialized with: sqlite3 temp/semantify.db <schema.sql
-    raise AssertionError('Database not found')    
-
-
+    os.system("sqlite3 %s <schema.sql" % dbname)
 
 conn = sqlite3.connect(dbname)
 c = conn.cursor()
