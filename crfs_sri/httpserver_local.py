@@ -6,6 +6,7 @@ import os
 import string
 from models import *
 import semantify_local
+from crfs import *
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup
 from bs4 import NavigableString
@@ -130,18 +131,19 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             value=semantify_local.history(conn, path, filename)         
             if value==1:
                 print "initialize model"
-                m = Model()
+                m = CRF()
                 print "done"
                 print
                 print "train model"
-                accuracy=m.train(graph_id,  performance_measure_id,  single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
+                #accuracy=m.train(graph_id,  performance_measure_id,  single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
+                m.train(train_file, devel_file, devel_prediction_file, verbose)
                 print "done"    
                 print
                 print "save model"
                 m.save(model_file)
                 print "done"
                 print                
-                print accuracy                
+                #print accuracy                
                 successlog.write(filename)
                 successlog.write('\t')
                 successlog.write( str(datetime.now()))
@@ -149,8 +151,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 elapsed=time.time()-t
                 print 'File', filename, 'handled in:',  elapsed
                 
-                o['accuracy']=accuracy  
-                self.wfile.write(json.dumps(o))                
+                #o['accuracy']=accuracy  
+                #self.wfile.write(json.dumps(o))                
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
@@ -161,13 +163,14 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             
             print 'Devel files extracted' 
             print "load model"
-            m=Model()
+            m=CRF()
             m.load(model_file)
             print "done"
             print
             print "apply model"
             print (test_file, test_prediction_file, test_reference_file, verbose)
-            m.apply(test_file, test_prediction_file, test_reference_file, verbose)
+            #m.apply(test_file, test_prediction_file, test_reference_file, verbose)
+            m.apply(test_file, test_prediction_file, verbose)
             print "done"
             print
             

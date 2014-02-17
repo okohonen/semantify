@@ -1,42 +1,47 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
-<dialog id="donothing" title="About WebAnnotator"
+<dialog id="donothing" title="About Semantify"
    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
    xmlns:html="http://www.w3.org/1999/xhtml"
    buttons="cancel"
    buttonlabelcancel="Close"
    ondialogcancel="return doCancel();">
     
-  <box>
-	<image src="chrome://webannotator/skin/logo-limsi.png"/><spacer flex="1"/><image src="chrome://webannotator/skin/logo-upsud.png"/> 
-  </box>
-  <separator class="groove" orient="horizontal"/>
+<separator class="groove" orient="horizontal"/>
   <groupbox>
-	<box>WebAnnotator has been developed at <label onclick="window.close()" class="text-link" href="http://www.limsi.fr/index.en.html">LIMSI/CNRS</label> and <label onclick="window.close()" class="text-link" href="http://www.u-psud.fr/en/index.html">University Paris-Sud.</label>
-	</box>
+	<box>
+    <html:div>
+        
+            <html:ul>Semantify has been developed at<label onclick="window.close()" class="text-link" href="http://ics.aalto.fi/en/">Department of Information and Computer Science</label>,<label onclick="window.close()" class="text-link" href="http://www.aalto.fi/en/">Aalto university</label></html:ul>
+            <html:ul>Development was funded by<label onclick="window.close()" class="text-link" href="http://asci.aalto.fi/">Aalto Science Institute</label>and the<label onclick="window.close()" class="text-link" href="http://ics.aalto.fi/en/">Department of Information and Computer Science</label></html:ul>
+        
+    </html:div>
+    </box>
   </groupbox>
   <separator class="groove" orient="horizontal"/>
   
   <groupbox>
-	<caption><image src="chrome://webannotator/skin/wa_small_activated.png"/><separator orient="vertical"/>User guide:</caption>
+	<caption>How the tool works:</caption>
 	<description style="width: 200px">
-	  Last updates, as well as a user guide can be found on <label onclick="window.close()" class="text-link" href="http://www.limsi.fr/~xtannier/en/WebAnnotator/">Web Annotator Home Page.</label> For any question, remark or if you wish to contribute, please contact <label value="xtannier@limsi.fr" style="color: blue; cursor:hand"/>
+    Choose your favourite DTD and start annotating. When you are done, press 'Store Page Tags'. When you want to see the results, press 'Tag Page'. 
 	</description>
   </groupbox>
   <groupbox>
-	<caption><image src="chrome://webannotator/skin/wa_small_activated.png"/><separator orient="vertical"/>Contributors:</caption>
+	<caption>Contributors:</caption>
 	<html:div>
 	  <html:ul>
-		<html:li>Thibault Baste</html:li>
-		<html:li>Jialin Liu</html:li>
-		<html:li>Jingjing Li</html:li>
-		<html:li>Xavier Tannier</html:li>
+		<html:li>Oskar Kohonen</html:li>
+		<html:li>Srikrishna Raamadhurai</html:li>
+		<html:li>Teemu Ruokolainen</html:li>
 	  </html:ul>
 	</html:div>
   </groupbox>
   <groupbox>
-	<caption><image src="chrome://webannotator/skin/wa_small_activated.png"/><separator orient="vertical"/>Credits:</caption>
-	<label href="http://amb.vis.ne.jp/mozilla/scrapbook/" class="text-link" onclick="window.close()">http://amb.vis.ne.jp/mozilla/scrapbook/</label>
+	<caption>Credits:</caption>
+    <html:div>
+	         Semantify front-end is based on<label onclick="window.close()" class="text-link" href="http://www.limsi.fr/~xtannier/en/WebAnnotator/">Web Annotator</label>by Xavier Tannier
+    </html:div>    
+	<!--<label href="http://amb.vis.ne.jp/mozilla/scrapbook/" class="text-link" onclick="window.close()">http://amb.vis.ne.jp/mozilla/scrapbook/</label>-->
   </groupbox>
   
   <script>

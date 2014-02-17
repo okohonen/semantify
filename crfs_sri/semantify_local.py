@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from bs4 import NavigableString
 import bs4
 from datetime import datetime
-import shlex, subprocess
+from crfs import *
 import sys  
 import zlib
 from sklearn import metrics
@@ -494,27 +494,29 @@ def history(conn, path, filename):
         # Collecting list of lines to write to training file and devel file        
         tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
         for i in range(len(tokens)):
-            lines.append(tokens[i]+fts[0][i]+fts[1][i]+tags[i]+'\n')
+            lines.append(tokens[i]+fts[0][i]+"\t"+fts[1][i]+tags[i]+'\n')
     
-    tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
+        
+    #tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
     for i in xrange(len(tokens)):
         if fts[0][i] == "":
             lines.append("\n")
         else:
             lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
                 
-    for i in xrange(len(lines)):
-        if len(lines[i])>1:
-            temp=lines[i].split(' : ')
-            tagindex=len(temp)-1
-            break
-    print 'Index of label is :', tagindex
+#    for i in xrange(len(lines)):
+#        if len(lines[i])>1:
+#            temp=lines[i].split(' : ')
+#            tagindex=len(temp)-1
+#            break
+#    print 'Index of label is :', tagindex
    
     # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
     flag=0; firsttagindex=0; window=[]; 
     
     for i in xrange(len(lines)):
-        temp=lines[i].split(' : ')        
+        temp=lines[i].split(' : ')     
+        tagindex=len(temp)-1
         if temp[0]=='\n':            
             window.append('\n')
         else:
@@ -531,9 +533,11 @@ def history(conn, path, filename):
                 for j in range(10):
                     if  (i+j) <len(tags):                                              
                         temp=lines[i+j].split(' : ')
-                        if not temp[0]=='\n':
+                        tagindex=len(temp)-1
+                        if not temp[0]=='\n':                            
                             temp[tagindex]=temp[tagindex].replace('1\t', '')
-                            temp[tagindex]=temp[tagindex].replace('\n', '')                            
+                            temp[tagindex]=temp[tagindex].replace('\n', '')   
+                            #devutil.keyboard()
                             if not temp[tagindex]=='O': 
                                 window.append(lines[i])
                                 break
@@ -543,7 +547,7 @@ def history(conn, path, filename):
                                     break
                     else:
                         break
-            
+    
     
     # Writing to train file and train devel files    
     writingflag=0

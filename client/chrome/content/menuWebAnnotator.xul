@@ -84,7 +84,8 @@
 	<menuitem id="WebAnnotator_t_deleteMenu3" label="file2"/>
 	<menuitem id="WebAnnotator_t_importMenu" label="&wa.import;"/>
 	<menuitem id="WebAnnotator_t_exportMenu" label="&wa.export;"/>
-	<menuitem id="WebAnnotator_t_descriptionMenu" label="&wa.about; &wa.name;"/>
+	<!--<menuitem id="WebAnnotator_t_descriptionMenu" label="&wa.about; &wa.name;"/>-->
+    <menuitem id="WebAnnotator_t_descriptionMenu" label="About Semantify"/>
 	<menuitem id="Semantify_t_putPage" label="Store page tags"/>
 	<menuitem id="Semantify_t_tagPage" label="Tag page"/>
 
@@ -98,7 +99,8 @@
 	<menuitem id="WebAnnotator_b_deleteMenu3" label="file2"/>
 	<menuitem id="WebAnnotator_b_importMenu" label="&wa.import;"/>
 	<menuitem id="WebAnnotator_b_exportMenu" label="&wa.export;"/>
-	<menuitem id="WebAnnotator_b_descriptionMenu" label="&wa.about; &wa.name;"/>
+	<!--<menuitem id="WebAnnotator_b_descriptionMenu" label="&wa.about; &wa.name;"/>-->
+    <menuitem id="WebAnnotator_b_descriptionMenu" label="About Semantify"/>
 	<menuitem id="Semantify_b_putPage" label="Store page tags"/>
 	<menuitem id="Semantify_b_tagPage" label="Tag page"/>
 	
