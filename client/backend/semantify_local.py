@@ -19,6 +19,7 @@ from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
 import codecs
+#import devutil
 import collections
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
@@ -493,15 +494,15 @@ def history(conn, path, filename):
         # Collecting list of lines to write to training file and devel file        
         tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
         for i in range(len(tokens)):
-            lines.append(tokens[i]+fts[0][i]+"\t"+fts[1][i]+tags[i]+'\n')
+            lines.append(fts[0][i]+"\t"+fts[1][i]+"\t"+tags[i]+'\n')
     
         
     #tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-    for i in xrange(len(tokens)):
-        if fts[0][i] == "":
-            lines.append("\n")
-        else:
-            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
+#    for i in xrange(len(tokens)):
+#        if fts[0][i] == "":
+#            lines.append("\n")
+#        else:
+#            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
                 
 #    for i in xrange(len(lines)):
 #        if len(lines[i])>1:
@@ -516,11 +517,12 @@ def history(conn, path, filename):
     for i in xrange(len(lines)):
         temp=lines[i].split(' : ')     
         tagindex=len(temp)-1
-        if temp[0]=='\n':            
+        if len(temp[0])<=5:            
             window.append('\n')
         else:
             temp[tagindex]=temp[tagindex].replace('1\t', '')            
             temp[tagindex]=temp[tagindex].replace('\n', '')
+            #devutil.keyboard()
             if not temp[tagindex]=='O':               
                 window.append(lines[i])
                 if flag==0:
@@ -533,7 +535,7 @@ def history(conn, path, filename):
                     if  (i+j) <len(tags):                                              
                         temp=lines[i+j].split(' : ')
                         tagindex=len(temp)-1
-                        if not temp[0]=='\n':                            
+                        if len(temp[0])>5:                            
                             temp[tagindex]=temp[tagindex].replace('1\t', '')
                             temp[tagindex]=temp[tagindex].replace('\n', '')   
                             #devutil.keyboard()
@@ -551,17 +553,17 @@ def history(conn, path, filename):
     # Writing to train file and train devel files    
     writingflag=0
     for i in range(len(lines)):
-        if len(lines[i])>2:
+        if len(lines[i])>5:
             trainfile.write(lines[i].encode('utf-8'))
             writingflag=1
         elif writingflag==1:
             trainfile.write('\n')
             writingflag=0
  
-   
+    
     writingflag=0
     for i in range(len(window)):
-        if len(window[i])>2:
+        if len(window[i])>5:
             traindevelfile.write(window[i].encode('utf-8'))
             writingflag=1
         elif writingflag==1:
