@@ -13,7 +13,7 @@ from bs4 import NavigableString
 from datetime import datetime
 import unicodedata
 import numpy
-import devutil
+#import devutil
 import codecs
 import zlib
 

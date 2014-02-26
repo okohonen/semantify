@@ -19,6 +19,7 @@ from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
 import codecs
+#import devutil
 import collections
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
@@ -236,7 +237,7 @@ class Ortho(BlockFeatureFunction):
 
 
     def __init__(self):
-        self._feature_nm = ['word', 'wordlower', 'long', 'brief']
+        self._feature_nm = ['word', 'long', 'brief']
         self._feature_nm.extend(map(lambda s: s+"count", Ortho.namemap.values()))
         self._feature_nm.extend(map(lambda s: "has" + s, Ortho.namemap.values()))
 
@@ -244,7 +245,7 @@ class Ortho(BlockFeatureFunction):
         tlong, tbrief = Ortho.generalisation(token);
         chartypecounts = Ortho.countletters(tlong);
 
-        ret = {'word': (token, '1'), 'wordlower': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
+        ret = {'word': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
         for k in Ortho.namemap.keys():
             ret["%scount" % Ortho.namemap[k]] = ('', str(chartypecounts[k])) 
             ret["has%s" % Ortho.namemap[k]] = ('', str(int(chartypecounts[k] > 0)))
@@ -255,12 +256,12 @@ class Ortho(BlockFeatureFunction):
         return self._feature_nm
     
 
-def write_testfiles(path, filename, sentences):
+def write_testfiles(path, filename, sentences, labels):
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
     for i in range(len(sentences)):              
         testfile.write(sentences[i].encode('utf8'))        
-        testreferencefile.write(sentences[i].encode('utf8'))
+        testreferencefile.write((sentences[i]+labels[i]).encode('utf8'))
         if sentences[i] != "\n":
             testfile.write('\n')        
             testreferencefile.write('\n')            
@@ -493,15 +494,15 @@ def history(conn, path, filename):
         # Collecting list of lines to write to training file and devel file        
         tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
         for i in range(len(tokens)):
-            lines.append(tokens[i]+fts[0][i]+"\t"+fts[1][i]+tags[i]+'\n')
+            lines.append(fts[0][i]+"\t"+fts[1][i]+"\t"+tags[i]+'\n')
     
         
     #tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-    for i in xrange(len(tokens)):
-        if fts[0][i] == "":
-            lines.append("\n")
-        else:
-            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
+#    for i in xrange(len(tokens)):
+#        if fts[0][i] == "":
+#            lines.append("\n")
+#        else:
+#            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
                 
 #    for i in xrange(len(lines)):
 #        if len(lines[i])>1:
@@ -516,11 +517,12 @@ def history(conn, path, filename):
     for i in xrange(len(lines)):
         temp=lines[i].split(' : ')     
         tagindex=len(temp)-1
-        if temp[0]=='\n':            
+        if len(temp[0])<=5:            
             window.append('\n')
         else:
             temp[tagindex]=temp[tagindex].replace('1\t', '')            
             temp[tagindex]=temp[tagindex].replace('\n', '')
+            #devutil.keyboard()
             if not temp[tagindex]=='O':               
                 window.append(lines[i])
                 if flag==0:
@@ -533,7 +535,7 @@ def history(conn, path, filename):
                     if  (i+j) <len(tags):                                              
                         temp=lines[i+j].split(' : ')
                         tagindex=len(temp)-1
-                        if not temp[0]=='\n':                            
+                        if len(temp[0])>5:                            
                             temp[tagindex]=temp[tagindex].replace('1\t', '')
                             temp[tagindex]=temp[tagindex].replace('\n', '')   
                             #devutil.keyboard()
@@ -551,17 +553,17 @@ def history(conn, path, filename):
     # Writing to train file and train devel files    
     writingflag=0
     for i in range(len(lines)):
-        if len(lines[i])>2:
+        if len(lines[i])>5:
             trainfile.write(lines[i].encode('utf-8'))
             writingflag=1
         elif writingflag==1:
             trainfile.write('\n')
             writingflag=0
  
-   
+    
     writingflag=0
     for i in range(len(window)):
-        if len(window[i])>2:
+        if len(window[i])>5:
             traindevelfile.write(window[i].encode('utf-8'))
             writingflag=1
         elif writingflag==1:
@@ -732,7 +734,7 @@ def keywordtag(path, filename):
     return content
     
 
-def accuracy(path, filename):
+def accuracy(path, filename, tagset):
     
     standardfile=open(os.getcwd()+path+'/temp/'+filename+'.test.reference')
     firstfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
@@ -741,30 +743,28 @@ def accuracy(path, filename):
     
     standard=standardfile.read().splitlines()
     stan=[]
+ 
     
     for i in standard:
         line=i.split(' : ')
-        if len(line)>1:
-            tagindex=len(line)-1
-            break
-    
-    for i in standard:
-        line=i.split(' : ')
+        tagindex=len(line)-1        
         if line[0] and not line[0]=='\n':
-            line=line[tagindex].replace('1\t', '')
-            line=line.replace('\n', '')
+            line=line[tagindex].replace('1', '')
+            line=line.replace('\n', '')     
             stan.append(line)
         
     first=firstfile.read().splitlines()
     file1=[]
     for i in first:
         line=i.split(' : ')
+        tagindex=len(line)-1
         if line[0] and not line[0]=='\n':
             line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             file1.append(line)
     
-    tagset=[]
+    exclude=['O', 'START', 'STOP']
+    #tagset=[]
     a=0; b=0
     for i in range(len(stan)):
         if stan[i]==file1[i]:
@@ -772,11 +772,11 @@ def accuracy(path, filename):
         predictiontracker.write(stan[i]); predictiontracker.write('\t')
         predictiontracker.write(file1[i]); predictiontracker.write('\t')
         predictiontracker.write('\n')
-        if not stan[i]=='O' and not stan[i] in tagset:
-            tagset.append(stan[i])
+        #if not stan[i] in exclude and not stan[i] in tagset:
+            #tagset.append(stan[i])
     predictiontracker.close()
             
-    
+    print "a= %s \tlen(stan)= %s " % (a, len(stan))
     f1=(a/len(stan))*100
     print 'Original model accuracy is : ', f1
     
