@@ -1218,10 +1218,12 @@ class CRF(object):
         for key, value in performance['all'].items():
 
             print '\t%s (devel): %.2f' % (key, value)
-
+            
+            # acc_temp is collected for cross validation experiment purpose
+            acc_temp=value
         print
 
-        return
+        return self.feature_manager.num_features, acc_temp
 
 
 
@@ -1241,7 +1243,7 @@ class CRF(object):
 
         return
 
-
+   
 
 
 
@@ -1323,7 +1325,7 @@ if __name__ == "__main__":
         performance = performance_measure.evaluate(options.prediction_file, options.reference_file)
 
         for key, value in performance['all'].items():
-
+      
             print '\t%s (devel): %.2f' % (key, value)
 
         print

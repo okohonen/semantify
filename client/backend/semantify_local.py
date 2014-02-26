@@ -237,7 +237,7 @@ class Ortho(BlockFeatureFunction):
 
 
     def __init__(self):
-        self._feature_nm = ['word', 'wordlower', 'long', 'brief']
+        self._feature_nm = ['word', 'long', 'brief']
         self._feature_nm.extend(map(lambda s: s+"count", Ortho.namemap.values()))
         self._feature_nm.extend(map(lambda s: "has" + s, Ortho.namemap.values()))
 
@@ -245,7 +245,7 @@ class Ortho(BlockFeatureFunction):
         tlong, tbrief = Ortho.generalisation(token);
         chartypecounts = Ortho.countletters(tlong);
 
-        ret = {'word': (token, '1'), 'wordlower': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
+        ret = {'word': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
         for k in Ortho.namemap.keys():
             ret["%scount" % Ortho.namemap[k]] = ('', str(chartypecounts[k])) 
             ret["has%s" % Ortho.namemap[k]] = ('', str(int(chartypecounts[k] > 0)))
@@ -256,12 +256,12 @@ class Ortho(BlockFeatureFunction):
         return self._feature_nm
     
 
-def write_testfiles(path, filename, sentences):
+def write_testfiles(path, filename, sentences, labels):
     testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
     for i in range(len(sentences)):              
         testfile.write(sentences[i].encode('utf8'))        
-        testreferencefile.write(sentences[i].encode('utf8'))
+        testreferencefile.write((sentences[i]+labels[i]).encode('utf8'))
         if sentences[i] != "\n":
             testfile.write('\n')        
             testreferencefile.write('\n')            
@@ -734,7 +734,7 @@ def keywordtag(path, filename):
     return content
     
 
-def accuracy(path, filename):
+def accuracy(path, filename, tagset):
     
     standardfile=open(os.getcwd()+path+'/temp/'+filename+'.test.reference')
     firstfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
@@ -743,30 +743,28 @@ def accuracy(path, filename):
     
     standard=standardfile.read().splitlines()
     stan=[]
+ 
     
     for i in standard:
         line=i.split(' : ')
-        if len(line)>1:
-            tagindex=len(line)-1
-            break
-    
-    for i in standard:
-        line=i.split(' : ')
+        tagindex=len(line)-1        
         if line[0] and not line[0]=='\n':
-            line=line[tagindex].replace('1\t', '')
-            line=line.replace('\n', '')
+            line=line[tagindex].replace('1', '')
+            line=line.replace('\n', '')     
             stan.append(line)
         
     first=firstfile.read().splitlines()
     file1=[]
     for i in first:
         line=i.split(' : ')
+        tagindex=len(line)-1
         if line[0] and not line[0]=='\n':
             line=line[tagindex].replace('1\t', '')
             line=line.replace('\n', '')
             file1.append(line)
     
-    tagset=[]
+    exclude=['O', 'START', 'STOP']
+    #tagset=[]
     a=0; b=0
     for i in range(len(stan)):
         if stan[i]==file1[i]:
@@ -774,11 +772,11 @@ def accuracy(path, filename):
         predictiontracker.write(stan[i]); predictiontracker.write('\t')
         predictiontracker.write(file1[i]); predictiontracker.write('\t')
         predictiontracker.write('\n')
-        if not stan[i]=='O' and not stan[i] in tagset:
-            tagset.append(stan[i])
+        #if not stan[i] in exclude and not stan[i] in tagset:
+            #tagset.append(stan[i])
     predictiontracker.close()
             
-    
+    print "a= %s \tlen(stan)= %s " % (a, len(stan))
     f1=(a/len(stan))*100
     print 'Original model accuracy is : ', f1
     
