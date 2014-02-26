@@ -278,7 +278,7 @@ def nodeblocks(retfile, tokens, filterf):
     for line in retfile:
         if line == "\n":
             continue
-        if curnode != tokens[c][2]:
+        if not curnode is tokens[c][2]:
             if curfilterstat:
                 yield (curnode, curtags)
             curtags = []
