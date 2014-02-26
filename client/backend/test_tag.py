@@ -14,7 +14,7 @@ import devutil
 import zlib
 import nltk
 
-# Usage: ~/code/semantify/crfs_sri> python preprocess_file.py filename.html
+# Usage: ~/code/semantify/crfs_sri> python test_tag.py filename.html filename.prediction
 
 
 # htmlfeaturefuns = [semantify_local.descendants]
