@@ -261,7 +261,7 @@ def write_testfiles(path, filename, sentences, labels):
     testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
     for i in range(len(sentences)):              
         testfile.write(sentences[i].encode('utf8'))        
-        testreferencefile.write((sentences[i]+labels[i]).encode('utf8'))
+        testreferencefile.write((sentences[i]+"\t"+labels[i]).encode('utf8'))
         if sentences[i] != "\n":
             testfile.write('\n')        
             testreferencefile.write('\n')            
