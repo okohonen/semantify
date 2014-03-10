@@ -159,7 +159,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             value=0
             
             words, f_ortho1,  f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=semantify_local.preprocess_file(page, build_node_index = True)
-            semantify_local.write_testfiles(path, filename, sentences)                        
+            semantify_local.write_testfiles(path, filename, sentences, labels)                        
             
             print 'Devel files extracted' 
             print "load model"

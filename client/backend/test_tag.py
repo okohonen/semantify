@@ -26,6 +26,7 @@ fp = open(sys.argv[1])
 page = BeautifulSoup(fp)
 
 words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(page, build_node_index=True)
+semantify_local.write_testfiles("/data/application", "test_tag", sentences, labels)
 
 # Build test file
 # semantify_local.write_testfiles("", "Talviurheilu-KeltainenPorssi", sentences)
