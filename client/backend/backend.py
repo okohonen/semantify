@@ -12,15 +12,149 @@ from bs4 import BeautifulSoup
 from bs4 import NavigableString
 import bs4
 from datetime import datetime
+
 from crfs import *
 import sys  
-import zlib
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from sklearn import cross_validation
 import codecs
-#import devutil
+import devutil
 import collections
+import gzip
+
+def log(s):
+    sys.stderr.write(s)
+
+
+class Backend:    
+    conn = None
+    c = None
+    models = []
+
+    def __init__(self):
+        dbname = "semantify.db"
+        if os.path.exists("semantify.ini"):
+            dt = open("semantify.ini", "r").readlines()
+            dbname = dt[0].strip()
+            
+        dbfile = "data/index/%s.db" % dbname
+        log("Database file set to %s\n" % dbfile)
+
+        if not os.path.exists(dbfile):
+            os.system("sqlite3 %s <schema.sql" % dbfile)
+
+        self.conn = sqlite3.connect(dbfile)
+        self.c = self.conn.cursor()
+        self.c.execute("PRAGMA foreign_keys = ON;")
+        self.fetch_models()
+
+    def fetch_models(self):
+        names = self.c.execute("SELECT name FROM models;")
+        for row in names:
+            self.models.append(row[0])
+
+    def get_models(self):
+        return self.models
+
+    def add_model(self, model_name):        
+        self.c.execute("INSERT INTO models (name) VALUES (?)", (model_name, ))
+        self.models.append(model_name)
+
+    def get_page_annotated_version(self, url):
+        self.c.execute('''SELECT MAX(version) FROM pages_annotated WHERE url=?''', (url,))
+        r = self.c.fetchone()
+        return r[0]
+
+    def page_annotated_filename(self, model_name, page_id, is_body):
+        suffix = "htmlbody" if is_body else "html"
+        return "data/index/%s_%s.%s.gz" % (model_name, page_id, suffix)
+    
+    def page_feature_file(self, model_name, page_id, feature_set):
+        return "data/temp/%s_%s_%s.annotated.gz" % (model_name, page_id, feature_set)
+    
+    def insert_new_page_annotated(self, url, version, is_body, model_name, content):
+        self.c.execute('''INSERT INTO pages_annotated (url, timestamp, version, is_body, model_id) VALUES (?, DATETIME('now'), ?, ?, (SELECT id FROM models WHERE name=?))''', (url, version, "1" if is_body else "0", model_name))
+        page_id = self.c.lastrowid
+        self.conn.commit()
+
+        fname = self.page_annotated_filename(model_name, page_id, is_body)
+        assert(not(os.path.exists(fname)))
+        fp = gzip.open(fname, 'wb')
+
+        if type(content) == "str":
+            fp.write(content)
+        else:
+            for line in content:
+                fp.write(line)
+            
+        return page_id
+    
+    def update_page_annotated(self, page_id, url, version, is_body, model_name, content):
+        self.c.execute('''UPDATE pages SET url=?, timestamp=DATETIME('now'), version=?, is_body=?, model_id=(SELECT id FROM models WHERE name=?)) WHERE id=? ''', (url, version,  "1" if is_body else "0", model_name, page_id))
+        self.conn.commit()
+        fname = page_annotated_file(model_name, page_id, is_body)
+        os.system("rm %s" % fname)
+        assert(not(os.path.exists(fname)))
+        fp = gzip.open(fname, 'wb')
+        fp.write(content)
+
+    def make_experiment_datasets(self, trainsetf, develsetf, testsetf, model_name, feature_set, order_by = "id", sizes = (0.8, 0.1, 0.1)):
+        assert(sum(sizes) == 1)
+        self.c.execute("SELECT pa.id, pa.is_body FROM pages_annotated AS pa JOIN models ON pa.model_id=models.id WHERE name=? ORDER BY ?", (model_name, order_by))
+        # fileinfo = map(lambda x: (self.page_annotated_filename(model_name, x[0], x[1] == 1), x[0]), self.c.fetchall())
+        fileinfo = self.c.fetchall()
+        trainset = []
+        develset = []
+        testset = []
+
+        for i in range(len(fileinfo)):
+            if float(i) / len(fileinfo) < sizes[0]:
+                trainset.append(fileinfo[i])
+            elif float(i) / len(fileinfo) < sizes[0] + sizes[1]:
+                develset.append(fileinfo[i])
+            else:
+                testset.append(fileinfo[i])
+
+        self.build_data_set(model_name, trainsetf, trainset, feature_set);
+        self.build_data_set(model_name, develsetf, develset, feature_set);
+        self.build_data_set(model_name, testsetf, testset, feature_set);
+                                
+    def build_data_set(self, model_name, target_file, input_info, feature_set):
+        featurefiles = []
+        for page_id, db_is_body in input_info:
+            # Check if feature_file exists already
+            inputfile = self.page_annotated_filename(model_name, page_id, db_is_body == 1)
+            featurefile = self.page_feature_file(model_name, page_id, feature_set)
+            assert(os.path.exists(inputfile))
+            if not os.path.exists(featurefile):
+                log("Creating feature file '%s'\n" % featurefile)
+                if db_is_body == 1:
+                    inputpage = BeautifulSoup('<html><body>%s</body></html>' % gzip.open(inputfile).read())
+                else:
+                    inputpage = BeautifulSoup(gzip.open(inputfile))
+                self.create_feature_file(inputpage, featurefile, feature_set, annotated=True)
+            featurefiles.append(featurefile)
+        log("Aggregating data set in '%s'\n" % target_file)
+        os.system("zcat %s | gzip > %s" % (" ".join(featurefiles), target_file))
+        log("done\n")
+
+    def create_feature_file(self, inputpage, featurefile, feature_set, annotated=True):
+
+        words, f_ortho1, f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=preprocess_file(inputpage, build_node_index = False)
+        fp = gzip.open(featurefile, 'wb')
+        for i in xrange(len(sentences)):              
+            if sentences[i] == "\n":
+                fp.write("\n")
+            else:
+                fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
+
+        # Add newline at the end to facilitate concatenating files
+        fp.write("\n")
+
+        
+        
+
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
 class WordPunctTokenizer:
@@ -40,40 +174,6 @@ class WordPunctTokenizer:
             tokenend.append(m.end())
         return tokens, tokenstart, tokenend
 
-# Convert to utf-8 so zlib doesn't get confused
-def blobencode(s):
-    return zlib.compress(s.encode('utf8'))
-
-def blobdecode(s):
-    return zlib.decompress(s).decode('utf8')
-
-def insert_new_page(cursor, o, version, schema_id = 1):
-    cursor.execute('''INSERT INTO pages (url, body, timestamp, version, schema_id) VALUES (?, ?, DATETIME('now'), ?, ?)''', (o['url'], sqlite3.Binary(blobencode(o['content'])), version, schema_id))
-    return cursor.lastrowid
-
-def update_page(cursor, page_id, o):
-    cursor.execute('''UPDATE pages SET url=?, body=?, timestamp=DATETIME('now') WHERE id=? ''', (o['url'], sqlite3.Binary(blobencode(o['content'])), page_id))
-                
-
-def transactions(conn,  page_id, tokens, f_ortho1,  f_ortho3, f_html, tags):
-    c=conn.cursor()
-    schema_id = str(1)
-    page_id=str(page_id)
-    #devutil.keyboard()
-    # Running through all lines in page: tokenizing, adding to db
-    c.execute('BEGIN TRANSACTION')
-    c.execute('DELETE FROM tokens WHERE page_id=?',  (page_id, ))
-    c.execute('DELETE FROM features WHERE page_id=?',  (page_id,))
-    c.execute('DELETE FROM tags WHERE page_id=? AND schema_id=?',  (page_id,schema_id))
-    
-    c.execute("INSERT INTO tokens (page_id, val) VALUES (?, ?)",  (page_id, sqlite3.Binary(blobencode("\n".join(tokens)))))    
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho1'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho1)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='ortho3'),?)",  (page_id, sqlite3.Binary(blobencode('\n'.join(f_ortho3)))))
-    c.execute("INSERT INTO features (page_id, feature_set_id, val) VALUES (?, (SELECT id FROM feature_sets WHERE name='html'),?)",  (page_id,sqlite3.Binary(blobencode('\n'.join(f_html)))))    
-    c.execute("INSERT INTO tags (page_id, schema_id, val) VALUES (?, ?, ?)",  (page_id, schema_id, sqlite3.Binary(blobencode('\n'.join(tags)))))
- 
-    conn.commit()
-    return
 
 
 def class_features(node):
@@ -463,13 +563,12 @@ def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [O
     return words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens
 
     
-def history(conn, path, filename):    
+def history(conn, model_name, path, filename):    
     trainfile=open(os.getcwd()+path+'/temp/'+filename+'.train','w')
     traindevelfile=open(os.getcwd()+path+'/temp/'+filename+'.train.devel','w') 
     lines=[]
     
     c = conn.cursor()   
-    # c.execute("SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '*!*') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho3', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1")
     
     schema_id = str(1)
     tokens = []
@@ -477,102 +576,16 @@ def history(conn, path, filename):
     writingflag=0
     lines=[]
 
-    c.execute("SELECT pages.id, tokens.val, tags.val FROM pages JOIN tokens ON pages.id=tokens.page_id JOIN tags ON pages.id = tags.page_id AND pages.schema_id=tags.schema_id WHERE tags.schema_id=?", (schema_id,))    
-    for values in c.fetchall():
-        page_id = str(values[0])           
-        tokens=blobdecode(str(values[1]))
-        tags=blobdecode(str(values[2]))
-        
-        c2 = conn.cursor()
-        c2.execute("SELECT feature_sets.name, features.val FROM features JOIN feature_sets ON feature_set_id=feature_sets.id WHERE page_id=? AND feature_sets.name IN ('ortho3','html') ORDER BY page_id, feature_sets.id", (page_id,))
-     
+    c.execute("SELECT id, isbody FROM pages_annotated WHERE model_id=(SELECT id FROM models WHERE name=?)" % (model_name,))
+    orig_files = []
+    feature_files = []
 
-        fts = []
-        for features in c2.fetchall():             
-            fts.append(blobdecode(str(features[1])))   
-        
-        # Collecting list of lines to write to training file and devel file        
-        tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-        for i in range(len(tokens)):
-            lines.append(fts[0][i]+"\t"+fts[1][i]+"\t"+tags[i]+'\n')
+    for values in c.fetchall():
+        suffix = "htmlbody" if values[1] == 1 else "html"
+        orig_files.append("data/index/%s_%s.%s.gz" % (model_name, values[0], suffix))
+        feature_files.append("data/temp/%s_%s_%s.annotated.gz" % (model_name, values[0], feature_set))
+
     
-        
-    #tokens=tokens.split('\n'); fts[0]=fts[0].split('\n'); fts[1]=fts[1].split('\n'); tags=tags.split('\n')
-#    for i in xrange(len(tokens)):
-#        if fts[0][i] == "":
-#            lines.append("\n")
-#        else:
-#            lines.append('%s\t%s\t%s\n' % (fts[0][i], fts[1][i], tags[i]))
-                
-#    for i in xrange(len(lines)):
-#        if len(lines[i])>1:
-#            temp=lines[i].split(' : ')
-#            tagindex=len(temp)-1
-#            break
-#    print 'Index of label is :', tagindex
-   
-    # Cleaning out useless 'O' tags and maintaining only the ones within +/-10 tags limit for learning the transitions from 'O' to annotation value
-    flag=0; firsttagindex=0; window=[]; 
-    
-    for i in xrange(len(lines)):
-        temp=lines[i].split(' : ')     
-        tagindex=len(temp)-1
-        if len(temp[0])<=5:            
-            window.append('\n')
-        else:
-            temp[tagindex]=temp[tagindex].replace('1\t', '')            
-            temp[tagindex]=temp[tagindex].replace('\n', '')
-            #devutil.keyboard()
-            if not temp[tagindex]=='O':               
-                window.append(lines[i])
-                if flag==0:
-                    temp[tagindex]
-                    firsttagindex=i
-                    flag=1
-            else:
-                counter=0
-                for j in range(10):
-                    if  (i+j) <len(tags):                                              
-                        temp=lines[i+j].split(' : ')
-                        tagindex=len(temp)-1
-                        if len(temp[0])>5:                            
-                            temp[tagindex]=temp[tagindex].replace('1\t', '')
-                            temp[tagindex]=temp[tagindex].replace('\n', '')   
-                            #devutil.keyboard()
-                            if not temp[tagindex]=='O': 
-                                window.append(lines[i])
-                                break
-                            else:
-                                counter=counter+1
-                                if counter>8:
-                                    break
-                    else:
-                        break
-    
-    
-    # Writing to train file and train devel files    
-    writingflag=0
-    for i in range(len(lines)):
-        if len(lines[i])>5:
-            trainfile.write(lines[i].encode('utf-8'))
-            writingflag=1
-        elif writingflag==1:
-            trainfile.write('\n')
-            writingflag=0
- 
-    
-    writingflag=0
-    for i in range(len(window)):
-        if len(window[i])>5:
-            traindevelfile.write(window[i].encode('utf-8'))
-            writingflag=1
-        elif writingflag==1:
-            traindevelfile.write('\n')
-            writingflag=0
-    
-    trainfile.close()   
-    traindevelfile.close()       
-    return 1    
     
 def fetch_tagnames(page, tagindex):
     tagset=[]; tagdict=[]

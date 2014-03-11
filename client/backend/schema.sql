@@ -1,87 +1,34 @@
-CREATE TABLE schemas
-(id INTEGER PRIMARY KEY AUTOINCREMENT,
- name VARCHAR(100));
-
---CREATE TABLE pages
---(id INTEGER PRIMARY KEY AUTOINCREMENT,
---url TEXT,
---body TEXT,
---timestamp DATETIME,
---version INT,
---schema_id INT
---);
-
-CREATE TABLE pages
+CREATE TABLE pages_annotated
 (id INTEGER PRIMARY KEY AUTOINCREMENT,
 url TEXT,
-body BLOB,
 timestamp DATETIME,
 version INT,
-schema_id INT
+is_body BOOLEAN,
+model_id INT REFERENCES models(id) ON DELETE CASCADE
+-- Same page may be annotated for different model, then different page_id
 );
 
+CREATE UNIQUE INDEX pages_annotated_uvm ON pages_annotated (url, version, model_id);
+
+CREATE TABLE pages_unannotated
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+url TEXT,
+timestamp DATETIME,
+version INT,
+is_body BOOLEAN);
+
+CREATE UNIQUE INDEX pages_unannotated_uv ON pages_unannotated (url, version);
 
 
-CREATE UNIQUE INDEX pages_uvs ON pages (url, version, schema_id);
+CREATE TABLE models (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       name VARCHAR(50));
 
--- CREATE TABLE tokens
--- (id INTEGER PRIMARY KEY AUTOINCREMENT,
---  page_id INT,
---  val VARCHAR(50),
---  FOREIGN KEY(page_id) REFERENCES pages(id) ON DELETE CASCADE);
+CREATE UNIQUE INDEX models_n ON models (name);
 
-CREATE TABLE tokens
- (id INTEGER PRIMARY KEY AUTOINCREMENT,
-  page_id INT,
-  val BLOB,
-  FOREIGN KEY(page_id) REFERENCES pages(id) ON DELETE CASCADE);
+CREATE TABLE model_features (
+       name VARCHAR(50),
+       model_id INT REFERENCES models(id) ON DELETE CASCADE);
 
-CREATE TABLE feature_sets
- (id INTEGER PRIMARY KEY AUTOINCREMENT,
- name VARCHAR(100));
---  
--- CREATE TABLE features
--- (token_id INT,
---  line TEXT,
---  feature_set_id INT,
---  FOREIGN KEY(token_id) REFERENCES tokens(id) ON DELETE CASCADE,
---  FOREIGN KEY(feature_set_id) REFERENCES feature_sets(id));
-
-CREATE TABLE features
-(page_id INT,
- feature_set_id INT,  
- val BLOB,
- FOREIGN KEY(page_id) REFERENCES pages(id) ON DELETE CASCADE,
- FOREIGN KEY(feature_set_id) REFERENCES feature_sets(id));
-
-CREATE UNIQUE INDEX features_pf ON features (page_id, feature_set_id);
-
---  CREATE TABLE tags 
---  (schema_id INT,
---    token_id INT, 
---    val VARCHAR(100),
---  FOREIGN KEY(token_id) REFERENCES tokens(id) ON DELETE CASCADE,
---  FOREIGN KEY(schema_id) REFERENCES schemas(id));
-
-CREATE TABLE tags 
-(page_id INT, 
- schema_id INT,
- val BLOB,
-FOREIGN KEY(page_id) REFERENCES pages(id) ON DELETE CASCADE,
-FOREIGN KEY(schema_id) REFERENCES schemas(id) ON DELETE CASCADE);
-
-INSERT INTO schemas (id, name) VALUES (1, 'default');
-INSERT INTO feature_sets (name) VALUES ('ortho1');
-INSERT INTO feature_sets (name) VALUES ('ortho3');
-INSERT INTO feature_sets (name) VALUES ('html');
-
---drop table ortho1html;
---drop table ortho3;
---drop table ortho3html;
---drop table features;
---drop table feature_sets;
---drop table tokens;
---drop table pages;
---drop table tags;
 
 -- SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '\t') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho1', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1;

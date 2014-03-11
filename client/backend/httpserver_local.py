@@ -5,7 +5,7 @@ import json
 import os
 import string
 #from models import *
-import semantify_local
+import backend
 from crfs import *
 import sqlite3, shlex, subprocess,  sys,  re,  time
 from bs4 import BeautifulSoup
@@ -19,17 +19,8 @@ import zlib
 
 PORT = 50010
 
-if len(sys.argv) < 2:
-    sys.exit("Usage httpserver_local.py dbfile")
+b = backend.Backend()
 
-dbname=sys.argv[1]
-
-if not os.path.exists(dbname):
-    os.system("sqlite3 %s <schema.sql" % dbname)
-
-conn = sqlite3.connect(dbname)
-c = conn.cursor()
-c.execute("PRAGMA foreign_keys = ON;")
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
 path='/data/application/'
@@ -91,14 +82,13 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # 3. We want to create a new version to edit
         
             # Case 3.
-            if o.has_key("create_new"):
-                c.execute('''SELECT MAX(version) FROM pages WHERE url=? AND schema_id=?''', (o['url'], schema_id))
-                if c.rowcount > 0:
-                    r = c.fetchone()
-                    version = r[0] + 1;
-                else:
+            if o.has_key("create_new"):                
+                cur_version = b.get_page_annotated_version(o['url'])
+                if cur_version is None:
                     version = 1;
-                semantify_local.insert_new_page(c, o, version);
+                else:
+                    version = cur_version + 1;
+                b.insert_new_page_annotated(o['url'], version, True, o['model_name'], o['content']);
         
             # Case 2.
             if o.has_key("version"):
@@ -109,7 +99,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     raise ValueError("Cannot use version that does not exist")
                 else:
                     page_id = r[0];
-                    semantify_local.update_page(c, page_id, o)
+                    b.update_page(c, page_id, o)
                 
             # Case 1.
             else:
@@ -117,18 +107,22 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 r = c.fetchone()                
                 if r is None:
                     # Here we are doing the first insertion
-                    page_id = semantify_local.insert_new_page(c, o, 1)
+                    page_id = b.insert_new_page(c, o, 1)
                 else:
                     page_id = r[0];
-                    semantify_local.update_page(c, page_id, o)
+                    b.update_page(c, page_id, o)
             conn.commit()       
         
+            if b.has_current_training_file(model_name, feature_set):
+                incremental_train_add(training_file, devel_file, devel_label_distr, file_to_add, "%s.train.gz" % model_name, "%s.devel.gz" % model_name)
+            else:
+                # Rebuild incrementally so we get the same results even if we must rebuild
+                build_training_set(conn, model_name, feature_set)
+
         
             # Trains a model with received annotations  
-            value=0              
-            words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=semantify_local.preprocess_file(page)
-            semantify_local.transactions(conn,  page_id, words, f_ortho1,  f_ortho3, f_html, labels)
-            value=semantify_local.history(conn, path, filename)         
+            # words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=b.preprocess_file(page)
+            value=b.history(conn, path, filename)         
             if value==1:
                 print "initialize model"
                 m = CRF()
@@ -158,8 +152,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Applies tags to the web page      
             value=0
             
-            words, f_ortho1,  f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=semantify_local.preprocess_file(page, build_node_index = True)
-            semantify_local.write_testfiles(path, filename, sentences, labels)                        
+            words, f_ortho1,  f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=b.preprocess_file(page, build_node_index = True)
+            b.write_testfiles(path, filename, sentences, labels)                        
             
             print 'Devel files extracted' 
             print "load model"
@@ -179,11 +173,11 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
 
-            nodes_to_tag = semantify_local.extract_tagged_nodes(retfile, tokens)
+            nodes_to_tag = b.extract_tagged_nodes(retfile, tokens)
             print "Nodes to tag: %d" % len(nodes_to_tag)
             print nodes_to_tag
 
-            semantify_local.apply_tagging(page, nodes_to_tag, node_index)
+            b.apply_tagging(page, nodes_to_tag, node_index)
             
             successlog.write(filename)
             successlog.write('\t')
