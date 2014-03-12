@@ -141,7 +141,7 @@ class Backend:
 
     def create_feature_file(self, inputpage, featurefile, feature_set, annotated=True):
 
-        words, f_ortho1, f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=preprocess_file(inputpage, build_node_index = False)
+        words, f_ortho1, f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=preprocess_file(inputpage, feature_set, build_node_index = False)
         fp = gzip.open(featurefile, 'wb')
         for i in xrange(len(sentences)):              
             if sentences[i] == "\n":
@@ -150,10 +150,7 @@ class Backend:
                 fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
 
         # Add newline at the end to facilitate concatenating files
-        fp.write("\n")
-
-        
-        
+        fp.write("\n")   
 
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
@@ -484,9 +481,36 @@ def window(start, end, t, sent, featurenames, featgroup):
         if t+i >= 0 and t+i < len(sent) - 1:
             s += "\t" + write_feature_line(featurenames, sent[t+i][featgroup], timesuffix)
     return s
-            
-def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [Ortho()], build_node_index=False):        
+
+def parse_feature_set_desc(s):
+    featuregroups = s.split("+")
+    try:
+        ret = map(lambda st: re.match("([a-z]+)([0-9])", st).groups(), featuregroups)
+        ret = map(lambda x: (x[0], int(x[1])), ret)
+        return ret
+    except AttributeError:
+        raise ValueError("'%s' is not a valid feature set description" % s)
+
+def feature_set_to_feature_function(parsed_feature_set):
+    feature_set_descr = []
+    htmlfeaturefuns = []
+    tokenfeaturefuns = []
+    for feature_name, window_size in parsed_feature_set:
+        if feature_name == "ortho":
+            blockf = Ortho()
+            tokenfeaturefuns.append(blockf)
+            feature_set_descr.append((feature_name, window_size, blockf, (0, len(tokenfeaturefuns) - 1)))
+        elif feature_name == "html":
+            blockf = Descendants()
+            htmlfeaturefuns.append(blockf)
+            feature_set_descr.append((feature_name, window_size, blockf, (1, len(htmlfeaturefuns) - 1)))
+    return (htmlfeaturefuns, tokenfeaturefuns, feature_set_descr)
+
+def preprocess_file(page, feature_set, build_node_index=False):        
     nodes = []
+
+    parsed_feature_set = parse_feature_set_desc(feature_set)
+    htmlfeaturefuns, tokenfeaturefuns, feature_set_descr = feature_set_to_feature_function(parsed_feature_set)
 
     nodelist = htmlparse(page)
 
@@ -503,57 +527,24 @@ def preprocess_file(page, htmlfeaturefuns=[Descendants()], tokenfeaturefuns = [O
     for sent in sentence_split(tokens):
         for t in range(len(sent)):
             words.append(sent[t][0]["word"][0])
-            f_ortho1.append(write_feature_line(tokenfeaturefuns[0].feature_names(), sent[t][0], '(t)'))
             
-            htmlf = write_feature_line(htmlfeaturefuns[0].feature_names(), sent[t][1], '(t)')
-            f_html.append(htmlf)
+            line = []
+            for feature_name, window_size, blockfeaturef, feature_addr in feature_set_descr: 
+                if window_size == 1:
+                    wstart = 0
+                    wend = 0
+                else:
+                    wstart = -(window_size // 2);
+                    wend = window_size // 2;
+                line.append(window(wstart, wend, t, sent, blockfeaturef.feature_names(), feature_addr[0]))
 
-            ortho3f = window(-1, 1, t, sent, tokenfeaturefuns[0].feature_names(), 0)
-            f_ortho3.append(ortho3f)
-            sentences.append(ortho3f + "\t" + htmlf)
+            sentences.append("\t".join(line))
 
             labels.append(tags[c])
             c += 1
         sentencec += 1
         words.append('\n'); f_ortho1.append('\n'); f_ortho3.append('\n'); f_html.append('\n'); labels.append('\n'); sentences.append('\n')   
 
-    # c = 0
-    # 
-    # # Split sentences based on '.' and tag name not being in nonblocktags list
-    # for t in xrange(len(tokens)):        
-    #     if '.' in  tokens[t][0]['word(t)'] or not tokens[t][2].parent.name in nonblocktags:   
-    # 
-    # 
-    #         if len(sentencetemp)>0:
-    #             sentences.extend(sentencetemp)                              
-    #             words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
-    #             sentences.extend('\n')   
-    #             words.extend('\n'); f_ortho1.extend('\n'); f_ortho3.extend('\n'); f_html.extend('\n'); labels.extend('\n')
-    #             sentencetemp=[]  
-    #             wordstemp=[]; f_ortho1temp=[]; f_ortho3temp=[]; f_htmltemp=[]; labeltemp=[]                  
-    #             nodes.append(nodestemp)
-    #             nodestemp = []
-    #             c += 1
-    # 
-    #     previousword='na'; nextword='na'; previouslong='na'; previousbrief='a'; nextlong='na'; nextbrief='a'            
-    #     if t>0:
-    #         previousword=tokens[t-1][0]['word(t)']; previouslong, previousbrief= generalisation(tokens[t-1][0]['word(t)'])         
-    #     if t+1<len(tokens):
-    #         nextword=tokens[t+1][0]['word(t)']; nextlong, nextbrief=generalisation(tokens[t+1][0]['word(t)'])
-    #     
-    #     line='word(t)='+tokens[t][0]['word(t)']+' : 1\tiscapital : '+tokens[t][0]['iscapital']+'\tisnumber : '+tokens[t][0]['isnumber'] +'\thasnumber : '+tokens[t][0]['hasnumber']+'\thassplchars : '+tokens[t][0]['hassplchars']+'\t'            
-    #     ortho1='long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\t'    
-    #     ortho3= 'long='+tokens[t][0]['long']+' : 1\tbrief='+tokens[t][0]['brief']+' : 1\tpreviousword='+previousword+' : 1\tpreviouslong='+previouslong+' : 1\tpreviousbrief='+previousbrief+' : 1\tnextword='+nextword+' : 1\tnextlong='+nextlong+' : 1\tnextbrief='+nextbrief+' : 1\t'
-    #     html= 'parentname='+tokens[t][1]['parentname']+' : 1\tgrandparentname='+tokens[t][1]['grandparentname']+' : 1\tgreatgrandparentname='+tokens[t][1]['greatgrandparentname']+' : 1\tclassname='+tokens[t][1]['classname']+' : 1\tclasslong='+tokens[t][1]['classlong']+' : 1\tclassbrief='+tokens[t][1]['classbrief']+' : 1\tdescendants='+tokens[t][1]['descendants']+' : 1\t'
-    # 
-    #     sentencetemp.append(line+ortho3+html+'\n')               
-    #     wordstemp.append(line); f_ortho1temp.append(ortho1); f_ortho3temp.append(ortho3); f_htmltemp.append(html); labeltemp.append(tags[t])
-    #     nodestemp.append(tokens[t][2])
-    # 
-    # # Last sentence
-    # if len(sentencetemp)>0:        
-    #     sentences.extend(sentencetemp)                              
-    #     words.extend(wordstemp); f_ortho1.extend(f_ortho1temp); f_ortho3.extend(f_ortho3temp); f_html.extend(f_htmltemp); labels.extend(labeltemp)
 
     print "Tokens after sentence split"
     print len(sentences), len(words),  len(f_ortho1),  len(f_ortho3),  len(f_html),  len(labels) 
