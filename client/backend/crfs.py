@@ -391,7 +391,10 @@ class Parser(object):
 
     def open(self):
 
-        self.FILE = open(self.data_file, 'r')
+        if self.data_file[-3:] == ".gz":
+            self.FILE = gzip.open(self.data_file, 'r')
+        else:
+            self.FILE = open(self.data_file, 'r')
 
         return
 

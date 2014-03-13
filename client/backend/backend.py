@@ -99,7 +99,7 @@ class Backend:
         fp = gzip.open(fname, 'wb')
         fp.write(content)
 
-    def make_experiment_datasets(self, trainsetf, develsetf, testsetf, model_name, feature_set, order_by = "id", sizes = (0.8, 0.1, 0.1)):
+    def make_experiment_datasets(self, trainsetf, develsetf, testsetreff, testsetf, model_name, feature_set, order_by = "id", sizes = (0.8, 0.1, 0.1)):
         assert(sum(sizes) == 1)
         self.c.execute("SELECT pa.id, pa.is_body FROM pages_annotated AS pa JOIN models ON pa.model_id=models.id WHERE name=? ORDER BY ?", (model_name, order_by))
         # fileinfo = map(lambda x: (self.page_annotated_filename(model_name, x[0], x[1] == 1), x[0]), self.c.fetchall())
@@ -118,7 +118,22 @@ class Backend:
 
         self.build_data_set(model_name, trainsetf, trainset, feature_set);
         self.build_data_set(model_name, develsetf, develset, feature_set);
-        self.build_data_set(model_name, testsetf, testset, feature_set);
+        self.build_data_set(model_name, testsetreff, testset, feature_set);
+
+        log("Creating test file '%s'\n" % testsetf)
+        self.striplabel(testsetreff, testsetf)
+
+    # Create an unlabeled version of a file by stripping its label
+    def striplabel(self, inputf, targetf):
+        # Build testfile by stripping the label from the test reference file
+        fpr = gzip.open(inputf)
+        fpw = gzip.open(targetf, "wb")
+        for line in fpr:
+            parts = line.split("\t")
+            fpw.write("\t".join(parts[:len(parts)-1]))
+            fpw.write("\n")
+        fpr.close()
+        fpw.close()
                                 
     def build_data_set(self, model_name, target_file, input_info, feature_set):
         featurefiles = []
@@ -148,10 +163,6 @@ class Backend:
                 fp.write("\n")
             else:
                 fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
-
-        # Add newline at the end to facilitate concatenating files
-        fp.write("\n")   
-
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
 class WordPunctTokenizer:
