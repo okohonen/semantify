@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html class=" js no-flexbox no-touch hashchange history" style="" version="HTML+RDFa 1.1" lang="fi"><head xmlns:og="http://opengraphprotocol.org/schema/">
+		<meta http-equiv="X-UA-Compatible" content="IE=100">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Viktoria senkki 90 - avoin - 50.00 € - Kaapit - Huonekalut - Koti - Huuto.net</title>		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="fi">
+<meta name="og:site_name" content="Huuto.net">
+<meta name="og:title" content="Viktoria senkki 90">
+<meta name="og:type" content="product">
+<meta name="og:url" content="http://www.huuto.net/fresco/kohteet/viktoria-senkki-90/282110750">
+<meta name="og:image" content="http://kuvat2.huuto.net/f/3b/e3466b782ceacded99e773d474c5f-orig.jpg">
+<meta name="og:description" content="Viktoria senkki 90x42x93, vanilja/mänty. (myynnissä myös lasten sänky ja Viktoria tv-taso, vanilja/mänty)">		<link href="/module/fresco/css/styles.css" media="all" rel="stylesheet" type="text/css">				<script type="text/javascript" async="" src="http://dnn506yrbagrg.cloudfront.net/pages/scripts/0010/8577.js?383336"></script><script src="http://www.google-analytics.com/ga.js" async="" type="text/javascript"></script><script src="//platform.twitter.com/widgets.js" id="twitter-wjs"></script><script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/module/fresco/js/modernizr.custom.min.js"></script>
+<script type="text/javascript" src="/module/fresco/js/event.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-typeahead.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-transition.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-carousel.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-collapse.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-popover.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-alert.js"></script>
+<script type="text/javascript" src="/module/fresco/bootstrap/js/bootstrap-tab.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+	function updateModalParams() {
+		var modalContentUrl = '/tarjoa/bidmodals/id/282110750';
+		var offerAmount = $('#offerAmount').val();
+		var useAutoBid = $('#automate').is(':checked') ? 1 : 0;
+		modalContentUrl += '/offer/' + offerAmount + '/automate/' + useAutoBid;
+		$('#offerForm .btn').attr('href', modalContentUrl);
+	}
+
+	function itemImageModalResize(size) {
+		var imageModal = $('#imageModal');
+		var activeImage = $(imageModal).find('.item.active img').eq(0);
+		var size = size || naturalImageSize(activeImage);
+		var maxModalSize = 0.90;
+		var aspectRatio;
+		var maxWidth;
+		var extraHeight;
+		var desiredHeight;
+		var imageHeight;
+		var targetHeight;
+		var padding = imageModal.outerWidth() - imageModal.width();
+
+		desiredHeight = $('body').height() * maxModalSize;
+
+		if (!(activeImage.height() == 0)) {
+			extraHeight = (imageModal.outerHeight() - activeImage.height());
+		} else {
+			// Fallback for when active image is not fully loaded
+			extraHeight = (imageModal.outerHeight() - Math.min(size.height, desiredHeight));
+		}
+
+		targetHeight = (desiredHeight - extraHeight - padding);
+
+		if (activeImage && activeImage.height() != 0 && size && size.width !== 0 && size.height !== 0) {
+			aspectRatio = size.width / size.height;
+
+			imageHeight = Math.min(targetHeight, size.height);
+			maxWidth = Math.min(imageHeight * aspectRatio, $('body').width() * maxModalSize);
+
+			imageModal.width(maxWidth);
+		}
+	}
+
+	function naturalImageSize(img) {
+		if ($.isEmptyObject(img)) { return undefined; }
+
+		var domElem = $(img)[0];
+
+		if (domElem.naturalWidth && domElem.naturalHeight) {
+			return {
+				'width': domElem.naturalWidth,
+				'height': domElem.naturalHeight
+			};
+		} else {
+			// Fallback for IE8 and older browsers
+			getImageSizeFromClone(img);
+
+			return undefined;
+		}
+    }
+
+	function getImageSizeFromClone(img) {
+		var newImg = new Image();
+
+		$(newImg).one('load', function() {
+			itemImageModalResize({
+				'width': newImg.width,
+				'height': newImg.height
+			});
+		});
+
+		newImg.src = $(img).attr('src'); // this must be done AFTER setting onload
+
+		return img;
+	}
+
+	$(document).ready(function () {
+		
+		$('#offerAmount').change(function(){
+			updateModalParams();
+		});
+		$('#automate').change(function(){
+			updateModalParams();
+		});
+
+				$('#offerModalAuction, #offerModalBuyNow').on('hidden', function () {
+			$(this).removeData('modal');
+		});
+
+		
+		// Open original image link
+		$('#imageModalOpenImageLink').on('click', function() {
+			$(this).attr("href", $('#imageModal .active img').attr("src"));
+			return true;
+		});
+
+		$('#imageModal').on('shown slid slide', function() {
+			itemImageModalResize();
+		});
+
+		$(window).on('resize orientation', function() {
+			if ($('#imageModal').is(':visible')) {
+				itemImageModalResize();
+			}
+		});
+
+		$('#imageModal .thumbnails img').on('click', function() {
+			var index = $('#imageModal .thumbnails img').index(this);
+			$('#modalCarousel').carousel(index);
+		});
+
+		$('#mainImage a').click(function(){
+			$('#modalCarousel').carousel(0);
+		});
+
+		$('#mainThumbnails a').click(function(){
+			$('#modalCarousel').carousel($(this).index() + 1);
+		});
+
+		$('#mainThumbnails a').hover(
+			function () {
+				$('#mainImageCarousel').carousel($(this).index() + 1);
+			},
+			function () {
+			}
+		);
+
+		$('#mainThumbnails').hover(
+			function () {
+			},
+			function () {
+				$('#mainImageCarousel').carousel(0);
+			}
+		);
+
+		$('.carousel').carousel({
+			interval: false
+		})
+
+			});
+    //-->
+</script>
+<script type="text/javascript" src="/module/fresco/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //<!--
+    		
+
+    //-->
+</script>
+<script type="text/javascript">
+    //<!--
+    	$(document).ready(function () {
+		updateMessageCharCount();
+	
+		$('#message').bind('change keyup paste load', function () {
+			updateMessageCharCount();
+		});
+	});
+	
+	function updateMessageCharCount() {
+		$('#messageCharCount').html(2000 - $('#message').val().length);	
+	}
+    //-->
+</script>
+<script type="text/javascript">
+    //<!--
+    	$(document).ready(function() {							
+		$(".fonectaMapLink").click(function() {
+			try {
+				analyticTracking("Huuto-net showitem - Fonecta map", "overlay-click");
+			} catch(err){
+				// console.debug(err);
+			}
+		});
+	});
+    //-->
+</script>
+<script type="text/javascript" src="/module/fresco/js/question.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+var urlAnswer = '/kysymykset/answer';
+var urlQuestion = '/kysymykset/question';
+var urlSendQuestion = '/kysymykset/sendquestion';
+var urlSaveAnswer = '/kysymykset/sendanswer';
+var urlEdit = '/kysymykset/edit';
+
+    //-->
+</script>
+<script type="text/javascript">
+    //<!--
+    window.embedjs=function(c,g){function h(){window.hasLoaded=!0}function i(a){return["<head></head><body onload=\"var d=document;d.getElementsByTagName('head')[0].appendChild(d.createElement('script')).src='",a,"'\"></body>"].join("")}window.addEventListener?window.addEventListener("load",h,!1):window.attachEvent("onload",h);var d=document.body;if(!d)return setTimeout(function(){embedjs(c,g)},100);var b=document.location.protocol;b=(b=="https:"?b:"http:")+"//"+c+g;var e=document.createElement("div"),
+k=e.appendChild(document.createElement("div")),a=document.createElement("iframe");e.style.display="none";d.insertBefore(e,d.firstChild).id="embedjs-"+c;a.frameBorder="0";a.id="embedjs-frame-"+c;/MSIE[ ]+6/.test(navigator.userAgent)&&(a.src="javascript:false");a.allowTransparency="true";k.appendChild(a);var f;try{a.contentWindow.document.open()}catch(l){f="javascript:var d=document.open();d.domain='"+document.domain+"';",a.src=f+"void(0);"}try{var j=a.contentWindow.document;j.write(i(b));j.close()}catch(m){a.src=
+f+'d.write("'+i(b).replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}};
+ 
+embedjs('connect.nosto.com', '/include/huutonet');
+    //-->
+</script>		<!--[if lt IE 9]>
+			<script src="/module/fresco/js/html5shiv-printshiv.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="http://cts.sanoma.fi/service/js/huuto-net/Koti_Huonekalut_Kaapit_kohde/"></script><script type="text/javascript"> try { cts = new Tagging(); } catch (err) { cts.log(err); } </script><script type="text/javascript"> try { cts.render("head"); } catch (err) { cts.log(err); } </script><script type="text/javascript">var adpt_src = (window.location.protocol === "https:") ? 'https://files.snstatic.fi/VMM' : 'http://files.snstatic.fi/VMM';document.write('<scr'+'ipt type="text/javascript" src="'+adpt_src+'/js/sanoma_bt.js"></scr'+'ipt>');</script><script type="text/javascript" src="http://files.snstatic.fi/VMM/js/sanoma_bt.js"></script><script type="text/javascript">var adt_url = (window.location.protocol === "https:") ? 'https://secserv.adtech.de' : 'http://adserver.adtech.de';var adt_tagprefix = (''.length>0) ? ''.replace(/[, ]+/gi,'+') + "+" : '';var adt_tag = (''.length>0) ? ''.replace(/[, ]+/gi,'+') : '';var adt_tags = (adt_tagprefix+adt_tag).length>0 ? ('key=' + adt_tagprefix + adt_tag +';').replace(/[, ]+/gi,'+') : '';var adt_keyval = (typeof(adptkwresp) != 'undefined') ? window.adptkwresp : '';if (window.adgroupid == undefined) { window.adgroupid = Math.round(Math.random() * 1000); }document.write('<scr'+'ipt type="text/javascript" src="'+adt_url+'/multiad/3.0/969.1/0/0/-1/ADTECH;mode=multiad;'+adt_tags+adt_keyval+'grp='+window.adgroupid+';misc='+new Date().getTime()+';alias=ht_koti_huonekalut_kaapit_kohde_box1,ht_koti_huonekalut_kaapit_kohde_jb1,ht_koti_huonekalut_kaapit_kohde_st1"></scr'+'ipt>');</script><script type="text/javascript" src="http://adserver.adtech.de/multiad/3.0/969.1/0/0/-1/ADTECH;mode=multiad;grp=498;misc=1380013119421;alias=ht_koti_huonekalut_kaapit_kohde_box1,ht_koti_huonekalut_kaapit_kohde_jb1,ht_koti_huonekalut_kaapit_kohde_st1"></script>
+	<style id="adfrom-styleSheet-adbox-static" type="text/css"></style><style id="adfrom-styleSheet-adbox" type="text/css"></style><script src="http://pagead2.googlesyndication.com/pagead/osd.js" type="text/javascript"></script><style type="text/css">.frosmo-inline form{background-color:#fff;}.frosmo-inline .banner-link{text-decoration:none;color:#000;min-height:45px;padding:10px 0 5px!important;background-color:white;border:none;padding:0;text-align:left;width:100%;}.frosmo-inline button.banner-link{cursor:pointer;}#firsttime.frosmo-inline .banner-link{min-height:90px;}.frosmo-inline .text-header{font-size:18px;font-weight:bold;margin-bottom:5px;display:block;}.frosmo-inline .text-content{font-size:13px;font-weight:normal;}.frosmo-inline .text-content img{display:inline-block!important;vertical-align:top;margin:0 5px;}.frosmo-inline .text-content .text-wrap{display:inline-block;vertical-align:top;max-width:330px;font-weight:normal;}.frosmo-inline .float{height:100%;display:block;vertical-align:top;}.frosmo-inline .float.left{width:680px;padding:0 10px 0 20px;float:left;}.frosmo-inline .float.right{width:220px;text-align:left;float:right;}.frosmo-inline .float .btn{margin-top:10px;}.frosmo-inline .float .btn a:hover{color:#fff;text-decoration:none;}#firsttime.frosmo-inline form{min-height:140px;}.frosmo-inline .text-content{font-size:14px;}.frosmo-inline .text-content img{display:inline-block!important;margin:0 10px 5px 10px;}.frosmo-inline .text-content .text-wrap{max-width:510px;}.frosmo-modal .text-header{display:none;}.frosmo-modal .float.left{float:none;max-width:520px;}.frosmo-modal .float.right{float:none;width:100%;text-align:center;}.frosmo-modal .float.left .text-wrap{max-width:360px;}.frosmo-modal .text-content img{margin:20px 10px 0 0;}#gallerylist-form.frosmo-inline .pmm-message{background-color:#e5f3fb;}.teaser #gallerylist-form.frosmo-inline .pmm-message{padding:8px 0 0 0;}.teaser #gallerylist-form.frosmo-inline .pmm-message p{margin-top:-8px;}.teaser #gallerylist-form.frosmo-inline .pmm-message.frosmo-ready p{margin-top:0;}#questions .frosmo-inline .pmm-message{margin-bottom:20px;}#published .frosmo-inline .pmm-message{margin-top:20px;}#frosmo-inline-top-simple{margin-top:-2px;background:#e8e9ea;border-left:5px solid #1a2a33;padding:4px 0 4px 20px;display:none;font-size:12px;margin-bottom:22px;}#frosmo-inline-top-simple.position-userAdList{margin-top:7px;margin-bottom:10px;}#frosmo-inline-top-simple.position-ownPage{margin-top:-4px;margin-bottom:20px;}#frosmo-inline-top-simple .pmm-title{display:none;}#frosmo-inline-top-simple a{color:#0285d6;font-weight:bold;}#frosmo-inline-top-simple a:hover{text-decoration:underline;}#frosmo-inline-top-simple a.btn{color:inherit;font-weight:inherit;}#frosmo-inline-top-simple a[data-dismiss=alert]{display:block;width:15px;height:15px;float:right;margin:0 12px;}#frosmoPopup{display:none;position:absolute;top:300px;left:300px;background-color:#fff;-moz-opacity:1;opacity:1;filter:alpha(opacity=100);border:1px solid #000;z-index:1002;-moz-box-shadow:0 0 30px #000;-webkit-box-shadow:0 0 30px #000;box-shadow:0 0 30px #000;max-height:90%;overflow:auto;}#frosmoPopupHeader{background-repeat:no-repeat;}#frosmoPopupClose{display:block;position:absolute;background-repeat:no-repeat;}#frosmoPopupBackground{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:#000;z-index:1001;-moz-opacity:.7;opacity:.70;filter:alpha(opacity=70);}</style><base href="http://www.huuto.net/kohteet/viktoria-senkki-90/282110750"></head>
+
+	<body onbeforeunload="" data-twttr-rendered="true" class="fluid"><div id="embedjs-connect.nosto.com" style="display: none;"><div><iframe id="embedjs-frame-connect.nosto.com" frameborder="0"></iframe></div></div>
+		<div id="outer-wrapper">
+			<div style="margin-bottom: 73px;" id="adtop">
+				<div class="container">
+					<script type="text/javascript">	try { cts.render("top"); } catch (err) { cts.log(err); } </script><script type="text/javascript">ADTECH_showAd("ht_koti_huonekalut_kaapit_kohde_jb1", document, false);</script><script language="javascript" src="http://track.adform.net/adfscript/?bn=2371044;click=http://adserver.adtech.de/adlink/969/3879757/0/225/AdId=9470503;BnId=1;itime=13118330;nodecode=yes;link=;ord=13118330;">
+</script><script type="text/javascript" src="http://s1.adform.net/banners/scripts/bootstrap/Adform.Bootstrap.js?v=140"></script><script type="text/javascript" src="http://track.adform.net/adfserve/?bn=2371044;click=http://adserver.adtech.de/adlink/969/3879757/0/225/AdId=9470503;BnId=1;itime=13118330;nodecode=yes;link=;ord=13118330;;js=1;adfxid=1x;4955;set=en-US%7Cen-US%7C1280X1024%7C11.2%7C1250%7C900%7C24%7C6%7C3%7C7%7C0&amp;CREFURL=http%3a%2f%2fwww.huuto.net%2fkohteet%2fviktoria-senkki-90%2f282110750"></script><script type="text/javascript" src="http://s1.adform.net/Banners/scripts/rmb/Adform.RMB.js?version=1-140"></script><div style="width: 980px; height: 120px; left: 0px; top: 0px;" id="adform-adbox-2r7y3nc2h0o" class="adform-adbox adform-adbox-static adform-adbox-static-T adform-adbox-static-I adform-domevents-hover-2a9y3ymn7eh"><div style="position:relative;width:100%;height:100%;overflow:hidden"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" id="adAdform2xtooprxfio" width="980" height="120"><param name="movie" value="http://s1.adform.net/Banners/3066931/3066931.swf?bv=1-140"><param name="version" value="8"><param name="play" value="true"><param name="menu" value="false"><param name="loop" value="true"><param name="quality" value="autohigh"><param name="wmode" value="opaque"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"><param name="flashvars" value="cid=0&amp;geo=2560%3B28312%3B246&amp;gid=0&amp;tv=0&amp;tid=0&amp;domain=http%3A%2F%2Ftrack.adform.net%2Fbanners%2F&amp;bv=1-140&amp;ADFid=1x&amp;ADFcmpgnID=121020&amp;ADFmembID=378404&amp;ADFbanID=3066931&amp;ADFbanPlacID=763254&amp;unloadID=5404319561659250415&amp;bn=2371044&amp;wmode=opaque&amp;evtBaseLink=http%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1&amp;clickTAG=http%3A%2F%2Fadserver.adtech.de%2Fadlink%2F969%2F3879757%2F0%2F225%2FAdId%3D9470503%3BBnId%3D1%3Bitime%3D13118330%3Bnodecode%3Dyes%3Blink%3Dhttp%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1%3Bunloadid%3D5404319561659250415%3Bpdmn%3Dwww.huuto.net%3Badfibeg%3D0%3BCREFURL%3Dhttp%253a%252f%252fwww.huuto.net%252fkohteet%252fviktoria-senkki-90%252f282110750%3BC%3D1&amp;clk=http%3A%2F%2Fadserver.adtech.de%2Fadlink%2F969%2F3879757%2F0%2F225%2FAdId%3D9470503%3BBnId%3D1%3Bitime%3D13118330%3Bnodecode%3Dyes%3Blink%3Dhttp%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1%3Bunloadid%3D5404319561659250415%3Bpdmn%3Dwww.huuto.net%3Badfibeg%3D0%3BCREFURL%3Dhttp%253a%252f%252fwww.huuto.net%252fkohteet%252fviktoria-senkki-90%252f282110750%3BC%3D3&amp;hash=1436519156&amp;rotseqno=1&amp;smid=-1&amp;timeDiff=1439&amp;hvfdomain=http://files.adform.net/Banners/&amp;staticDomain=http%3A%2F%2Fs1.adform.net%2FBanners%2F&amp;adId=Adform2xtooprxfio&amp;expandTime=0&amp;collapseTime=0&amp;behavior=default&amp;landingPageTarget=_blank"><param name="assetId" value="0"><embed type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" src="http://s1.adform.net/Banners/3066931/3066931.swf?bv=1-140" version="8" play="true" menu="false" loop="true" quality="autohigh" wmode="opaque" allowscriptaccess="always" allowfullscreen="true" flashvars="cid=0&amp;geo=2560%3B28312%3B246&amp;gid=0&amp;tv=0&amp;tid=0&amp;domain=http%3A%2F%2Ftrack.adform.net%2Fbanners%2F&amp;bv=1-140&amp;ADFid=1x&amp;ADFcmpgnID=121020&amp;ADFmembID=378404&amp;ADFbanID=3066931&amp;ADFbanPlacID=763254&amp;unloadID=5404319561659250415&amp;bn=2371044&amp;wmode=opaque&amp;evtBaseLink=http%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1&amp;clickTAG=http%3A%2F%2Fadserver.adtech.de%2Fadlink%2F969%2F3879757%2F0%2F225%2FAdId%3D9470503%3BBnId%3D1%3Bitime%3D13118330%3Bnodecode%3Dyes%3Blink%3Dhttp%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1%3Bunloadid%3D5404319561659250415%3Bpdmn%3Dwww.huuto.net%3Badfibeg%3D0%3BCREFURL%3Dhttp%253a%252f%252fwww.huuto.net%252fkohteet%252fviktoria-senkki-90%252f282110750%3BC%3D1&amp;clk=http%3A%2F%2Fadserver.adtech.de%2Fadlink%2F969%2F3879757%2F0%2F225%2FAdId%3D9470503%3BBnId%3D1%3Bitime%3D13118330%3Bnodecode%3Dyes%3Blink%3Dhttp%3A%2F%2Ftrack.adform.net%2FC%2F%3Fbn%3D2371044%3Bbsqno%3D1%3Bli%3D1%3Bcset%3D19%7C19%7C16%7C1250%7C900%7C24%7C6%7C15%7C0%7C3%7C7%7C0%7C0%3Bjs%3D1%3Bsmid%3D-1%3Bunloadid%3D5404319561659250415%3Bpdmn%3Dwww.huuto.net%3Badfibeg%3D0%3BCREFURL%3Dhttp%253a%252f%252fwww.huuto.net%252fkohteet%252fviktoria-senkki-90%252f282110750%3BC%3D3&amp;hash=1436519156&amp;rotseqno=1&amp;smid=-1&amp;timeDiff=1439&amp;hvfdomain=http://files.adform.net/Banners/&amp;staticDomain=http%3A%2F%2Fs1.adform.net%2FBanners%2F&amp;adId=Adform2xtooprxfio&amp;expandTime=0&amp;collapseTime=0&amp;behavior=default&amp;landingPageTarget=_blank" assetid="0" name="adAdform2xtooprxfio" width="980" height="120"></object></div></div>
+<noscript>
+<a href="http://adserver.adtech.de/adlink/969/3879757/0/225/AdId=9470503;BnId=1;itime=13118330;nodecode=yes;link=http://track.adform.net/C/?bn=2371044;C=0" target="_blank">
+<img src="http://track.adform.net/adfserve/?bn=2371044;srctype=4;ord=13118330" border="0" width="980" height="120" alt=""/>
+</a>
+</noscript>
+
+<script type="text/javascript">var adt_url = (window.location.protocol === "https:") ? 'https://secserv.adtech.de' : 'http://adserver.adtech.de';var adt_tagprefix = (''.length>0) ? ''.replace(/[, ]+/gi,'+') : '';var adt_tag = (''.length>0) ? ''.replace(/[, ]+/gi,'+') : '';var adt_tags = (adt_tagprefix+adt_tag).length>0 ? ('key='+(adt_tagprefix+' '+adt_tag).replace(/^s+|s+$/g, "")+';').replace(/[, ]+/gi,'+') : '';var adt_keyval = (typeof(adptkwresp) != 'undefined') ? window.adptkwresp : '';if (window.adgroupid == undefined) { window.adgroupid = Math.round(Math.random() * 1000); }document.write('<scr'+'ipt type="text/javascript" src="'+adt_url+'/addyn|3.0|969.1|2179776|0|16|ADTECH;'+adt_tags+adt_keyval+'cookie=info;alias=ht_koti_huonekalut_kaapit_kohde_dyn1;loc=100;target=_blank;grp='+window.adgroupid+';misc='+new Date().getTime()+'"></scri'+'pt>');</script><script type="text/javascript" src="http://adserver.adtech.de/addyn%7C3.0%7C969.1%7C2179776%7C0%7C16%7CADTECH;cookie=info;alias=ht_koti_huonekalut_kaapit_kohde_dyn1;loc=100;target=_blank;grp=498;misc=1380013120606"></script><!---->
+
+				</div>
+			</div>
+			<div class="content-wrapper">
+				<div class="hdr follow fixed" id="navigation">
+					<div class="navbar navbar-inverse navbar-static-top prevent-zoom">
+						<div class="navbar-inner">
+							<div class="container">
+								<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a hreftemp="/" class="brand"><img src="/module/fresco/images/huuto_logo_20130128.png" alt="Huuto"></a>
+								<div class="navbar-search">
+									<form id="searchForm" action="/hakutulos" accept-charset="UTF-8" method="get">
+										<input name="words" id="words" value="" class="search-query" placeholder="Hae Huuto.netistä" type="text">										<button name="search-button" id="search-button" type="submit" value="Hae" class="btn btn-mini btn-orange">Hae</button>
+										<a hreftemp="/haku" class="advanced-search pull-right" data-placement="bottom" title="Tarkennettu&nbsp;haku">
+											<img class="advanced-search-icon" src="/module/fresco/images/search2.png" alt="Tarkennettu haku" width="20" height="21">
+										</a>
+									</form>
+								</div>
+								<div class="pull-right nav-collapse collapse">
+									<ul class="nav">
+										<li class="dropdown" id="departments">
+											<a hreftemp="#departments" class="dropdown-toggle" data-toggle="dropdown">Osastot <span class="caret"></span> </a>
+											<ul class="dropdown-menu">
+																									<li><a hreftemp="/osasto/ajoneuvot/1">Ajoneuvot </a></li>
+																									<li><a hreftemp="/osasto/antiikki/27">Antiikki </a></li>
+																									<li><a hreftemp="/osasto/elokuvat/86">Elokuvat </a></li>
+																									<li><a hreftemp="/osasto/harrastukset/127">Harrastukset </a></li>
+																									<li><a hreftemp="/osasto/kauneus-ja-terveys/939">Kauneus ja terveys </a></li>
+																									<li><a hreftemp="/osasto/kellot-ja-korut/184">Kellot ja korut </a></li>
+																									<li><a hreftemp="/osasto/keraily/203">Keräily </a></li>
+																									<li><a hreftemp="/osasto/kirjat-ja-lehdet/262">Kirjat ja lehdet </a></li>
+																									<li><a hreftemp="/osasto/kodin-elektroniikka/324">Kodin elektroniikka </a></li>
+																									<li><a hreftemp="/osasto/koti/338">Koti </a></li>
+																									<li><a hreftemp="/osasto/lastentarvikkeet/375">Lastentarvikkeet </a></li>
+																									<li><a hreftemp="/osasto/laukut/929">Laukut </a></li>
+																									<li><a hreftemp="/osasto/matkat/900">Matkat </a></li>
+																									<li><a hreftemp="/osasto/musiikki/403">Musiikki </a></li>
+																									<li><a hreftemp="/osasto/pelit/448">Pelit </a></li>
+																									<li><a hreftemp="/osasto/puhelimet/502">Puhelimet </a></li>
+																									<li><a hreftemp="/osasto/paasyliput/397">Pääsyliput </a></li>
+																									<li><a hreftemp="/osasto/rakentaminen/519">Rakentaminen </a></li>
+																									<li><a hreftemp="/osasto/sekalaista/525">Sekalaista </a></li>
+																									<li><a hreftemp="/osasto/taide-ja-design/528">Taide ja design </a></li>
+																									<li><a hreftemp="/osasto/tietotekniikka/51">Tietotekniikka </a></li>
+																									<li><a hreftemp="/osasto/vaatetus/561">Vaatetus </a></li>
+																							</ul>
+										</li>
+									</ul>
+									<ul class="nav">
+																					<li>
+												<a hreftemp="/uusi-ilmoitus" id="toNewItem">Jätä ilmoitus</a>
+											</li>
+										
+																					<li>
+												<a hreftemp="/huutoplus" id="toHuutoPlus" class="pluswhite">Huuto</a>
+											</li>
+																			</ul>
+																			<ul id="user-actions" class="nav">
+											<li>
+												<a hreftemp="https://salattu.huuto.net/rekisteroidy" id="toRegister">Tee tunnus</a>
+											</li>
+											<li class="tourStop5">
+												<a hreftemp="https://salattu.huuto.net/kirjaudu" id="toLogin">Kirjaudu</a>
+											</li>
+										</ul>
+																	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container-fluid breadcrumbs">
+					<div class="row-fluid">
+						<div class="span9">
+							<ul class="breadcrumb">
+								<li><a hreftemp="/" class="home"></a> <span class="divider">/</span></li>
+																	<li><a hreftemp="/osasto/koti/338">Koti</a> <span class="divider">/</span></li>
+																	<li><a hreftemp="/osasto/koti/huonekalut/339">Huonekalut</a> <span class="divider">/</span></li>
+																	<li><a hreftemp="/osasto/koti/kaapit/801">Kaapit</a> <span class="divider">/</span></li>
+															</ul>
+						</div>
+
+						<div class="text-right span3">
+							<span class="clock">24.9.2013 &nbsp; 11:58:37</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="container-fluid" id="content">
+					<div id="user-notify">
+						<div class="alert alert-info hide notice">
+							<a class="close" data-dismiss="alert">x</a>
+						</div>
+						<div class="alert alert-warning hide warning">
+							<a class="close" data-dismiss="alert">x</a>
+						</div>
+						<div class="alert alert-error hide error">
+							<a class="close" data-dismiss="alert">x</a>
+						</div>
+																		
+						
+						
+											</div>
+
+					
+					
+
+
+
+
+
+
+
+		<div class="nosto_product hide">
+		<span class="url">http://www.huuto.net/kohteet/viktoria-senkki-90/282110750</span>
+		<span class="product_id">282110750</span>
+		<span class="name">Viktoria senkki 90</span>
+					<span class="image_url">http://kuvat2.huuto.net/f/3b/e3466b782ceacded99e773d474c5f-orig.jpg</span>
+				<span class="price">50.00</span>
+		<span class="price_currency_code">EUR</span>
+		<span class="availability">InStock</span>
+		<span class="category">/Koti/Huonekalut/Kaapit</span>
+		<span class="tag1">Hyvä</span>
+		<span class="tag2">Huutokauppa</span>
+		<span class="date_published">2013-09-17T22:29:34+03:00</span>
+		<span class="valid_until">2013-09-24T22:29:34+03:00</span>
+	</div>
+
+	<div class="nosto_element" id="productpage-nosto-1"></div>
+
+<div class="row-fluid">
+	<div class="span12 itemid">
+		Kohdenumero: 282110750				<span class="favorite-add">
+			<a hreftemp="https://salattu.huuto.net/omasivu/muistilista/lisaa/item/282110750">Lisää muistilistalle</a>
+		</span>
+			</div>
+</div>
+
+<h1>Viktoria senkki 90</h1>
+
+<div class="row-fluid">
+	<div class="images span4">
+														<div id="imageModal" class="modal hide fade">
+					<div class="modal-header">
+						<a hreftemp="#" id="imageModalOpenImageLink" target="_blank">
+							Suurenna tätä kuvaa
+						</a>
+						<a hreftemp="#" class="close" data-dismiss="modal">×</a>
+					</div>
+					<div class="modal-body">
+						<div id="modalCarousel" class="carousel" data-interval="false">
+							<div class="carousel-inner">
+								<div class="active item" data-dismiss="modal">
+									<img src="http://kuvat2.huuto.net/f/3b/e3466b782ceacded99e773d474c5f-orig.jpg" alt=" ">
+								</div>
+															</div>
+													</div>
+					</div>
+
+									</div>
+				<div id="mainImage" class="big">
+					<a hreftemp="#" data-toggle="modal" data-target="#imageModal">
+					<div id="mainImageCarousel" class="carousel" data-interval="false">
+						<!-- Carousel items -->
+						<div class="carousel-inner">
+							<div class="active item"><img src="http://kuvat2.huuto.net/f/3b/e3466b782ceacded99e773d474c5f-m.jpg"></div>
+													</div>
+					</div>
+					</a>
+				</div>
+				<div id="mainThumbnails" class="thumbnails row-fluid">
+									</div>
+				&nbsp;
+	</div>
+	<div class="offer span5">
+		<!-- offerbox  -->
+		
+
+<form action="/tarjoa/bid/itemid/282110750" method="post">
+	<div id="offerModalAuction" class="modal fluid modal-offer fade hide" tabindex="-1">
+		<div class="modal-body">
+		</div>
+	</div>
+</form>
+
+
+	<div id="offer_hybrid" class="bidbox">
+		<div class="row-fluid">
+			<div class="span4 title">
+				Hinta nyt
+			</div>
+			<div class="span8 data price">
+				50,00 €							</div>
+		</div>
+
+					<div class="row-fluid yourbid">
+				<div class="span4 title">
+					Oma tarjouksesi
+				</div>
+				<div class="span8 data pull-up">
+					<form id="offerForm" class="form-horizontal" action="/tarjoa/anonymous/itemid/282110750" method="post">
+						<input name="itemid" value="282110750" type="hidden">
+						<input name="openModalType" value="1" type="hidden">
+						<button id="offerButton" type="submit" class="btn btn-primary pull-right">
+							Tarjoa
+						</button>
+						<input id="offerAmount" name="bid" value="52,00" type="text">
+						<span>€</span>
+						<div class="info minimum">
+							Minimikorotus <strong>2,00 €</strong>
+						</div>
+													<label for="automate"><input name="automate" id="automate" value="1" type="checkbox">
+							Käytä korotusautomaattia</label>
+											</form>
+				</div>
+			</div>
+				<div class="row-fluid quantity">
+			<div class="span4 title">
+				Myynnissä
+			</div>
+			<div class="span8 data">
+				<strong>1 kpl</strong>
+			</div>
+		</div>
+		<div class="row-fluid timeleft">
+							<div class="span4 title">
+					Aikaa jäljellä
+				</div>
+				<div class="span8 data">
+					<strong>10 h 30 min 58 s</strong>
+					<div class="info">
+						Sulkeutuu <span datetime="24.09.2013 22:29:34">24.09.2013 22:29:34</span>
+						tai 5 minuuttia viimeisen tehdyn tarjouksen jälkeen
+					</div>
+				</div>
+					</div>
+	</div>
+
+		<!-- /offerbox -->
+
+					</div>
+	<div class="span3">
+		<div class="seller">
+			<h2>Myyjä</h2>
+			<span class="username">
+	<a hreftemp="https://salattu.huuto.net/kayttaja/1367288">Samppa-71 (6)</a>				
+    			
+    </span>
+			<div class="userinfo">
+				
+				<!-- TODO
+				Palautteista <strong>__%</strong> positiivisia<br />
+				-->
+									Tämä käyttäjä ei ole tunnistautunut.							</div>
+
+							<a hreftemp="/hakutulos/sellernro/1367288">
+					Katso myyjän kaikki kohteet (3)
+				</a>
+					<br>
+					</div>
+					<div class="share">
+				<h2>Kerro kaverille</h2>
+				<div>
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.huuto.net/kohteet/viktoria-senkki-90/282110750&amp;layout=button_count&amp;show_faces=false&amp;width=130&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21&amp;ref=fb" style="border:none; overflow:hidden; width:200px; height:21px;" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+				</div>
+				<div>
+					<iframe data-twttr-rendered="true" title="Twitter Tweet Button" style="width: 65px; height: 20px;" class="twitter-share-button twitter-count-none" src="http://platform.twitter.com/widgets/tweet_button.1379634856.html#_=1380013126029&amp;count=none&amp;id=twitter-widget-0&amp;lang=fi&amp;original_referer=http%3A%2F%2Fwww.huuto.net%2Fkohteet%2Fviktoria-senkki-90%2F282110750&amp;size=m&amp;text=Viktoria%20senkki%2090%20-%20avoin%20-%2050.00%20%E2%82%AC%20-%20Kaapit%20-%20Huonekalut%20-%20Koti%20-%20Huuto.net&amp;url=http%3A%2F%2Fwww.huuto.net%2Fkohteet%2Fviktoria-senkki-90%2F282110750" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+					<script async="async">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if (!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+				<div>
+	
+	<a hreftemp="#emailShareModal" role="button" class="btn btn-mini" data-toggle="modal">@ Sähköposti</a>
+
+	<form id="email-share-form" name="emailshareform" enctype="application/x-www-form-urlencoded" method="post" class="form-horizontal" accept-charset="UTF-8" action="/share/sendemailshare">
+		<div id="emailShareModal" class="modal fluid hide fade" tabindex="-1" role="dialog" aria-labelledby="Kerro kaverille sähköpostilla" aria-hidden="true">
+			<div class="modal-header">
+				<h3>Kerro kaverille</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="modal-body">
+				<p>Vinkkaa kaverille löytämästäsi mielenkiintoisesta kohteesta. Hän voi olla onnellinen huudon voittaja! Täytä lomake ja lähetä eteenpäin.</p>
+
+				
+<input name="safeInput" value="897864c807de4ffbbc3e2918ac7e0e64a0802f1d" id="safeInput" type="hidden">				
+<input name="itemid" value="282110750" id="itemid" type="hidden">
+				<div class="control-group">
+					<label for="name" class="required">Nimesi</label>
+
+					<div class="controls">
+						
+<input name="name" id="name" value="" type="text">											</div>
+				</div>
+
+				<div class="control-group">
+					<label for="email" class="required">Sähköpostisi</label>
+
+					<div class="controls">
+						
+<input name="email" id="email" value="" maxlength="60" type="text">											</div>
+				</div>
+
+				<div class="control-group">
+					<label for="email_friend" class="required">Kaverin sähköposti</label>
+
+					<div class="controls">
+						
+<input name="email_friend" id="email_friend" value="" maxlength="60" type="text">											</div>
+				</div>
+
+				<div class="control-group">
+					<label for="message" class="required">Viesti</label>
+
+					<div class="controls">
+						
+<textarea name="message" id="message" maxlength="2000" rows="4" cols="80">Hei, löysin sinulle Huuto.netistä kiinnostavan tuotteen</textarea>						<span class="counter" id="messageCharCount">1945</span>
+											</div>				
+				</div>
+			</div>
+			<div class="modal-footer">
+				
+<input name="submit" id="submit" value="Lähetä" class="btn btn-primary" type="submit">			</div>
+		</div>
+	</form>
+</div>
+			</div>
+			</div>
+</div>
+
+<hr>
+
+<h2>Kuvaus</h2>
+<div class="row product_details">
+
+	<div class="span6">
+
+		<span id="userContent">
+			<p>Viktoria senkki <span style="" wa-subtypes="" wa-id="14" wa-type="cubboard_measures" class="WebAnnotator_cubboard_measures">90x42x93</span>, vanilja/mänty.</p>
+
+<p>(myynnissä myös lasten sänky ja Viktoria tv-taso, vanilja/mänty)</p>
+										
+		</span>
+
+		<div class="row-fluid">
+			<div class="span4"><small>Kuntoluokitus</small></div>
+			<div class="span8">Hyvä</div>
+		</div>
+
+		<h2>Maksaminen ja toimitus</h2>
+
+					<div class="row-fluid">
+					<div class="span4"><small>Maksutapa</small></div>
+					<div class="span8">Käteinen</div>
+			</div>
+		
+					<div class="row-fluid">
+					<div class="span4"><small>Toimitustapa</small></div>
+					<div class="span8">Nouto</div>
+			</div>
+		
+		<div class="row-fluid">
+			<div class="span4"><small>Toimituskulut Suomeen</small></div>
+			<div class="span8">
+									<a hreftemp="#questions" onclick="$('#showQuestionBox').click()">Kysy myyjältä</a>
+							</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span4"><small>Tuotteen sijainti</small></div>
+			<div class="span8">
+				<!-- location -->
+				
+	90830 Haukipudas		
+	<div class="map">
+				<a hreftemp="http://www.fonecta.fi/kartat/Haukipudas?edsacid=p-huutonet-kartta" class="fonectaMapLink" target="_blank">
+			<img src="http://kartta.fonecta.fi/oym?key=FO1349G5NGDTJ52H913SFRK63939&amp;f=a&amp;m=mg&amp;ft=png_std&amp;free=Haukipudas&amp;z=12&amp;w=230&amp;h=170">
+		</a>
+		<br>
+		<a hreftemp="http://www.fonecta.fi/kartat/Haukipudas?edsacid=p-huutonet-kartta" class="fonectaMapLink" target="_blank">Katso sijainti kartalla</a>
+
+		<div class="fonecta pull-right">
+			<a hreftemp="http://www.fonecta.com?edsacid=p-huutonet-logo">
+				<img src="/module/fresco/images/fonecta-logo-small.png" alt=" ">
+			</a>
+		</div>
+
+			</div>
+	
+	
+				<!-- /location -->
+			</div>
+		</div>
+
+		
+			</div>
+
+						<div class="span6">
+				<span class="ads-giant-box">
+					<script type="text/javascript">	try { cts.render("rectangle1-1"); } catch (err) { cts.log(err); } </script><script type="text/javascript">ADTECH_showAd("ht_koti_huonekalut_kaapit_kohde_box1", document, false);</script><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=5,0,0,0" id="AT_FLASHO3880617" name="AT_FLASHO3880617" width="468" height="400"><param name="movie" value="http://aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/tarjous-vk39-468x400.swf?targetTAG=_blank&amp;clickTarget=_blank&amp;pathTAG=http%3A//aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/&amp;closeTAG=javascript%3AcloseAdLayer3880617%28%29&amp;openTAG=javascript%3AopenAdLayer3880617%28%29&amp;expandTAG=javascript%3Aexpand3880617%28%29&amp;collapseTAG=javascript%3Acollapse3880617%28%29&amp;clicktarget=_blank&amp;clickTarget=_blank&amp;clickTARGET=_blank&amp;CURRENTDOMAIN=www.huuto.net"><param name="quality" value="autohigh"><param name="base" value="http://aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/"><param name="flashvars" value="clickTAG=http%3A//adserver.adtech.de/adlink/969/3880617/0/170/AdId%3D9532686%3BBnId%3D2%3Bitime%3D13118328%3Bnodecode%3Dyes%3Blink%3Dhttp%3A//www.mso.fi/%3Fcmp%3Dbn-mso_tuki_lanseeraus_468x400_092013_sima%26utm_source%3Dtuki%26utm_medium%3Dbanner%26utm_campaign%3Dlanseeraus_468x400_sima"><param name="allowscriptaccess" value="always"><param name="swLiveConnect" value="true"><param name="wmode" value="opaque"><embed src="http://aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/tarjous-vk39-468x400.swf?targetTAG=_blank&amp;clickTarget=_blank&amp;pathTAG=http%3A//aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/&amp;closeTAG=javascript%3AcloseAdLayer3880617%28%29&amp;openTAG=javascript%3AopenAdLayer3880617%28%29&amp;expandTAG=javascript%3Aexpand3880617%28%29&amp;collapseTAG=javascript%3Acollapse3880617%28%29&amp;clicktarget=_blank&amp;clickTarget=_blank&amp;clickTARGET=_blank&amp;CURRENTDOMAIN=www.huuto.net" id="AT_FLASHO3880617" name="AT_FLASHO3880617" base="http://aka-cdn-ns.adtech.de/apps/265/Ad9532681St3Sz170Sq104923219V0Id6/" quality="autohigh" flashvars="clickTAG=http%3A//adserver.adtech.de/adlink/969/3880617/0/170/AdId%3D9532686%3BBnId%3D2%3Bitime%3D13118328%3Bnodecode%3Dyes%3Blink%3Dhttp%3A//www.mso.fi/%3Fcmp%3Dbn-mso_tuki_lanseeraus_468x400_092013_sima%26utm_source%3Dtuki%26utm_medium%3Dbanner%26utm_campaign%3Dlanseeraus_468x400_sima" allowscriptaccess="always" swliveconnect="true" wmode="opaque" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="468" height="400"></object>
+				</span>
+			</div>
+			</div>
+
+<!-- questions -->
+<a name="questions"></a>
+<div class="row-fluid questions">
+	<div class="span9">
+		<h2>Kysymykset</h2>
+			
+
+<div id="questions">
+		
+	
+	<div>
+				<br>
+
+									<a hreftemp="https://salattu.huuto.net/kirjaudu">Kysy myyjältä</a> <span class="grayText">(edellyttää kirjautumista)</span>
+					
+		<div id="questionBox" class="span10" style="display: none;">
+			<p class="bubbleDown">
+				<a class="close questionBox-close">x</a>
+				<textarea id="questionInput" type="text" name="question" maxlength="255" rows="4" cols="80" wrap="soft"></textarea>
+				<input name="id" value="282110750" type="hidden">
+			</p>
+			<p>
+				Asiaton kommentointi, vaihto- ja ostotarjoukset sekä kysymykset tuotteen myynnistä ohi huutokaupan ovat kiellettyjä, ja saattavat johtaa kysyjän tunnuksen poistamiseen.
+			</p>
+			<button class="btn btn-mini send-question">Lähetä</button>
+		</div>
+			</div>
+</div>
+	</div>
+</div>
+<!-- /questions -->
+
+<!-- bids -->
+<a name="bids"></a>
+<div class="row-fluid air">
+	<div class="span9">
+		<h2>Huudot</h2>
+			<div class="bidstats">
+	<div class="row-fluid title">
+		<div class="span2">
+			0		</div>
+		<div class="span2">
+			0		</div>
+		<div class="span5">
+							10 h 30 min 58 s					</div>
+	</div>
+	<div class="row-fluid data">
+		<div class="span2">
+			huutoja
+		</div>
+		<div class="span2">
+			huutajia
+		</div>
+		<div class="span5">
+			aikaa jäljellä 		</div>
+	</div>
+</div>
+
+<table class="table table-custom">
+	<thead>
+		<tr>
+			<th class="span4">Huutaja</th>
+			<th class="span3 td-right">Huuto</th>
+			<th class="span2 td-right">Aika</th>
+		</tr>
+	</thead>
+	<tbody>
+			
+		<tr>
+			<td>Lähtöhinta</td>
+			<td class="td-right">50,00 €</td>
+			<td class="td-right">17.09.2013 22:29:34</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="product_details">
+	<tbody><tr>
+		<td class="title span2">Ilmoitettu</td>
+		<td class="span4">17.09.2013 22:29:34</td>
+	</tr>
+		<tr>
+		<td class="title">Sulkeutuu</td>
+		<td>24.09.2013 22:29:34</td>
+	</tr>
+	<tr>
+		<td class="title ">Aukioloaika</td>
+		<td>7 vrk</td>
+	</tr>
+</tbody></table>
+	</div>
+</div>
+<!-- /bids -->
+
+			<!-- bid actions -->
+		<div class="bid-actions well air">
+		    <div class="row-fluid">
+			    <div class="span8">
+					Kiinnostaako kohde?
+											<form id="offerFormBottomAuction" class="form-horizontal offerFormBottom" action="/tarjoa/anonymous/itemid/282110750" method="post">
+							<input name="openModalType" id="openModalType" value="1" type="hidden">
+							<button class="btn btn-success margin submit">
+								Tee tarjous
+							</button>
+						</form>
+					
+					
+					                </div>
+				<div class="span4">
+                    <p class="pull-right help-block">
+					    <a hreftemp="/ohjeet/ohje-turvallisesti2">Näin käyt kauppaa turvallisesti</a>
+					    <br>
+					    							<a hreftemp="/kohteet/viktoria-senkki-90/282110750/anonymousreport">Ilmoita asiattomasta kohteesta</a>
+						                    </p>
+				</div>
+			</div>
+		</div>
+		<!-- /bid actions -->
+	
+
+
+
+	<div class="googleAds">
+		<div class="google-ads google-ads-showitem" id="koti-bottom-ads"><div class="google-logo"><a hreftemp="http://www.google.com/url?ct=abg&amp;q=https://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.huuto.net/kohteet/viktoria-senkki-90/282110750%26gl%3DFI%26hl%3Dfi%26client%3Dca-sanoma-huuto%26ai0%3DCc23QQlRBUvnoNoa2yQO04YGIBc6Z1-cC3rfI3GLAjbcBEAEg-e60ESgEUIjRyfj______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0MV-WkCe8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd4Xo5BadqbvK2oS4G1D48h4049C8ji5BIAH5tXNFg%26ai1%3DCHBEpQlRBUvnoNoa2yQO04YGIBf2DvJ0C9f61zkLAjbcBEAIg-e60ESgEUJfCxNUDYPf53ALIAQGpAobMD7_GpbY-qAMBqgRxT9DlfG9AnfI5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkPlRoM1StqhQub3OA9e5dvRBBOEcZXVS6AB5Wq8xo%26ai2%3DCTWP3QlRBUvnoNoa2yQO04YGIBery_-IDms3jrTnAjbcBEAMg-e60ESgEUNbUoPr______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0JVWbUCc8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd47uJ1NdqbvK2oS4G1D48h4049C3nSpIIAHyt3OMg%26ai3%3DCRmeBQlRBUvnoNoa2yQO04YGIBZrK0s8D4s-Xg1TAjbcBEAQg-e60ESgEUKnvk739_____wFg9_ncAqAB4v2P9APIAQGpAobMD7_GpbY-qAMBqgRxT9D1ZVdAm_I5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkP6lwK0CtqhQub3OA9e5dvRBBOEckEMz6IBgGAB4aC8As&amp;usg=AFQjCNFjwu51s4KcEOIHi1gA5zMXE1iFCQ"><img src="/fi/img/google_logo3.gif" alt="Google-mainokset"></a></div><div class="google-ad"><span class="href"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=Cc23QQlRBUvnoNoa2yQO04YGIBc6Z1-cC3rfI3GLAjbcBEAEg-e60ESgEUIjRyfj______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0MV-WkCe8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd4Xo5BadqbvK2oS4G1D48h4049C8ji5BIAH5tXNFg&amp;num=1&amp;sig=AOD64_39oNYopW3gB98R-Ozv1A3XZ1dPnw&amp;client=ca-sanoma-huuto&amp;adurl=http://www.mattoja.fi/nukkamatot.html" class="name" target="_blank">Mattoja netistä</a></span><span class="description">Kaikki matot -35% Paljon värejä ja kokoja.Tilaa heti</span><span class="url"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=Cc23QQlRBUvnoNoa2yQO04YGIBc6Z1-cC3rfI3GLAjbcBEAEg-e60ESgEUIjRyfj______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0MV-WkCe8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd4Xo5BadqbvK2oS4G1D48h4049C8ji5BIAH5tXNFg&amp;num=1&amp;sig=AOD64_39oNYopW3gB98R-Ozv1A3XZ1dPnw&amp;client=ca-sanoma-huuto&amp;adurl=http://www.mattoja.fi/nukkamatot.html" target="_blank">www.mattoja.fi</a></span></div> <div class="google-ad"><span class="href"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=CHBEpQlRBUvnoNoa2yQO04YGIBf2DvJ0C9f61zkLAjbcBEAIg-e60ESgEUJfCxNUDYPf53ALIAQGpAobMD7_GpbY-qAMBqgRxT9DlfG9AnfI5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkPlRoM1StqhQub3OA9e5dvRBBOEcZXVS6AB5Wq8xo&amp;num=2&amp;sig=AOD64_0BFoMOs8IeMt3V-h1cL2NxZu1D0A&amp;client=ca-sanoma-huuto&amp;adurl=http://www.pkskaihdin.net/3" class="name" target="_blank">Laadukkaat Sälekaihtimet</a></span><span class="description">Pk-Seudun Kaihdin Ilmainen mittaus ja suunnittelu</span><span class="url"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=CHBEpQlRBUvnoNoa2yQO04YGIBf2DvJ0C9f61zkLAjbcBEAIg-e60ESgEUJfCxNUDYPf53ALIAQGpAobMD7_GpbY-qAMBqgRxT9DlfG9AnfI5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkPlRoM1StqhQub3OA9e5dvRBBOEcZXVS6AB5Wq8xo&amp;num=2&amp;sig=AOD64_0BFoMOs8IeMt3V-h1cL2NxZu1D0A&amp;client=ca-sanoma-huuto&amp;adurl=http://www.pkskaihdin.net/3" target="_blank">www.pkskaihdin.net</a></span></div> <div class="google-ad"><span class="href"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=CTWP3QlRBUvnoNoa2yQO04YGIBery_-IDms3jrTnAjbcBEAMg-e60ESgEUNbUoPr______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0JVWbUCc8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd47uJ1NdqbvK2oS4G1D48h4049C3nSpIIAHyt3OMg&amp;num=3&amp;sig=AOD64_11dU3j1MV_Hn_CsgB2_Dt1raf1oQ&amp;client=ca-sanoma-huuto&amp;adurl=http://www.VPTH-PutkiOy.fi" class="name" target="_blank">Maalämpö</a></span><span class="description">Maalämpötyöt ammattitaidolla - Tutustu ja ota yhteyttä!</span><span class="url"><a hreftemp="http://googleads.g.doubleclick.net/aclk?sa=L&amp;ai=CTWP3QlRBUvnoNoa2yQO04YGIBery_-IDms3jrTnAjbcBEAMg-e60ESgEUNbUoPr______wFg9_ncAsgBAakChswPv8altj6oAwGqBG5P0JVWbUCc8jm8BLOsWLEQVljp1cPrOo0_recn3-ikhCUWZzrdhdNoF4fNuQibqHuRW6jIbRmZuz1_2PyqFu4rfveETq7mwK82gf4qy_y_g-ZbRubapd47uJ1NdqbvK2oS4G1D48h4049C3nSpIIAHyt3OMg&amp;num=3&amp;sig=AOD64_11dU3j1MV_Hn_CsgB2_Dt1raf1oQ&amp;client=ca-sanoma-huuto&amp;adurl=http://www.VPTH-PutkiOy.fi" target="_blank">www.VPTH-PutkiOy.fi</a></span></div> <div class="google-ad"><span class="href"><a hreftemp="http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CRmeBQlRBUvnoNoa2yQO04YGIBZrK0s8D4s-Xg1TAjbcBEAQg-e60ESgEUKnvk739_____wFg9_ncAqAB4v2P9APIAQGpAobMD7_GpbY-qAMBqgRxT9D1ZVdAm_I5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkP6lwK0CtqhQub3OA9e5dvRBBOEckEMz6IBgGAB4aC8As&amp;num=4&amp;cid=5Giz9ArZ-qFPHtOgRBtA6M2Q&amp;sig=AOD64_1Ez3sMzbuOT0BqZNmwcldPZ-gMMw&amp;client=ca-sanoma-huuto&amp;adurl=http://www.puutarhatukku.fi/category/71/puutarhakalusteet" class="name" target="_blank">Kauniit puutarhakalusteet</a></span><span class="description">Laadukkaat kalusteet edullisesti. Ilmainen kotiinkuljetus koko maahan</span><span class="url"><a hreftemp="http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CRmeBQlRBUvnoNoa2yQO04YGIBZrK0s8D4s-Xg1TAjbcBEAQg-e60ESgEUKnvk739_____wFg9_ncAqAB4v2P9APIAQGpAobMD7_GpbY-qAMBqgRxT9D1ZVdAm_I5vASzrFixEFZY6dXD6zqNP63nJ9_opIQlFmc63YXTaBeHzbkIm6h7kVuoyG0Zmbs9f9j8qhbuK373hE6u5sCvNoH-Ksv8v4PmW0bm2u3eiKkP6lwK0CtqhQub3OA9e5dvRBBOEckEMz6IBgGAB4aC8As&amp;num=4&amp;cid=5Giz9ArZ-qFPHtOgRBtA6M2Q&amp;sig=AOD64_1Ez3sMzbuOT0BqZNmwcldPZ-gMMw&amp;client=ca-sanoma-huuto&amp;adurl=http://www.puutarhatukku.fi/category/71/puutarhakalusteet" target="_blank">www.puutarhatukku.fi</a></span></div> </div>	</div>
+
+	<div class="row-fluid sanoma-services">
+		<div class="span4">
+			<iframe class="framedbox" src="http://ko.snstatic.fi/huuto-is-es/"></iframe>
+		</div>
+		<div class="span4">
+			<iframe class="framedbox" src="http://ko.snstatic.fi/huuto-etusivu-hs-300-iframe/"></iframe>
+		</div>
+		<div class="span4">
+			<iframe class="framedbox" src="http://ko.snstatic.fi/Huuto-asunnot-geobox-selector-kohde/"></iframe>
+		</div>
+	</div>
+				</div>
+
+				<footer>
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<img src="/module/fresco/images/huuto_logo_light_small.png" alt=" ">
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span4">
+								<h5>Asiakaspalvelu</h5>
+								<p>
+								0600–1–7003<br>
+								ma–pe klo 9–17 (1,97 €/min + pvm tai mpm)<br>
+								</p>
+								<p>
+									<a hreftemp="/ohjeet/palaute">Palaute ja kysymykset</a><br>
+									<a hreftemp="/mainonta">Mainostilaa myy Sanoma Verkkomediamyynti</a><br>
+									<a hreftemp="/IPR">Intellectual Property Rights</a>
+								</p>
+							</div>
+							<div class="span4 category-list">
+								<h5>Osastot</h5>
+								<div>
+									<ul>
+																				<li>
+											<a hreftemp="/osasto/ajoneuvot/1">Ajoneuvot</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/antiikki/27">Antiikki</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/elokuvat/86">Elokuvat</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/harrastukset/127">Harrastukset</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/kauneus-ja-terveys/939">Kauneus ja terveys</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/kellot-ja-korut/184">Kellot ja korut</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/keraily/203">Keräily</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/kirjat-ja-lehdet/262">Kirjat ja lehdet</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/kodin-elektroniikka/324">Kodin elektroniikka</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/koti/338">Koti</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/lastentarvikkeet/375">Lastentarvikkeet</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/laukut/929">Laukut</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/matkat/900">Matkat</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/musiikki/403">Musiikki</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/pelit/448">Pelit</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/puhelimet/502">Puhelimet</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/paasyliput/397">Pääsyliput</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/rakentaminen/519">Rakentaminen</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/sekalaista/525">Sekalaista</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/taide-ja-design/528">Taide ja design</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/tietotekniikka/51">Tietotekniikka</a>
+										</li>
+																				<li>
+											<a hreftemp="/osasto/vaatetus/561">Vaatetus</a>
+										</li>
+																			</ul>
+								</div>
+							</div>
+							<div class="span4">
+								<h5>Muuta</h5>
+								<ul>
+									<li><a hreftemp="/huutoplus">Huuto Plus</a></li>
+									<li><a hreftemp="/ohjeet/ohje-huutopaketti">Huutopaketti</a></li>
+									<li><a hreftemp="https://salattu.huuto.net/tunnistautuminen">Tunnistautuminen</a></li>
+									<li><a hreftemp="/kaupat">Kaupat</a></li>
+									<li><a hreftemp="/ohjeet">Ohjeet</a></li>
+									<li><a hreftemp="/keskustelu">Keskustelu</a></li>
+									<li><a hreftemp="http://m.huuto.net">m.huuto.net</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="footerbar">
+						<div class="row-fluid">
+							<div class="span4">
+							Copyright ©2012 <a hreftemp="http://www.sanoma.fi/" target="_blank">Sanoma News Oy</a>
+							</div>
+							<div class="span2">
+								<a hreftemp="/ohjeet/saannot">Huuto.net säännöt</a>
+							</div>
+							<div class="span2">
+								<a hreftemp="/ohjeet/rekisteriseloste">Rekisteriseloste</a>
+							</div>
+							<div class="span4">
+								<a hreftemp="/ohjeet/kayttajasopimusehdot-ohje">Käyttöehdot</a>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+			<div id="adside">
+				<div class="side-ad">
+					<script type="text/javascript">	try { cts.render("side01"); } catch (err) { cts.log(err); } </script><script type="text/javascript">ADTECH_showAd("ht_koti_huonekalut_kaapit_kohde_st1", document, false);</script><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=5,0,0,0" id="AT_FLASHO3884083" name="AT_FLASHO3884083" width="140" height="350"><param name="movie" value="http://aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/Pupu09_syyskuu_140x350.swf?targetTAG=_blank&amp;clickTarget=_blank&amp;pathTAG=http%3A//aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/&amp;closeTAG=javascript%3AcloseAdLayer3884083%28%29&amp;openTAG=javascript%3AopenAdLayer3884083%28%29&amp;expandTAG=javascript%3Aexpand3884083%28%29&amp;collapseTAG=javascript%3Acollapse3884083%28%29&amp;clicktarget=_blank&amp;clickTarget=_blank&amp;clickTARGET=_blank&amp;CURRENTDOMAIN=www.huuto.net"><param name="quality" value="autohigh"><param name="base" value="http://aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/"><param name="flashvars" value="clickTAG=http%3A//adserver.adtech.de/adlink/969/3884083/0/82/AdId%3D9485762%3BBnId%3D1%3Bitime%3D13118349%3Bnodecode%3Dyes%3Blink%3Dhttp%3A//puutarha.net/artikkelit/8268/syyskuun_vinkit.htm%3Futm_source%3Dron%26utm_medium%3Dbanner%26utm_content%3D160x600%26utm_campaign%3Dpunet_syysvinkit%26cmp%3Dbn_rk_punet_sima"><param name="allowscriptaccess" value="always"><param name="swLiveConnect" value="true"><param name="wmode" value="opaque"><embed src="http://aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/Pupu09_syyskuu_140x350.swf?targetTAG=_blank&amp;clickTarget=_blank&amp;pathTAG=http%3A//aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/&amp;closeTAG=javascript%3AcloseAdLayer3884083%28%29&amp;openTAG=javascript%3AopenAdLayer3884083%28%29&amp;expandTAG=javascript%3Aexpand3884083%28%29&amp;collapseTAG=javascript%3Acollapse3884083%28%29&amp;clicktarget=_blank&amp;clickTarget=_blank&amp;clickTARGET=_blank&amp;CURRENTDOMAIN=www.huuto.net" id="AT_FLASHO3884083" name="AT_FLASHO3884083" base="http://aka-cdn-ns.adtech.de/apps/449/Ad9485761St3Sz82Sq104840815V0Id1/" quality="autohigh" flashvars="clickTAG=http%3A//adserver.adtech.de/adlink/969/3884083/0/82/AdId%3D9485762%3BBnId%3D1%3Bitime%3D13118349%3Bnodecode%3Dyes%3Blink%3Dhttp%3A//puutarha.net/artikkelit/8268/syyskuun_vinkit.htm%3Futm_source%3Dron%26utm_medium%3Dbanner%26utm_content%3D160x600%26utm_campaign%3Dpunet_syysvinkit%26cmp%3Dbn_rk_punet_sima" allowscriptaccess="always" swliveconnect="true" wmode="opaque" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="140" height="350"></object>
+				</div>
+				<div class="side-ad">
+					<script type="text/javascript">	try { cts.render("side02"); } catch (err) { cts.log(err); } </script><script type="text/javascript">if (JanModifiedAdCall == undefined) { var JanModifiedAdCall = 0; }if (JanModifiedAdCall < 1) { var impro_url = (window.location.protocol === "https:") ? 'https://ad.360yield.com' : 'http://ad.360yield.com';if (typeof(adptkwresp) == 'undefined') window.adptkwresp = '';if (!adptkw_string) {	var adptkw_string = window.adptkwresp.replace( /[;]/g, "&" );	adptkw_string = adptkw_string.replace( /[:]/g, "," ); 	}document.write('<scr'+'ipt type="text/javascript" src="'+impro_url+'/nadj?pub=347&placement=huut-160x600-btf-l-2-roc-koti_kohde&size=160x600&tz='+(new Date().getTimezoneOffset())+'&'+adptkw_string+'"></scr'+'ipt>');}</script><script type="text/javascript" src="http://ad.360yield.com/nadj?pub=347&amp;placement=huut-160x600-btf-l-2-roc-koti_kohde&amp;size=160x600&amp;tz=-180&amp;"></script><a hreftemp="http://#"><img alt="" src="http://creative.360yield.com/file/852/1x1.jpg" style="”display:none&quot;" width="0" height="0"></a><improvedigital_ad_output_information campaign_id="24427" line_item_id="61389" creative_id="125457" placement_id="428327"></improvedigital_ad_output_information> 
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/module/fresco/js/layout.js"></script>
+		
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1955649-1']);
+_gaq.push(['_setDomainName', 'huuto.net']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+
+			function analyticTracking(name, actionName) {
+				try { 
+					_gaq.push(['_trackEvent', name, actionName]);
+				} catch(error) {
+					// console.debug(error);
+				}
+
+				return true;
+			}
+</script>
+						<script type="text/javascript"><!--
+				
+			function google_ad_request_done(google_ads) {
+
+				if (google_ads.length < 1) { return false; }
+
+
+				var content = '<div class="google-logo"><a href="'+ google_info.feedback_url +'">'
+						+'<img src="/fi/img/google_logo3.gif" alt="Google-mainokset"/></a></div>';
+
+				for(var i = 0; i < google_ads.length; ++i) {
+					var ad = google_ads[i];
+
+					content = content +'<div class="google-ad">'
+						+'<span class="href"><a class="name" target="_blank" href="'+ ad.url +'">'+ ad.line1 +'</a></span>'
+						+'<span class="description">'+ ad.line2 +' '+ ad.line3 +'</span>'
+						+'<span class="url"><a target="_blank" href="'+ ad.url +'">'+ ad.visible_url +'</a></span>'
+						+'</div> ';
+
+				}
+
+				document.getElementById("koti-bottom-ads").innerHTML = content;
+			}
+
+				// google ad - koti-bottom
+				google_ad_client = 'ca-sanoma-huuto';
+				google_ad_output = 'js';
+				google_ad_type = 'text';
+				google_ad_width = '728';
+				google_ad_height = '30';
+				google_max_num_ads = 4;
+				google_ad_channel = '9243753386'; google_kw = unescape('koti'); google_kw_type = 'broad'; 
+
+				
+
+				//-->
+				</script>
+				<script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><script src="http://pagead2.googlesyndication.com/pagead/js/r20130917/r20130906/show_ads_impl.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><script language="JavaScript1.1" src="http://googleads.g.doubleclick.net/pagead/ads?client=ca-sanoma-huuto&amp;output=js&amp;h=30&amp;adk=3595685582&amp;w=728&amp;lmt=1380013117&amp;num_ads=4&amp;channel=9243753386&amp;ad_type=text&amp;ea=0&amp;flash=11.2.202&amp;kw=koti&amp;kw_type=broad&amp;url=http%3A%2F%2Fwww.huuto.net%2Fkohteet%2Fviktoria-senkki-90%2F282110750&amp;dt=1380013122594&amp;bdt=5321&amp;shv=r20130917&amp;cbv=r20130906&amp;saldr=sb&amp;correlator=1380013122791&amp;frm=20&amp;ga_vid=829966409.1380009578&amp;ga_sid=1380009578&amp;ga_hid=1737286442&amp;ga_fc=1&amp;u_tz=180&amp;u_his=1&amp;u_java=0&amp;u_h=1024&amp;u_w=1280&amp;u_ah=1024&amp;u_aw=1280&amp;u_cd=24&amp;u_nplug=9&amp;u_nmime=50&amp;dff=arial&amp;dfs=15&amp;biw=1245&amp;bih=878&amp;oid=3&amp;ref=http%3A%2F%2Fwww.huuto.net%2Fosasto%2Fkoti%2Fkaapit%2F801&amp;vis=2&amp;fu=0&amp;ifi=1&amp;dtd=202"></script>		<script src="//www.google.com/adsense/search/ads.js" type="text/javascript"></script><script src="//www.google.com/ads/search/module/ads/3.0/9be0356cc1bed970ff1bfb820d8b4ca6f0fe9bcc/n/search.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+
+
+</script>		
+<script type="text/javascript" src="/js/analytic/spring.js"></script><script type="text/javascript">var sp_e0 = {"s":"huutonet","cp":"huuto_osastot/huuto_koti","url":document.location.href};spring.c(sp_e0);</script><img src="http://huutonet.spring-tns.net/j0=,,,r=http%3A//www.huuto.net/osasto/koti/kaapit/801;+,cp=huuto_osastot/huuto_koti+url=http%3A//www.huuto.net/kohteet/viktoria-senkki-90/282110750;;;?lt=hlyw6ln3&amp;x=1280x1024x24" width="1" height="1"> <noscript><img src="http://huutonet.spring-tns.net/j0=,,,;+,,cp=huuto_osastot/huuto_koti;;;;" alt=""/></noscript>
+		
+<script language="javascript">
+	var vlc = "0";
+	var v = {};
+	v["lgged"] = 0;
+	v["huuto_cat"] = 801;
+	v["fresco"] = 1;
+</script>
+<script language="javascript" src="/module/fresco/js/zig.js" type="text/javascript"></script><iframe src="http://files.snstatic.fi/weba/js/ls/ls.html" style="position: absolute; width: 1px; height: 1px; left: -9999px;"></iframe>
+<noscript><img src="http://analytics.sanoma.fi/zag.gif?Log=1&dt=JSnoscript" border="0" width="1" height="1"/></noscript>
+		
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0010/8577.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+		<script type="text/javascript" charset="utf-8" src="//optimizer.s3.amazonaws.com/huutonet/frosmo.huutonet.fresco.js"></script>	
+
+</body><wa-color id="WA-color-0" bg="#33CCFF" fg="#000000" class="WebAnnotator_cubboard_measures" type="cubboard_measures"></wa-color><wa-color id="WA-color-1" bg="#FF0000" fg="#000000" class="WebAnnotator_other_measures" type="other_measures"></wa-color></html>
