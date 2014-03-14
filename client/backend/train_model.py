@@ -2,9 +2,10 @@ import sys
 import backend
 from crfs import *
 
-# Usage add_files_to_index.py model_name 
-
 b = backend.Backend()
+
+if "-h" in sys.argv or len(sys.argv) != 5:
+    sys.exit("Usage: train_model.py train_file devel_file devel_prediction_file model_file\n")
 
 train_file = sys.argv[1]
 devel_file = sys.argv[2]

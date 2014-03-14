@@ -2,7 +2,8 @@ import sys
 import backend
 from crfs import *
 
-# Usage add_files_to_index.py model_name 
+if "-h" in sys.argv or len(sys.argv) != 5:
+    sys.exit("Usage: apply_model.py model_file test_file test_reference_file test_prediction_file\n")
 
 b = backend.Backend()
 
@@ -28,3 +29,4 @@ print
 
 elapsed=time.time()-t
 print 'File', test_file, 'handled in:',  elapsed
+

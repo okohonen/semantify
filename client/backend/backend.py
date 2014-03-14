@@ -134,7 +134,7 @@ class Backend:
             fpw.write("\n")
         fpr.close()
         fpw.close()
-                                
+                            
     def build_data_set(self, model_name, target_file, input_info, feature_set):
         featurefiles = []
         for page_id, db_is_body in input_info:
@@ -163,6 +163,64 @@ class Backend:
                 fp.write("\n")
             else:
                 fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
+
+def extractlabel(line):
+    parts = line.split("\t")
+    return parts[-1].strip()
+
+def labels(inputf):        
+    if inputf[-3:] == ".gz":
+        fp = gzip.open(inputf)
+    else:
+        fp = open(inputf)
+    for line in fp:
+        if line == "\n":
+            continue
+        yield extractlabel(line)
+    fp.close()
+
+def label_to_index(label, tagmap):
+    if not tagmap.has_key(label):
+        log("Warning: label '%s' not in tagset" % label)
+        return None
+    return tagmap[label]
+
+def discrete_histogram(x):
+    hist = {}    
+    for xi in x:
+        if not hist.has_key(xi):
+            hist[xi] = 0
+        hist[xi] += 1
+    return hist
+
+def evaluate_results(referencef, predictedf, tagset=[]):
+    tagmap = dict(zip(tagset, range(len(tagset))))
+    pairs = zip(map(lambda l: label_to_index(l, tagmap), labels(referencef)), \
+                    map(lambda l: label_to_index(l, tagmap), labels(predictedf)))
+    pairs = filter(lambda p: p[0] is not None, pairs)
+    referencelabels, predictedlabels = zip(*pairs)
+    cm = confusion_matrix(referencelabels, predictedlabels)
+
+    predicted_counts = numpy.sum(cm, axis=0)
+    reference_counts = numpy.sum(cm, axis=1)
+
+    correct_counts = numpy.array(numpy.diag(cm), dtype=numpy.float)
+
+    precisions = numpy.zeros(correct_counts.shape)
+    recalls = numpy.zeros(correct_counts.shape)
+    fs = numpy.zeros(correct_counts.shape)
+
+    ind = predicted_counts > 0
+    precisions[ind] = correct_counts[ind] / predicted_counts[ind]
+
+    ind = reference_counts > 0
+    recalls[ind] = correct_counts[ind] / reference_counts[ind]    
+
+    ind = precisions + recalls > 0
+    fs[ind] = 2*precisions[ind]*recalls[ind] / (precisions[ind] + recalls[ind])
+
+    return (precisions, recalls, fs)
+
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
 class WordPunctTokenizer:

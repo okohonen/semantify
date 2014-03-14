@@ -1,7 +1,7 @@
 import sys
 import backend
 
-# Usage add_files_to_index.py model_name 
+# Usage make_data_set.py model_name 
 
 b = backend.Backend()
 
