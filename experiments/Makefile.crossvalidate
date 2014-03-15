@@ -1,0 +1,31 @@
+# Five-fold cross-validation
+export PYTHONPATH=$PYTHONPATH:/home/okohonen/code/semantify/client/backend
+
+BINDIR=/home/okohonen/code/semantify/experiments/bin
+PWD=$(shell pwd)
+FOLDS=$(shell python $(BINDIR)/parse_dirname.py $(PWD) K)
+MODEL_NAME=$(shell python $(BINDIR)/parse_dirname.py $(PWD) M)
+FEATURE_SET=$(shell python $(BINDIR)/parse_dirname.py $(PWD) F)
+
+all: $(shell perl -e 'foreach $$i (1 .. $(FOLDS)) { print "f_scores_$$i.txt "; } print "\n";')
+
+file_list.txt:
+	python $(BINDIR)/extract_dataset_files.py $(MODEL_NAME) id $(FEATURE_SET) > $@
+
+%_train.gz: file_list.txt
+	python $(BINDIR)/make_data_set.py $< --nr-of-folds=$(FOLDS) --fold=$* --output-file-pattern=$* --feature-set=$(FEATURE_SET) --model-name $(MODEL_NAME) 
+
+%_model.bin: %_train.gz
+	python $(BINDIR)/train_model.py $*.train.gz $*.devel.gz $*.devel.prediction $@ > $*.trainlog
+
+%.test.prediction: %_model.bin
+	python $(BINDIR)/apply_model.py $< $*.test.gz $*.test.prediction
+
+f_scores_%.txt: %.test.prediction 
+	python $(BINDIR)/evaluate_accuracy.py $*.test.reference.gz $*.test.prediction > $@
+
+clean:
+	rm -f *.gz *.bin *.prediction *.trainlog
+
+info: 
+	@echo Nr of folds $(FOLDS), Model name: $(MODEL_NAME), Feture set: $(FEATURE_SET) $(all)

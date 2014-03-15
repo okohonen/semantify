@@ -2,15 +2,14 @@ import sys
 import backend
 from crfs import *
 
-if "-h" in sys.argv or len(sys.argv) != 5:
-    sys.exit("Usage: apply_model.py model_file test_file test_reference_file test_prediction_file\n")
+if "-h" in sys.argv or len(sys.argv) != 4:
+    sys.exit("Usage: apply_model.py model_file test_file test_prediction_file\n")
 
 b = backend.Backend()
 
 model_file = sys.argv[1]
 test_file = sys.argv[2]
-test_reference_file = sys.argv[3]
-test_prediction_file = sys.argv[4]
+test_prediction_file = sys.argv[3]
 
 verbose = True
 
@@ -21,7 +20,7 @@ m.load(model_file)
 print "done"
 print
 print "apply model"
-print (test_file, test_prediction_file, test_reference_file, verbose)
+print (test_file, test_prediction_file, verbose)
 #m.apply(test_file, test_prediction_file, test_reference_file, verbose)
 m.apply(test_file, test_prediction_file, verbose)
 print "done"

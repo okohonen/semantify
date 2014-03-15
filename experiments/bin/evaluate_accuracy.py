@@ -6,9 +6,8 @@ b = backend.Backend()
 
 test_reference_file = sys.argv[1]
 test_prediction_file = sys.argv[2]
-tagset = eval(sys.argv[3])
 
-precisions, recalls, fs = backend.evaluate_results(test_reference_file, test_prediction_file, tagset)
+precisions, recalls, fs, tagset = backend.evaluate_results(test_reference_file, test_prediction_file)
 
 print "               class\t\tpreci.\trecall\tf-score"
 print "               ========================================"
