@@ -225,21 +225,7 @@ def k_fold_cross_validation(X, K, k):
     validation = [x for i, x in enumerate(X) if i % K == k]
     return (training, validation)
 
-def evaluate_results(referencef, predictedf, tagset=[]):
-    tagset_ = set()
-    for l in labels(referencef):
-        tagset_.add(l)
-    for l in labels(predictedf):
-        tagset_.add(l)
-    tagset = sorted(list(tagset_))
-
-    tagmap = dict(zip(tagset, range(len(tagset))))
-    pairs = zip(map(lambda l: label_to_index(l, tagmap), labels(referencef)), \
-                    map(lambda l: label_to_index(l, tagmap), labels(predictedf)))
-    pairs = filter(lambda p: p[0] is not None, pairs)
-    referencelabels, predictedlabels = zip(*pairs)
-    cm = confusion_matrix(referencelabels, predictedlabels)
-
+def cm_to_prf(cm):
     predicted_counts = numpy.sum(cm, axis=0)
     reference_counts = numpy.sum(cm, axis=1)
 
@@ -258,7 +244,22 @@ def evaluate_results(referencef, predictedf, tagset=[]):
     ind = precisions + recalls > 0
     fs[ind] = 2*precisions[ind]*recalls[ind] / (precisions[ind] + recalls[ind])
 
-    return (precisions, recalls, fs, tagset)
+    return (precisions, recalls, fs)
+
+def evaluate_results(referencef, predictedf, tagset):
+    # Add possible tags from the tagger
+    tagset.extend(['START', 'STOP'])
+
+    tagmap = dict(zip(tagset, range(len(tagset))))
+    pairs = zip(map(lambda l: label_to_index(l, tagmap), labels(referencef)), \
+                    map(lambda l: label_to_index(l, tagmap), labels(predictedf)))
+    pairs = filter(lambda p: p[0] is not None, pairs)
+    referencelabels, predictedlabels = zip(*pairs)
+    cm = confusion_matrix(referencelabels, predictedlabels, range(len(tagset)))
+
+    precisions, recalls, fs = cm_to_prf(cm)
+
+    return (precisions, recalls, fs, tagset, cm)
 
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
@@ -359,10 +360,12 @@ def traverse_html_nodes(nodeiter, htmlfeaturefuns, tokenfeaturefuns, build_token
             tokenization = tok.tokenize(node.string)
 
         for t in tokenization:
-            tokenf = {}
+            # 'word' needed internally, but only used externally if feature extractor
+            # asks for it
+            tokenf = {'word': (t.lower(), '1')} 
             for feat in tokenfeaturefuns:
                 vd = feat.extract(t)
-                tokenf = vd      
+                tokenf.update(vd)
             labels.append(label)
             tokens.append((tokenf, htmlf, node, blocknr))
     return (tokens, labels, node_index)
@@ -450,7 +453,7 @@ class Ortho(BlockFeatureFunction):
         tlong, tbrief = Ortho.generalisation(token);
         chartypecounts = Ortho.countletters(tlong);
 
-        ret = {'word': (token.lower(), '1'), 'long': (tlong, '1') ,'brief': (tbrief, '1') }
+        ret = {'long': (tlong, '1') ,'brief': (tbrief, '1') }
         for k in Ortho.namemap.keys():
             ret["%scount" % Ortho.namemap[k]] = ('', str(chartypecounts[k])) 
             ret["has%s" % Ortho.namemap[k]] = ('', str(int(chartypecounts[k] > 0)))
