@@ -2077,7 +2077,7 @@ webannotator.main = {
     },
 
     storePage: function() {
-        var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+        var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": "default"};
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
     // Sri edit
     //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);

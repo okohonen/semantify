@@ -96,13 +96,22 @@ class Backend:
         return page_id
     
     def update_page_annotated(self, page_id, url, version, is_body, model_name, content):
-        self.c.execute('''UPDATE pages SET url=?, timestamp=DATETIME('now'), version=?, is_body=?, model_id=(SELECT id FROM models WHERE name=?)) WHERE id=? ''', (url, version,  "1" if is_body else "0", model_name, page_id))
+        assert(False)
+        self.c.execute('''UPDATE pages_annotated SET url=?, timestamp=DATETIME('now'), version=?, is_body=?, model_id=(SELECT id FROM models WHERE name=?)) WHERE id=? ''', (url, version,  "1" if is_body else "0", model_name, page_id))
         self.conn.commit()
         fname = page_annotated_file(model_name, page_id, is_body)
         os.system("rm %s" % fname)
         assert(not(os.path.exists(fname)))
         fp = gzip.open(fname, 'wb')
         fp.write(content)
+
+    def find_page_id(self, url, model_id):
+        self.c.execute("SELECT id FROM pages_annotated WHERE url=? AND model_id=? ORDER BY version DESC", (url, model_id))
+        r = self.c.fetchone()                
+        if r is None:
+            return None
+        else:
+            return r[0]
 
     # Returns a list of page-files in desired order for tracking of crossvalidation folds
     def extract_dataset_files(self, model_name, feature_set, order_by="id"):

@@ -4,7 +4,6 @@ import socket
 import json
 import os
 import string
-#from models import *
 import backend
 from crfs import *
 import sqlite3, shlex, subprocess,  sys,  re,  time
@@ -13,7 +12,7 @@ from bs4 import NavigableString
 from datetime import datetime
 import unicodedata
 import numpy
-#import devutil
+import devutil
 import codecs
 import zlib
 
@@ -83,6 +82,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Case 3.
             if o.has_key("create_new"):                
+                assert(False)
+
                 cur_version = b.get_page_annotated_version(o['url'])
                 if cur_version is None:
                     version = 1;
@@ -92,6 +93,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Case 2.
             if o.has_key("version"):
+                assert(False)
+
                 c.execute('''SELECT id FROM pages WHERE url=? AND version=? AND schema_id=? ORDER BY timestamp DESC''', (o['url'], o['version'], schema_id))
                 r = c.fetchone()
                 if r is None:
@@ -103,15 +106,13 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 
             # Case 1.
             else:
-                c.execute("SELECT id FROM pages WHERE url=? AND schema_id=? ORDER BY version DESC", (o['url'], schema_id))
-                r = c.fetchone()                
-                if r is None:
-                    # Here we are doing the first insertion
-                    page_id = b.insert_new_page(c, o, 1)
+                model_id = 1
+                version = 1
+                page_id = b.find_page_id(o['url'], model_id)
+                if page_id is None:
+                    page_id = b.insert_new_page_annotated(o['url'], version, True, o['model_name'], o['content'].encode('utf-8'))
                 else:
-                    page_id = r[0];
-                    b.update_page(c, page_id, o)
-            conn.commit()       
+                    b.update_page_annotated(c, page_id, o)
         
             if b.has_current_training_file(model_name, feature_set):
                 incremental_train_add(training_file, devel_file, devel_label_distr, file_to_add, "%s.train.gz" % model_name, "%s.devel.gz" % model_name)
