@@ -4,7 +4,7 @@
 	 xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description about="urn:mozilla:install-manifest">
-	  <em:id>WebAnnotator@limsi.fr</em:id>
+	  <em:id>Semantify@aalto.fi</em:id>
 	  <em:unpack>true</em:unpack>
 	  <em:version>1.12</em:version>
 	  <em:type>2</em:type>
@@ -17,7 +17,7 @@
 		</Description>
 	  </em:targetApplication>
 	  
-	  <em:name>WebAnnotator</em:name>
+	  <em:name>Semantify</em:name>
 	  <em:description>WebAnnotator is an annotation tool for Web pages.</em:description>
 	  <em:creator>Xavier Tannier</em:creator>
 	  <em:developer>Thibault Baste</em:developer>

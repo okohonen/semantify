@@ -123,6 +123,10 @@ class Backend:
             filelist.append(self.page_annotated_filename(model_name, page_id, db_is_body == 1))
         return filelist
 
+    #    def get_training_test_devel_split(self, file_list, nrfolds, fold, develratio):
+        
+        
+
     def make_experiment_datasets(self, file_list, model_name, trainsetf, develsetf, testsetreff, testsetf, feature_set, nrfolds, fold):
         training_set_, test_set = k_fold_cross_validation(file_list, nrfolds, fold)
 

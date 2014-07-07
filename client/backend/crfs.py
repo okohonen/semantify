@@ -415,13 +415,15 @@ class Parser(object):
 
         previous_line_was_empty = True
         
+        linenr = 0
         while(1):
 
             position = self.FILE.tell()
             line = self.FILE.readline().strip() 
+            linenr += 1
 
             if not line and previous_line_was_empty:
-                
+                print "Finished reading data file at double newline on line %d" % linenr
                 break
             
             elif not line and not previous_line_was_empty:
@@ -1174,12 +1176,14 @@ class CRF(object):
 
         # initialize devel and train data sets
 
+        tic = time.clock()
         train_data = TrainData(train_file, self.feature_manager, self.state_manager)
         devel_data = DevelData(devel_file, self.feature_manager, self.state_manager)
 
         print '\ttrain data size:', train_data.size
         print '\tdevel data size:', devel_data.size
         print "\tnumber of features:", self.feature_manager.num_features
+        print "\tdata loaded in:", time.clock() - tic
 
         # initialize decoder
             
