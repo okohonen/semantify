@@ -32,7 +32,7 @@ file_list = eval(open(sys.argv[1]).read())
 assert(type(file_list) is list)
 
 test_reference_file = "%s.test.reference.gz" % args.output_pattern
-test_file = "%s.test.reference.gz" % args.output_pattern
+test_file = "%s.test.gz" % args.output_pattern
 devel_prediction_file = "%s.devel.prediction" % args.output_pattern
 test_prediction_name = "%s.test.prediction" % args.output_pattern
 final_model = "%s_model.bin" % args.output_pattern

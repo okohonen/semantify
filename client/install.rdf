@@ -18,14 +18,13 @@
 	  </em:targetApplication>
 	  
 	  <em:name>Semantify</em:name>
-	  <em:description>WebAnnotator is an annotation tool for Web pages.</em:description>
-	  <em:creator>Xavier Tannier</em:creator>
-	  <em:developer>Thibault Baste</em:developer>
-	  <em:developer>jingjing Li</em:developer>
-	  <em:developer>Jialin Liu</em:developer>
+	  <em:description>Semantify integrates annotation of web pages with machine learning.</em:description>
+	  <em:creator>Oskar Kohonen</em:creator>
+	  <em:developer>Srikrishna Raamadhurai</em:developer>
+	  <em:developer>Teemu Ruokolainen</em:developer>
 
-	  <em:homepageURL>http://www.limsi.fr/Individu/xtannier/en/WebAnnotator/</em:homepageURL>
+	  <em:homepageURL>https://github.com/okohonen/semantify</em:homepageURL>
 	  <em:aboutURL>chrome://webannotator/content/description.xul</em:aboutURL>
-	  <em:iconURL>chrome://webannotator/skin/wa_small_activated.png</em:iconURL>
+	  <em:iconURL>chrome://webannotator/skin/s.png</em:iconURL>
   </Description>
 </RDF>

@@ -17,6 +17,14 @@ class RandomTrainDevelSplitter:
             else:
                 train_set.append_sentence(lines)
 
+class ModulusTrainDevelSplitter:
+    def __init__(self):
+        self.tagcounts = defaultdict(int)
+    
+    def apply(self, input_ff, train_set, devel_set):
+        for lines in input_ff.sentences():
+            devutil.keyboard()
+
 class IncrementalTraining:
     def incremental_train(self, feature_fp):
         pass

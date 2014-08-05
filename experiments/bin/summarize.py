@@ -13,6 +13,7 @@ for f in sys.argv[2:]:
 # devutil.keyboard()
 
 combined = reduce(lambda x, y: x + y, cms)
+
 precisions, recalls, fs = backend.cm_to_prf(combined)
 
 print "               class\t\tpreci.\trecall\tf-score"

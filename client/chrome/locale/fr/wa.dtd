@@ -1,6 +1,6 @@
 <!--https://developer.mozilla.org/En/Firefox_addons_developer_guide/Let%27s_build_a_Firefox_extension-->
 
-<!ENTITY wa.name "WebAnnotator">
+<!ENTITY wa.name "Semantify">
 <!ENTITY wa.about "&#192; propos de">
 <!ENTITY wa.activatelastused "Activer le dernier sch&#233;ma">
 <!ENTITY wa.chooseschema "Choisir un sch&#233;ma">
