@@ -24,6 +24,8 @@ import collections
 import gzip
 import math
 
+from feature_file import labels
+
 def log(s):
     sys.stderr.write(s)
 
@@ -183,20 +185,6 @@ class Backend:
             else:
                 fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
 
-def extractlabel(line):
-    parts = line.split("\t")
-    return parts[-1].strip()
-
-def labels(inputf):        
-    if inputf[-3:] == ".gz":
-        fp = gzip.open(inputf)
-    else:
-        fp = open(inputf)
-    for line in fp:
-        if line == "\n":
-            continue
-        yield extractlabel(line)
-    fp.close()
 
 def label_to_index(label, tagmap):
     if not tagmap.has_key(label):

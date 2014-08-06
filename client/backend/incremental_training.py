@@ -5,6 +5,8 @@ import time
 from crfs import CRF
 import gzip
 import os
+from collections import defaultdict
+import feature_file as ff
 
 class RandomTrainDevelSplitter:
     def __init__(self, devel_probability):
@@ -17,13 +19,24 @@ class RandomTrainDevelSplitter:
             else:
                 train_set.append_sentence(lines)
 
-class ModulusTrainDevelSplitter:
-    def __init__(self):
+class ModuloTrainDevelSplitter:
+    def __init__(self, modulo):
+        self.mod = modulo
         self.tagcounts = defaultdict(int)
     
     def apply(self, input_ff, train_set, devel_set):
         for lines in input_ff.sentences():
-            devutil.keyboard()
+            labels = map(ff.extractlabel, lines)
+            devel = False
+            for l in set(labels):
+                self.tagcounts[l] += 1
+                # Use 3 to get devel started somewhat quickly
+                if self.tagcounts[l] % self.mod == 3:
+                    devel = True
+            if devel:
+                devel_set.append_sentence(lines)
+            else:
+                train_set.append_sentence(lines)
 
 class IncrementalTraining:
     def incremental_train(self, feature_fp):

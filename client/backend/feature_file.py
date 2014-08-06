@@ -1,3 +1,4 @@
+import gzip
 # Wrapper for the feature file format
 
 class StringFeatureFileWriter:
@@ -20,3 +21,18 @@ class StringFeatureFileReader:
                 lines = []
             else:
                 lines.append(line)
+
+def extractlabel(line):
+    parts = line.split("\t")
+    return parts[-1].strip()
+
+def labels(inputf):        
+    if inputf[-3:] == ".gz":
+        fp = gzip.open(inputf)
+    else:
+        fp = open(inputf)
+    for line in fp:
+        if line == "\n":
+            continue
+        yield extractlabel(line)
+    fp.close()

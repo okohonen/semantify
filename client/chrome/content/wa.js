@@ -494,7 +494,7 @@ webannotator.main = {
 		// Disable button
 		var button = document.getElementById("WebAnnotator_button");
 		button.disabled = true;
-		button.style.listStyleImage = "url('chrome://webannotator/skin/wa_small_disabled.png')";
+		button.style.listStyleImage = "url('chrome://webannotator/skin/s_disabled.png')";
 		// Disable menu
 		var menu = document.getElementById("WebAnnotator-menu");
 		menu.disabled = true;
@@ -516,7 +516,7 @@ webannotator.main = {
 		// Enable button
 		var button = document.getElementById("WebAnnotator_button");
 		button.disabled = false;
-		button.style.listStyleImage = "url('chrome://webannotator/skin/wa_small_activated.png')";
+		button.style.listStyleImage = "url('chrome://webannotator/skin/s.png')";
 		// Enable menu
 		var menu = document.getElementById("WebAnnotator-menu");
 		menu.disabled = false;
