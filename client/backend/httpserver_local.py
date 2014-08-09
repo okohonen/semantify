@@ -15,6 +15,8 @@ import numpy
 import devutil
 import codecs
 import zlib
+import incremental_training as it
+import feature_file as ff
 
 PORT = 50010
 
@@ -30,6 +32,9 @@ errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
 successlog=open(os.getcwd()+path+'successlog.txt',  'w')
 filecount=0
 
+feature_set = "ortho3+html3"
+
+its = {}
 
 class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_POST(self):
@@ -114,47 +119,22 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 else:
                     b.update_page_annotated(c, page_id, o)
         
-            if b.has_current_training_file(model_name, feature_set):
-                incremental_train_add(training_file, devel_file, devel_label_distr, file_to_add, "%s.train.gz" % model_name, "%s.devel.gz" % model_name)
-            else:
-                # Rebuild incrementally so we get the same results even if we must rebuild
-                build_training_set(conn, model_name, feature_set)
-
-        
-            # Trains a model with received annotations  
-            # words, f_ortho1,  f_ortho3, f_html, labels, sentences, nodes, node_index, tokens=b.preprocess_file(page)
-            value=b.history(conn, path, filename)         
-            if value==1:
-                print "initialize model"
-                m = CRF()
-                print "done"
-                print
-                print "train model"
-                #accuracy=m.train(graph_id,  performance_measure_id,  single_pass,  train_file,  devel_file, devel_prediction_file,  verbose)
-                m.train(train_file, devel_file, devel_prediction_file, verbose)
-                print "done"    
-                print
-                print "save model"
-                m.save(model_file)
-                print "done"
-                print                
-                #print accuracy                
-                successlog.write(filename)
-                successlog.write('\t')
-                successlog.write( str(datetime.now()))
-                successlog.write('\n') 
-                elapsed=time.time()-t
-                print 'File', filename, 'handled in:',  elapsed
-                
-                #o['accuracy']=accuracy  
-                #self.wfile.write(json.dumps(o))                
+            if not(its.has_key(o['model_name'])):
+                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], it.ModuloTrainDevelSplitter(10))
+            
+            # We should have inserted the feature file already
+            # Broken here: Need to separate the page index into its own component and extract it in some sensible way
+            # But let's build it first
+            
+            page_features = b.extract_features(page, feature_set, True)
+            its[o['model_name']].incremental_train(page_features, devel_prediction_file,model_file)
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
             value=0
             
-            words, f_ortho1,  f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=b.preprocess_file(page, build_node_index = True)
-            b.write_testfiles(path, filename, sentences, labels)                        
+            page_features = b.extract_features(page, feature_set, False)
+            backend.write_testfile(test_file, page_features.sentences())
             
             print 'Devel files extracted' 
             print "load model"

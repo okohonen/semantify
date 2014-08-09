@@ -25,6 +25,7 @@ import gzip
 import math
 
 from feature_file import labels
+import feature_file as ff
 
 def log(s):
     sys.stderr.write(s)
@@ -55,6 +56,9 @@ class Backend:
         self.c = self.conn.cursor()
         self.c.execute("PRAGMA foreign_keys = ON;")
         self.fetch_models()
+
+    def get_tmpdir(self):
+        return "%s/data/temp" % self.localdir
 
     def fetch_models(self):
         names = self.c.execute("SELECT name FROM models;")
@@ -175,16 +179,22 @@ class Backend:
         os.system("zcat %s | gzip > %s" % (" ".join(featurefiles), target_file))
         log("done\n")
 
-    def create_feature_file(self, inputpage, featurefile, feature_set, annotated=True):
+    def extract_features(self, inputpage, feature_set, annotated=True):
+        return ff.StringFeatureFileReader(self._extract_features_iter(inputpage, feature_set, annotated))
 
+    def _extract_features_iter(self, inputpage, feature_set, annotated=True):
         words, f_ortho1, f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=preprocess_file(inputpage, feature_set, build_node_index = False)
-        fp = gzip.open(featurefile, 'wb')
         for i in xrange(len(sentences)):              
             if sentences[i] == "\n":
-                fp.write("\n")
+                yield("\n")
             else:
-                fp.write((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
+                yield((sentences[i]+"\t"+labels[i]+"\n").encode('utf8'))
 
+    def create_feature_file(self, inputpage, featurefile, feature_set, annotated=True):
+        fp = gzip.open(featurefile, 'wb')
+        for l in self.extract_features(inputpage, feature_set, annotated):
+            fp.write(l)
+            
 
 def label_to_index(label, tagmap):
     if not tagmap.has_key(label):
@@ -465,16 +475,13 @@ class Ortho(BlockFeatureFunction):
         return self._feature_nm
     
 
-def write_testfiles(path, filename, sentences, labels):
-    testfile = open(os.getcwd()+path+'/temp/'+filename+'.test','w')    
-    testreferencefile = open(os.getcwd()+path+'/temp/'+filename+'.test.reference','w')    
-    for i in range(len(sentences)):              
-        testfile.write(sentences[i].encode('utf8'))        
-        testreferencefile.write((sentences[i]+"\t"+labels[i]).encode('utf8'))
-        if sentences[i] != "\n":
-            testfile.write('\n')        
-            testreferencefile.write('\n')            
-    
+def write_testfile(fname, sentences):
+    testfile = open(fname, 'w')    
+    for s in sentences: 
+        for tok in s:
+            print tok
+            testfile.write(tok.encode('utf8') + "\n")        
+        testfile.write("\n")  
 
 def nodeblocks(retfile, tokens, filterf):
     c = 0
