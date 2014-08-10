@@ -1,31 +1,25 @@
 #!/usr/bin/env python
 
 from __future__  import division
-import socket
-import urllib2
 import sqlite3
 import os
-import string
 import re
 import time
-from bs4 import BeautifulSoup
-from bs4 import NavigableString
 import bs4
 from datetime import datetime
-
-from crfs import *
 import sys  
-from sklearn import metrics
-from sklearn.metrics import confusion_matrix
-from sklearn import cross_validation
-import codecs
 import devutil
 import collections
 import gzip
 import math
 
+from sklearn.metrics import confusion_matrix
+
+from crfs import *
+
 from feature_file import labels
 import feature_file as ff
+import htmlparse as hp
 
 def log(s):
     sys.stderr.write(s)
@@ -170,21 +164,15 @@ class Backend:
             if not os.path.exists(featurefile):
                 log("Creating feature file '%s'\n" % featurefile)
                 if inputfile[-11:] == "htmlbody.gz":
-                    inputpage = BeautifulSoup('<html><body>%s</body></html>' % gzip.open(inputfile).read())
+                    inputpage = bs4.BeautifulSoup('<html><body>%s</body></html>' % gzip.open(inputfile).read())
                 else:
-                    inputpage = BeautifulSoup(gzip.open(inputfile))
-                self.create_feature_file(inputpage, featurefile, feature_set, annotated=True)
+                    inputpage = bs4.BeautifulSoup(gzip.open(inputfile))
+                parsed_page = hp.parse_page(inputpage, feature_set, annotated=True, build_node_index=False)
+                parsed_page.write_feature_file(featurefile)
             featurefiles.append(featurefile)
         log("Aggregating data set in '%s'\n" % target_file)
         os.system("zcat %s | gzip > %s" % (" ".join(featurefiles), target_file))
         log("done\n")
-
- 
-    def create_feature_file(self, inputpage, featurefile, feature_set, annotated=True):
-        fp = gzip.open(featurefile, 'wb')
-        for sent in self.extract_features(inputpage, feature_set, annotated).sentences():
-            for tok in sent:
-                fp.write(tok.encode('utf8'))        
 
 
 def label_to_index(label, tagmap):
@@ -260,107 +248,4 @@ def evaluate_results(referencef, predictedf, tagset):
     cm = confusion_matrix(referencelabels, predictedlabels, range(len(tagset)))
 
     precisions, recalls, fs = cm_to_prf(cm)
-
-                
-
-def accuracy(path, filename, tagset):
-    
-    standardfile=open(os.getcwd()+path+'/temp/'+filename+'.test.reference')
-    firstfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
-    predictiontracker=open(os.getcwd()+path+'/temp/'+filename+'.prediction.tracker', 'w')   
-    
-    
-    standard=standardfile.read().splitlines()
-    stan=[]
- 
-    
-    for i in standard:
-        line=i.split(' : ')
-        tagindex=len(line)-1        
-        if line[0] and not line[0]=='\n':
-            line=line[tagindex].replace('1', '')
-            line=line.replace('\n', '')     
-            stan.append(line)
-        
-    first=firstfile.read().splitlines()
-    file1=[]
-    for i in first:
-        line=i.split(' : ')
-        tagindex=len(line)-1
-        if line[0] and not line[0]=='\n':
-            line=line[tagindex].replace('1\t', '')
-            line=line.replace('\n', '')
-            file1.append(line)
-    
-    exclude=['O', 'START', 'STOP']
-    #tagset=[]
-    a=0; b=0
-    for i in range(len(stan)):
-        if stan[i]==file1[i]:
-            a=a+1
-        predictiontracker.write(stan[i]); predictiontracker.write('\t')
-        predictiontracker.write(file1[i]); predictiontracker.write('\t')
-        predictiontracker.write('\n')
-        #if not stan[i] in exclude and not stan[i] in tagset:
-            #tagset.append(stan[i])
-    predictiontracker.close()
-            
-    print "a= %s \tlen(stan)= %s " % (a, len(stan))
-    f1=(a/len(stan))*100
-    print 'Original model accuracy is : ', f1
-    
-    return tagset
-        
-def confusionmatrix(path, filename, tagset):
-
-    predictionfile=open(os.getcwd()+path+'/temp/'+filename+'.prediction.tracker')
-    
-    #confusionfile=open(os.getcwd()+path+'/temp/'+filename+'.'+confusion+'.confusion', 'w')    
-    
-    
-    prediction=predictionfile.read().splitlines()
-    true=[]; predfull=[]
-    pred=[]
-    
-    
-    
-    def replace(token,  order):
-        absent=0;
-        for q in range(len(tagset)):
-            if  tagset[q] in token:  
-                token=q+1
-                if not (q+1) in order:
-                    order.append(q+1)
-                absent=0
-                break
-            else:
-                absent=1
-        if absent==1:
-            token=0
-        return token,  order
-    
-    order=[0]
-    for i in range(len(prediction)):
-        line=prediction[i].split('\t')   
-        line[0],  order=replace(line[0],  order)
-        if not line[0] in order:
-            order.append(line[0])
-        line[1],  order=replace(line[1],  order)
-        true.append(line[0])
-        predfull.append(line[1])
-        #confusionfile.write(repr(line))
-        #confusionfile.write('\n')       
-    
-    #confusionfile.close()        
-    
-    if not len(order)==len(tagset)+1:
-        for i in range(len(tagset)+1):
-            if not i in order:
-                true.append(i)
-                predfull.append(i)
-                pred.append(i)
-                
-    #statistics=metrics.classification_report(true, predfull)           
-    print  'Confusion matrix for Original model is :', confusion_matrix( true,  predfull)    
-    
-    return confusion_matrix(true,  predfull), true, predfull
+    return (precisions, recalls, fs, tagset, cm)

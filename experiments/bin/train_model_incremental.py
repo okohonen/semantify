@@ -7,6 +7,7 @@ import gzip
 import incremental_training as it
 import feature_file as ff
 from bs4 import BeautifulSoup
+import htmlparse as hp
 
 # This script trains a model incrementally and decodes the test set after training on each model
 
@@ -54,7 +55,7 @@ for i in range(len(training_set)):
     model_file = devel_prediction_file = "%s_%d_model.bin" % (args.output_pattern, i+1)
 
     # Preprocess_file
-    b.create_feature_file(BeautifulSoup(gzip.open(training_set[i])), "tmp_feature_file.gz", args.feature_set, True)
+    parsed_page = hp.parse_page(BeautifulSoup(gzip.open(training_set[i])), args.feature_set, annotated=True, build_node_index=False)
     # Add to incremental training set
-    model_training.incremental_train(ff.StringFeatureFileReader(gzip.open("tmp_feature_file.gz")), devel_prediction_file, model_file)
+    model_training.incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
     model_training.apply(model_file, test_file, "%s_%d_test.prediction" % (args.output_pattern, i+1))

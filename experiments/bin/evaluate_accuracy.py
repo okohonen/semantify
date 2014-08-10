@@ -10,6 +10,7 @@ assert(type(tagset) is list)
 
 precisions, recalls, fs, extended_tagset, cm = backend.evaluate_results(test_reference_file, test_prediction_file, tagset)
 
+
 print "               class\t\tpreci.\trecall\tf-score"
 print "               ========================================"
 for i in range(len(extended_tagset)):

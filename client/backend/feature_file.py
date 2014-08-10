@@ -6,7 +6,6 @@ class StringFeatureFileWriter:
         self.fp = fp
         
     def append_sentence(self, lines):
-        print lines
         self.fp.write("".join(lines).encode("utf-8"))
         self.fp.write("\n")
 
