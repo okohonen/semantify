@@ -20,6 +20,7 @@
 
 <!ENTITY wa.cancel "Annuler">
 <!ENTITY wa.save "Sauvegarder">
+<!ENTITY wa.create "Cr&#233;er">
 <!ENTITY wa.preferences "Pr&#233;f&#233;rences">
 <!ENTITY wa.fielddtdfile "DTD :">
 <!ENTITY wa.fieldschemaname "Nom du sch&#233;ma :">

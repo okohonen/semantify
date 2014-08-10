@@ -28,7 +28,7 @@
 	</description>
 	<hbox>
 <!--	  <textbox readonly="true" onclick="if (this.value == '') selection('saveFileName', false);" id="saveFileName" size="50" flex="5"/>  -->
-	  <textbox readonly="true" id="saveFileName" size="50" flex="5"/> 
+	  <textbox readonly="true" id="modelName" size="50" flex="5"/> 
 	  <button label="Browse" oncommand="webannotator.save.selection('saveFileName', false);"/>
 	</hbox>
 	<checkbox id="color_cb" label="Keep color information outside WebAnnotator" checked="false"/>
