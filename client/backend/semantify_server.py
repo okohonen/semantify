@@ -17,6 +17,7 @@ import codecs
 import zlib
 import incremental_training as it
 import feature_file as ff
+import htmlparse as hp
 
 PORT = 50010
 
@@ -63,7 +64,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         graph_id='first-order-chain'; performance_measure_id='accuracy'; single_pass=False; verbose=False
         
-        test_file                        =os.getcwd()+path+'/temp/'+filename+'.test'
+        test_file                        =os.getcwd()+path+'/temp/'+filename+'.test.gz'
         test_reference_file         =os.getcwd()+path+'/temp/'+filename+'.test.reference'  
         
         train_file                       =os.getcwd()+path+'/temp/'+filename+'.train'   
@@ -72,10 +73,12 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         test_prediction_file         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'
         model_file                 =os.getcwd()+path+'/temp/client.model'   
         
-        page = BeautifulSoup('<html><body>%s</body></html>' % o['content'])
+        
+        page = BeautifulSoup('<html><body>%s</body></html>' % o['content'], from_encoding = "utf-8")
    
         if o["command"] == "PUT": 
-            
+
+            parsed_page = hp.parse_page(page, feature_set, annotated=True, build_node_index=False)
             # TODO client sends schema identifier
             schema_id = 1;
 
@@ -126,15 +129,15 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Broken here: Need to separate the page index into its own component and extract it in some sensible way
             # But let's build it first
             
-            page_features = b.extract_features(page, feature_set, True)
-            its[o['model_name']].incremental_train(page_features, devel_prediction_file,model_file)
+
+            # b.extract_features(page, feature_set, True)
+            its[o['model_name']].incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
         
         elif o["command"] == "TAG":
             # Applies tags to the web page      
-            value=0
+            parsed_page = hp.parse_page(page, feature_set, annotated=False, build_node_index=True)
             
-            page_features = b.extract_features(page, feature_set, False)
-            backend.write_testfile(test_file, page_features.sentences())
+            parsed_page.write_feature_file(test_file)
             
             print 'Devel files extracted' 
             print "load model"
@@ -143,7 +146,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print "done"
             print
             print "apply model"
-            print (test_file, test_prediction_file, test_reference_file, verbose)
+            print (test_file, test_prediction_file, verbose)
             #m.apply(test_file, test_prediction_file, test_reference_file, verbose)
             m.apply(test_file, test_prediction_file, verbose)
             print "done"
@@ -154,18 +157,19 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
 
-            nodes_to_tag = b.extract_tagged_nodes(retfile, tokens)
-            print "Nodes to tag: %d" % len(nodes_to_tag)
-            print nodes_to_tag
+            parsed_page.apply_tagging(retfile)
 
-            b.apply_tagging(page, nodes_to_tag, node_index)
+            # nodes_to_tag = backend.extract_tagged_nodes(retfile, tokens)
+            # print "Nodes to tag: %d" % len(nodes_to_tag)
+            # print nodes_to_tag
+            # backend.apply_tagging(page, nodes_to_tag, node_index)
             
             successlog.write(filename)
             successlog.write('\t')
             successlog.write(str(datetime.now()))
             successlog.write('\n')             
             
-            o['content']=str(page)
+            o['content']=str(parsed_page)
 
             self.wfile.write(json.dumps(o))
 
