@@ -138,7 +138,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             parsed_page = hp.parse_page(page, feature_set, annotated=False, build_node_index=True)
             
             parsed_page.write_feature_file(test_file)
-            
+
             print 'Devel files extracted' 
             print "load model"
             m=CRF()
@@ -148,6 +148,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print "apply model"
             print (test_file, test_prediction_file, verbose)
             #m.apply(test_file, test_prediction_file, test_reference_file, verbose)
+
             m.apply(test_file, test_prediction_file, verbose)
             print "done"
             print
@@ -169,7 +170,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             successlog.write(str(datetime.now()))
             successlog.write('\n')             
             
-            o['content']=str(parsed_page)
+            s = str(parsed_page)
+            o['content'] = str(parsed_page.get_body())
 
             self.wfile.write(json.dumps(o))
 

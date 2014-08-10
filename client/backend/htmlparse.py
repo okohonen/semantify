@@ -4,15 +4,18 @@ from bs4 import BeautifulSoup
 from bs4 import NavigableString
 import bs4
 import collections
+import gzip
+import devutil
 
 def parse_page(page, feature_set, annotated=True, build_node_index=True):
     words, f_ortho1, f_ortho3, f_html, labels, sentences, token_nodes, node_index, tokens=preprocess_file(page, feature_set, build_node_index)
-    return ParsedHTML(sentences, labels, tokens, node_index, annotated)
+    return ParsedHTML(page, sentences, labels, tokens, node_index, annotated)
 
 # Data structure to store the parsed HTML file. Also allows modifying the HTML with 
 # the taggings from a classifier
 class ParsedHTML:
-    def __init__(self, sentences, labels, tokens, node_index, annotated):
+    def __init__(self, soup, sentences, labels, tokens, node_index, annotated):
+        self.soup = soup
         self.sentences = sentences
         self.labels = labels
         self.tokens = tokens
@@ -35,16 +38,77 @@ class ParsedHTML:
 
     # Write parsed file to disc
     def write_feature_file(self, filename):
-        pass
+        fp = gzip.open(filename, 'wb')
+        for tok in self._read_features_iter():
+            fp.write(tok.encode('utf8'))        
 
     # Read classifier output from file given as argument
     def apply_tagging(self, retfile):
-        pass
+        assert(not(self.node_index is None))
+        nodes_to_tag = self._extract_tagged_nodes(retfile)
+        print "Nodes to tag: %d" % len(nodes_to_tag)
+        print nodes_to_tag
+        self._modify_tree(nodes_to_tag)
+
+    def _modified_subtreelist(self, soup, s, taggings, node_pos):
+        nodel = []
+        lastpos = 0
+        for startoffset, endoffset, tag in taggings:            
+            startpos = node_pos[0][startoffset]
+            endpos = node_pos[1][endoffset]
+            nodel.append(soup.new_string(s[lastpos:startpos]))
+            span = soup.new_tag('span')
+            span['wa-subtypes'] = ""
+            span['wa-type'] = tag
+            span['class'] = "Semantify_%s" % tag
+            span['semantify'] = "auto"
+            span.string = s[startpos:endpos]
+            nodel.append(span)
+            lastpos = endpos
+        nodel.append(soup.new_string(s[lastpos:]))
+        return nodel
+        
+    def _modify_tree(self, nodes_to_tag):
+        for node, taggings in nodes_to_tag:
+            ml = self._modified_subtreelist(self.soup, node.string, taggings, self.node_index[node])
+            node.replace_with(ml[0])
+            for i in range(1, len(ml)):
+                ml[i-1].insert_after(ml[i])
+    
+
+    # Takes as input the tagged file and the tokens and then produces a list of taggings
+# represented as pairs with offsets in lists of triples :[(node, [(startoffset, endoffset, tags)])]
+    def _extract_tagged_nodes(self, retfile):
+        ret = []
+    
+        notags = ['O', 'START', 'STOP']
+    
+        for node, tags in nodeblocks(retfile, self.tokens, lambda x: x not in notags):
+            curtag = tags[0]
+            starti = 0
+    
+            offsets = []
+    
+            for i in range(len(tags)):
+                if tags[i] != curtag:
+                    if curtag not in notags:
+                        offsets.append((starti, i-1, tags[starti]))
+                    starti = i
+                    curtag = tags[i]
+            if curtag not in notags:
+                offsets.append((starti, i, tags[starti]))
+            ret.append((node, offsets))
+    
+        return ret
+
 
     # Return the page body as string
     def __str__(self):
-        pass
+        return str(self.soup)
 
+    def get_body(self):
+        return self.soup.body
+        
 
 # Class that implements tokenization equivalent to nltk.wordpunct_tokenize, but also returns the positions of each match
 class WordPunctTokenizer:
@@ -275,60 +339,6 @@ def nodeblocks(retfile, tokens, filterf):
     assert(c == len(tokens))
 
 
-# Takes as input the tagged file and the tokens and then produces a list of taggings
-# represented as pairs with offsets in lists of triples :[(node, [(startoffset, endoffset, tags)])]
-def extract_tagged_nodes(retfile, tokens):
-    ret = []
-
-    notags = ['O', 'START', 'STOP']
-
-    for node, tags in nodeblocks(retfile, tokens, lambda x: x not in notags):
-        curtag = tags[0]
-        starti = 0
-
-
-        offsets = []
-
-        for i in range(len(tags)):
-            if tags[i] != curtag:
-                if curtag not in notags:
-                    offsets.append((starti, i-1, tags[starti]))
-                starti = i
-                curtag = tags[i]
-        if curtag not in notags:
-            offsets.append((starti, i, tags[starti]))
-        ret.append((node, offsets))
-
-    return ret
-
-
-
-
-def modified_subtreelist(soup, s, taggings, node_pos):
-    nodel = []
-    lastpos = 0
-    for startoffset, endoffset, tag in taggings:            
-        startpos = node_pos[0][startoffset]
-        endpos = node_pos[1][endoffset]
-        nodel.append(soup.new_string(s[lastpos:startpos]))
-        span = soup.new_tag('span')
-        span['wa-subtypes'] = ""
-        span['wa-type'] = tag
-        span['class'] = "Semantify_%s" % tag
-        span['semantify'] = "auto"
-        span.string = s[startpos:endpos]
-        nodel.append(span)
-        lastpos = endpos
-    nodel.append(soup.new_string(s[lastpos:]))
-    return nodel
-
-
-def apply_tagging(soup, nodes_to_tag, node_index):
-    for node, taggings in nodes_to_tag:
-        ml = modified_subtreelist(soup, node.string, taggings, node_index[node])
-        node.replace_with(ml[0])
-        for i in range(1, len(ml)):
-            ml[i-1].insert_after(ml[i])
             
 
 def sentence_split(tokens):
