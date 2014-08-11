@@ -7,32 +7,27 @@
 		buttons="accept,cancel"
 		buttonlabelcancel="&wa.cancel;"
 		buttonlabelaccept="&wa.create;"
-		onload="webannotator.new_model.populateMenu();"
-		ondialogaccept="return webannotator.new_model.populateMenu();"
+		onload="webannotator.new_model.populateMenus();"
+		ondialogaccept="return webannotator.new_model.create();"
 		ondialogcancel="">
-  <script type="text/javascript" src="wa.js"></script>
-  <script type="text/javascript" src="htmlWA.js"></script>
   <script type="text/javascript" src="new_model.js"></script>
   <dialogheader title="New Model" description="Semantify"/>
 
-  <vbox>
+  <hbox>
   <groupbox id="namebox">
 	<caption label="Model name"/>
 	<description style="width: 200px">
 	  Give the model a descriptive name 
 	</description>
+	<textbox id="model_name" size="10"/> 
 	<description style="width: 200px">
 	  Required.
 	</description>
-	<hbox>
-	  <textbox id="model_name" size="20" flex="5"/> 
-	</hbox>
   </groupbox>
   <groupbox id="dtdbox">
     
 	<caption label="Choose schema"/>
 	<vbox>
-	<button label="Import new Schema" oncommand="webannotator.main.importFile()"/>
 	<description style="width: 200px">
 	 Choose previously loaded schema
 	</description>
@@ -41,8 +36,17 @@
            <menuitem id="WebAnnotator_chooseModelSchemaMenu1" label="&wa.displayfiles;"/>
 	  </menupopup>
 	</menu>
+	<separator class="groove" orient="horizontal"/>
+	<spacer minheight="20"/>
+	<button label="Import new schema" oncommand="webannotator.new_model.importFile()"/>
+	<spacer minheight="10"/>
+	<menu id="WebAnnotator_chooseModelDeleteMenu" label="Delete schema">
+	  <menupopup id="WebAnnotator_chooseModelDeleteMenu_pop" >
+           <menuitem id="WebAnnotator_chooseModelDeleteMenu1" label="&wa.displayfiles;"/>
+	  </menupopup>
+	 </menu>
 	</vbox>
   </groupbox>
-  </vbox>
+  </hbox>
  </dialog>
 

@@ -22,6 +22,8 @@ webannotator.contentPath = "chrome://webannotator/content/";
 
 // Names of the schema files 
 webannotator.schemas = [];
+// Semantify addition: Models available
+webannotator.models = [{name: 'a', dtd: 'fname.dtd'}];
 
 // Name of the DTD file 
 webannotator.dtdFileName = "";
@@ -2134,8 +2136,6 @@ webannotator.main = {
 			}
 		}
 	}
-
-
 };
 
 
