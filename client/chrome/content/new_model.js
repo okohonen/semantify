@@ -55,8 +55,8 @@ webannotator.new_model = {
 			
 			var menuitemDelete = deleteMenu.appendItem(schema["name"], i);
 	    		menuitemDelete.setAttribute("id", "WebAnnotator_chooseModelDeleteMenu" + i);
-	    		menuitemChoose.setAttribute("number", i);
-	    		menuitemChoose.addEventListener("command", function(e) {webannotator.new_model.deleteDTDFile(this.getAttribute('number'))});
+	    		menuitemDelete.setAttribute("number", i);
+	    		menuitemDelete.addEventListener("command", function(e) {webannotator.new_model.deleteDTDFile(this.getAttribute('number'))});
 			
 		    }
 	    	}
@@ -70,7 +70,21 @@ webannotator.new_model = {
     },
 
     deleteDTDFile: function (id) {
+	// Check dtd is not in use
+	var dtdFile = webannotator.schemas[id];
+
+	var model;
+	var i;
+	for(i = 0; i < webannotator.models.length; i++){
+	    model = webannotator.models[i];
+	    if (model.dtd == dtdFile["name"]) {
+		alert(webannotator.bundle.GetStringFromName("waSchemaAlreadyUsed"));
+		return false;
+	    }
+	}
+
 	webannotator.main.deleteFile(id);
+	webannotator.new_model.populateMenus();
     },
 
     /**
