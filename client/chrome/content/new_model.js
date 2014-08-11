@@ -65,10 +65,12 @@ webannotator.new_model = {
     },
     
     chooseFile: function (i) {
-	webannotator.new_model.selected = i;
 	var chooseMenu = document.getElementById("WebAnnotator_chooseModelSchemaMenu");
-	chooseMenu.label = webannotator.schemas[i]["name"];
-	
+	chooseMenu.label = webannotator.schemas[i]["name"];	
+    },
+
+    deleteDTDFile: function (id) {
+	webannotator.main.deleteFile(id);
     },
 
     /**
