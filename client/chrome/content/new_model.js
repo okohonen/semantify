@@ -165,11 +165,6 @@ webannotator.new_model = {
 
     create: function() {
 	var s;
-	for(s in window.dialogArguments) {
-	    Application.console.log(s)
-	}
-
-
 	var modelName = document.getElementById('model_name').value;
 	if(modelName == "") {
 	    alert(webannotator.bundle.GetStringFromName("waModelNameRequired"));
@@ -194,11 +189,8 @@ webannotator.new_model = {
 	    }
 	}
 	webannotator.models.push({name: modelName, dtd: chooseMenu.label})
+	webannotator.main.updateMenus(); 
 
-	for(i = 0; i < webannotator.models.length; i++){
-	    model = webannotator.models[i];
-	    Application.console.log('x ' + model.name + " " + model.dtd)
-	}
 	return true;
     }
 };

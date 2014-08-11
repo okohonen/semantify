@@ -3,7 +3,9 @@
 <!ENTITY wa.name "Semantify">
 <!ENTITY wa.about "&#192; propos de">
 <!ENTITY wa.activatelastused "Activer le dernier sch&#233;ma">
+<!ENTITY wa.newmodel "cr&#233;er un nouveau mod&#233;le">
 <!ENTITY wa.chooseschema "Choisir un sch&#233;ma">
+<!ENTITY wa.choosemodel "Choisir un mod&#233;le">
 <!ENTITY wa.displayfiles "Afficher les fichiers">
 <!ENTITY wa.deleteschema "Effacer un sch&#233;ma">
 <!ENTITY wa.import "Importer une nouvelle DTD">

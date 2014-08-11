@@ -20,17 +20,16 @@
 	  <menupopup id="WebAnnotator_menu_ButtonPopup">
 	    <menuitem id="Semantify_b_choose_modelMenu" oncommand="if (webannotator.session) { webannotator.main.locale_alert('waCantCreateNewModel'); } else { window.openDialog('chrome://webannotator/content/new_model.xul', 'new_model', 'chrome', webannotator); }"/>
 		<menuseparator/>
-	        <menuitem id="WebAnnotator_b_importMenu" oncommand="webannotator.main.importFile()"/>
 		<menu id="WebAnnotator_b_chooseMenu" >
 		  <menupopup id="WebAnnotator_b_chooseMenu_pop" >
 			<menuitem id="WebAnnotator_b_chooseMenu1"/>
 		  </menupopup>
 		</menu>
-		<menu id="WebAnnotator_b_deleteMenu">
+		<!-- <menu id="WebAnnotator_b_deleteMenu">
 		  <menupopup id="WebAnnotator_b_deleteMenu_pop">
 			<menuitem id="WebAnnotator_b_deleteMenu1"/>
 		  </menupopup>
-		</menu>
+		</menu>-->
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_activeMenu" oncommand=""/>
 		<menuseparator/>
@@ -48,17 +47,16 @@
 	  <menupopup id="WebAnnotator_t_menu_pop">
 	    <menuitem id="Semantify_t_choose_modelMenu" oncommand="window.showModalDialog('chrome://webannotator/content/new_model.xul',1)"/>
 	    <menuseparator/>
-		<menuitem id="WebAnnotator_t_importMenu" oncommand="webannotator.main.importFile()"/>
 		<menu id="WebAnnotator_t_chooseMenu" >
 		  <menupopup id="WebAnnotator_t_chooseMenu_pop" >
 			<menuitem id="WebAnnotator_t_chooseMenu1"/>
 		  </menupopup>
 		</menu>
-		<menu id="WebAnnotator_t_deleteMenu">
+		<!-- <menu id="WebAnnotator_t_deleteMenu">
 		  <menupopup id="WebAnnotator_t_deleteMenu_pop">
 			<menuitem id="WebAnnotator_t_deleteMenu1"/>
 		  </menupopup>
-		</menu>
+		</menu>-->
 		<menuseparator/>
 		<menuitem id="WebAnnotator_t_activeMenu"/>
 		<menuseparator/>
@@ -74,15 +72,14 @@
 
 	<menu id="WebAnnotator-menu" label="&wa.name;"/>
 
-	<menuitem id="Semantify_t_choose_modelMenu" label="Create new model"/>
+	<menuitem id="Semantify_t_choose_modelMenu" label="&wa.newmodel;"/>
 	<menu id="WebAnnotator_t_activeMenu" label="&wa.activatelastused;"/>
-	<menu id="WebAnnotator_t_chooseMenu" label="&wa.chooseschema;"/>
+	<menu id="WebAnnotator_t_chooseMenu" label="&wa.choosemodel;"/>
 	<menuitem id="WebAnnotator_t_chooseMenu1" label="&wa.displayfiles;"/>
-	<menu id="WebAnnotator_t_deleteMenu" label="&wa.deleteschema;"/>
+	<!-- <menu id="WebAnnotator_t_deleteMenu" label="&wa.deleteschema;"/> 
 	<menuitem id="WebAnnotator_t_deleteMenu1" label="&wa.displayfiles;"/>
 	<menuitem id="WebAnnotator_t_deleteMenu2" label="file1"/>
-	<menuitem id="WebAnnotator_t_deleteMenu3" label="file2"/>
-	<menuitem id="WebAnnotator_t_importMenu" label="&wa.import;"/>
+	<menuitem id="WebAnnotator_t_deleteMenu3" label="file2"/> -->
 	<menuitem id="WebAnnotator_t_exportMenu" label="&wa.export;"/>
 	<!--<menuitem id="WebAnnotator_t_descriptionMenu" label="&wa.about; &wa.name;"/>-->
     <menuitem id="WebAnnotator_t_descriptionMenu" label="About Semantify"/>
@@ -91,13 +88,12 @@
 
 	<menuitem id="Semantify_b_choose_modelMenu" label="Create new model"/>
 	<menu id="WebAnnotator_b_activeMenu" label="&wa.activatelastused;"/>
-	<menu id="WebAnnotator_b_chooseMenu" label="&wa.chooseschema;"/>
+	<menu id="WebAnnotator_b_chooseMenu" label="&wa.choosemodel;"/>
 	<menuitem id="WebAnnotator_b_chooseMenu1" label="&wa.displayfiles;"/>
-	<menu id="WebAnnotator_b_deleteMenu" label="&wa.deleteschema;"/>
+	<!--<menu id="WebAnnotator_b_deleteMenu" label="&wa.deleteschema;"/>
 	<menuitem id="WebAnnotator_b_deleteMenu1" label="&wa.displayfiles;"/>
 	<menuitem id="WebAnnotator_b_deleteMenu2" label="file1"/>
-	<menuitem id="WebAnnotator_b_deleteMenu3" label="file2"/>
-	<menuitem id="WebAnnotator_b_importMenu" label="&wa.import;"/>
+	<menuitem id="WebAnnotator_b_deleteMenu3" label="file2"/>-->
 	<menuitem id="WebAnnotator_b_exportMenu" label="&wa.export;"/>
 	<!--<menuitem id="WebAnnotator_b_descriptionMenu" label="&wa.about; &wa.name;"/>-->
     <menuitem id="WebAnnotator_b_descriptionMenu" label="About Semantify"/>

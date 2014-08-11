@@ -3,7 +3,9 @@
 <!ENTITY wa.name "Semantify">
 <!ENTITY wa.about "About">
 <!ENTITY wa.activatelastused "Activate last used">
+<!ENTITY wa.newmodel "Create new Model">
 <!ENTITY wa.chooseschema "Choose Schema">
+<!ENTITY wa.choosemodel "Choose Model">
 <!ENTITY wa.displayfiles "Display files">
 <!ENTITY wa.deleteschema "Delete Schema">
 <!ENTITY wa.import "Import new DTD">

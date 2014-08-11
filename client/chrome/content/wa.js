@@ -965,9 +965,9 @@ webannotator.main = {
 	 */
 	updateMenus: function (updateButtonMenu, updateTextMenu){
 		var b_menu1 = document.getElementById('WebAnnotator_b_chooseMenu');
-		var b_menu2 = document.getElementById('WebAnnotator_b_deleteMenu');
+		// var b_menu2 = document.getElementById('WebAnnotator_b_deleteMenu');
 		var t_menu1 = document.getElementById('WebAnnotator_t_chooseMenu');
-		var t_menu2 = document.getElementById('WebAnnotator_t_deleteMenu');
+		// var t_menu2 = document.getElementById('WebAnnotator_t_deleteMenu');
 		var b_activeMenu = document.getElementById("WebAnnotator_b_activeMenu");
 		var t_activeMenu = document.getElementById("WebAnnotator_t_activeMenu");
 
@@ -975,12 +975,12 @@ webannotator.main = {
 		if (webannotator.schemas.length == 0) {
 			if (b_menu1 != null) {
 				b_menu1.setAttribute("disabled", "true");
-				b_menu2.setAttribute("disabled", "true");
+			        // b_menu2.setAttribute("disabled", "true");
 				b_activeMenu.setAttribute("disabled", "true");	
 			} 
 			if (t_menu1 != null) {
 				t_menu1.setAttribute("disabled", "true");
-				t_menu2.setAttribute("disabled", "true");
+				// t_menu2.setAttribute("disabled", "true");
 				t_activeMenu.setAttribute("disabled", "true");
 			}
 		} 
@@ -989,37 +989,38 @@ webannotator.main = {
 		else {
 			if (b_menu1 != null && updateButtonMenu) {
 				b_menu1.setAttribute("disabled", "false");
-				b_menu2.setAttribute("disabled", "false");
+				// b_menu2.setAttribute("disabled", "false");
 				var b_menuChooseNodes = document.getElementById('WebAnnotator_b_chooseMenu_pop');
-				var b_menuDeleteNodes = document.getElementById('WebAnnotator_b_deleteMenu_pop');
+				// var b_menuDeleteNodes = document.getElementById('WebAnnotator_b_deleteMenu_pop');
 				// Remove all items from menus
 				while (b_menuChooseNodes.hasChildNodes()) {
 					b_menuChooseNodes.removeChild(b_menuChooseNodes.firstChild);
 				}
-				while (b_menuDeleteNodes.hasChildNodes()) {
-					b_menuDeleteNodes.removeChild(b_menuDeleteNodes.firstChild);
-				}
+				// while (b_menuDeleteNodes.hasChildNodes()) {
+				// 	b_menuDeleteNodes.removeChild(b_menuDeleteNodes.firstChild);
+				// }
 				
 				// Add the names of the files in the menu: choose DTD and delete DTD
 				var lastUsedFound = 0;
 				var i;
-				for (i = 0 ; i < webannotator.schemas.length ; i++) {
+				for (i = 0 ; i < webannotator.models.length ; i++) {
 					b_activeMenu.setAttribute("disabled", "false");
-					var schema = webannotator.schemas[i];
-					var menuitemChoose = b_menu1.appendItem(schema["name"], i);
+					var model = webannotator.models[i];
+					var menuitemChoose = b_menu1.appendItem(model.name, i);
 					menuitemChoose.setAttribute("id", "WebAnnotator_b_chooseMenu" + i);
 					menuitemChoose.setAttribute("number", i);
 					menuitemChoose.addEventListener("command", function(e) {webannotator.main.chooseFile(this.getAttribute('number'), true)});
-					var menuitemDelete = b_menu2.appendItem(schema["name"], i);
-					menuitemDelete.setAttribute("id", "WebAnnotator_b_deleteMenu" + i);
-					menuitemDelete.setAttribute("number", i);
-					menuitemDelete.addEventListener("command", function(e) {webannotator.main.deleteFile(this.getAttribute('number'))});
-					if (schema["lastused"] == 1 && !webannotator.session) {
-						b_activeMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waActivate") + " " + schema["name"]);
-						b_activeMenu.setAttribute("number", i);
-						b_activeMenu.addEventListener("command", webannotator.main.switchActivation);
-						lastUsedFound = 1;
-					}
+					// var menuitemDelete = b_menu2.appendItem(schema["name"], i);
+					// menuitemDelete.setAttribute("id", "WebAnnotator_b_deleteMenu" + i);
+					// menuitemDelete.setAttribute("number", i);
+				    // menuitemDelete.addEventListener("command", function(e) {webannotator.main.deleteFile(this.getAttribute('number'))});
+				    // TODO: Fix this part
+				    // schema["lastused"] == 1 && !webannotator.session) {
+				    // 	b_activeMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waActivate") + " " + schema["name"]);
+				    // 	b_activeMenu.setAttribute("number", i);
+				    // 	b_activeMenu.addEventListener("command", webannotator.main.switchActivation);
+				    // 	lastUsedFound = 1;
+				    // }
 				}
 				if (!lastUsedFound && !webannotator.session) {
 					b_activeMenu.setAttribute("disabled", "true");
