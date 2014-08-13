@@ -19,7 +19,6 @@
 				   oncommand="webannotator.main.updateMenus(true, false)">
 	  <menupopup id="WebAnnotator_menu_ButtonPopup">
 	    <menuitem id="Semantify_b_choose_modelMenu" oncommand="if (webannotator.session) { webannotator.main.locale_alert('waCantCreateNewModel'); } else { window.openDialog('chrome://webannotator/content/new_model.xul', 'new_model', 'chrome', webannotator); }"/>
-		<menuseparator/>
 		<menu id="WebAnnotator_b_chooseMenu" >
 		  <menupopup id="WebAnnotator_b_chooseMenu_pop" >
 			<menuitem id="WebAnnotator_b_chooseMenu1"/>
@@ -33,11 +32,12 @@
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_activeMenu" oncommand=""/>
 		<menuseparator/>
+		<menuitem id="Semantify_b_putPage" oncommand="webannotator.main.storePage()"/>
+		<menuitem id="Semantify_b_tagPage" oncommand="webannotator.main.tagPage()"/>
+		<menuseparator/>
 		<menuitem id="WebAnnotator_b_exportMenu" disabled="true" oncommand="window.showModalDialog('chrome://webannotator/content/save.xul',1)"/>
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_descriptionMenu" oncommand="window.showModalDialog('chrome://webannotator/content/description.xul',1)"/>
-		<menuitem id="Semantify_b_putPage" oncommand="webannotator.main.storePage()"/>
-		<menuitem id="Semantify_b_tagPage" oncommand="webannotator.main.tagPage()"/>
 	  </menupopup>
 	</toolbarbutton>
   </toolbarpalette>
@@ -60,11 +60,12 @@
 		<menuseparator/>
 		<menuitem id="WebAnnotator_t_activeMenu"/>
 		<menuseparator/>
+		<menuitem id="Semantify_t_putPage" oncommand="webannotator.main.storePage()"/>
+		<menuitem id="Semantify_t_tagPage" oncommand="webannotator.main.tagPage()"/>
+		<menuseparator/>
 		<menuitem id="WebAnnotator_t_exportMenu" disabled="true" oncommand="window.showModalDialog('chrome://webannotator/content/save.xul',1)"/>
 		<menuseparator/>
 		<menuitem id="WebAnnotator_t_descriptionMenu" oncommand="window.showModalDialog('chrome://webannotator/content/description.xul',1)"/>
-		<menuitem id="Semantify_t_putPage" oncommand="webannotator.main.storePage()"/>
-		<menuitem id="Semantify_t_tagPage" oncommand="webannotator.main.tagPage()"/>
 	  </menupopup>
 	</menu>
   </menupopup>
@@ -86,7 +87,7 @@
 	<menuitem id="Semantify_t_putPage" label="Store page tags"/>
 	<menuitem id="Semantify_t_tagPage" label="Tag page"/>
 
-	<menuitem id="Semantify_b_choose_modelMenu" label="Create new model"/>
+	<menuitem id="Semantify_b_choose_modelMenu" label="&wa.newmodel;"/>
 	<menu id="WebAnnotator_b_activeMenu" label="&wa.activatelastused;"/>
 	<menu id="WebAnnotator_b_chooseMenu" label="&wa.choosemodel;"/>
 	<menuitem id="WebAnnotator_b_chooseMenu1" label="&wa.displayfiles;"/>
@@ -135,7 +136,7 @@
 				oncommand="webannotator.main.switchPanel();"/>
 		<button id="WebAnnotator_options" label="&wa.options;"
 				oncommand="webannotator.main.options();"/>
-		<image src="chrome://webannotator/skin/wa_small_activated.png"/>
+		<image src="chrome://webannotator/skin/s.png"/>
 		<separator class="groove" orient="vertical"/>
 	  </box>
     </vbox>

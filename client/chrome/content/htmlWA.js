@@ -60,7 +60,7 @@ webannotator.htmlWA = {
 			
 			// Disable all links
 			webannotator.htmlWA.receiveWindowSwitchLinks(content.document, false, false);
-			isDisable = true;
+		        // isDisable = true;
 						
 			// Remove firstLoad event from body
 			content.document.body.removeEventListener("mouseover", webannotator.htmlWA.firstLoad, false);

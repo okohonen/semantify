@@ -154,6 +154,9 @@ webannotator.new_model = {
 		    webannotator.main.updateMenus(true, true);
 
 		    webannotator.new_model.populateMenus();
+
+		    webannotator.main.activate();
+		    webannotator.main.options();
 		}
 	    }
 	    else {
@@ -188,8 +191,12 @@ webannotator.new_model = {
 		return false;
 	    }
 	}
-	webannotator.models.push({name: modelName, dtd: chooseMenu.label})
-	webannotator.main.updateMenus(); 
+	var newModel = {name: modelName, dtd: chooseMenu.label, lastused: 0}
+	webannotator.models.push(newModel)
+	webannotator.main.updateMenus(true, true);
+
+	// Activate the new model
+	webannotator.main.chooseFile(webannotator.models.length - 1);
 
 	return true;
     }
