@@ -47,43 +47,66 @@ class Backend:
             os.system("sqlite3 %s < %s/schema.sql" % (self.localdir, dbfile))
 
         self.conn = sqlite3.connect(dbfile)
+        self.conn.row_factory = sqlite3.Row
         self.c = self.conn.cursor()
         self.c.execute("PRAGMA foreign_keys = ON;")
-        self.fetch_models()
 
     def get_tmpdir(self):
         return "%s/data/temp" % self.localdir
 
-    def fetch_models(self):
-        names = self.c.execute("SELECT name FROM models;")
-        for row in names:
-            self.models.append(row[0])
-
-    def get_models(self):
-        return self.models
-
-    def add_model(self, model_name):        
-        self.c.execute("INSERT INTO models (name) VALUES (?)", (model_name, ))
-        self.models.append(model_name)
-
-    def get_page_annotated_version(self, url):
-        self.c.execute('''SELECT MAX(version) FROM pages_annotated WHERE url=?''', (url,))
-        r = self.c.fetchone()
-        return r[0]
-
-    def page_annotated_filename(self, model_name, page_id, is_body):
+    def pages_annotated_filename(self, model_name, page_id, is_body):
         suffix = "htmlbody" if is_body else "html"
         return "%s/data/index/%s_%s.%s.gz" % (self.localdir, model_name, page_id, suffix)
     
     def page_feature_file(self, model_name, page_id, feature_set):
         return "%s/data/temp/%s_%s_%s.annotated.gz" % (self.localdir, model_name, page_id, feature_set)
     
-    def insert_new_page_annotated(self, url, version, is_body, model_name, content):
+    def models_check_and_insert(self, model_name, dtdfile):
+        model = self.get_model(model_name)
+        if model is None:
+            self._insert_model(model_name, dtdfile);
+        elif model['dtdfile'] != dtdfile:
+            raise ValueError("Dtdfile '%s' does not match stored '%s'" % (dtdfile, model['dtdfile']))
+
+    def get_model(self, model_name):
+        self.c.execute("SELECT * FROM models WHERE name=?", (model_name, ))
+        model = self.c.fetchone()
+        return model
+
+    def _insert_model(self, model_name, dtdfile):        
+        self.c.execute("INSERT INTO models (name, dtdfile) VALUES (?, ?)", (model_name, dtdfile))        
+
+    def insert_pages_annotated(self, model_name, dtdfile, url, is_body, content):
+        self.models_check_and_insert(model_name, dtdfile)
+        # Should fail if version 1 already exists for this url and model
+        return self._insert_pages_annotated(model_name, dtdfile, url, 1, is_body, content)
+    
+    def get_pages_annotated(self, model_name, url):
+        self.c.execute("SELECT * FROM pages_annotated WHERE url=? AND model_id=(SELECT id FROM models WHERE name=?)", (url, model_name, ))
+        pages_annotated = self.c.fetchmany()
+        return pages_annotated
+    
+
+    def insert_or_update_pages_annotated(self, model_name, dtdfile, url, is_body, content):
+        self.models_check_and_insert(model_name, dtdfile)
+
+        # Check if page exists, and if so what its latest version is
+        pages = self.get_pages_annotated(model_name, url)
+        if len(pages) == 0: # Insert
+            return self._insert_pages_annotated(model_name, dtdfile, url, 1, is_body, content)
+        else:
+            # Update newest version
+            page = max(pages, key=lambda p: p["version"])
+            self._update_pages_annotated(model_name, dtdfile, page["id"], page["url"], page["version"], is_body, content)
+            return page.id
+
+    def _insert_pages_annotated(self, model_name, dtdfile, url, version, is_body, content):
         self.c.execute('''INSERT INTO pages_annotated (url, timestamp, version, is_body, model_id) VALUES (?, DATETIME('now'), ?, ?, (SELECT id FROM models WHERE name=?))''', (url, version, "1" if is_body else "0", model_name))
         page_id = self.c.lastrowid
         self.conn.commit()
 
-        fname = self.page_annotated_filename(model_name, page_id, is_body)
+        # Store page content in gzip-file
+        fname = self.pages_annotated_filename(model_name, page_id, is_body)
         assert(not(os.path.exists(fname)))
         fp = gzip.open(fname, 'wb')
 
@@ -95,11 +118,11 @@ class Backend:
             
         return page_id
     
-    def update_page_annotated(self, page_id, url, version, is_body, model_name, content):
+    def _update_pages_annotated(self, model_name, dtdfile, page_id, url, version, is_body, content):
         assert(False)
         self.c.execute('''UPDATE pages_annotated SET url=?, timestamp=DATETIME('now'), version=?, is_body=?, model_id=(SELECT id FROM models WHERE name=?)) WHERE id=? ''', (url, version,  "1" if is_body else "0", model_name, page_id))
         self.conn.commit()
-        fname = page_annotated_file(model_name, page_id, is_body)
+        fname = pages_annotated_file(model_name, page_id, is_body)
         os.system("rm %s" % fname)
         assert(not(os.path.exists(fname)))
         fp = gzip.open(fname, 'wb')
@@ -116,11 +139,11 @@ class Backend:
     # Returns a list of page-files in desired order for tracking of crossvalidation folds
     def extract_dataset_files(self, model_name, feature_set, order_by="id"):
         self.c.execute("SELECT pa.id, pa.is_body FROM pages_annotated AS pa JOIN models ON pa.model_id=models.id WHERE name=? ORDER BY ?", (model_name, order_by))
-        # fileinfo = map(lambda x: (self.page_annotated_filename(model_name, x[0], x[1] == 1), x[0]), self.c.fetchall())
+        # fileinfo = map(lambda x: (self.pages_annotated_filename(model_name, x[0], x[1] == 1), x[0]), self.c.fetchall())
         filelist = []
         for page_id, db_is_body in self.c.fetchall():
             # Check if feature_file exists already
-            filelist.append(self.page_annotated_filename(model_name, page_id, db_is_body == 1))
+            filelist.append(self.pages_annotated_filename(model_name, page_id, db_is_body == 1))
         return filelist
 
     #    def get_training_test_devel_split(self, file_list, nrfolds, fold, develratio):

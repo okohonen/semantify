@@ -90,47 +90,22 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Case 3.
             if o.has_key("create_new"):                
-                assert(False)
-
-                cur_version = b.get_page_annotated_version(o['url'])
-                if cur_version is None:
-                    version = 1;
-                else:
-                    version = cur_version + 1;
-                b.insert_new_page_annotated(o['url'], version, True, o['model_name'], o['content']);
+                b.insert_pages_annotated(o['model_name'], o['dtd'], o['url'], True, o['content'])
         
             # Case 2.
             if o.has_key("version"):
-                assert(False)
+                b.update_pages_annotated(o['model_name'], o['dtd'], o['url'], o['version'], True, o['content'])
 
-                c.execute('''SELECT id FROM pages WHERE url=? AND version=? AND schema_id=? ORDER BY timestamp DESC''', (o['url'], o['version'], schema_id))
-                r = c.fetchone()
-                if r is None:
-                    # This is an error, since we should never insert an old version
-                    raise ValueError("Cannot use version that does not exist")
-                else:
-                    page_id = r[0];
-                    b.update_page(c, page_id, o)
-                
             # Case 1.
             else:
-                model_id = 1
-                version = 1
-                page_id = b.find_page_id(o['url'], model_id)
-                if page_id is None:
-                    page_id = b.insert_new_page_annotated(o['url'], version, True, o['model_name'], o['content'].encode('utf-8'))
-                else:
-                    b.update_page_annotated(c, page_id, o)
-        
+                # If page already exists then update latest version
+                b.insert_or_update_pages_annotated(o['model_name'], o['dtd'], o['url'], True, ['content'])
+                # b.insert_or_update_pages_annotated(o['model_name'], o['dtd'], o['url'], o['content'].encode('utf-8'), True)
+
+            # Incremental training with modulo criterion for train-devel split
             if not(its.has_key(o['model_name'])):
                 its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], it.ModuloTrainDevelSplitter(10))
             
-            # We should have inserted the feature file already
-            # Broken here: Need to separate the page index into its own component and extract it in some sensible way
-            # But let's build it first
-            
-
-            # b.extract_features(page, feature_set, True)
             its[o['model_name']].incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
         
         elif o["command"] == "TAG":

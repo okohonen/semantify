@@ -22,13 +22,9 @@ CREATE UNIQUE INDEX pages_unannotated_uv ON pages_unannotated (url, version);
 
 CREATE TABLE models (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
-       name VARCHAR(50));
+       name VARCHAR(50),
+       dtdfile VARCHAR(100));
 
 CREATE UNIQUE INDEX models_n ON models (name);
-
-CREATE TABLE model_features (
-       name VARCHAR(50),
-       model_id INT REFERENCES models(id) ON DELETE CASCADE);
-
 
 -- SELECT tt.*, tags.val FROM (SELECT tokens.id AS token_id, GROUP_CONCAT(features.line, '\t') AS f FROM tokens JOIN features ON tokens.id=features.token_id WHERE page_id=1 AND feature_set_id IN (SELECT id FROM feature_sets WHERE name IN('ortho1', 'html')) GROUP BY tokens.id) AS tt JOIN tags ON tags.token_id=tt.token_id WHERE tags.schema_id=1;

@@ -23,10 +23,11 @@ webannotator.contentPath = "chrome://webannotator/content/";
 // Names of the schema files 
 webannotator.schemas = [];
 // Semantify addition: Models available
-webannotator.models = [{name: 'a', dtd: 'imdb.dtd', lastused: 0}];
+webannotator.models = [];
 
 // Name of the DTD file 
 webannotator.dtdFileName = "";
+// Semantify addition: Active model
 webannotator.modelName = "";
 
 // Path of the extension
@@ -2078,14 +2079,14 @@ webannotator.main = {
     },
 
     storePage: function() {
-        var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": "default"};
+        var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName, "dtd": webannotator.dtdFileName};
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
     // Sri edit
     //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);
     },
 
     tagPage: function() {
-        var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML};
+        var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName};
 	webannotator.main.expandOverlay("Tagging page");
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
     },
