@@ -1,0 +1,11 @@
+<!-- Four high-level annotations types : person, org, location, date -->
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT attribute (#PCDATA)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT condition (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT warranty (#PCDATA)>
+<!ELEMENT amount (#PCDATA)>
+<!ELEMENT closing_time (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
