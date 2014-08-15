@@ -13,7 +13,7 @@ import collections
 import gzip
 import math
 
-from sklearn.metrics import confusion_matrix
+# from sklearn.metrics import confusion_matrix
 
 from crfs import *
 
@@ -40,11 +40,11 @@ class Backend:
             dt = open(inifile, "r").readlines()
             dbname = dt[0].strip()
             
-        dbfile = "%s/data/index/%s.db" % (self.localdir, dbname)
+        dbfile = "%s/data/index/%s" % (self.localdir, dbname)
         log("Database file set to %s\n" % dbfile)
 
         if not os.path.exists(dbfile):
-            os.system("sqlite3 %s < %s/schema.sql" % (self.localdir, dbfile))
+            os.system("sqlite3 %s < %s/schema.sql" % (dbfile, self.localdir))
 
         self.conn = sqlite3.connect(dbfile)
         self.conn.row_factory = sqlite3.Row
