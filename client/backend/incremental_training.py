@@ -46,14 +46,15 @@ class IncrementalTraining:
         pass
 
 class TrainingFileBuilderIncrementalTraining(IncrementalTraining):
-    def __init__(self, storage_dir, model_name, train_devel_splitter):
+    def __init__(self, storage_dir, model_name, train_devel_splitter, resuming=False):
         self.storage_dir = storage_dir
         self.model_name = model_name
         self.train_devel_splitter = train_devel_splitter
         self.train_file_name = "%s/%s_train.gz" % (self.storage_dir, self.model_name)
         self.devel_file_name = "%s/%s_devel.gz" % (self.storage_dir, self.model_name)
-        assert(not(os.path.exists(self.train_file_name)))
-        assert(not(os.path.exists(self.devel_file_name)))
+        if not(resuming):
+            assert(not(os.path.exists(self.train_file_name)))
+            assert(not(os.path.exists(self.devel_file_name)))
         
         ff.StringFeatureFileWriter(open("%s/%s_devel.gz" % (self.storage_dir, self.model_name), "a"))
         self.verbose = False

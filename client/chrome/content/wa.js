@@ -424,6 +424,11 @@ webannotator.main = {
 		if (exportMenu != null) {
 			exportMenu.setAttribute("disabled", "false");
 		}
+
+	        var putMenu = document.getElementById("Semantify_b_putPage");
+		if (putMenu != null) {
+			putMenu.setAttribute("disabled", "false");
+		}
 		
 		activeMenu = document.getElementById("WebAnnotator_t_activeMenu");
 		if (activeMenu != null) {
@@ -435,6 +440,12 @@ webannotator.main = {
 		if (exportMenu != null) {
 			exportMenu.setAttribute("disabled", "false");		
 		}
+
+	        var putMenu = document.getElementById("Semantify_t_putPage");
+		if (putMenu != null) {
+			putMenu.setAttribute("disabled", "false");
+		}
+
 		
 		var container = gBrowser.tabContainer;
 		container.addEventListener("TabSelect", webannotator.main.tabSelect, false);
@@ -569,6 +580,17 @@ webannotator.main = {
 			if (exportMenu != null) {
 				exportMenu.setAttribute("disabled", "true");
 			}
+
+		        var putMenu = document.getElementById("Semantify_b_putPage");
+		        if (putMenu != null) {
+			    putMenu.setAttribute("disabled", "true");
+		        }
+
+		        var putMenu = document.getElementById("Semantify_t_putPage");
+		        if (putMenu != null) {
+			    putMenu.setAttribute("disabled", "true");
+		        }
+
 			window.content.location.reload();
 			webannotator.linksEnable = true;
 			// remove all event listeners
@@ -973,9 +995,11 @@ webannotator.main = {
 		var t_menu1 = document.getElementById('WebAnnotator_t_chooseMenu');
 		var b_activeMenu = document.getElementById("WebAnnotator_b_activeMenu");
 		var t_activeMenu = document.getElementById("WebAnnotator_t_activeMenu");
+	        var b_tagMenu = document.getElementById("Semantify_b_tagPage");
+	        var t_tagMenu = document.getElementById("Semantify_t_tagPage");
 
-		// else, if no schema file available
-		if (webannotator.schemas.length == 0) {
+		// else, if no models available
+		if (webannotator.models.length == 0) {
 			if (b_menu1 != null) {
 				b_menu1.setAttribute("disabled", "true");
 			        // b_menu2.setAttribute("disabled", "true");
@@ -1012,11 +1036,17 @@ webannotator.main = {
 					b_activeMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waActivate") + " " + model.name + "-" + model.dtd);
 					b_activeMenu.setAttribute("number", i);
 					b_activeMenu.addEventListener("command", webannotator.main.switchActivation);
+					b_tagMenu.setAttribute("disabled", "false");
+					t_tagMenu.setAttribute("disabled", "false");
+					b_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " " + model.name);
+					t_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " " + model.name);
 					lastUsedFound = 1;
 				    }
 				}
 				if (!lastUsedFound && !webannotator.session) {
-					b_activeMenu.setAttribute("disabled", "true");
+				    b_activeMenu.setAttribute("disabled", "true");
+				    b_tagMenu.setAttribute("disabled", "true");
+				    t_tagMenu.setAttribute("disabled", "true");
 				}
 
 				webannotator.buttonMenuCreated = true;
@@ -1024,7 +1054,6 @@ webannotator.main = {
 
 			if (t_menu1 != null && updateTextMenu) {
 				t_menu1.setAttribute("disabled", "false");
-				// t_menu2.setAttribute("disabled", "false");
 				var t_menuChooseNodes = document.getElementById('WebAnnotator_t_chooseMenu_pop');
 				var t_menuDeleteNodes = document.getElementById('WebAnnotator_t_deleteMenu_pop');
 				// Remove all items from menus

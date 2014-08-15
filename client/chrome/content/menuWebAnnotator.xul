@@ -32,8 +32,8 @@
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_activeMenu" oncommand=""/>
 		<menuseparator/>
-		<menuitem id="Semantify_b_putPage" oncommand="webannotator.main.storePage()"/>
-		<menuitem id="Semantify_b_tagPage" oncommand="webannotator.main.tagPage()"/>
+		<menuitem id="Semantify_b_putPage" oncommand="webannotator.main.storePage()" disabled="true"/>
+		<menuitem id="Semantify_b_tagPage" oncommand="webannotator.main.tagPage()" disabled="true"/>
 		<menuseparator/>
 		<menuitem id="WebAnnotator_b_exportMenu" disabled="true" oncommand="window.showModalDialog('chrome://webannotator/content/save.xul',1)"/>
 		<menuseparator/>
@@ -60,8 +60,8 @@
 		<menuseparator/>
 		<menuitem id="WebAnnotator_t_activeMenu"/>
 		<menuseparator/>
-		<menuitem id="Semantify_t_putPage" oncommand="webannotator.main.storePage()"/>
-		<menuitem id="Semantify_t_tagPage" oncommand="webannotator.main.tagPage()"/>
+		<menuitem id="Semantify_t_putPage" oncommand="webannotator.main.storePage()" disabled="true"/>
+		<menuitem id="Semantify_t_tagPage" oncommand="webannotator.main.tagPage()" disabled="true"/>
 		<menuseparator/>
 		<menuitem id="WebAnnotator_t_exportMenu" disabled="true" oncommand="window.showModalDialog('chrome://webannotator/content/save.xul',1)"/>
 		<menuseparator/>
