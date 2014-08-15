@@ -1,7 +1,7 @@
-<!-- Four high-level annotations types : person, org, location, date -->
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT model (#PCDATA)>
 <!ELEMENT attribute (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT condition (#PCDATA)>
 <!ELEMENT category (#PCDATA)>

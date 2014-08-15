@@ -49,6 +49,8 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         t=time.time()        
         o = json.loads(data_string) 
       
+        print o["command"]
+
         # Writing to a file for processing   
         now=str(datetime.now().strftime('%Y%m%d_%H%M%S'))
         # No need for html-file, we already have it in memory
@@ -58,23 +60,11 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # for i in range(len(content)):                        
         #     f.write(content[i].encode('utf-8'))
         # f.write('</body></html>'.encode('utf-8'))
-        # f.close()
+        # f.close()                
         
-        filename='file_'+now
+        if o.has_key("content"):
+            page = BeautifulSoup('<html><body>%s</body></html>' % o['content'], from_encoding = "utf-8")
 
-        graph_id='first-order-chain'; performance_measure_id='accuracy'; single_pass=False; verbose=False
-        
-        test_file                        =os.getcwd()+path+'/temp/'+filename+'.test.gz'
-        test_reference_file         =os.getcwd()+path+'/temp/'+filename+'.test.reference'  
-        
-        train_file                       =os.getcwd()+path+'/temp/'+filename+'.train'   
-        devel_file              =os.getcwd()+path+'/temp/'+filename+'.train.devel' 
-        devel_prediction_file      =os.getcwd()+path+'/temp/'+filename+'.devel.prediction' 
-        test_prediction_file         =os.getcwd()+path+'/temp/'+filename+'.test.prediction'
-        model_file                 =os.getcwd()+path+'/temp/client.model'   
-        
-        
-        page = BeautifulSoup('<html><body>%s</body></html>' % o['content'], from_encoding = "utf-8")
    
         if o["command"] == "PUT": 
 
@@ -104,54 +94,36 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Incremental training with modulo criterion for train-devel split
             if not(its.has_key(o['model_name'])):
-                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], it.ModuloTrainDevelSplitter(10), resuming=True)
+                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], feature_set, it.ModuloTrainDevelSplitter(10), resuming=True)
             
-            its[o['model_name']].incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
+            its[o['model_name']].incremental_train(parsed_page.read_features())
         
         elif o["command"] == "TAG":
+            print (o["url"], o["model_name"])
             # Applies tags to the web page      
             parsed_page = hp.parse_page(page, feature_set, annotated=False, build_node_index=True)
+            model = b.get_tagger(o['model_name'], feature_set)
+            parsed_page.apply_tagging(model.tag(parsed_page))
             
-            parsed_page.write_feature_file(test_file)
-
-            print 'Devel files extracted' 
-            print "load model"
-            m=CRF()
-            m.load(model_file)
-            print "done"
-            print
-            print "apply model"
-            print (test_file, test_prediction_file, verbose)
-            #m.apply(test_file, test_prediction_file, test_reference_file, verbose)
-
-            m.apply(test_file, test_prediction_file, verbose)
-            print "done"
-            print
-            
-            print "Reading in prediction file"
-            print
-
-            retfile=open(os.getcwd()+path+'/temp/'+filename+'.test.prediction')
-
-            parsed_page.apply_tagging(retfile)
-
-            # nodes_to_tag = backend.extract_tagged_nodes(retfile, tokens)
-            # print "Nodes to tag: %d" % len(nodes_to_tag)
-            # print nodes_to_tag
-            # backend.apply_tagging(page, nodes_to_tag, node_index)
-            
-            successlog.write(filename)
             successlog.write('\t')
             successlog.write(str(datetime.now()))
             successlog.write('\n')             
             
-            s = str(parsed_page)
             o['content'] = str(parsed_page.get_body())
 
             self.wfile.write(json.dumps(o))
 
             elapsed=time.time()-t
-            print 'File', filename, 'served in:',  elapsed                 
+            print 'File served in:',  elapsed                 
+    
+        elif o["command"] == "GETMODELS":
+            models = b.get_models()
+            ret = []
+            for m in models:
+                ret.append({"name": m["name"], "dtd": m["dtdfile"], "lastused": 0})
+            self.wfile.write(json.dumps(ret))
+
+            
         
 class SemantifyTCPServer(SocketServer.TCPServer):
     def server_bind(self):

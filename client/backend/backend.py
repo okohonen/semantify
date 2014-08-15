@@ -15,11 +15,10 @@ import math
 
 # from sklearn.metrics import confusion_matrix
 
-from crfs import *
-
 from feature_file import labels
 import feature_file as ff
 import htmlparse as hp
+from tagging_model import TaggingModel
 
 def log(s):
     sys.stderr.write(s)
@@ -28,19 +27,17 @@ def log(s):
 class Backend:    
     conn = None
     c = None
-    models = []
 
     def __init__(self):
         # Work from directory of the current file
         self.localdir = os.path.dirname(os.path.abspath(__file__))
 
-        dbname = "semantify.db"
         inifile = "%s/semantify.ini" % self.localdir
         if os.path.exists(inifile):
             dt = open(inifile, "r").readlines()
             dbname = dt[0].strip()
             
-        dbfile = "%s/data/index/%s" % (self.localdir, dbname)
+        dbfile = "%s/data/index/%s.db" % (self.localdir, dbname)
         log("Database file set to %s\n" % dbfile)
 
         if not os.path.exists(dbfile):
@@ -73,8 +70,14 @@ class Backend:
         model = self.c.fetchone()
         return model
 
+    def get_models(self):
+        self.c.execute("SELECT * FROM models", )
+        return self.c.fetchall()
+
     def _insert_model(self, model_name, dtdfile):        
         self.c.execute("INSERT INTO models (name, dtdfile) VALUES (?, ?)", (model_name, dtdfile))        
+
+    
 
     def insert_pages_annotated(self, model_name, dtdfile, url, is_body, content):
         self.models_check_and_insert(model_name, dtdfile)
@@ -218,6 +221,8 @@ class Backend:
         os.system("zcat %s | gzip > %s" % (" ".join(featurefiles), target_file))
         log("done\n")
 
+    def get_tagger(self, model_name, feature_set):
+        return TaggingModel(self.get_tmpdir(), model_name, feature_set)
 
 def label_to_index(label, tagmap):
     if not tagmap.has_key(label):

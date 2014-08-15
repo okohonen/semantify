@@ -151,15 +151,32 @@ webannotator.main = {
 		return dir;
 	},
 
+        fetchModels: function() {
+            var dt = {command: "GETMODELS"};
+	    webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdateModels);
+	    
+	},
+
+    ajaxUpdateModels: function(req) {
+	var obj = JSON.parse(req.responseText);
+	webannotator.models = obj;
+	webannotator.main.updateMenus(true, true);
+    },
+
+
 	/**
 	 * Initialize the extension path
 	 */
 	setPathEX: function (){
 		// Read the names of files
 		webannotator.main.readSchemasFile();
+	        // Read models available on the server
+	        webannotator.main.fetchModels();
+
 		// Create elements in XUL button and menus
 		setTimeout(function() {webannotator.main.createMenus(); }, 1000);
 
+	    
 /*		var id = "WebAnnotator@limsi.fr";
 		try {
 			// Firefox 4 and later; Mozilla 2 and later
@@ -445,6 +462,18 @@ webannotator.main = {
 		if (putMenu != null) {
 			putMenu.setAttribute("disabled", "false");
 		}
+
+	    var b_tagMenu = document.getElementById("Semantify_b_tagPage");
+	    if (b_tagMenu != null) {
+		b_tagMenu.setAttribute("disabled", "false");
+		b_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " '" + webannotator.modelName + "'");
+	    }
+	    
+	    var t_tagMenu = document.getElementById("Semantify_t_tagPage");
+	    if (t_tagMenu != null) {
+		t_tagMenu.setAttribute("disabled", "false");
+		t_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " '" + webannotator.modelName + "'");
+	    }	        
 
 		
 		var container = gBrowser.tabContainer;
@@ -979,6 +1008,9 @@ webannotator.main = {
 		}
 	},
 	
+        
+
+
 	/**
 	 * Create XUL menus
 	 */
@@ -1038,8 +1070,8 @@ webannotator.main = {
 					b_activeMenu.addEventListener("command", webannotator.main.switchActivation);
 					b_tagMenu.setAttribute("disabled", "false");
 					t_tagMenu.setAttribute("disabled", "false");
-					b_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " " + model.name);
-					t_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " " + model.name);
+					b_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " '" + model.name + "'");
+					t_tagMenu.setAttribute("label", webannotator.bundle.GetStringFromName("waTagPage") + " " + webannotator.bundle.GetStringFromName("waTagPageWith") + " '" + model.name + "'");
 					lastUsedFound = 1;
 				    }
 				}
@@ -1122,11 +1154,12 @@ webannotator.main = {
 		}
 		else {
 		    var model = webannotator.models[id];
+		    var currentSchema;
 
 		    for (var i =0; i < webannotator.schemas.length ; i++){
 			webannotator.schemas[i]["lastused"] = "0";
 			if (model.dtd == webannotator.schemas[i]["name"]) {
-			    var currentSchema = webannotator.schemas[i];
+			    currentSchema = webannotator.schemas[i];
 			    webannotator.currentSchemaId = i;
 			    currentSchema["lastused"] = "1";
 			}
@@ -1138,7 +1171,12 @@ webannotator.main = {
 			    webannotator.models[i]["lastused"] = 1;
 			}
 		    }
-			
+					    	
+		    // If a model uses a schema that was not loaded, then things are borken
+		    if (typeof currentSchema == 'undefined') {
+			alert(webannotator.bundle.GetStringFromName("waDTDMissing") + "'" + model.dtd + "' " + webannotator.bundle.GetStringFromName("waDTDMissing2"));
+		    }
+
 		    webannotator.dtdFileName = currentSchema["filename"];
 		    webannotator.modelName = model.name;
 
@@ -2110,11 +2148,23 @@ webannotator.main = {
     storePage: function() {
         var dt = {command: "PUT", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName, "dtd": webannotator.dtdFileName};
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
-    // Sri edit
-    //webannotator.main.ajax(webannotator.semantify_url, dt, webannotator.main.ajaxUpdatePage);
+	webannotator.main.setModified(false);
     },
 
     tagPage: function() {
+	if (webannotator.modelName == "") {
+	    // The only sensible thing is to tag with the last-used model
+	    var i;
+	    for (i = 0 ; i < webannotator.models.length ; i++) {
+		var model = webannotator.models[i];
+		if (model["lastused"] == 1) {
+		    webannotator.modelName = model.name;
+		    webannotator.dtdFileName = model.dtd;
+		    webannotator.main.activate();
+		    break;
+		}
+	    }
+	}
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName};
 	webannotator.main.expandOverlay("Tagging page");
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
@@ -2166,7 +2216,6 @@ webannotator.main = {
 		}
 	}
 };
-
 
 
 // Set extension file path and read annotation schemas file

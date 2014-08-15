@@ -48,7 +48,7 @@ b.build_data_set(args.model_name, test_reference_file, test_set, args.feature_se
 print "Creating test file '%s'\n" % test_file
 b.striplabel(test_reference_file, test_file)
 
-model_training = it.TrainingFileBuilderIncrementalTraining(".", args.output_pattern, it.ModuloTrainDevelSplitter(10))
+model_training = it.TrainingFileBuilderIncrementalTraining(".", args.output_pattern, args.feature_set, it.ModuloTrainDevelSplitter(10))
 model_training.set_verbose(True)
 
 for i in range(len(training_set)):
@@ -57,5 +57,5 @@ for i in range(len(training_set)):
     # Preprocess_file
     parsed_page = hp.parse_page(BeautifulSoup(gzip.open(training_set[i])), args.feature_set, annotated=True, build_node_index=False)
     # Add to incremental training set
-    model_training.incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
+    model_training.incremental_train(parsed_page.read_features(), model_file)
     model_training.apply(model_file, test_file, "%s_%d_test.prediction" % (args.output_pattern, i+1))

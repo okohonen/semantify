@@ -46,12 +46,14 @@ class IncrementalTraining:
         pass
 
 class TrainingFileBuilderIncrementalTraining(IncrementalTraining):
-    def __init__(self, storage_dir, model_name, train_devel_splitter, resuming=False):
+    def __init__(self, storage_dir, model_name, feature_set, train_devel_splitter, resuming=False):
         self.storage_dir = storage_dir
         self.model_name = model_name
+        self.feature_set = feature_set
         self.train_devel_splitter = train_devel_splitter
-        self.train_file_name = "%s/%s_train.gz" % (self.storage_dir, self.model_name)
-        self.devel_file_name = "%s/%s_devel.gz" % (self.storage_dir, self.model_name)
+        self.train_file_name = "%s/%s_%s_train.gz" % (storage_dir, model_name, feature_set)
+        self.devel_file_name = "%s/%s_%s_devel.gz" % (storage_dir, model_name, feature_set)
+        self.devel_prediction_file_name = "%s/%s_%s_devel.prediction" % (storage_dir, model_name, feature_set)
         if not(resuming):
             assert(not(os.path.exists(self.train_file_name)))
             assert(not(os.path.exists(self.devel_file_name)))
@@ -62,9 +64,11 @@ class TrainingFileBuilderIncrementalTraining(IncrementalTraining):
     def set_verbose(self, verbose):
         self.verbose = verbose
 
-    def incremental_train(self, feature_f, devel_prediction_file, model_file):
+    def incremental_train(self, feature_f, model_file=None):
         self.train_devel_splitter.apply(feature_f, ff.StringFeatureFileWriter(gzip.open(self.train_file_name, "a")), ff.StringFeatureFileWriter(gzip.open(self.devel_file_name, "a")))
-        
+        if model_file is None:
+            model_file = "%s/%s_%s_model.bin" % (self.storage_dir, self.model_name, self.feature_set)
+            
         t = time.time()
         
         print "initialize model"
@@ -73,7 +77,7 @@ class TrainingFileBuilderIncrementalTraining(IncrementalTraining):
         print
         print "train model"
         
-        m.train(self.train_file_name, self.devel_file_name, devel_prediction_file, self.verbose)
+        m.train(self.train_file_name, self.devel_file_name, self.devel_prediction_file_name, self.verbose)
         print "done"    
         print
         print "save model"
