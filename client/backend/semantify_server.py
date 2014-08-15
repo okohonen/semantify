@@ -104,7 +104,7 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # Incremental training with modulo criterion for train-devel split
             if not(its.has_key(o['model_name'])):
-                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], it.ModuloTrainDevelSplitter(10))
+                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], it.ModuloTrainDevelSplitter(10), resuming=True)
             
             its[o['model_name']].incremental_train(parsed_page.read_features(), devel_prediction_file, model_file)
         

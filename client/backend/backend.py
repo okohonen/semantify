@@ -97,16 +97,32 @@ class Backend:
         else:
             # Update newest version
             page = max(pages, key=lambda p: p["version"])
-            self._update_pages_annotated(model_name, dtdfile, page["id"], page["url"], page["version"], is_body, content)
-            return page.id
+            assert(page["url"] == url)
+            self._update_pages_annotated(model_name, dtdfile, page["id"], is_body, content)
+            return page["id"]
 
     def _insert_pages_annotated(self, model_name, dtdfile, url, version, is_body, content):
         self.c.execute('''INSERT INTO pages_annotated (url, timestamp, version, is_body, model_id) VALUES (?, DATETIME('now'), ?, ?, (SELECT id FROM models WHERE name=?))''', (url, version, "1" if is_body else "0", model_name))
         page_id = self.c.lastrowid
         self.conn.commit()
 
-        # Store page content in gzip-file
-        fname = self.pages_annotated_filename(model_name, page_id, is_body)
+        # Store page content separately 
+        return self._write_page(model_name, page_id, is_body, content, annotated=True)
+
+    def _update_pages_annotated(self, model_name, dtdfile, page_id, is_body, content):
+        self.c.execute('''UPDATE pages_annotated SET timestamp=DATETIME('now'), is_body=? WHERE id=?''', ("1" if is_body else "0", page_id))
+        self.conn.commit()
+
+        self._remove_page(model_name, page_id, annotated=True)
+        return self._write_page(model_name, page_id, is_body, content, annotated=True)
+
+    # Stores page contents in gzipped files with well-defined name
+    def _write_page(self, model_name, page_id, is_body, content, annotated=True):
+        if annotated:
+            fname = self.pages_annotated_filename(model_name, page_id, is_body)
+        else:
+            assert("Not Implemented" == False)
+
         assert(not(os.path.exists(fname)))
         fp = gzip.open(fname, 'wb')
 
@@ -118,15 +134,20 @@ class Backend:
             
         return page_id
     
-    def _update_pages_annotated(self, model_name, dtdfile, page_id, url, version, is_body, content):
-        assert(False)
-        self.c.execute('''UPDATE pages_annotated SET url=?, timestamp=DATETIME('now'), version=?, is_body=?, model_id=(SELECT id FROM models WHERE name=?)) WHERE id=? ''', (url, version,  "1" if is_body else "0", model_name, page_id))
-        self.conn.commit()
-        fname = pages_annotated_file(model_name, page_id, is_body)
-        os.system("rm %s" % fname)
-        assert(not(os.path.exists(fname)))
-        fp = gzip.open(fname, 'wb')
-        fp.write(content)
+    # Clears a content file, returns number of deleted files
+    def _remove_page(self, model_name, page_id, annotated=True):
+        fnames = []
+        if annotated:
+            fnames.append(self.pages_annotated_filename(model_name, page_id, False))
+            fnames.append(self.pages_annotated_filename(model_name, page_id, True))
+        else:
+            assert("Not Implemented" == False)    
+
+        to_delete = [f for f in fnames if os.path.exists(f)]
+        assert(len(to_delete) < 2)
+        for fname in to_delete:
+            os.remove(fname)
+        return len(to_delete)            
 
     def find_page_id(self, url, model_id):
         self.c.execute("SELECT id FROM pages_annotated WHERE url=? AND model_id=? ORDER BY version DESC", (url, model_id))
