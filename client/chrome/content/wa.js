@@ -2121,28 +2121,48 @@ webannotator.main = {
 
     ajaxUpdatePage: function(req) {
 	var obj = JSON.parse(req.responseText);
+
+	var dtdFile = webannotator.dtdFileName;
+	var modelName = webannotator.modelName;
+
+	// webannotator.main.deactivate();
+
 	window.content.document.body.innerHTML = obj.content;
 
-	// Erase annotations, so we can receive the latest from the server
-	webannotator.annotationNames = {};
-	webannotator.annotationTexts = {};
-	webannotator.annotationAttributes = {};
-	var selectedIds = [];
-	webannotator.main.updateTable(selectedIds, true);
+	// webannotator.dtdFileName = dtdFile;
+	// webannotator.modelName = modelName;
 
+	webannotator.main.activate();
 	webannotator.main.buildSemantifyAnnotations();
-	webannotator.main.buildAnnotations();
-	
-	// Update the data element as we now have counted the amount of annotations
-	var element = content.document.getElementById("WA_data_element");
-  	element.setAttribute("WA-maxid", webannotator.maxId);
 
-	webannotator.main.activateHTMLBody();
-	webannotator.main.activateMenus();
-	// Show already existing annotation (if any)
-	webannotator.main.receiveShowAnnotations();
-	// The page has not been modified yet
-	webannotator.main.setModified(false);
+	// Erase annotations, so we can receive the latest from the server
+	// webannotator.annotationNames = {};
+	// webannotator.annotationTexts = {};
+	// webannotator.annotationAttributes = {};
+	// var selectedIds = [];
+	// webannotator.main.updateTable(selectedIds, true);
+	// 
+	// webannotator.main.buildSemantifyAnnotations();
+	// webannotator.main.buildAnnotations();
+	// 
+	// var dom = webannotator.misc.jsonToDOM(["WA_data_element", {id:"WA_data_element", "WA-maxid":""+webannotator.maxId},
+	// 									   ""], content.document);
+	// webannotator.main.setModified(false);
+	// content.document.documentElement.appendChild(dom);  
+	// 
+	// // Update the data element as we now have counted the amount of annotations
+	// var element = content.document.getElementById("WA_data_element");
+  	// element.setAttribute("WA-maxid", webannotator.maxId);
+	// 
+	// webannotator.main.activateHTMLBody();
+	// 
+	// webannotator.session = true;
+	// 
+	// webannotator.main.activateMenus();
+	// // Show already existing annotation (if any)
+	// webannotator.main.receiveShowAnnotations();
+	// // The page has not been modified yet
+	// webannotator.main.setModified(false);
     },
 
     storePage: function() {
@@ -2160,12 +2180,22 @@ webannotator.main = {
 		if (model["lastused"] == 1) {
 		    webannotator.modelName = model.name;
 		    webannotator.dtdFileName = model.dtd;
-		    webannotator.main.activate();
 		    break;
 		}
 	    }
+	} else {
+	    var dtdFile = webannotator.dtdFileName;
+	    var modelName = webannotator.modelName;
+
+	    // Without this the edit menu does not work
+	    webannotator.main.deactivate();
+
+	    webannotator.dtdFileName = dtdFile;
+	    webannotator.modelName = modelName;
 	}
+	
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName};
+
 	webannotator.main.expandOverlay("Tagging page");
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
     },
@@ -2198,10 +2228,12 @@ webannotator.main = {
 				
 				// Add style information if exists
 				var color = webannotator.htmlWA.getColor(webannotator.dtdFileName, type, -2);
-			        bgcol = tinycolor.lighten(tinycolor.lighten(tinycolor.lighten(color[1])));
+			        var bgcol = tinycolor.lighten(tinycolor.lighten(color[1]));
+ 			        // var bgcol = color[1];
 
 				if (color !== null) {
-					span.setAttribute("style", "color:" + color[0] + "; background-color:" + bgcol + ";");
+					// span.setAttribute("style", "color:" + color[0] + "; background-color:" + bgcol + ";");
+				    span.setAttribute("style", "color:" + color[0] + "; background: repeating-linear-gradient( 0deg, " + color[1] + ", " + color[1] + " 5px, " + bgcol + " 5px, " + bgcol + " 10px );");
 				}
 			        span.setAttribute("id", "semantify_" + id);
 			        span.setAttribute("idnr", id);

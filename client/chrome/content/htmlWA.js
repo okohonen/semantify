@@ -116,7 +116,7 @@ webannotator.htmlWA = {
 	 */
 	hideEditAnnotationMenu: function () {
 		clearTimeout(webannotator.showEditEvent);
-		webannotator.showEditEvent = setTimeout(function() {webannotator.popups.hide_popup('webannotator-edit-menu'); webannotator.main.receiveShowAnnotations(); webannotator.htmlWA.receiveWindowUnblinkAnnotation();}, 500);
+		webannotator.showEditEvent = setTimeout(function() {webannotator.popups.hide_popup('webannotator-edit-menu'); webannotator.main.receiveShowAnnotations(); webannotator.htmlWA.receiveWindowUnblinkAnnotation();}, 5000);
 	},
 
 	/**
