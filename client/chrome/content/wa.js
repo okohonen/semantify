@@ -2187,11 +2187,13 @@ webannotator.main = {
 	    var dtdFile = webannotator.dtdFileName;
 	    var modelName = webannotator.modelName;
 
-	    // Without this the edit menu does not work
 	    webannotator.main.deactivate();
 
-	    webannotator.dtdFileName = dtdFile;
-	    webannotator.modelName = modelName;
+	    // Without this the edit menu does not work
+	    // Apparently there is some kind of delay to deactivate that happens in another thread
+	    // Ugly, but works now
+	    setTimeout(function() { webannotator.main.tagPage(); }, 1000);
+	    return
 	}
 	
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName};
