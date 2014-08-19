@@ -130,10 +130,10 @@ class Backend:
         fp = gzip.open(fname, 'wb')
 
         if type(content) == "str":
-            fp.write(content)
+            fp.write(content.encode("utf-8"))
         else:
             for line in content:
-                fp.write(line)
+                fp.write(line.encode("utf-8"))
             
         return page_id
     
@@ -159,6 +159,34 @@ class Backend:
             return None
         else:
             return r[0]
+
+    def get_current_model_annotated_feature_files(self, model_name, feature_set, rebuild_if_missing=False):
+        self.c.execute("SELECT id FROM pages_annotated WHERE model_id=(SELECT id FROM models WHERE name=?)", (model_name, ))        
+        feature_files = []
+        for r in self.c.fetchall():
+            ffn = self.page_feature_file(model_name, r["id"], feature_set)
+            feature_files.append((r["id"], ffn))
+            if rebuild_if_missing:
+                if not(os.path.exists(ffn)):
+                    self.build_feature_file(r["id"], feature_set, ffn)                    
+                    
+        return feature_files
+
+    def build_feature_file(self, page_id, feature_set, feature_file_name):
+        self.c.execute("SELECT pages_annotated.*, models.name AS model_name FROM pages_annotated JOIN models ON models.id=pages_annotated.model_id WHERE pages_annotated.id=?", (page_id, ))
+        r = self.c.fetchone()
+        if r is None:
+            raise ValueError("Missing page with id '%d'" %  page_id)
+        
+        inputfile = self.pages_annotated_filename(r["model_name"], page_id, r["is_body"])
+
+        if inputfile[-11:] == "htmlbody.gz":
+            inputpage = bs4.BeautifulSoup('<html><body>%s</body></html>' % gzip.open(inputfile).read())
+        else:
+            inputpage = bs4.BeautifulSoup(gzip.open(inputfile))
+        parsed_page = hp.parse_page(inputpage, feature_set, annotated=True, build_node_index=False)
+        parsed_page.write_feature_file(feature_file_name)
+
 
     # Returns a list of page-files in desired order for tracking of crossvalidation folds
     def extract_dataset_files(self, model_name, feature_set, order_by="id"):

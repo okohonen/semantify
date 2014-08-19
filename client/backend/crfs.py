@@ -423,7 +423,7 @@ class Parser(object):
             linenr += 1
 
             if not line and previous_line_was_empty:
-                print "Finished reading data file at double newline on line %d" % linenr
+                # print "Finished reading data file at double newline on line %d" % linenr
                 break
             
             elif not line and not previous_line_was_empty:

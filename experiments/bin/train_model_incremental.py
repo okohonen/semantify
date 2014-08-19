@@ -57,5 +57,5 @@ for i in range(len(training_set)):
     # Preprocess_file
     parsed_page = hp.parse_page(BeautifulSoup(gzip.open(training_set[i])), args.feature_set, annotated=True, build_node_index=False)
     # Add to incremental training set
-    model_training.incremental_train(parsed_page.read_features(), model_file)
+    model_training.incremental_train(parsed_page.read_features(), i, model_file = model_file)
     model_training.apply(model_file, test_file, "%s_%d_test.prediction" % (args.output_pattern, i+1))

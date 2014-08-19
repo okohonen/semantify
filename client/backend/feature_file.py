@@ -1,4 +1,5 @@
 import gzip
+import devutil
 # Wrapper for the feature file format
 
 class StringFeatureFileWriter:
@@ -9,9 +10,16 @@ class StringFeatureFileWriter:
         self.fp.write("".join(lines).encode("utf-8"))
         self.fp.write("\n")
 
+    def close(self):
+        self.fp.close()
+
+    def __del__(self):
+        self.close()
+
 class StringFeatureFileReader:
-    def __init__(self, fp):
+    def __init__(self, fp, encoding = None):
         self.fp = fp
+        self.encoding = encoding
 
     def sentences(self):
         lines = []
@@ -19,8 +27,10 @@ class StringFeatureFileReader:
             if line=="\n":
                 yield lines
                 lines = []
-            else:
+            elif self.encoding is None:
                 lines.append(line)
+            else:
+                lines.append(line.decode(self.encoding))
 
 def extractlabel(line):
     parts = line.split("\t")

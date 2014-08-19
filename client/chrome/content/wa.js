@@ -2198,8 +2198,8 @@ webannotator.main = {
 	
         var dt = {command: "TAG", url: window.content.document.location.href, "content": window.content.document.body.innerHTML, "model_name": webannotator.modelName};
 
-	webannotator.main.expandOverlay("Tagging page");
 	webannotator.main.ajax(webannotator.semantify_url, JSON.stringify(dt), webannotator.main.ajaxUpdatePage);
+	webannotator.main.expandOverlay("Tagging page");
     },
         // ---
 

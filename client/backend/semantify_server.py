@@ -18,6 +18,7 @@ import zlib
 import incremental_training as it
 import feature_file as ff
 import htmlparse as hp
+import threading
 
 PORT = 50010
 
@@ -33,7 +34,7 @@ errorlog=open(os.getcwd()+path+'errorlog.txt',  'w')
 successlog=open(os.getcwd()+path+'successlog.txt',  'w')
 filecount=0
 
-feature_set = "ortho3+html3"
+feature_set = "ortho3+html1"
 
 its = {}
 
@@ -64,7 +65,11 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         if o.has_key("content"):
             page = BeautifulSoup('<html><body>%s</body></html>' % o['content'], from_encoding = "utf-8")
-
+            
+            # Save to file for debugging
+            outfp = open("out.html", 'w')
+            outfp.write('<html><body>%s</body></html>' % o['content'].encode("utf8"))
+            outfp.close()
    
         if o["command"] == "PUT": 
 
@@ -80,23 +85,23 @@ class SemantifyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
             # Case 3.
             if o.has_key("create_new"):                
-                b.insert_pages_annotated(o['model_name'], o['dtd'], o['url'], True, o['content'])
+                page_id = b.insert_pages_annotated(o['model_name'], o['dtd'], o['url'], True, o['content'])
         
             # Case 2.
             if o.has_key("version"):
-                b.update_pages_annotated(o['model_name'], o['dtd'], o['url'], o['version'], True, o['content'])
+                page_id = b.update_pages_annotated(o['model_name'], o['dtd'], o['url'], o['version'], True, o['content'])
 
             # Case 1.
             else:
                 # If page already exists then update latest version
-                b.insert_or_update_pages_annotated(o['model_name'], o['dtd'], o['url'], True, ['content'])
+                page_id = b.insert_or_update_pages_annotated(o['model_name'], o['dtd'], o['url'], True, o['content'])
                 # b.insert_or_update_pages_annotated(o['model_name'], o['dtd'], o['url'], o['content'].encode('utf-8'), True)
 
             # Incremental training with modulo criterion for train-devel split
             if not(its.has_key(o['model_name'])):
-                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], feature_set, it.ModuloTrainDevelSplitter(10), resuming=True)
+                its[o['model_name']] = it.TrainingFileBuilderIncrementalTraining(b.get_tmpdir(), o['model_name'], feature_set, it.ModuloTrainDevelSplitter(10), b)
             
-            its[o['model_name']].incremental_train(parsed_page.read_features())
+            its[o['model_name']].incremental_train(parsed_page.read_features(), page_id)
         
         elif o["command"] == "TAG":
             print (o["url"], o["model_name"])
@@ -136,3 +141,4 @@ httpd = SemantifyTCPServer(("localhost", PORT), SemantifyHandler)
 if __name__ == "__main__":
     print "serving at port", PORT  
     httpd.serve_forever()
+    

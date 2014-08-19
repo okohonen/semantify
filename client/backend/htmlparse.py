@@ -156,8 +156,13 @@ def htmlparse(soup):
 
         if isinstance(node, bs4.Tag):
             # Find the annotation label and add to 'labels' list
-            if node.name == "span" and node.has_attr("class") and "WebAnnotator_" in node['class'][0]:
-                label=node['class'][0].replace('WebAnnotator_', '')
+            # Interpret automatic tags resubmitted as being correct
+            if node.name == "span" and node.has_attr("class") and \
+            ("WebAnnotator_" in node['class'][0] or "Semantify_" in node['class'][0]):
+                if "WebAnnotator_" in node['class'][0]:
+                    label=node['class'][0].replace('WebAnnotator_', '')
+                else:
+                    label=node['class'][0].replace('Semantify_', '') 
                 l = stack
             else:
                 l = [node]
@@ -350,8 +355,10 @@ def sentence_split(tokens):
         if '.' in tokens[t][0]['word'] or (t+1 < len(tokens) and tokens[t+1][3] != curblock):
             yield(ltemp)
             ltemp = []            
-            curblock = tokens[t+1][3]
-    yield(ltemp)
+            if t+1 < len(tokens):
+                curblock = tokens[t+1][3]
+    if len(ltemp) > 0:
+        yield(ltemp)
 
 def write_feature_line(featurenames, tokenfeat, timesuffix):
     return "\t".join(["%s%s%s%s : %s" % (f, timesuffix, '=' if len(tokenfeat[f][0]) > 0 else '', tokenfeat[f][0], tokenfeat[f][1]) for f in featurenames if tokenfeat.has_key(f)])
