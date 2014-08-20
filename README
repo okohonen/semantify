@@ -1,9 +1,9 @@
-Semantify allows fast construction of custom machine learning taggers
+Semantify is a tool for the construction of custom, machine learning taggers
 for web pages. Semantify extends WebAnnotator, "a tool for annotating Web pages",
 implemented as a Firefox extension (http://perso.limsi.fr/xtannier/en/WebAnnotator/). 
-WebAnnotator is lightly modified to integrate with
-with a machine learning based tagger. The user's
-annotations are sent to a tagger component that is then trained to
+We have lightly modified the WebAnnotator UI is to integrate with
+with a machine learning based tagger, implemented in Python. The Firefox extension 
+sends the user's annotations to a tagger component that is then trained to
 perform the same tagging.
 
 Disclaimer:
