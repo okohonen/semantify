@@ -28,7 +28,7 @@ agreement, please see license.txt
 
 Distributed with the software are the following external libraries
 subject to their own licenses:
-- Beautiful soup (http://www.crummy.com/software/BeautifulSoup/)
+- Beautiful Soup (http://www.crummy.com/software/BeautifulSoup/)
 - TinyColor v0.9.16 (https://github.com/bgrins/TinyColor)
 
 Known bugs:
