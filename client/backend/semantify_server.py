@@ -26,7 +26,7 @@ b = backend.Backend()
 
 
 # When changing database name, please do check  out the table name in the appropriate semantify_local_* file
-path='/data/application/'
+path='/data/temp/'
 
 
 #   Opening error log 
