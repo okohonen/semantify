@@ -1,0 +1,35 @@
+# K-fold cross-validation
+export PYTHONPATH=$PYTHONPATH:/home/okohonen/code/semantify/client/backend
+SHELL := /bin/bash
+
+BINDIR=/home/okohonen/code/semantify/experiments/bin
+PWD=$(shell pwd)
+FOLDS=$(shell python $(BINDIR)/parse_dirname.py $(PWD) K)
+MODEL_NAME=$(shell python $(BINDIR)/parse_dirname.py $(PWD) M)
+FEATURE_SET=$(shell python $(BINDIR)/parse_dirname.py $(PWD) F)
+
+FOLDRESULTS = $(shell perl -e 'foreach $$i (1 .. $(FOLDS)) { print "f_scores_$$i.txt "; } print "\n";')
+CONFUSION_MATRIX_FILES = $(shell perl -e 'foreach $$i (1 .. $(FOLDS)) { print "confusion_matrix_$$i.bin "; } print "\n";')
+
+all: 1_model.bin
+
+file_list.txt:
+	python $(BINDIR)/extract_dataset_files.py $(MODEL_NAME) id $(FEATURE_SET) > $@
+
+%_model.bin: file_list.txt
+	python $(BINDIR)/train_model_incremental.py $< --nr-of-folds=$(FOLDS) --fold=$* --output-file-pattern=incr --feature-set=$(FEATURE_SET) --model-name $(MODEL_NAME)  
+
+tagset.txt: incr.test.reference.gz
+	python $(BINDIR)/extract_tagset.py $< > $@
+
+f_scores_%.txt: incr_%_test.prediction tagset.txt
+	python $(BINDIR)/evaluate_accuracy.py incr.test.reference.gz incr_$*_test.prediction tagset.txt confusion_matrix_$*.bin > $@
+
+.PHONY: eval
+eval: $(shell ls incr_*_test.prediction | sed -e s/[^0-9]//g | awk '{ printf( "f_scores_%s.txt\n", $$1 );}')
+
+clean:
+	rm -f *.gz *.bin *.prediction *.trainlog *.txt
+
+info: 
+	@echo Nr of folds $(FOLDS), Model name: $(MODEL_NAME), Feture set: $(FEATURE_SET) $(all)
