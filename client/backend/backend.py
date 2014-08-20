@@ -41,6 +41,10 @@ class Backend:
         log("Database file set to %s\n" % dbfile)
 
         if not os.path.exists(dbfile):
+            if not os.path.exists("%s/data" % self.localdir):
+                os.system("mkdir %s/data" % self.localdir)
+                os.system("mkdir %s/data/index" % self.localdir)
+                os.system("mkdir %s/data/temp" % self.localdir)
             os.system("sqlite3 %s < %s/schema.sql" % (dbfile, self.localdir))
 
         self.conn = sqlite3.connect(dbfile)
