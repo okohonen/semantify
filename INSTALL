@@ -1,0 +1,59 @@
+Required dependencies:
+- Python 2.7 (may work on older ones as well, but not tested)
+- Python libraries
+  - sqlite3 
+
+Optional dependencies:
+- SciKit if you want to calculate F-scores (sklearn to be precise)
+
+Installation
+1) Get the sources
+
+In some suitable directory:
+> git clone https://github.com/okohonen/semantify
+
+2) Package the firefox extension
+> cd semantify
+> make
+
+3) Install the Firefox extension
+- In Firefox select: "Open File"
+- Choose the file semantify/client.xpi created in the previous step
+- Choose Install Now
+- You will need to restart Firefox to complete the installation
+- After restart, the semantify-extension should show up in the
+  bookmarks toolbar as a small blue icon with a white "s". You may need
+  to add it to the toolbar from the "Customize"-menu
+
+Usage:
+1) Start the backend component
+
+> cd client/backend
+> python semantify_server.py
+
+(Should say "serving at port 50010")
+
+2) (Re)start Firefox
+- From the Semantify-menu:
+  - Create new model
+    - Choose an appropriate dtd-file describing your desired
+      annotation-categories. Some examples are available in the
+      directory semantify/client/samples
+    - Start tagging as with WebAnnotator
+    - Once done the tagging can be stored in the backend's page index by
+      choosing "Store page tags" from the semantify-menu, which
+      initiates the training of a tagger
+    - A tagger can be applied to a page using "Tag Page"
+      - NOTE: If the training set is very small, e.g. < 10 pages,
+        automatic tagging is likely to still yield no taggings, but this
+        corrects itself with more annotated pages.
+    - Models are automatically stored in the backend if there is at
+      least one annotated page for that model
+      - NOTE: If the semantify_server.py is not running when Firefox
+        starts up, then the Firefox extension cannot retrieve these
+	stored models, and one needs to restart Firefox to access
+	them.
+      - Should semantify_server.py crash during some operation it can
+        generally be restarted without needing to restart Firefox (so
+	as not to lose annotations because of a server crash)
+      

@@ -1,0 +1,46 @@
+Semantify allows fast construction of custom machine learning taggers
+for web pages. Semantify extends WebAnnotator, "a tool for annotating Web pages",
+implemented as a Firefox extension (http://perso.limsi.fr/xtannier/en/WebAnnotator/). 
+WebAnnotator is lightly modified to integrate with
+with a machine learning based tagger. The user's
+annotations are sent to a tagger component that is then trained to
+perform the same tagging.
+
+Disclaimer:
+This is a proof-of-concept implementation, not mature software. Using
+it requires some technical knowledge (mainly ability to use the shell).
+
+Semantify has been developed by:
+Oskar Kohonen, Srikrishna Raamadhurai and Teemu Ruokolainen at Aalto
+University, Helsinki, Finland
+
+For a more detailed description, see our paper:
+ 
+ Creating Custom Taggers by Integrating Web Page Annotation and
+ Machine Learning
+ Srikrishna Raamadhurai, Oskar Kohonen, Teemu Ruokolainen
+ Coling 2014 
+ (currently available at:
+ http://anthology.aclweb.org/C/C14/C14-2004.pdf)
+
+The software is licensed with the CeCill free software license
+agreement, please see license.txt
+
+Distributed with the software are the following external libraries
+subject to their own licenses:
+- Beautiful soup (http://www.crummy.com/software/BeautifulSoup/)
+- TinyColor v0.9.16 (https://github.com/bgrins/TinyColor)
+
+Known bugs:
+- Save&Export is not working
+
+Known issues:
+- The feature functions currently implemented are best suited to
+  discover fields in a web-page. 
+  The current implementation is lacking in good features that enable: 
+    1) Generalizing tagging to include synonyms or related words 
+    2) Generalization from sentence-level structure, such as
+       part-of-speech 
+    3) Any kind of morphological analysis
+
+We hope these will be addressed in the future.
