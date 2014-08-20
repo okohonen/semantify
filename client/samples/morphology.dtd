@@ -1,4 +1,0 @@
-<!-- Three high-level annotations types -->
-<!ELEMENT prefix (#PCDATA)>
-<!ELEMENT stem (#PCDATA)>
-<!ELEMENT suffix (#PCDATA)>
