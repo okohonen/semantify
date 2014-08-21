@@ -155,7 +155,6 @@ webannotator.new_model = {
 
 		    webannotator.new_model.populateMenus();
 
-		    webannotator.main.activate();
 		    webannotator.main.options();
 		}
 	    }
@@ -193,6 +192,7 @@ webannotator.new_model = {
 	}
 	var newModel = {name: modelName, dtd: chooseMenu.label, lastused: 0}
 	webannotator.models.push(newModel)
+
 	webannotator.main.updateMenus(true, true);
 
 	// Activate the new model
