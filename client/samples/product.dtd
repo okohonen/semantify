@@ -1,6 +1,8 @@
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT model (#PCDATA)>
+<!ELEMENT target_attribute (#PCDATA)>
 <!ELEMENT attribute (#PCDATA)>
+<!ELEMENT other (#PCDATA)>
 <!ELEMENT price (#PCDATA)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT condition (#PCDATA)>
